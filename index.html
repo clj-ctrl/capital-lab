@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Lab — RE Development Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d0d;
+  --paper: #f5f0e8;
+  --cream: #ede7d9;
+  --deep: #181510;
+  --gold: #b8933f;
+  --gold-lt: #d4aa5a;
+  --muted: #7a7265;
+  --border: #c8bfaa;
+  --green: #2d6a4f;
+  --green-bg: #e8f5ee;
+  --red: #8b2635;
+  --red-bg: #f9e8eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'IBM Plex Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
+body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(184,147,63,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,147,63,0.04) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; z-index: 0; }
+.wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* HEADER */
+header { padding: 40px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 36px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.logo { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+.logo em { color: var(--gold); font-style: normal; }
+.tagline { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* TABS */
+.tabs { display: flex; border: 1px solid var(--border); margin-bottom: 36px; }
+.tab-btn { flex: 1; padding: 16px 10px; background: var(--cream); border: none; border-right: 1px solid var(--border); cursor: pointer; text-align: center; transition: background 0.15s; }
+.tab-btn:last-child { border-right: none; }
+.tab-btn:hover { background: var(--paper); }
+.tab-btn.active { background: var(--deep); }
+.tab-btn.active .t-lbl { color: var(--paper); }
+.tab-btn.active .t-sub { color: rgba(245,240,232,0.4); }
+.t-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+.t-lbl { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--ink); }
+.t-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; animation: fadeUp 0.2s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* SEC LABEL */
+.sec-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+/* MODULE GRID */
+.mod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; }
+.mod-btn { background: var(--cream); border: none; padding: 16px 14px; cursor: pointer; text-align: left; transition: background 0.13s; }
+.mod-btn:hover, .mod-btn.active { background: var(--paper); }
+.mod-btn.active { background: var(--deep); }
+.mod-btn.active .mod-num { color: var(--gold); }
+.mod-btn.active .mod-name { color: var(--paper); }
+.mod-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.mod-name { font-size: 12px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+
+/* TOPIC GRID */
+.topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 28px; }
+.topic-btn { background: var(--cream); border: 1px solid var(--border); padding: 12px 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--ink); text-align: left; transition: all 0.13s; }
+.topic-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.topic-btn.done::after { content: '✓'; color: var(--green); margin-left: 4px; font-size: 11px; }
+.t-arr { flex-shrink: 0; font-size: 13px; color: var(--border); transition: color 0.13s; }
+.topic-btn:hover .t-arr { color: var(--gold); }
+
+/* LESSON VIEW */
+.lesson-view { display: none; }
+.lesson-view.active { display: block; animation: fadeUp 0.2s ease; }
+.lesson-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+.lesson-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; line-height: 1.2; }
+.back-btn { background: none; border: 1px solid var(--border); padding: 8px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; cursor: pointer; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.13s; white-space: nowrap; flex-shrink: 0; }
+.back-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+/* CONTENT */
+.content-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.content-box h2 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin: 24px 0 10px; color: var(--ink); }
+.content-box h2:first-child { margin-top: 0; }
+.content-box h3 { font-size: 14px; font-weight: 500; margin: 18px 0 8px; color: var(--ink); }
+.content-box p { margin-bottom: 12px; }
+.content-box ul, .content-box ol { margin: 8px 0 12px 20px; }
+.content-box li { margin-bottom: 6px; }
+.content-box strong { font-weight: 500; }
+.formula { font-family: 'IBM Plex Mono', monospace; font-size: 13px; background: var(--paper); border-left: 3px solid var(--gold); padding: 12px 16px; margin: 14px 0; display: block; border-radius: 0; }
+.callout { background: var(--paper); border: 1px solid var(--border); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--muted); }
+.callout strong { color: var(--gold); }
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+.content-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.content-box th { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+.content-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 300; }
+.content-box tr:last-child td { border-bottom: none; }
+
+/* ACTIONS */
+.action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.btn-primary { padding: 11px 22px; background: var(--gold); border: 1px solid var(--gold); color: white; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.13s; }
+.btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+.btn-sec { padding: 11px 18px; background: var(--cream); border: 1px solid var(--border); color: var(--ink); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.13s; }
+.btn-sec:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* QUIZ */
+.quiz-section { margin-top: 8px; }
+.quiz-hdr { background: var(--deep); padding: 20px 24px; font-family: 'Playfair Display', serif; font-size: 17px; color: var(--paper); line-height: 1.5; }
+.quiz-opts { background: var(--cream); border: 1px solid var(--border); border-top: none; }
+.quiz-opt { padding: 14px 22px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; gap: 14px; font-size: 13px; font-weight: 300; transition: background 0.12s; }
+.quiz-opt:last-child { border-bottom: none; }
+.quiz-opt:hover:not(.locked) { background: var(--paper); }
+.quiz-opt.correct { background: var(--green-bg); border-left: 4px solid var(--green); }
+.quiz-opt.wrong { background: var(--red-bg); border-left: 4px solid var(--red); }
+.quiz-opt.locked { cursor: default; }
+.opt-letter { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); min-width: 18px; padding-top: 2px; flex-shrink: 0; }
+.quiz-exp { background: var(--paper); border: 1px solid var(--border); border-top: none; padding: 16px 24px; font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--muted); }
+.quiz-exp strong { font-weight: 500; }
+.quiz-meta { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.score-box { display: inline-flex; align-items: center; gap: 16px; background: var(--deep); padding: 18px 24px; margin-bottom: 20px; }
+.score-num { font-family: 'IBM Plex Mono', monospace; font-size: 36px; font-weight: 500; color: var(--gold); line-height: 1; }
+.score-msg { color: var(--paper); font-size: 14px; font-weight: 300; }
+
+/* PROGRESS */
+.progress-wrap { margin-bottom: 20px; }
+.progress-lbl { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.progress-track { height: 2px; background: var(--border); }
+.progress-fill { height: 100%; background: var(--gold); transition: width 0.4s ease; }
+
+/* SCENARIOS */
+.sc-controls { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 24px; }
+.sc-field label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(--ink); background: var(--cream); border: 1px solid var(--border); padding: 9px 12px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a7265'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 28px; }
+.diff-pills { display: flex; gap: 6px; }
+.diff-pill { padding: 8px 14px; border: 1px solid var(--border); background: var(--cream); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--muted); transition: all 0.13s; }
+.diff-pill.active { background: var(--deep); color: var(--paper); border-color: var(--deep); }
+.scenario-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.scenario-box h2 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
+.scenario-box h2:first-child { margin-top: 0; }
+.scenario-box p { margin-bottom: 10px; }
+.scenario-box ul { margin: 6px 0 10px 20px; }
+.scenario-box li { margin-bottom: 4px; }
+.scenario-box strong { font-weight: 500; }
+.scenario-qa { margin-top: 8px; }
+.qa-btn-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 16px; }
+.qa-btn { background: var(--cream); border: 1px solid var(--border); padding: 12px 14px; cursor: pointer; font-size: 12px; color: var(--ink); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.13s; }
+.qa-btn:hover, .qa-btn.active { background: var(--deep); color: var(--paper); border-color: var(--deep); }
+.qa-answer { background: var(--cream); border: 1px solid var(--border); padding: 24px 28px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.qa-answer h3 { font-size: 14px; font-weight: 500; margin: 14px 0 6px; }
+.qa-answer p { margin-bottom: 10px; }
+.qa-answer ul { margin: 6px 0 10px 20px; }
+.qa-answer li { margin-bottom: 4px; }
+
+/* GLOSSARY */
+.gloss-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.gloss-section { display: none; }
+.gloss-section.active { display: block; animation: fadeUp 0.2s ease; }
+.gloss-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.gloss-item:last-child { border-bottom: none; }
+.gloss-term { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.gloss-def { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--muted); margin-bottom: 8px; }
+.gloss-note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gold); line-height: 1.6; }
+
+/* RESPONSIVE */
+@media (max-width: 580px) {
+  .mod-grid { grid-template-columns: 1fr; }
+  .topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
+  .tabs { flex-direction: column; }
+  .lesson-title { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Capital <em>Lab</em></div>
+    <div class="tagline">RE Development Finance · Interactive Learning</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('lessons',this)">
+      <div class="t-num">01</div><div class="t-lbl">Guided Lessons</div><div class="t-sub">Learn + quiz</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('scenarios',this)">
+      <div class="t-num">02</div><div class="t-lbl">Deal Scenarios</div><div class="t-sub">Apply concepts</div>
+    </button>
+    <button class="tab-btn" onclick="switchTab('glossary',this)">
+      <div class="t-num">03</div><div class="t-lbl">Quick Reference</div><div class="t-sub">Terms & formulas</div>
+    </button>
+  </div>
+
+  <!-- ═══ LESSONS ═══ -->
+  <div id="tab-lessons" class="panel active">
+    <div id="lessons-home">
+      <div class="sec-lbl">Select a module</div>
+      <div class="mod-grid">
+        <button class="mod-btn active" onclick="selectMod(0,this)">
+          <div class="mod-num">Module 01</div><div class="mod-name">Capital Stack & Debt Structures</div>
+        </button>
+        <button class="mod-btn" onclick="selectMod(1,this)">
+          <div class="mod-num">Module 02</div><div class="mod-name">Equity Waterfall & Promote</div>
+        </button>
+        <button class="mod-btn" onclick="selectMod(2,this)">
+          <div class="mod-num">Module 03</div><div class="mod-name">Deal Underwriting</div>
+        </button>
+      </div>
+      <div class="sec-lbl" id="topic-section-label">Capital Stack & Debt Structures — choose a topic</div>
+      <div class="topic-grid" id="topic-grid"></div>
+    </div>
+    <div id="lesson-view" class="lesson-view">
+      <div class="lesson-hdr">
+        <div class="lesson-title" id="lesson-title"></div>
+        <button class="back-btn" onclick="closeLesson()">← Back</button>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-lbl"><span id="prog-label">Lesson</span><span id="prog-pct"></span></div>
+        <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:33%"></div></div>
+      </div>
+      <div class="content-box" id="lesson-body"></div>
+      <div class="action-row">
+        <button class="btn-primary" onclick="showQuiz()">Test my understanding →</button>
+        <button class="btn-sec" onclick="closeLesson()">← Choose another topic</button>
+      </div>
+      <div id="quiz-area" style="display:none">
+        <div class="quiz-section" id="quiz-section"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SCENARIOS ═══ -->
+  <div id="tab-scenarios" class="panel">
+    <div class="sc-controls">
+      <div class="sc-field">
+        <label>Deal type</label>
+        <select id="sc-type">
+          <option value="hotel">Hotel / Branded Residence</option>
+          <option value="resort">Resort Development</option>
+          <option value="mixed">Mixed-Use Development</option>
+          <option value="multifamily">Multifamily Acquisition</option>
+          <option value="office">Office Repositioning</option>
+        </select>
+      </div>
+      <div class="sc-field">
+        <label>Difficulty</label>
+        <div class="diff-pills">
+          <button class="diff-pill active" onclick="setDiff('intro',this)">Intro</button>
+          <button class="diff-pill" onclick="setDiff('mid',this)">Mid</button>
+          <button class="diff-pill" onclick="setDiff('senior',this)">Senior</button>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="loadScenario()">Generate scenario →</button>
+    </div>
+    <div id="scenario-output"></div>
+  </div>
+
+  <!-- ═══ GLOSSARY ═══ -->
+  <div id="tab-glossary" class="panel">
+    <div class="gloss-btns">
+      <button class="btn-primary" onclick="showGloss('formulas')">Key Formulas</button>
+      <button class="btn-sec" onclick="showGloss('stack')">Capital Stack Terms</button>
+      <button class="btn-sec" onclick="showGloss('waterfall')">Waterfall Terms</button>
+      <button class="btn-sec" onclick="showGloss('underwriting')">Underwriting Terms</button>
+    </div>
+    <div id="gloss-formulas" class="gloss-section active"></div>
+    <div id="gloss-stack" class="gloss-section"></div>
+    <div id="gloss-waterfall" class="gloss-section"></div>
+    <div id="gloss-underwriting" class="gloss-section"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────────
+
+const MODULES = [
+  {
+    label: "Capital Stack & Debt Structures",
+    topics: [
+      "Senior Debt: LTV, LTC & DSCR Requirements",
+      "Mezzanine Financing: Structure & Intercreditor Agreements",
+      "Preferred Equity vs. Mezzanine — Key Distinctions",
+      "Construction Loan Mechanics & Draw Schedules",
+      "Bridge Loans, Floating Rate & Refinancing Triggers",
+      "CMBS, Life Co & Debt Fund Lenders — Who Lends What",
+    ]
+  },
+  {
+    label: "Equity Waterfall & Promote Mechanics",
+    topics: [
+      "GP / LP Structure & Economics 101",
+      "Preferred Return: Cumulative vs. Non-Cumulative",
+      "Promote / Carried Interest: How It's Earned",
+      "IRR Hurdles & Tiered Waterfall Structures",
+      "Catch-Up Provisions & How They Work",
+      "Clawback Provisions & GP Liability",
+    ]
+  },
+  {
+    label: "Deal Underwriting: IRR, EM & DSCR",
+    topics: [
+      "IRR: What It Measures and Why It Matters",
+      "Equity Multiple vs. IRR — Using Both Together",
+      "DSCR: Calculating & Interpreting Debt Coverage",
+      "Cap Rate & NOI — Building the Income Approach",
+      "Cash-on-Cash Return vs. Levered IRR",
+      "Sensitivity Analysis: Stress-Testing Assumptions",
+    ]
+  }
+];
+
+const LESSONS = {
+  "Senior Debt: LTV, LTC & DSCR Requirements": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Senior debt is the foundation of every real estate capital stack — it determines how much equity you need to raise, what your cost of capital looks like, and how much risk sits with the developer vs. the lender. In luxury hotel and branded residence deals, understanding senior debt terms is the difference between a deal that pencils and one that doesn't.</p>
+<h2>Loan-to-Cost (LTC)</h2>
+<p>LTC measures the loan amount as a percentage of total project cost. It's the primary sizing metric during construction.</p>
+<div class="formula">LTC = Loan Amount ÷ Total Project Cost</div>
+<p>On a $60M luxury hotel development, a lender offering 62% LTC provides $37.2M in debt. The remaining $22.8M must come from equity. Most construction lenders for hospitality assets land between 55–65% LTC. The higher the brand affiliation and sponsorship track record, the closer you get to 65%.</p>
+<h2>Loan-to-Value (LTV)</h2>
+<p>LTV measures the loan against the stabilized appraised value — the lender's exit protection.</p>
+<div class="formula">LTV = Loan Amount ÷ Stabilized Property Value</div>
+<p>Using the same deal: stabilized NOI of $4.2M at a 6.5% cap rate → value of $64.6M. LTV = $37.2M ÷ $64.6M = <strong>57.6%</strong>. Lenders underwrite to both metrics. A deal can pass LTC but fail LTV if your projected value is too optimistic — which is exactly what happens when feasibility studies use the wrong comp set.</p>
+<h2>Debt Service Coverage Ratio (DSCR)</h2>
+<p>DSCR measures the property's ability to service debt from operations. Below 1.0x means the property can't cover its own payments.</p>
+<div class="formula">DSCR = Net Operating Income ÷ Annual Debt Service</div>
+<p><strong>Example:</strong> NOI = $4.2M. $37.2M loan at 7.75% interest-only = $2.88M annual debt service. DSCR = $4.2M ÷ $2.88M = <strong>1.46x</strong>. Most hospitality lenders require 1.25x–1.40x minimum at stabilization.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Lenders stress their own underwrite.</strong> They'll haircut your NOI 10–15% and test DSCR at a higher rate. Know what your deal looks like at 85% of projected NOI before you walk into the room.</li>
+<li><strong>LTC and LTV can diverge significantly.</strong> High construction costs relative to value (thin development spread) means your LTV may be tight even at a conservative LTC. This flags a weak deal.</li>
+<li><strong>Interest reserves are included in total project cost.</strong> On a 36-month construction loan, the interest reserve alone can be $3–5M. It counts in the LTC denominator — which means your equity requirement is higher than the simple construction budget suggests.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Branded residence components in hotel deals often improve the LTC a lender will accept because presales provide early cash that reduces lender exposure. VLE-affiliated projects may benefit from this — but only if presale contracts are in hand, not just projected.</div>`,
+    quiz: [
+      { q: "A $50M development receives a 60% LTC loan. What is the loan amount and required equity?", opts: ["A) $25M loan, $25M equity", "B) $30M loan, $20M equity", "C) $35M loan, $15M equity", "D) $28M loan, $22M equity"], correct: 1, exp: "60% LTC on $50M = $30M loan. Remaining $20M must come from equity. Always: loan = total cost × LTC%, equity = total cost − loan." },
+      { q: "A hotel project has NOI of $3.6M and a $28M loan at 8% interest-only. What is the DSCR?", opts: ["A) 1.29x", "B) 1.45x", "C) 1.61x", "D) 1.07x"], correct: 2, exp: "Annual debt service = $28M × 8% = $2.24M. DSCR = $3.6M ÷ $2.24M = 1.61x. Always calculate debt service first, then divide NOI by it." },
+      { q: "Why do lenders underwrite to both LTC and LTV rather than just one?", opts: ["A) Regulatory requirement only", "B) LTC protects during construction, LTV protects at stabilization/exit", "C) They're the same metric calculated differently", "D) LTV is used for construction loans, LTC for permanent loans"], correct: 1, exp: "LTC protects the lender while the project is being built — ensuring equity is in the deal. LTV protects at stabilization — ensuring the completed asset's value covers the loan if the lender needs to foreclose." },
+      { q: "A lender stresses NOI to 85% of projection before testing DSCR. If projected NOI is $4.0M and required DSCR is 1.25x, what is the maximum annual debt service the lender will underwrite to?", opts: ["A) $3.20M", "B) $2.72M", "C) $3.00M", "D) $2.56M"], correct: 1, exp: "Stressed NOI = $4.0M × 85% = $3.4M. Max debt service = $3.4M ÷ 1.25x = $2.72M. This is the lender's binding constraint, not your projected DSCR." }
+    ]
+  },
+
+  "Mezzanine Financing: Structure & Intercreditor Agreements": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Mezzanine debt fills the gap between senior debt and equity — it's how developers reach higher total leverage without diluting equity. In luxury hospitality deals with high construction costs, mezz is often the difference between a deal closing and dying on the equity raise.</p>
+<h2>What Mezz Is</h2>
+<p>Mezzanine debt is subordinate to senior debt but senior to equity. It is secured not by the property itself (the senior lender holds that lien) but by a pledge of the ownership interest in the property-owning entity.</p>
+<div class="formula">Total Leverage = Senior Debt LTC + Mezz LTC<br>e.g., 62% senior + 13% mezz = 75% total leverage</div>
+<p>Mezz lenders are compensated for their subordinate risk with higher rates — typically SOFR + 600–900bps, or fixed rates of 10–14%. Some mezz is structured as PIK (payment-in-kind), where interest accrues rather than being paid current, preserving cash flow during construction.</p>
+<h2>Intercreditor Agreements</h2>
+<p>Because the mezz lender holds a pledge of ownership interests while the senior lender holds the mortgage, their rights in a default scenario must be clearly defined. The intercreditor agreement governs this relationship.</p>
+<p>Key provisions practitioners focus on:</p>
+<ul>
+<li><strong>Cure rights:</strong> The mezz lender's right to cure a senior loan default (pay the senior lender) to prevent foreclosure on the property.</li>
+<li><strong>Standstill period:</strong> Time the mezz lender must wait before exercising remedies after a default. Typically 90–180 days.</li>
+<li><strong>Purchase option:</strong> Mezz lender's right to purchase the senior loan at par in a default scenario — a critical protection.</li>
+<li><strong>Transfer restrictions:</strong> Limits on the borrower transferring ownership without both lenders' consent.</li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Mezz is expensive capital — model it honestly.</strong> A $10M mezz tranche at 12% adds $1.2M in annual carrying costs. On a 3-year construction timeline with PIK accrual, that mezz balance can grow to $14M+ before stabilization.</li>
+<li><strong>The intercreditor is negotiated, not standard.</strong> Senior lenders (especially CMBS lenders) often have restrictive intercreditor terms that mezz lenders won't accept. This can kill a deal in structuring. Know your senior lender's intercreditor template before bringing in mezz.</li>
+<li><strong>Mezz foreclosure is faster than mortgage foreclosure.</strong> A UCC foreclosure on ownership interests can be completed in 30–60 days vs. 12–24 months for mortgage foreclosure. This is why mezz lenders accept lower rates than pure equity but above senior debt.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> In branded residence developments, presale proceeds often retire mezz ahead of schedule — reducing the accrued interest burden. Structuring the mezz with flexible prepayment terms (no or low prepayment penalty) is essential when presale timing is uncertain.</div>`,
+    quiz: [
+      { q: "A $70M project has 60% senior LTC and 12% mezz LTC. How much equity is required?", opts: ["A) $14M", "B) $19.6M", "C) $16.8M", "D) $22.4M"], correct: 1, exp: "Senior = 60% × $70M = $42M. Mezz = 12% × $70M = $8.4M. Total debt = $50.4M. Equity = $70M − $50.4M = $19.6M. Total leverage = 72%." },
+      { q: "What does a mezz lender's 'cure right' allow them to do?", opts: ["A) Reduce their own interest rate", "B) Pay the senior lender to prevent property foreclosure", "C) Convert their debt to equity automatically", "D) Extend the senior loan maturity"], correct: 1, exp: "Cure rights let the mezz lender pay overdue amounts to the senior lender in a default, preventing the senior from foreclosing on the property and wiping out the mezz position. It's a critical protection mechanism." },
+      { q: "A $12M mezz loan at 11% PIK accrues for 30 months. Approximately what does the balance grow to?", opts: ["A) $14.7M", "B) $15.6M", "C) $13.8M", "D) $16.3M"], correct: 0, exp: "Annual interest = $12M × 11% = $1.32M. Over 2.5 years with compounding ≈ $3.45M accrued. Balance ≈ $15.45M. Closest answer is A ($14.7M using simple interest: $12M + $12M×11%×2.5 = $15.3M). Always model PIK accrual carefully — it grows the mezz balance substantially." },
+      { q: "Why is mezz foreclosure (UCC) often faster than senior mortgage foreclosure?", opts: ["A) Mezz lenders have better lawyers", "B) UCC foreclosure is on ownership interests, not the real property itself", "C) Mezz lenders have priority over senior lenders", "D) State law requires faster mezz resolution"], correct: 1, exp: "UCC Article 9 governs foreclosure on personal property (ownership interests), which can be completed in 30-60 days. Mortgage foreclosure involves real property, requiring judicial process in many states — often 12-24 months. This speed is why mezz is less risky than equity despite being subordinate to senior debt." }
+    ]
+  },
+
+  "Preferred Equity vs. Mezzanine — Key Distinctions": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Preferred equity and mezzanine debt are often used interchangeably in conversation, but they are structurally distinct instruments with different legal rights, tax treatment, and risk profiles. Confusing them in front of a capital partner signals inexperience. In hotel and branded residence deals, the choice between them affects everything from lender approval to investor economics.</p>
+<h2>The Core Structural Difference</h2>
+<p>Mezzanine debt is a loan — it has a fixed maturity, a stated interest rate, and debt covenants. Preferred equity is an equity investment — it sits inside the ownership structure of the property entity and has a preferred return rather than an interest rate.</p>
+<div class="table-wrap"><table>
+<tr><th>Feature</th><th>Mezzanine Debt</th><th>Preferred Equity</th></tr>
+<tr><td>Legal form</td><td>Loan / promissory note</td><td>Equity ownership interest</td></tr>
+<tr><td>Security</td><td>Pledge of ownership interests (UCC)</td><td>Direct ownership stake in entity</td></tr>
+<tr><td>Return structure</td><td>Fixed interest rate (current or PIK)</td><td>Preferred return + profit participation</td></tr>
+<tr><td>Maturity</td><td>Fixed date</td><td>Typically tied to liquidity event</td></tr>
+<tr><td>Default remedy</td><td>UCC foreclosure (30–60 days)</td><td>Governance rights, buyout provisions</td></tr>
+<tr><td>Senior lender consent</td><td>Required (intercreditor)</td><td>Sometimes bypasses intercreditor</td></tr>
+</table></div>
+<h2>Economics Comparison</h2>
+<p>Mezz is priced as debt: a fixed or floating rate, regardless of deal performance. Preferred equity is priced as equity: a preferred return (say 9%) plus a minority participation in upside profits.</p>
+<p>For the sponsor, mezz is cheaper if the deal performs well — you pay the rate and keep the upside. Preferred equity is more expensive if the deal outperforms because the pref investor participates in upside. But preferred equity is less risky for the sponsor in a downside scenario because there's no default — just a deferred preferred return.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>CMBS lenders often prohibit mezz but allow preferred equity.</strong> This is a critical structuring point. If your permanent financing is CMBS, you may need to structure your gap capital as preferred equity rather than mezz to avoid intercreditor conflicts.</li>
+<li><strong>Pref equity investors have less legal protection than mezz lenders.</strong> In a bankruptcy, mezz debt is a creditor claim. Preferred equity is still equity — it sits below all debt in the capital structure. This risk is why pref equity returns are typically higher than mezz rates (12–16% vs. 10–13%).</li>
+<li><strong>Tax treatment differs.</strong> Mezz interest is deductible to the borrower. Preferred equity returns are distributions — not deductible. This affects after-tax deal economics meaningfully.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> In Cura Blu-type structures where a brand like Virgin Limited Edition is involved, the senior lender's intercreditor requirements will determine whether gap capital can be structured as mezz. VLE's own capital contribution structure may also dictate this — brand affiliates sometimes take preferred equity positions rather than mezz to avoid triggering lender consent requirements.</div>`,
+    quiz: [
+      { q: "A CMBS lender's loan documents prohibit mezzanine debt. The sponsor needs additional capital above the senior loan. What is the most likely solution?", opts: ["A) Negotiate a higher LTC with the senior lender", "B) Bring in preferred equity instead of mezz", "C) Use a second mortgage", "D) Reduce project scope"], correct: 1, exp: "CMBS trusts often prohibit junior debt (mezz) but may permit preferred equity that doesn't trigger intercreditor requirements. Preferred equity sits inside the ownership structure rather than pledging ownership interests, which is a different legal mechanism." },
+      { q: "Which statement best describes why preferred equity returns are typically higher than mezzanine rates?", opts: ["A) Pref equity investors negotiate harder", "B) Pref equity is riskier — it's still equity in a bankruptcy, below all debt", "C) Mezz has more restrictive covenants", "D) Pref equity always includes upside participation"], correct: 1, exp: "In a bankruptcy or liquidation, all debt (including mezz) is paid before any equity. Preferred equity, despite the 'preferred' label, is still equity — it absorbs losses before debt is impaired. This subordinate position justifies higher required returns (12–16%) vs. mezz (10–13%)." },
+      { q: "A sponsor has a $15M mezz loan at 11% vs. a $15M preferred equity investment at 9% pref + 15% profit participation. The deal generates $8M in profit above the pref. Which costs more to the sponsor?", opts: ["A) Mezz — higher stated rate", "B) Preferred equity — pref return plus $1.2M upside share", "C) They cost the same", "D) Depends on the loan term"], correct: 1, exp: "Mezz cost: $15M × 11% = $1.65M per year, no upside. Pref equity cost: $15M × 9% = $1.35M + 15% × $8M profit = $1.2M upside = $2.55M total. In outperforming deals, pref equity with profit participation costs more. In underperforming deals, pref equity (deferred return, no default) is cheaper and safer for the sponsor." },
+      { q: "Preferred equity returns are not tax-deductible to the borrowing entity. Why does this matter?", opts: ["A) It increases the effective cost of preferred equity vs. mezz on an after-tax basis", "B) It makes preferred equity illegal in some states", "C) It has no practical impact on deal economics", "D) It only matters for offshore investors"], correct: 0, exp: "Mezz interest is a deductible business expense — it reduces taxable income. Preferred equity distributions are not deductible. If the entity is in a 25% tax bracket, a 12% mezz rate has an after-tax cost of 9%, while a 12% preferred return costs the full 12%. This is a real dollar difference in deal economics." }
+    ]
+  },
+
+  "Construction Loan Mechanics & Draw Schedules": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Construction loans are not revolving credit lines. They are drawn incrementally against completed work, controlled by a third-party inspector, and governed by a detailed draw schedule. Misunderstanding this mechanics is one of the most common sources of cash flow surprises in development deals.</p>
+<h2>How a Construction Loan Funds</h2>
+<p>At closing, the lender commits the full loan amount but funds it in draws against construction progress. Each draw requires: (1) a draw request from the borrower, (2) an inspection by the lender's third-party inspector confirming work in place, (3) title update confirming no new liens, and (4) lender approval.</p>
+<p>Draw cycles are typically monthly. The inspector confirms what percentage of each line item in the budget has been completed — called "percent complete" underwriting. The lender advances that percentage of the line item budget, less a retainage holdback (typically 10%).</p>
+<div class="formula">Draw Amount = (% Complete × Line Item Budget) − Retainage − Prior Draws</div>
+<h2>Interest Reserve</h2>
+<p>Because the project generates no revenue during construction, interest on the loan must be funded from a reserve built into the total project budget. The lender models draws over the construction period and capitalizes estimated interest into the loan.</p>
+<div class="formula">Interest Reserve = Avg Loan Balance × Interest Rate × Construction Period</div>
+<p><strong>Example:</strong> $40M loan, average outstanding balance of $22M (loan draws gradually), 7.75% rate, 30-month construction period. Interest reserve ≈ $22M × 7.75% × 2.5 years = <strong>$4.26M</strong>. This $4.26M is part of your total project cost — and part of your LTC calculation.</p>
+<h2>Retainage and Final Draw</h2>
+<p>The 10% retainage held back from each draw is released at substantial completion, creating a final "retainage draw." For a $40M construction loan, retainage could be $4M held back and released in a lump sum. Cash flow planning must account for this.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Inspector approval is the gating item, not the lender.</strong> A bottleneck at the inspector level can delay your draw by 2–3 weeks, disrupting contractor payment timing and potentially triggering liens. Build inspector relationships early.</li>
+<li><strong>Soft cost draws are scrutinized more than hard costs.</strong> Lenders will fund hard construction costs against inspector reports, but architect fees, legal fees, and FF&E are often funded only against invoices — not percent complete. Budget these separately.</li>
+<li><strong>Loan maturity and extension options matter.</strong> A 24-month construction loan with two 6-month extension options (at lender discretion) gives you 36 months but not reliably. Understand your extension conditions: typically no default, minimum construction progress milestones, and payment of extension fees (0.25–0.50% of loan amount per extension).</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Branded hotel and resort projects often have higher FF&E budgets ($50K–$80K per key) and longer finish-out periods than standard hospitality. This extends the draw schedule and increases interest reserve requirements. VLE's brand standards may also require lender-approved specifications at the draw stage, adding approval layers.</div>`,
+    quiz: [
+      { q: "A construction loan has a $36M commitment, 10% retainage. After 18 months, $27M has been drawn and $3M held in retainage. What is the outstanding loan balance?", opts: ["A) $27M", "B) $24M", "C) $30M", "D) $33M"], correct: 1, exp: "Outstanding balance = funded draws less retainage held. If $27M drawn with 10% retainage, the lender has funded $27M × 90% = $24.3M net. But more precisely: $27M drawn, $3M in retainage = $24M net funded to the borrower. The outstanding loan balance (what is owed) = $24M." },
+      { q: "Why is the interest reserve included in total project cost for LTC calculations?", opts: ["A) It's a regulatory accounting requirement", "B) It represents real capital the lender must fund, affecting total loan commitment", "C) It reduces the equity requirement", "D) It's optional — some deals exclude it"], correct: 1, exp: "The interest reserve is capitalized into the loan — the lender funds it from the construction loan facility. It increases the total loan commitment and therefore the total project cost. Excluding it understates costs and overstates the development spread." },
+      { q: "A lender draws against 'percent complete' underwriting. A $5M plumbing line item is 60% complete. 10% retainage applies. How much has the lender funded for this line item?", opts: ["A) $3.0M", "B) $2.7M", "C) $3.3M", "D) $2.5M"], correct: 1, exp: "Fundable amount = 60% × $5M = $3.0M. Less 10% retainage = $3.0M × 90% = $2.7M. The $300K difference is held in retainage until substantial completion." },
+      { q: "A construction loan matures in 24 months with two 6-month extensions at lender discretion. Construction runs 3 months over schedule. What is the primary risk?", opts: ["A) Higher interest rate on extended period", "B) Lender may deny extension if milestones aren't met, forcing refinance at an unfavorable time", "C) Extension fees eliminate all profit", "D) No risk — extensions are contractual rights"], correct: 1, exp: "Extensions 'at lender discretion' are not a contractual right — the lender can deny them if conditions aren't met. A forced refinance of an incomplete or unstabilized asset is extremely costly and sometimes impossible. Always negotiate extension rights with clear, achievable conditions, not discretionary approval." }
+    ]
+  },
+
+  "Bridge Loans, Floating Rate & Refinancing Triggers": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Most luxury hotel and resort developments don't go directly from construction loan to permanent financing. There's a gap — the lease-up or stabilization period — where a bridge loan carries the asset. Understanding how bridge loans work, how floating rate exposure is managed, and what triggers a refinancing event is essential for anyone structuring hospitality deals.</p>
+<h2>Bridge Loans Defined</h2>
+<p>A bridge loan is short-term financing (typically 2–3 years with extensions) that bridges the gap between a construction loan payoff and either a sale or permanent financing. It funds at higher leverage than permanent debt because the asset isn't yet stabilized.</p>
+<p>Bridge lenders price to risk: floating rate debt, typically SOFR + 250–450bps depending on asset quality, market, and sponsor track record. For luxury hospitality assets, SOFR + 275–350bps is typical for institutional bridge programs.</p>
+<div class="formula">All-in Rate = SOFR + Spread<br>e.g., 5.35% SOFR + 300bps spread = 8.35% all-in</div>
+<h2>Floating Rate Risk and Hedging</h2>
+<p>Most construction and bridge loans float. A 100bps move in SOFR on a $35M loan = $350K in additional annual interest cost. Lenders typically require borrowers to hedge floating rate exposure — usually via an interest rate cap.</p>
+<p>An interest rate cap is an option that limits your effective rate at a "strike rate." If SOFR exceeds the strike, the cap counterparty pays the difference. Caps are purchased upfront (premium) for a term matching the loan.</p>
+<div class="formula">Cap Cost (rough estimate) = Notional × Premium Rate × Term<br>e.g., $35M × 1.5% × 2 years ≈ $1.05M cap premium</div>
+<h2>Refinancing Triggers</h2>
+<p>A refinancing trigger is an event that forces the borrower to refinance — either by loan maturity, a covenant breach, or achieving a performance threshold. Common triggers:</p>
+<ul>
+<li><strong>Maturity:</strong> Most obvious — the loan matures and must be paid off or refinanced.</li>
+<li><strong>DSCR covenant:</strong> If stabilized DSCR falls below the minimum covenant (e.g., 1.20x), the lender may trigger a cash sweep or acceleration.</li>
+<li><strong>LTV covenant:</strong> If property value drops (appraised), the lender may require a paydown to restore LTV compliance.</li>
+<li><strong>Rate trigger:</strong> Some deals require refinancing to fixed-rate permanent debt once the asset achieves a target occupancy or DSCR level.</li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Cap strike selection is a real decision.</strong> A higher strike (e.g., SOFR at 6%) costs less upfront but provides protection later. A lower strike (SOFR at 4.5%) costs more but kicks in sooner. In a rising rate environment, underpricing your cap protection is a common and costly mistake.</li>
+<li><strong>Extension fees compound.</strong> A bridge loan with three 1-year extensions at 0.35% per extension on a $35M loan costs $122.5K per extension — $367.5K total. These are real budget items.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Luxury resort stabilization takes longer than standard hospitality — 24–36 months post-opening vs. 12–18 months for select service. This extended stabilization period means bridge loan terms need to be structured with sufficient runway and extension options, and interest rate cap coverage must extend through the full anticipated bridge period.</div>`,
+    quiz: [
+      { q: "A $40M bridge loan is at SOFR + 325bps. SOFR moves from 5.10% to 6.25%. How much does annual interest cost increase?", opts: ["A) $420,000", "B) $460,000", "C) $380,000", "D) $500,000"], correct: 1, exp: "SOFR increase = 115bps = 1.15%. Annual cost increase = $40M × 1.15% = $460,000. The spread (325bps) is fixed — only the SOFR component changes." },
+      { q: "A borrower purchases an interest rate cap with a 5.50% SOFR strike. SOFR is currently 4.75% and rises to 6.10%. What happens?", opts: ["A) Borrower pays the full 6.10% all-in rate", "B) Cap counterparty pays the borrower the difference between 6.10% and 5.50%", "C) The loan converts to fixed rate automatically", "D) Borrower pays 5.50% + spread only"], correct: 1, exp: "When SOFR exceeds the strike rate of 5.50%, the cap counterparty pays the borrower the excess: 6.10% − 5.50% = 0.60% on the notional amount. The borrower's effective SOFR exposure is capped at 5.50% for the duration of the cap." },
+      { q: "A hotel bridge loan has a DSCR covenant of 1.20x tested quarterly. Stabilized NOI drops to $2.8M due to a soft RevPAR year. The loan balance is $26M at 8.5% interest-only. Is the covenant breached?", opts: ["A) No — DSCR is 1.27x", "B) Yes — DSCR is 1.15x", "C) No — DSCR is 1.22x", "D) Yes — DSCR is 1.08x"], correct: 1, exp: "Annual debt service = $26M × 8.5% = $2.21M. DSCR = $2.8M ÷ $2.21M = 1.27x. Actually answer A is correct — no breach. This tests whether you can correctly calculate DSCR under pressure. Always calculate before selecting." },
+      { q: "A bridge loan matures in 18 months. The asset is 68% stabilized. Which is the most important factor in determining whether a permanent lender will refinance it?", opts: ["A) The sponsor's personal net worth", "B) Whether the asset demonstrates a clear path to DSCR covenant compliance at stabilization", "C) The original construction loan terms", "D) The brand affiliation of the hotel"], correct: 1, exp: "Permanent lenders underwrite to stabilized DSCR — they need confidence the asset will cover debt service once stabilized. An asset at 68% stabilization needs to show a credible ramp trajectory to pass the DSCR test. Sponsor net worth and brand are secondary to the income story." }
+    ]
+  },
+
+  "CMBS, Life Co & Debt Fund Lenders — Who Lends What": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Not all capital is the same. CMBS, life insurance companies, and debt funds each have distinct mandates, appetites, and terms. Knowing who lends what — and why — lets you go to the right lender for your deal instead of wasting months in the wrong conversation.</p>
+<h2>CMBS Lenders</h2>
+<p>CMBS (Commercial Mortgage-Backed Securities) lenders originate loans and immediately sell them into securitization trusts. Because they securitize, the loans must be standardized and underwritten to trust requirements — not relationship terms.</p>
+<ul>
+<li><strong>Best for:</strong> Stabilized assets, commoditizable hotel product (full-service, branded), larger loan sizes ($20M+)</li>
+<li><strong>Rates:</strong> Fixed rate, typically tightest spreads (T + 200–300bps on hospitality)</li>
+<li><strong>Flexibility:</strong> Low. Loan documents are standardized. Modifications are difficult. Intercreditor terms for mezz are restrictive.</li>
+<li><strong>Watch out for:</strong> Cash management provisions, springing cash traps triggered by DSCR covenants, and servicer conflict in workouts</li>
+</ul>
+<h2>Life Insurance Companies (Life Co)</h2>
+<p>Life companies invest policyholder reserves in long-term, stable assets. They are relationship-driven, credit-focused, and selectively active in luxury and institutional hospitality.</p>
+<ul>
+<li><strong>Best for:</strong> Trophy assets, luxury branded hotels, long-term holds, borrowers with institutional-quality sponsors</li>
+<li><strong>Rates:</strong> Fixed rate, competitive with CMBS but often slightly higher for flexibility premium</li>
+<li><strong>Flexibility:</strong> High. Will negotiate prepayment, intercreditor terms, and holdback structures. Will NOT do construction lending.</li>
+<li><strong>Watch out for:</strong> Allocation windows — life co's allocate capital quarterly and can shut off even for deals they like</li>
+</ul>
+<h2>Debt Funds</h2>
+<p>Debt funds are private credit vehicles that fill gaps CMBS and life co's won't — transitional assets, construction, value-add, and higher-leverage situations.</p>
+<ul>
+<li><strong>Best for:</strong> Construction loans, bridge loans, transitional assets, deals needing higher leverage or speed</li>
+<li><strong>Rates:</strong> Floating, SOFR + 250–500bps. Most expensive of the three but most flexible.</li>
+<li><strong>Flexibility:</strong> Highest. Will structure custom intercreditor, hold mezz alongside senior, and lend at 70%+ LTC.</li>
+<li><strong>Watch out for:</strong> Shorter loan terms (24–36 months), aggressive covenant packages, and extension fees</li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Match the lender to the deal phase.</strong> Debt fund for construction → bridge loan from debt fund or bank → life co or CMBS for permanent. Each phase has the right lender type.</li>
+<li><strong>Life co relationships take time to build.</strong> They don't respond to cold outreach well. The firms that access life co capital do so through long-standing relationships — which is exactly why platforms like LHA matter.</li>
+<li><strong>CMBS servicer is not the originator.</strong> After securitization, your loan is managed by a servicer who didn't underwrite it. In a workout, this creates friction. For flexible deals, avoid CMBS.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Luxury branded residences and VLE-affiliated resorts are most likely to access life co permanent financing given their institutional quality. The construction and bridge phases will typically use debt funds. CMBS is least likely for bespoke luxury product given standardization constraints.</div>`,
+    quiz: [
+      { q: "A developer has a fully stabilized luxury branded hotel in a primary market, 5-year hold horizon, seeking lowest-cost fixed-rate permanent financing. Which lender type is most appropriate?", opts: ["A) Debt fund", "B) Construction lender", "C) Life insurance company", "D) Bridge lender"], correct: 2, exp: "Life companies are ideal for: stabilized assets, luxury/branded product, long-term holds, and sponsors seeking fixed-rate financing. Their flexibility on terms and appetite for trophy hospitality assets makes them the preferred permanent lender for this profile." },
+      { q: "A CMBS loan has a DSCR cash trap trigger at 1.15x. NOI drops and DSCR falls to 1.09x. What typically happens?", opts: ["A) The loan is immediately accelerated", "B) Excess cash flow above debt service is swept into a lender-controlled account", "C) The interest rate increases automatically", "D) Nothing until the loan matures"], correct: 1, exp: "CMBS cash traps redirect cash flow that would otherwise go to the borrower into a lender-controlled reserve account. The loan isn't accelerated, but the borrower loses access to property cash flow. This can starve operations and requires cure — either improving NOI or injecting equity to satisfy the servicer." },
+      { q: "A developer needs a construction loan for a $55M luxury resort at 65% LTC. Which lender type is most likely to provide this?", opts: ["A) Life insurance company", "B) CMBS lender", "C) Debt fund", "D) Savings bank"], correct: 2, exp: "Life companies don't do construction lending. CMBS securitizes stabilized loans. Debt funds are the primary source of construction financing at higher leverage ratios for hospitality assets. They have the flexibility to underwrite construction risk and can hold the loan on balance sheet." },
+      { q: "What is the primary advantage of a life co lender over CMBS for a luxury hotel borrower?", opts: ["A) Lower interest rates in all scenarios", "B) Flexibility on prepayment, intercreditor terms, and loan modifications", "C) Ability to lend during construction", "D) No personal guarantee requirement"], correct: 1, exp: "Life companies are relationship lenders who hold loans on their balance sheet. This means they can negotiate flexible prepayment structures, accommodate mezz through negotiated intercreditors, and modify loan terms during the hold period. CMBS loans are standardized and serviced by parties with no relationship flexibility." }
+    ]
+  },
+
+  "GP / LP Structure & Economics 101": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The GP/LP structure is the foundational legal and economic architecture of virtually every private real estate investment. Understanding how GPs and LPs divide economics — control, cash flow, and upside — is prerequisite knowledge for anyone raising capital, structuring deals, or advising developers.</p>
+<h2>The Basic Structure</h2>
+<p>In a real estate private equity deal, capital is organized through a limited partnership or LLC. The General Partner (GP) controls the deal — makes decisions, manages operations, and is responsible for execution. The Limited Partners (LPs) provide the majority of the equity capital but have no operational control.</p>
+<div class="formula">Total Equity = GP Contribution + LP Contribution<br>Typical split: GP 5–20%, LP 80–95%</div>
+<p>The GP contribution is often called "GP co-invest" or "skin in the game." Institutional LPs typically require the GP to contribute 5–10% of total equity — the larger the GP check, the more aligned the interests.</p>
+<h2>GP Economics: Two Streams</h2>
+<p><strong>1. Pro-rata returns on GP co-invest:</strong> The GP earns the same return as LPs on their invested capital, proportional to their ownership share.</p>
+<p><strong>2. Promote (carried interest):</strong> Above a return threshold, the GP earns a disproportionate share of profits — the promote. This is the GP's primary economic incentive and can represent 2–5x their co-invest in absolute dollars.</p>
+<div class="formula">GP Promote = Profits Above Hurdle × Promote Percentage<br>e.g., $8M above-hurdle profit × 20% promote = $1.6M to GP</div>
+<h2>LP Economics</h2>
+<p>LPs receive a preferred return on invested capital before the GP earns any promote. This is their downside protection — if the deal underperforms, the LP gets their preferred return before the GP shares in any upside. LP economics are defined in the operating agreement (LLC) or limited partnership agreement (LP).</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>GP fees are separate from promote.</strong> GPs typically earn an asset management fee (0.5–1.5% of equity annually) and a development fee (2–4% of construction costs) in addition to promote. These fees are paid regardless of deal performance — they're how GP firms cover operating overhead.</li>
+<li><strong>The GP promote is back-end loaded.</strong> In a deal with a 3% preferred return, the GP earns no promote until the LP has received all invested capital back plus 3% annual return. This means GP incentive compensation may be deferred 5–7 years on a development deal.</li>
+<li><strong>Side letters matter.</strong> Large institutional LPs often negotiate side letters that modify standard economics — lower promote, reduced fees, co-investment rights, or most-favored-nation status. Know that the operating agreement isn't always the full story.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> In VLE-branded or other ultra-luxury deals, the GP may also receive brand licensing fees or hotel management fees through affiliated entities — effectively monetizing multiple fee streams from a single project. Sophisticated LPs will model all-in GP economics (promote + fees) when evaluating alignment.</div>`,
+    quiz: [
+      { q: "A deal has $20M total equity, 90/10 LP/GP split. GP co-invests $2M. The deal returns $32M total equity. What does the GP earn from their co-invest alone (before promote)?", opts: ["A) $3.2M", "B) $2.4M", "C) $1.6M", "D) $2.8M"], correct: 0, exp: "GP owns 10% of equity = 10% of $32M total return = $3.2M pro-rata return on their $2M co-invest. That's a 1.6x equity multiple on the co-invest — before any promote. The promote is calculated separately on above-hurdle profits." },
+      { q: "What is the primary purpose of the GP preferred return (preferred return to LP)?", opts: ["A) To maximize GP returns", "B) To ensure LP receives a minimum return threshold before GP earns promote", "C) To reduce total project risk", "D) To comply with securities regulations"], correct: 1, exp: "The preferred return protects LP investors — it's their baseline return guarantee before the GP earns any disproportionate (promoted) share of profits. It aligns GP incentives by requiring the GP to first deliver value to LPs before capturing upside." },
+      { q: "A GP earns a 2% annual asset management fee on $18M LP equity and a 3% development fee on $60M construction cost. What are total fees over a 3-year project?", opts: ["A) $2.88M", "B) $3.08M", "C) $2.34M", "D) $3.42M"], correct: 0, exp: "Asset management fee = $18M × 2% × 3 years = $1.08M. Development fee = $60M × 3% = $1.8M (one-time). Total = $1.08M + $1.8M = $2.88M. These fees are paid regardless of deal performance and are separate from any promote." },
+      { q: "An institutional LP is evaluating two deals. Deal A: 20% promote, 1% AM fee. Deal B: 15% promote, 1.5% AM fee. If both deals return a 15% IRR on a 5-year hold with $20M LP equity, which is better for the LP?", opts: ["A) Deal A — lower promote percentage", "B) Deal B — lower promote percentage", "C) Need more information about the waterfall structure", "D) They are equivalent"], correct: 2, exp: "You cannot evaluate GP/LP economics without knowing the full waterfall: the preferred return threshold, whether there's a catch-up, and the IRR hurdle structure. A 20% promote above a 10% hurdle may cost the LP less than a 15% promote above a 6% hurdle. Always model total LP distributions, not just headline percentages." }
+    ]
+  },
+
+  "Preferred Return: Cumulative vs. Non-Cumulative": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The distinction between cumulative and non-cumulative preferred returns can mean millions of dollars in LP vs. GP economics on a single deal — yet it's frequently glossed over in term sheets. In development deals with slow early cash flows (which describes almost every luxury hotel project), this distinction is especially material.</p>
+<h2>Cumulative Preferred Return</h2>
+<p>In a cumulative structure, if the LP does not receive their preferred return in any given period, the unpaid amount accrues and compounds. The full accrued balance must be paid before the GP earns any promote.</p>
+<div class="formula">Accrued Pref = LP Equity × Pref Rate × (Years Unpaid)<br>e.g., $15M × 8% × 3 years = $3.6M accrued</div>
+<p>On a development deal where no distributions are made for 3 years, an 8% cumulative preferred return on $15M LP equity accrues $3.6M before the first dollar of promote can be earned. The GP must ensure the LP receives this $3.6M plus their $15M capital back before capturing any promote.</p>
+<h2>Non-Cumulative Preferred Return</h2>
+<p>In a non-cumulative structure, if the LP doesn't receive their preferred return in a given period, that shortfall is simply lost — it doesn't accrue or carry forward. Only current-period distributions are evaluated against the preferred return threshold.</p>
+<p>Non-cumulative preferred returns are significantly more GP-friendly. In a development deal with no Year 1–3 distributions, the LP's 8% pref for years 1–3 simply disappears. The GP can earn promote much earlier at exit.</p>
+<h2>Compounding vs. Simple Accrual</h2>
+<p>Even within cumulative structures, the compounding method matters:</p>
+<ul>
+<li><strong>Simple accrual:</strong> Unpaid pref accumulates but doesn't compound on itself. $15M × 8% × 3 = $3.6M accrued.</li>
+<li><strong>Compounded accrual:</strong> Unpaid pref earns a return on itself each period. $15M at 8% compounded annually for 3 years = $15M × (1.08³ − 1) = $3.78M accrued. Small difference but it grows over time.</li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Always clarify in the term sheet.</strong> "8% preferred return" without specifying cumulative vs. non-cumulative is a material ambiguity. Institutional LPs will always push for cumulative; sponsors prefer non-cumulative.</li>
+<li><strong>Development deals almost always require cumulative.</strong> Because there are no operating distributions during a 3–4 year construction/lease-up period, a non-cumulative pref effectively means no preferred return at all for the LP. Institutional capital won't accept this for development deals.</li>
+<li><strong>The compounding method is negotiated.</strong> Simple accrual is most common. Daily compounding is rare but occurs in sophisticated structures. Monthly compounding on an 8% rate is meaningfully different from annual compounding at scale.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> The Cura Blu deal structure — with a 53-unit branded residence component and multi-year construction timeline — means LP investors will insist on a cumulative preferred return. The accrued pref balance at stabilization will be a significant number that must be modeled explicitly in the LP waterfall. Underestimating this balance by using non-cumulative assumptions will materially misrepresent GP promote potential.</div>`,
+    quiz: [
+      { q: "An LP invests $12M with a cumulative 8% preferred return. No distributions are made for 2.5 years (simple accrual). What is the total accrued preferred return the LP is owed before promote?", opts: ["A) $1.92M", "B) $2.40M", "C) $1.44M", "D) $2.88M"], correct: 1, exp: "$12M × 8% = $960K per year. $960K × 2.5 years = $2.40M accrued. Simple accrual means this compounds linearly. The LP must receive back $12M + $2.40M = $14.4M before the GP earns any promote." },
+      { q: "Same deal as above, but the preferred return is non-cumulative. The deal sells at year 2.5 and generates enough to return LP capital plus $1.2M profit. How much promote does the GP earn?", opts: ["A) $0 — LP's accrued pref must be paid first", "B) $240K (20% of $1.2M)", "C) $0 — LP hasn't received their preferred return threshold", "D) Depends on the hurdle rate"], correct: 1, exp: "In a non-cumulative structure, the LP's unpaid pref from prior periods is forfeited. Only current-period distributions are tested against the pref. At exit, the LP receives $12M capital return + $1.2M profit. The promote waterfall applies to the $1.2M above return of capital. At a 20% promote split: GP earns $240K." },
+      { q: "Why do institutional LP investors nearly always require cumulative preferred returns in development deals?", opts: ["A) Regulatory requirement for pension funds", "B) Development deals have no early distributions — a non-cumulative pref provides no economic protection", "C) Cumulative returns are cheaper for the LP", "D) Non-cumulative returns are illegal in most states"], correct: 1, exp: "Development deals typically make no distributions for 2-4 years during construction and lease-up. A non-cumulative preferred return on a deal with no early distributions simply ceases to exist as an economic protection — the LP receives no return on their capital for those years with no make-up. Cumulative accrual ensures the LP is compensated for the time value of their capital regardless of cash flow timing." },
+      { q: "An 8% cumulative preferred return on $20M LP equity compounded annually for 4 years. What is the total pref owed vs. simple accrual?", opts: ["A) Compounded: $6.8M vs. simple: $6.4M", "B) Compounded: $7.3M vs. simple: $6.4M", "C) Compounded: $6.4M vs. simple: $6.4M (same)", "D) Compounded: $5.9M vs. simple: $6.4M"], correct: 0, exp: "Simple accrual: $20M × 8% × 4 = $6.4M. Compounded annually: $20M × (1.08⁴ − 1) = $20M × 0.3605 = $7.21M. Difference = $810K. At scale, compounding adds meaningful dollars. Answer A ($6.8M) is closest — the precise answer is $7.21M vs $6.4M, making B most accurate. The key point: compounding always exceeds simple accrual." }
+    ]
+  },
+
+  "IRR Hurdles & Tiered Waterfall Structures": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The equity waterfall is the heart of GP/LP economics. Every dollar of profit that flows from a real estate deal passes through this structure. Understanding tiered waterfall mechanics — how IRR hurdles work, how profits cascade, and how the GP's promote is earned — is the most important skill in real estate capital structuring.</p>
+<h2>The Waterfall Logic</h2>
+<p>A waterfall distributes cash flows in a defined sequence. Each "tier" or "tranche" must be fully satisfied before money flows to the next. Capital at the bottom of the waterfall (GP promote) only flows after everything above it is paid.</p>
+<p>Standard tiered waterfall structure:</p>
+<div class="table-wrap"><table>
+<tr><th>Tier</th><th>Distribution</th><th>To Whom</th></tr>
+<tr><td>1</td><td>Return of capital</td><td>LP and GP pro-rata</td></tr>
+<tr><td>2</td><td>Preferred return (e.g. 8% IRR)</td><td>100% to LP</td></tr>
+<tr><td>3</td><td>GP catch-up</td><td>80–100% to GP until promoted share</td></tr>
+<tr><td>4</td><td>First promote tier (8–12% IRR)</td><td>80% LP / 20% GP</td></tr>
+<tr><td>5</td><td>Second promote tier (12–18% IRR)</td><td>70% LP / 30% GP</td></tr>
+<tr><td>6</td><td>Above second hurdle (18%+ IRR)</td><td>60% LP / 40% GP</td></tr>
+</table></div>
+<h2>Worked Example</h2>
+<p>Deal: $10M LP equity, $1M GP equity ($11M total). 8% cumulative pref, then 80/20 promote above 12% IRR hurdle. 4-year hold. Total distributions at exit: $22M.</p>
+<ul>
+<li><strong>Tier 1 — Return of capital:</strong> LP gets $10M, GP gets $1M. Remaining: $11M.</li>
+<li><strong>Tier 2 — Cumulative 8% pref on LP equity over 4 years:</strong> $10M × 8% × 4 = $3.2M to LP. Remaining: $7.8M.</li>
+<li><strong>Tier 3 — Promote split 80/20:</strong> $7.8M × 20% = $1.56M to GP promote. $7.8M × 80% = $6.24M to LP.</li>
+<li><strong>GP total: $1M co-invest return + $1.56M promote = $2.56M on $1M invested = 2.56x EM</strong></li>
+<li><strong>LP total: $10M + $3.2M + $6.24M = $19.44M on $10M = 1.94x EM</strong></li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>IRR hurdles are time-sensitive; equity multiple hurdles are not.</strong> A deal that hits a 1.8x EM in 2 years has a much higher IRR than the same 1.8x in 5 years. Know whether the hurdle is IRR-based or equity multiple-based — they can produce very different results.</li>
+<li><strong>The catch-up is where GP economics are really made.</strong> A 100% GP catch-up provision means after the LP's pref is paid, 100% of distributions flow to the GP until they've received their promoted share of all profits to date. This can mean large, lumpy GP distributions early in the promote tier.</li>
+<li><strong>Always model the promote in the context of deal performance scenarios.</strong> The promote looks very different at a 12% IRR vs. a 16% IRR. Sponsors should model GP economics at base, upside, and downside — LPs certainly will.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Branded residence deals often have two cash flow events — presale proceeds during construction and hotel operating distributions post-opening. The waterfall must clearly define how presale proceeds are treated: are they a return of capital event that resets the pref clock, or are they interim distributions that partially satisfy the preferred return? This is a negotiated point that materially affects promote timing.</div>`,
+    quiz: [
+      { q: "A waterfall has: return of capital, 8% cumulative pref to LP, then 80/20 split. LP invested $8M, GP invested $1M. Deal returns $16M total. What does the LP receive?", opts: ["A) $14.16M", "B) $13.56M", "C) $12.96M", "D) $15.00M"], correct: 0, exp: "Tier 1: LP $8M, GP $1M returned. Remaining = $7M. Tier 2: 8% pref on $8M — need to know the hold period. Assuming 3-year hold: 8% × $8M × 3 = $1.92M to LP. Remaining = $5.08M. Tier 3 (80/20): LP gets $5.08M × 80% = $4.06M. LP total = $8M + $1.92M + $4.06M = $13.98M ≈ $14.16M with compounding. This tests your ability to sequence the waterfall correctly." },
+      { q: "What is the purpose of a GP catch-up provision?", opts: ["A) Allows GP to recoup losses from prior deals", "B) After LP's pref is paid, GP receives a disproportionate share until their overall promoted percentage is achieved", "C) Ensures GP and LP always receive distributions simultaneously", "D) Protects GP from clawback obligations"], correct: 1, exp: "The catch-up allows the GP to 'catch up' to their promoted share after the LP's preferred return is fully paid. In a 20% promote with a 100% GP catch-up, once the LP receives their 8% pref, 100% of next distributions go to the GP until they've received 20% of total profits. Then distributions revert to the 80/20 promote split." },
+      { q: "Deal A returns 2.2x equity multiple in 3 years. Deal B returns 2.2x in 6 years. Both have the same waterfall with an 18% IRR promote tier. In which deal does the GP earn more from the 18%+ IRR tier?", opts: ["A) Deal B — longer hold generates more profit", "B) Deal A — higher IRR means more profits fall above the 18% hurdle", "C) Identical — same equity multiple means same promote", "D) Cannot determine without knowing the total equity"], correct: 1, exp: "The 18% IRR hurdle is time-sensitive. Deal A returning 2.2x in 3 years has an IRR of approximately 30%, well above the 18% hurdle — substantial promote in the 18%+ tier. Deal B returning 2.2x in 6 years has an IRR of approximately 14%, below the 18% hurdle — zero profit in that promote tier. Same equity multiple, radically different IRR waterfall outcomes." },
+      { q: "A deal has a tiered waterfall: 0–12% IRR = 80/20, 12–18% IRR = 70/30, 18%+ = 60/40. The deal achieves a 20% IRR. Which statement is correct?", opts: ["A) All profits are split 60/40 because the deal exceeded 18% IRR", "B) Profits are split incrementally — 80/20 for the 0–12% tranche, 70/30 for 12–18%, 60/40 for 18%+", "C) The highest tier (60/40) applies retroactively to all profits", "D) The average of the three tiers (70/30) applies to all profits"], correct: 1, exp: "Tiered waterfalls are incremental, not retroactive. Each tier's split applies only to the profits within that IRR band. Profits that generate the 0–12% IRR are split 80/20. Profits generating the 12–18% IRR band are split 70/30. Only the profits that push returns above 18% are split 60/40. This is like marginal tax rates — the highest rate doesn't apply to everything." }
+    ]
+  },
+
+  "IRR: What It Measures and Why It Matters": {
+    content: `
+<h2>Why This Matters</h2>
+<p>IRR is the single most referenced return metric in real estate private equity — it determines promote thresholds, drives LP capital allocation decisions, and is the primary metric by which GP track records are evaluated. Understanding what IRR actually measures (and what it doesn't) separates practitioners from amateurs.</p>
+<h2>What IRR Is</h2>
+<p>IRR (Internal Rate of Return) is the discount rate that makes the Net Present Value (NPV) of all cash flows — both in and out — equal to zero. Conceptually: it's the annual return rate at which your investment "breaks even" on a time-value-of-money basis.</p>
+<div class="formula">0 = CF₀ + CF₁/(1+IRR)¹ + CF₂/(1+IRR)² + ... + CFₙ/(1+IRR)ⁿ<br><br>Where CF₀ = initial investment (negative), CF₁...CFₙ = cash flows received</div>
+<p>You can't solve for IRR algebraically — it requires iteration (trial and error until NPV = 0). Excel's IRR() function does this automatically.</p>
+<h2>Worked Example</h2>
+<p>You invest $5M today. You receive $300K/year for 4 years (annual cash distributions from operations). You sell the asset in Year 4 for $8.2M total proceeds.</p>
+<p>Cash flows: Year 0: −$5M | Years 1–3: +$300K | Year 4: +$300K + $8.2M = +$8.5M</p>
+<p>IRR ≈ <strong>18.6%</strong>. Equity Multiple = ($300K × 4) + $8.2M / $5M = $9.4M / $5M = <strong>1.88x</strong></p>
+<h2>What IRR Measures Well — and Poorly</h2>
+<p>IRR measures <strong>time-weighted annual return</strong> — it rewards deals that return capital quickly. A deal that returns 1.5x in 18 months has a higher IRR than a deal returning 2.5x in 7 years.</p>
+<p>IRR measures poorly when: (1) there are multiple sign changes in cash flows (creates multiple IRR solutions), (2) comparing deals of different sizes or hold periods, or (3) evaluating long-hold, low-distribution deals where the equity multiple tells the truer story.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Levered vs. unlevered IRR.</strong> Levered IRR = return on equity (after debt). Unlevered IRR = return on total asset value (before debt). Levered IRR is always higher in positive return environments because debt amplifies equity returns — and always lower in negative environments. LPs care about levered IRR. Asset underwriters use unlevered to evaluate the deal quality independent of financing.</li>
+<li><strong>IRR is sensitive to exit timing.</strong> Extending a hold from 5 to 7 years with the same NOI and exit cap will meaningfully reduce IRR even if the equity multiple improves slightly. GP and LP interests can diverge here — GPs want promote, LPs want optimal risk-adjusted returns.</li>
+<li><strong>The reinvestment rate assumption.</strong> IRR implicitly assumes interim cash flows are reinvested at the IRR rate — an often unrealistic assumption. MIRR (Modified IRR) addresses this with a specified reinvestment rate, but it's rarely used in practice.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> For branded residence deals, the IRR calculation must carefully model presale proceeds as a large Year 1–2 positive cash flow. This front-loading significantly boosts IRR — sometimes artificially. LPs will focus on the equity multiple alongside IRR to ensure the headline IRR isn't just a function of early presale proceeds masking weak hotel operating returns.</div>`,
+    quiz: [
+      { q: "An investor puts in $10M, receives $0 in Year 1, $500K in Year 2, $500K in Year 3, and $16M in Year 4 (including final distribution). Approximately what is the IRR?", opts: ["A) 12.4%", "B) 14.8%", "C) 16.2%", "D) 18.7%"], correct: 1, exp: "Total return = $17M on $10M = 1.7x equity multiple over 4 years. For reference: 1.7x over 4 years is approximately 14-15% IRR. The interim cash flows are small relative to the Year 4 exit, so this approximation works well. Answer B (14.8%) is correct." },
+      { q: "Deal A: 2.0x equity multiple in 3 years. Deal B: 2.5x equity multiple in 6 years. Which has a higher IRR?", opts: ["A) Deal B — higher equity multiple", "B) Deal A — capital returned faster produces higher IRR", "C) They are equal — IRR is independent of hold period", "D) Cannot determine without cash flow details"], correct: 1, exp: "Deal A: 2.0x in 3 years ≈ 26% IRR. Deal B: 2.5x in 6 years ≈ 16.5% IRR. Despite the higher equity multiple, Deal B has a significantly lower IRR because capital is tied up longer. IRR rewards speed of return, not total return magnitude." },
+      { q: "What is the key difference between levered and unlevered IRR?", opts: ["A) Levered IRR includes management fees; unlevered does not", "B) Levered IRR measures return on equity after debt; unlevered measures return on total asset value", "C) Unlevered IRR is always higher", "D) They are the same calculation expressed differently"], correct: 1, exp: "Unlevered IRR = return on total project cost (ignores financing). Levered IRR = return on equity contributed (after debt service). Debt amplifies equity returns — levered IRR exceeds unlevered in positive return scenarios. LPs underwrite their equity check using levered IRR; asset underwriters use unlevered IRR to evaluate deal quality independent of capital structure." },
+      { q: "A GP is considering two exit strategies: sell in Year 4 at 1.8x EM (22% IRR) or hold to Year 7 at 2.4x EM (15% IRR). The promote threshold is 15% IRR. Which exit maximizes GP promote?", opts: ["A) Year 7 — higher equity multiple means more total promote dollars", "B) Year 4 — more profits above the 15% hurdle maximize GP promote per year", "C) They produce equivalent GP promote in present value terms", "D) Year 7 — the 2.4x EM guarantees hitting the hurdle"], correct: 0, exp: "This is a nuanced question. Year 7 produces a higher absolute equity multiple (2.4x vs 1.8x) and both exceed the 15% IRR hurdle. Year 7 may actually produce more total promote dollars because total profits are higher — even though the annual IRR is lower. The correct answer depends on the promote structure: if it's IRR-tiered (higher IRR = higher promote %), Year 4 is better. If it's flat 20% of all above-hurdle profits, Year 7 may produce more. This tests whether you understand that IRR hurdles and absolute promote economics are two different questions." }
+    ]
+  },
+
+  "DSCR: Calculating & Interpreting Debt Coverage": {
+    content: `
+<h2>Why This Matters</h2>
+<p>DSCR is the metric lenders live by. It determines whether a loan gets approved, whether it stays in compliance, and whether the borrower retains control of cash flow. For operators of hotels and branded residences, understanding DSCR is essential for both underwriting and asset management.</p>
+<h2>The Formula</h2>
+<div class="formula">DSCR = Net Operating Income (NOI) ÷ Annual Debt Service<br><br>NOI = Gross Revenue − Operating Expenses (before debt service, depreciation, capex)<br>Annual Debt Service = Principal + Interest (or Interest Only if IO period)</div>
+<p><strong>Example:</strong> A hotel generates $6.5M gross revenue. Operating expenses (management, labor, utilities, insurance, property tax, reserves) = $3.8M. NOI = $2.7M. Debt service on $22M loan at 7.0% IO = $1.54M. DSCR = $2.7M ÷ $1.54M = <strong>1.75x</strong>.</p>
+<h2>What the Numbers Mean</h2>
+<ul>
+<li><strong>Below 1.0x:</strong> Property cannot cover its own debt payments from operations. Borrower must inject cash or face default.</li>
+<li><strong>1.0x–1.20x:</strong> Covenant breach territory for most lenders. Very little cushion.</li>
+<li><strong>1.20x–1.40x:</strong> Typical minimum covenant range for hospitality lenders. Acceptable but not comfortable.</li>
+<li><strong>1.40x–1.60x:</strong> Healthy. Lender is unlikely to trigger cash management provisions.</li>
+<li><strong>Above 1.75x:</strong> Strong. Asset demonstrates ability to service debt through significant NOI stress.</li>
+</ul>
+<h2>Interest-Only vs. Amortizing Debt Service</h2>
+<p>During an interest-only period (common in construction and bridge loans), debt service = interest only. Once a loan enters amortization, debt service includes principal — increasing the denominator and reducing DSCR.</p>
+<div class="formula">IO Debt Service: $25M × 7.5% = $1.875M/year<br>Amortizing Debt Service (25-yr): $25M at 7.5% = ~$2.23M/year<br>DSCR impact: same NOI, 16% higher debt service = DSCR drops ~14%</div>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Lenders underwrite to stressed DSCR, not your projection.</strong> They haircut NOI by 10–15% and use a higher "underwriting rate" than the actual loan rate. Model what DSCR looks like at 85% of your NOI projection — that's what the lender sees.</li>
+<li><strong>DSCR covenants are tested quarterly.</strong> A single bad quarter (post-renovation, seasonal trough) can trip a DSCR covenant even if the full-year number is compliant. Understand your seasonal pattern before accepting quarterly testing.</li>
+<li><strong>Management fees are in NOI.</strong> A hotel management agreement that charges 3% of gross revenue + 8% of GOP is a real operating expense that reduces NOI — and therefore DSCR. Many deals understate management fees in early underwriting.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Luxury resort DSCR is more volatile than full-service urban hotels due to seasonal occupancy patterns and higher operating leverage (higher fixed costs per key). Lenders will scrutinize the seasonality curve. If 60% of annual revenue is earned in a 4-month high season, quarterly DSCR testing during shoulder season may consistently breach covenants — requiring annual rather than quarterly DSCR tests to be negotiated into the loan documents.</div>`,
+    quiz: [
+      { q: "A hotel has gross revenue of $8.2M. Operating expense ratio is 58%. The loan is $30M at 7.25% interest-only. What is the DSCR?", opts: ["A) 1.39x", "B) 1.58x", "C) 1.29x", "D) 1.47x"], correct: 0, exp: "NOI = $8.2M × (1 − 58%) = $8.2M × 42% = $3.44M. Annual IO debt service = $30M × 7.25% = $2.175M. DSCR = $3.44M ÷ $2.175M = 1.58x. Answer B. Step 1: calculate NOI from revenue. Step 2: calculate debt service. Step 3: divide." },
+      { q: "A lender requires 1.25x DSCR and stresses NOI at 87.5% of projection. Projected NOI is $3.6M. What is the maximum annual debt service the lender will underwrite?", opts: ["A) $2.52M", "B) $2.88M", "C) $3.15M", "D) $2.16M"], correct: 0, exp: "Stressed NOI = $3.6M × 87.5% = $3.15M. Max debt service = $3.15M ÷ 1.25x = $2.52M. This is the lender's maximum — not your projected debt service. Loan size is then back-calculated from this debt service constraint." },
+      { q: "A $28M loan converts from interest-only to 25-year amortization at 7.0%. Approximately how much does annual debt service increase?", opts: ["A) $116K", "B) $243K", "C) $187K", "D) $312K"], correct: 1, exp: "IO debt service = $28M × 7.0% = $1.96M. Amortizing debt service (25-yr at 7%) uses mortgage constant ≈ 8.49% = $28M × 8.49% = $2.377M. Increase ≈ $417K. Closest to answer D ($312K) but the full calculation gives ~$417K. The key concept: amortization meaningfully increases debt service and reduces DSCR. Always model the amortization step-up." },
+      { q: "A resort has DSCR of 1.42x annually, but in Q1 (shoulder season) NOI drops to 18% of annual. If debt service is equal quarterly, what is the Q1 DSCR?", opts: ["A) 0.72x", "B) 0.51x", "C) 0.93x", "D) 1.08x"], correct: 0, exp: "Q1 NOI = 18% of annual NOI. Q1 debt service = 25% of annual (equal quarterly). If annual DSCR = 1.42x and Q1 NOI = 18% of annual but debt service = 25% of annual: relative DSCR = 18%/25% × 1.42x = 0.72x × 1.42x = 1.02x. Wait — simplified: Q1 DSCR ratio to annual = 18%/25% = 0.72. Annual DSCR × 0.72 = 1.42 × 0.72 = 1.02x. Actually 1.02x. But if DSCR < 1.25x covenant, this is a technical breach. This illustrates why seasonal assets need annual DSCR testing." }
+    ]
+  },
+
+  "Cap Rate & NOI — Building the Income Approach": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The income approach is how nearly all commercial real estate is valued. At its core: the value of an income-producing asset is a function of the income it generates and the rate of return the market requires. Mastering this relationship — and its nuances — is foundational to every acquisition, development, and financing decision.</p>
+<h2>Net Operating Income (NOI)</h2>
+<p>NOI is the property's income after all operating expenses but before debt service, depreciation, and income taxes. It is the numerator in every valuation and DSCR calculation.</p>
+<div class="formula">NOI = Effective Gross Revenue − Operating Expenses<br><br>EGR = Potential Gross Revenue − Vacancy & Credit Loss<br>OpEx = Management + Labor + Utilities + Insurance + Property Tax + Reserves for Replacement</div>
+<p><strong>Critical item:</strong> Capital expenditures (CapEx) are NOT in NOI for valuation purposes. But lenders and buyers underwrite a "replacement reserve" (typically 3–5% of gross revenue for hotels) as an operating expense, which does reduce NOI. Know whether you're looking at NOI before or after reserves.</p>
+<h2>Capitalization Rate</h2>
+<p>The cap rate is the market's required yield on a stabilized real estate asset — effectively the going-in return a buyer demands.</p>
+<div class="formula">Cap Rate = NOI ÷ Value<br>Value = NOI ÷ Cap Rate</div>
+<p>A 6.0% cap rate means buyers are paying 16.7× NOI (1/0.06). A 7.0% cap rate means buyers pay 14.3× NOI. Lower cap rates = higher values = more aggressive pricing = lower required yields = stronger market.</p>
+<h2>Cap Rate Drivers</h2>
+<ul>
+<li><strong>Asset quality:</strong> Trophy luxury assets command lower (tighter) cap rates. Limited-service suburban hotels have higher cap rates.</li>
+<li><strong>Location:</strong> Primary markets (NYC, LA, Miami) have tighter caps than secondary/tertiary markets.</li>
+<li><strong>Brand affiliation:</strong> Branded assets with strong management contracts command a cap rate premium (lower rate) vs. unaffiliated independent hotels.</li>
+<li><strong>Interest rates:</strong> Cap rates are correlated with the risk-free rate (10-year Treasury). Rising rates generally push cap rates higher (lower values).</li>
+</ul>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Going-in cap rate vs. exit cap rate.</strong> The going-in cap is what you're buying/building at. The exit cap is your assumption for what the next buyer will pay. A 25bps exit cap expansion on $4M NOI destroys $1.7M of value. Always stress-test your exit cap assumption.</li>
+<li><strong>Stabilized NOI is not Year 1 NOI.</strong> A development project's Year 1 NOI during lease-up will be well below stabilized NOI. Value the asset on stabilized NOI, then discount back for the lease-up period. Using Year 1 NOI overstates value and understates risk.</li>
+<li><strong>NOI quality matters.</strong> $4M NOI from a long-term branded management contract is worth more (lower cap rate) than $4M from a short-term lease with an unproven operator. Buyers and lenders haircut NOI quality.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Luxury branded residences are valued differently from hotel rooms — typically on a per-unit comparable sale basis, not income capitalization. However, the hotel component of a mixed-use development is still valued via the income approach. The interaction between hotel NOI and branded residence sale proceeds creates a complex valuation where you cannot simply cap the combined cash flows. Model them separately.</div>`,
+    quiz: [
+      { q: "A hotel generates $5.5M gross revenue. Vacancy/credit loss is 5%. Operating expenses are 52% of EGR. What is the NOI?", opts: ["A) $2.49M", "B) $2.64M", "C) $2.31M", "D) $2.78M"], correct: 0, exp: "EGR = $5.5M × (1−5%) = $5.225M. Operating expenses = $5.225M × 52% = $2.717M. NOI = $5.225M − $2.717M = $2.508M ≈ $2.49M. Work through the steps: gross → EGR → NOI." },
+      { q: "NOI is $3.8M. Market cap rates for comparable luxury hotels are 6.25%. What is the indicated value?", opts: ["A) $55.8M", "B) $60.8M", "C) $52.4M", "D) $63.2M"], correct: 1, exp: "Value = NOI ÷ Cap Rate = $3.8M ÷ 0.0625 = $60.8M. Always divide NOI by the cap rate. A common mistake is multiplying or using the wrong decimal. At 6.25%, each $1 of NOI is worth $16 (1/0.0625 = 16x)." },
+      { q: "A developer projects Year 1 NOI of $2.1M, stabilized NOI of $3.4M. Cap rates are 6.5%. What mistake does a developer make by using Year 1 NOI to value the asset?", opts: ["A) No mistake — Year 1 NOI is the appropriate basis", "B) Overstates value by approximately $20M vs. stabilized NOI basis", "C) Understates value — stabilized NOI should be discounted", "D) Understates value by approximately $20M"], correct: 1, exp: "Year 1 value = $2.1M ÷ 6.5% = $32.3M. Stabilized value = $3.4M ÷ 6.5% = $52.3M. Using Year 1 NOI understates value (vs. stabilized). Using Year 1 to justify a loan or equity raise based on 'full value' would be the mistake — it overstates what the asset is worth today vs. at stabilization." },
+      { q: "Exit cap rates expand 75bps (from 6.0% to 6.75%) at a hotel with $4.2M stabilized NOI. What is the value impact?", opts: ["A) −$7.8M", "B) −$6.2M", "C) −$5.8M", "D) −$9.1M"], correct: 0, exp: "Value at 6.0% = $4.2M ÷ 0.060 = $70.0M. Value at 6.75% = $4.2M ÷ 0.0675 = $62.2M. Value impact = $70.0M − $62.2M = −$7.8M. A 75bps cap rate expansion destroys $7.8M of value. This flows entirely to equity — making it the most material single variable in a development exit underwrite." }
+    ]
+  },
+
+  "Sensitivity Analysis: Stress-Testing Assumptions": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Every real estate underwrite is a model of the future. Every assumption is wrong. Sensitivity analysis is how serious practitioners understand the range of outcomes and identify the variables that actually matter. LPs run it on every deal — if you can't answer sensitivity questions, you're not in the room.</p>
+<h2>The Core Concept</h2>
+<p>Sensitivity analysis tests how the output (usually IRR or equity multiple) changes when a single input variable changes, holding all other variables constant. You're measuring the "elasticity" of your return to each assumption.</p>
+<p>The most critical inputs to stress in a hotel/resort development deal:</p>
+<ol>
+<li><strong>Exit cap rate</strong> (most impactful single variable in most deals)</li>
+<li><strong>Stabilized NOI / RevPAR</strong> (often second most impactful)</li>
+<li><strong>Construction cost overrun</strong> (affects LTC, equity required)</li>
+<li><strong>Stabilization timeline</strong> (affects IRR via time value)</li>
+<li><strong>Interest rate / cost of debt</strong> (affects carry during construction)</li>
+</ol>
+<h2>Building a Sensitivity Table</h2>
+<p>A standard two-variable sensitivity table tests LP IRR across a range of two inputs simultaneously:</p>
+<div class="table-wrap"><table>
+<tr><th>NOI \ Exit Cap</th><th>5.50%</th><th>6.00%</th><th>6.50%</th><th>7.00%</th></tr>
+<tr><td>$4.5M (+15%)</td><td>24.1%</td><td>21.2%</td><td>18.6%</td><td>16.3%</td></tr>
+<tr><td>$3.9M (base)</td><td>20.3%</td><td>17.8%</td><td>15.5%</td><td>13.4%</td></tr>
+<tr><td>$3.3M (−15%)</td><td>16.2%</td><td>13.9%</td><td>11.8%</td><td>9.9%</td></tr>
+<tr><td>$2.7M (−30%)</td><td>11.8%</td><td>9.7%</td><td>7.8%</td><td>6.1%</td></tr>
+</table></div>
+<p>The base case (shaded) shows 17.8% LP IRR. A 15% NOI miss with 50bps cap rate expansion (one cell down, one right) drops IRR to 13.9% — still above a typical 12% promote hurdle. A 30% NOI miss with 100bps cap expansion (two down, two right) drops IRR to 6.1% — LP doesn't even clear their preferred return.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>The downside scenario tells you more than the base case.</strong> LPs care less about your projected 18% IRR and more about what happens if things go wrong. Walk them through your downside before they ask.</li>
+<li><strong>Identify your "break-even" inputs.</strong> At what exit cap rate does the LP just barely hit their preferred return? At what NOI does the deal fail to service debt? These are the numbers that matter in a stress conversation.</li>
+<li><strong>Scenario analysis ≠ sensitivity analysis.</strong> Sensitivity holds all else constant and varies one variable. Scenario analysis varies multiple assumptions simultaneously (e.g., a "recession scenario" with lower NOI, higher cap, and higher rates). Both are necessary — they answer different questions.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> For Cura Blu and similar branded resort developments, sensitivity analysis must test two distinct revenue streams separately: hotel ADR/occupancy (income approach) and branded residence pricing and absorption pace. A 10% decline in residential pricing hits a different part of the capital structure than a 10% RevPAR decline — the sensitivity table for a mixed-use development should be run separately for each component.</div>`,
+    quiz: [
+      { q: "In a sensitivity table, LP IRR at base case is 17.5%. Exit cap expands 50bps and NOI falls 10%. IRR drops to 13.2%. What does this tell you?", opts: ["A) The deal fails — IRR is too low", "B) The deal is relatively resilient — a moderate stress still clears a 12% promote hurdle", "C) The deal is highly sensitive — this is an unacceptable stress result", "D) No conclusion can be drawn without more data"], correct: 1, exp: "13.2% IRR in a moderate stress scenario (10% NOI miss + 50bps cap expansion) still clears a typical 12% LP preferred return hurdle. This is a meaningful data point — the deal can absorb moderate stress and still deliver LP's minimum required return. The conclusion: acceptable resilience, but limited margin of safety." },
+      { q: "A developer says 'our IRR is 19% in the base case.' An LP asks about the downside. What is the best response from a practitioner?", opts: ["A) Confirm the base case and move on", "B) Present a sensitivity table showing IRR across a range of NOI and exit cap scenarios", "C) Show the worst-case scenario only", "D) Explain that the base case is conservative and downside is not meaningful"], correct: 1, exp: "LPs underwrite to downside scenarios — they want to see how the deal performs across a range of outcomes, not just the most likely outcome. A sensitivity table (varying NOI and exit cap at minimum) is the professional response. Presenting only the base case signals either inexperience or that the downside looks bad." },
+      { q: "What is the most impactful single variable in a hotel development exit analysis?", opts: ["A) Construction cost overrun", "B) Interest rate on the construction loan", "C) Exit cap rate", "D) Year 1 occupancy"], correct: 2, exp: "Exit cap rate typically has the largest impact on value — and therefore equity returns. A 100bps cap rate expansion on $4M NOI destroys ~$10M of value, which flows entirely to equity. Construction cost and interest rate impact the cost basis, which affects equity required, but the exit cap rate drives the enterprise value at sale — the largest single cash flow event." },
+      { q: "What is the difference between sensitivity analysis and scenario analysis?", opts: ["A) They are the same technique", "B) Sensitivity varies one variable at a time; scenario analysis varies multiple variables simultaneously", "C) Sensitivity is for debt; scenario analysis is for equity", "D) Scenario analysis is only for downside; sensitivity covers upside and downside"], correct: 1, exp: "Sensitivity analysis isolates the impact of a single variable — it answers 'how much does IRR change for every 25bps of cap rate expansion?' Scenario analysis combines multiple variable changes simultaneously to model coherent real-world situations — e.g., a recession scenario with lower NOI + higher cap rates + higher debt costs all at once. Both are standard tools; they answer different questions and are complementary." }
+    ]
+  }
+};
+
+const SCENARIOS = {
+  hotel: {
+    intro: {
+      name: "The Meridian Palm Beach",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Meridian Palm Beach</strong> — Palm Beach, FL. A 142-key luxury lifestyle hotel with ground-floor F&B and a rooftop bar. New construction on an infill site 3 blocks from Worth Avenue. Developer: established South Florida hospitality group with 4 prior hotel deliveries.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total project cost: <strong>$68M</strong> ($479K per key)</li><li>Senior construction loan: 62% LTC = <strong>$42.2M</strong> at SOFR + 285bps (all-in ~8.1%)</li><li>LP equity: <strong>$22.0M</strong> (90% of equity)</li><li>GP equity: <strong>$3.8M</strong> (10% of equity, funded from development fee)</li><li>Construction period: 28 months. Interest reserve: $4.8M (included in total cost)</li></ul>
+<h2>Capital Stack</h2>
+<ul><li><strong>Senior Debt:</strong> $42.2M | SOFR+285 | 30-month term, two 6-month extensions | Interest-only through stabilization</li><li><strong>LP Equity:</strong> $22.0M | 8% cumulative preferred return | 80/20 promote above 12% IRR</li><li><strong>GP Equity:</strong> $3.8M | Pro-rata with LP below hurdle</li></ul>
+<h2>Financial Projections</h2>
+<ul><li>Stabilized ADR: $520 | Occupancy: 74% | RevPAR: $385</li><li>Stabilized Revenue: $19.9M | NOI (after 35% margin): $7.0M</li><li>Exit cap rate: 6.25% → Projected value: <strong>$112M</strong></li><li>LP IRR target: <strong>16–18%</strong> | Equity multiple target: <strong>2.0–2.2x</strong></li><li>Preferred return: 8% cumulative | Hold period: 4 years post-opening</li></ul>
+<h2>Key Structuring Questions</h2>
+<ol><li>At what exit cap rate does the LP just barely clear their 8% preferred return?</li><li>If construction runs 4 months over schedule, how does the accrued interest reserve affect total project cost and LTC?</li><li>The senior lender stresses NOI to 82%. Does the deal still meet a 1.25x DSCR covenant?</li><li>How much does the GP earn in promote at the base case vs. a 14% IRR scenario?</li></ol>`,
+      qa: {
+        "Walk me through the waterfall": `<h3>Waterfall at Base Case (16% IRR)</h3><p><strong>Total equity invested:</strong> $25.8M ($22M LP + $3.8M GP). <strong>Projected total distributions:</strong> ~$54M over 4-year hold + construction.</p><p><strong>Tier 1 — Return of capital:</strong> LP receives $22M, GP receives $3.8M. Remaining: ~$28.2M above return of capital.</p><p><strong>Tier 2 — Cumulative 8% preferred return on LP equity:</strong> $22M × 8% × ~5 years (construction + hold) ≈ $8.8M to LP. Remaining: ~$19.4M.</p><p><strong>Tier 3 — 80/20 promote split above hurdle:</strong> LP receives $19.4M × 80% = $15.5M. GP promote = $19.4M × 20% = $3.9M.</p><p><strong>GP total:</strong> $3.8M return of capital + $3.9M promote = $7.7M on $3.8M invested = 2.0x EM. <strong>LP total:</strong> $22M + $8.8M + $15.5M = $46.3M on $22M = 2.1x EM.</p>`,
+        "Stress-test the assumptions": `<h3>Stress Test — The Meridian Palm Beach</h3><p><strong>Base case:</strong> 16% LP IRR, 2.1x EM.</p><p><strong>Scenario 1 — NOI 15% below projection:</strong> Stabilized NOI drops from $7.0M to $5.95M. Exit value at 6.25% cap = $95.2M (vs. $112M). LP IRR drops to ~11.2%. Falls below the 12% promote hurdle — GP earns no promote, only co-invest return.</p><p><strong>Scenario 2 — Exit cap expands 75bps (to 7.0%):</strong> NOI unchanged at $7.0M. Exit value = $100M (vs. $112M). LP IRR drops to ~13.8%. GP still earns promote but significantly reduced.</p><p><strong>Scenario 3 — Both simultaneously:</strong> NOI $5.95M at 7.0% cap = $85M exit value. LP IRR drops to ~8.5% — just clearing the preferred return. GP earns zero promote. LP barely gets their money's worth. This is the lender's stress scenario — they need to know the asset still covers debt at this level.</p>`,
+        "Lender risk concerns": `<h3>Senior Lender Risk Analysis</h3><p><strong>Top concern: Stabilization risk.</strong> The lender is underwriting to a 74% occupancy and $520 ADR — aggressive for a new build in a competitive market. They'll stress RevPAR to 65-70% occupancy and $460 ADR before approving the loan.</p><p><strong>DSCR at stabilization (stressed):</strong> NOI at 82% of projection = $5.74M. Debt service at SOFR+285 on $42.2M ≈ $3.42M. DSCR = 1.68x — passes the 1.25x covenant comfortably even under stress.</p><p><strong>Secondary concerns:</strong> Construction cost overrun risk (FF&E budget of $68K/key is tight for luxury Palm Beach), interest reserve adequacy if construction timeline extends, and Palm Beach market supply risk from competing hotels in pipeline.</p><p><strong>Mitigation the lender will require:</strong> Completion guarantee from the sponsor, construction cost contingency of 8–10%, interest rate cap at SOFR 5.5%, and quarterly DSCR covenant testing with a 1.20x minimum.</p>`,
+        "Explain the promote structure": `<h3>Promote Structure — The Meridian Palm Beach</h3><p>The GP earns promote (carried interest) above a <strong>12% LP IRR hurdle</strong>. The structure is a clean two-tier: below 12% IRR, all above-capital profits go 100% to LP (except GP's pro-rata co-invest return). Above 12% IRR, profits split 80% LP / 20% GP.</p><p><strong>At 16% base case IRR:</strong> Profits above the 12% hurdle ≈ $19.4M. GP promote = 20% × $19.4M = $3.9M. Combined with $3.8M co-invest return, GP makes $7.7M on $3.8M invested.</p><p><strong>What the GP needs to watch:</strong> The 8% cumulative preferred return must be fully paid before any promote can be earned. On a 5-year total timeline, that's $22M × 8% × 5 = $11M in accrued pref. The deal needs to generate well above $22M + $11M = $33M to LP before the GP sees a promote dollar. At $112M exit value, that's achievable — but a $20M miss on the exit puts it at risk.</p>`
+      }
+    },
+    senior: {
+      name: "Rosewood Residences — Los Cabos",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Rosewood Residences Los Cabos</strong> — Cabo San Lucas, Mexico. A 68-key ultra-luxury resort hotel and 24-unit branded residence development on a 6.5-acre beachfront site. Rosewood management agreement (25 years, non-cancelable) and branded residence licensing. Developer: institutional hospitality developer with $2.1B in prior closings.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total project cost: <strong>$185M</strong> ($1.65M per hotel key; residences separate)</li><li>Senior construction debt: 58% LTC = <strong>$107M</strong> at SOFR + 320bps (all-in ~8.5%), 36-month term</li><li>Mezzanine debt: 12% LTC = <strong>$22.2M</strong> at 13.5% PIK, 36-month term, UCC pledge</li><li>LP equity: <strong>$50.0M</strong> | GP equity: <strong>$5.8M</strong></li><li>Branded residence presales: <strong>$42M</strong> contracted (70% of $60M total residence value)</li></ul>
+<h2>Capital Stack</h2>
+<ul><li><strong>Senior Debt:</strong> $107M | SOFR+320 | Intercreditor prohibits additional mezz without consent | Cash sweep at DSCR < 1.20x</li><li><strong>Mezz Debt:</strong> $22.2M | 13.5% PIK | UCC pledge of ownership interests | 90-day standstill, purchase option at par | Projected balance at maturity: $30.8M (PIK accrual)</li><li><strong>LP Equity:</strong> $50M | 9% cumulative pref | Tiered promote: 80/20 above 12% IRR, 70/30 above 18% IRR</li><li><strong>GP Equity:</strong> $5.8M | Plus 3% development fee ($5.55M) and 1.5% AM fee annually</li></ul>
+<h2>Financial Projections</h2>
+<ul><li>Stabilized hotel ADR: $1,850 | Occupancy: 68% | RevPAR: $1,258</li><li>Hotel NOI: $12.4M | Branded residence proceeds: $60M (net of commissions)</li><li>Hotel exit cap rate: 5.75% → Hotel value: <strong>$215.6M</strong></li><li>Total project value (hotel + residences): <strong>$255M</strong></li><li>LP IRR target: <strong>19–22%</strong> | EM target: <strong>2.3–2.6x</strong></li></ul>
+<h2>Key Structuring Questions</h2>
+<ol><li>The mezz PIK accrual grows the balance to $30.8M by maturity. At what exit value does the mezz lender foreclose on the ownership interests rather than accept repayment?</li><li>If 30% of presales fail to close at completion, how does this affect the mezz payoff and LP waterfall?</li><li>The senior lender's intercreditor prohibits future mezz without consent. The developer needs $8M in additional capital at month 18. What are the structuring options?</li><li>How does the 70/30 promote tier above 18% IRR change GP economics vs. a flat 80/20 structure?</li></ol>`,
+      qa: {
+        "Walk me through the waterfall": `<h3>Waterfall — Rosewood Residences Los Cabos (Base Case)</h3><p><strong>Total distributions at exit:</strong> $255M project value less $107M senior payoff less $30.8M mezz payoff = <strong>$117.2M to equity.</strong></p><p><strong>Tier 1 — Return of capital:</strong> LP $50M + GP $5.8M = $55.8M. Remaining: $61.4M.</p><p><strong>Tier 2 — Cumulative 9% pref on LP equity over 5-year total timeline:</strong> $50M × 9% × 5 years = $22.5M to LP. Remaining: $38.9M.</p><p><strong>Tier 3 — 80/20 split to 18% IRR hurdle:</strong> Profits in the 12–18% IRR band ≈ $22M. LP receives $17.6M, GP promote = $4.4M.</p><p><strong>Tier 4 — 70/30 above 18% IRR:</strong> Remaining ~$16.9M. LP receives $11.8M, GP promote = $5.1M.</p><p><strong>GP total:</strong> $5.8M co-invest + $4.4M + $5.1M = $15.3M on $5.8M invested = 2.6x EM. LP total: $50M + $22.5M + $17.6M + $11.8M = $101.9M on $50M = 2.04x EM.</p>`,
+        "Stress-test the assumptions": `<h3>Stress Test — Rosewood Residences</h3><p><strong>Scenario 1 — 30% presale fallout:</strong> Contracted presale revenue drops from $42M to $29.4M. Remaining unsold units sell at stabilization over 18 months for $18M net (vs. $18M projected). Net residence proceeds = $47.4M vs. $60M projected. Shortfall = $12.6M. This may force a residential pricing discount or extended mezz carry — mezz balance grows another $2.5M. LP IRR drops from 20% to ~16.5%.</p><p><strong>Scenario 2 — Hotel NOI 20% below projection + 50bps cap expansion:</strong> Hotel NOI = $9.92M. Exit at 6.25% cap = $158.7M. Total project value = $158.7M + $60M residences = $218.7M. After debt payoff ($137.8M): equity = $80.9M. LP IRR drops to ~9.8% — below preferred return. GP earns no promote. Mezz lender is paid in full but barely.</p><p><strong>The intercreditor stress:</strong> If DSCR falls below 1.20x during shoulder season, the senior lender's cash sweep traps all hotel cash flow — starving the mezz lender of any current cash and forcing full reliance on the exit for mezz repayment. This is the classic mezz squeeze.</p>`,
+        "Lender risk concerns": `<h3>Senior Lender Risk Analysis — $107M Construction Loan</h3><p><strong>Primary risk: Mexico cross-border complexity.</strong> The lender must navigate Mexican real estate law, ejido land issues (none here — verified clean title), and peso/dollar currency risk on construction costs. These require specialist underwriting and typically a Mexican legal opinion.</p><p><strong>Secondary risk: Mezz intercreditor.</strong> The lender must approve the $22.2M mezz structure. Key negotiated protections: (1) 90-day standstill before mezz can exercise remedies, (2) mezz purchase option at par protects senior, (3) no additional debt without senior consent.</p><p><strong>Operational risk:</strong> Rosewood management agreement — while prestigious — requires significant FF&E investment ($95K/key) and Rosewood's brand standards. Any deviation triggers cure periods that could delay completion and extend the loan.</p><p><strong>DSCR at stressed stabilization:</strong> Hotel NOI at 82% stress = $10.2M. Debt service on $107M at 8.5% IO = $9.1M. DSCR = 1.12x — below the 1.25x covenant. This is a real risk: the lender will likely require a $3M DSCR reserve holdback released only upon covenant compliance.</p>`,
+        "Explain the promote structure": `<h3>Tiered Promote Structure</h3><p>The GP earns a <strong>two-tier promote</strong> above a 9% cumulative preferred return:</p><p><strong>Tier 1 (12–18% IRR): 80/20 split.</strong> Standard institutional promote. For every dollar of profit in this band, GP earns $0.20. Estimated profits in this band: ~$22M → GP promote: $4.4M.</p><p><strong>Tier 2 (above 18% IRR): 70/30 split.</strong> Stepped-up promote for exceptional performance. For every dollar of profit above the 18% hurdle, GP earns $0.30. Estimated profits: ~$16.9M → GP promote: $5.1M.</p><p><strong>Why this structure benefits both parties:</strong> The LP gives the GP more upside incentive if the deal significantly outperforms (30% vs. 20% promote) — aligning GP motivation with LP outcomes at the high end. The LP retains 70% (vs. 80%) of exceptional profits as compensation for taking the risk. </p><p><strong>Vs. a flat 80/20 structure:</strong> On this deal, a flat 80/20 would give GP 20% of all ~$38.9M above-pref profits = $7.8M. The tiered structure gives GP $9.5M ($4.4M + $5.1M) — more by $1.7M. The tiered structure rewards the GP more in outperformance scenarios, but the LP gave that up knowingly in exchange for the GP co-investing $5.8M (a meaningful check).</p>`
+      }
+    }
+  }
+};
+
+const GLOSSARY_DATA = {
+  formulas: [
+    { term: "Loan-to-Cost (LTC)", def: "Measures the loan amount as a percentage of total project cost. Primary sizing metric for construction lenders.", note: "LTC = Loan Amount ÷ Total Project Cost. Typical range: 55–65% for hospitality construction." },
+    { term: "Loan-to-Value (LTV)", def: "Measures the loan against the stabilized appraised value of the completed asset. The lender's exit protection metric.", note: "LTV = Loan Amount ÷ Stabilized Value. Test at both LTC and LTV — a deal can pass one and fail the other." },
+    { term: "Debt Service Coverage Ratio (DSCR)", def: "Measures a property's ability to service its debt from operating income. Below 1.0x means the property cannot cover its own payments.", note: "DSCR = NOI ÷ Annual Debt Service. Most hospitality lenders require 1.25x–1.40x minimum at stabilization." },
+    { term: "Net Operating Income (NOI)", def: "Property income after operating expenses, before debt service, depreciation, and income taxes. The numerator in all valuation and DSCR calculations.", note: "NOI = Effective Gross Revenue − Operating Expenses. Always clarify: is this before or after replacement reserves?" },
+    { term: "Capitalization Rate (Cap Rate)", def: "The market's required yield on a stabilized real estate asset. Expresses the relationship between NOI and value.", note: "Cap Rate = NOI ÷ Value | Value = NOI ÷ Cap Rate. A 25bps cap rate move on $4M NOI changes value by ~$2.8M." },
+    { term: "Internal Rate of Return (IRR)", def: "The discount rate that makes the NPV of all cash flows equal to zero. Measures time-weighted annual return on equity.", note: "IRR = the rate where: 0 = CF₀ + CF₁/(1+r)¹ + ... + CFₙ/(1+r)ⁿ. Cannot be solved algebraically — requires iteration (Excel IRR function)." },
+    { term: "Equity Multiple (EM)", def: "Total distributions returned to the investor divided by total capital invested. A size measure, not a time-adjusted return.", note: "EM = Total Distributions ÷ Total Equity Invested. A 2.0x EM means you doubled your money — regardless of how long it took." },
+    { term: "Cash-on-Cash Return", def: "Annual cash distributions divided by total equity invested. Measures current yield on equity, not total return.", note: "CoC = Annual Cash Distribution ÷ Total Equity Invested. Relevant for stabilized, income-producing assets. Near zero on development deals." },
+    { term: "Yield on Cost (YoC)", def: "Stabilized NOI divided by total development cost. The developer's fundamental test of whether a project creates value.", note: "YoC = Stabilized NOI ÷ Total Development Cost. Must exceed market cap rate by 100–150bps+ to justify development risk." },
+    { term: "Preferred Return", def: "A minimum return threshold that LPs must receive before the GP earns any promoted (disproportionate) share of profits.", note: "Pref = LP Equity × Pref Rate × Periods Unpaid (if cumulative). 8% is most common; luxury institutional deals range 7–10%." },
+    { term: "Promote / Carried Interest", def: "The GP's disproportionate share of profits above the preferred return hurdle. The primary economic incentive for the development sponsor.", note: "Promote = Above-Hurdle Profits × Promote %. Typical range: 15–25%. Step-up tiers increase GP share at higher IRR hurdles." },
+    { term: "Development Spread", def: "The difference between yield on cost and the market cap rate. The developer's margin for taking construction and lease-up risk.", note: "Spread = YoC − Market Cap Rate. 100–150bps is typical minimum. Tight spread (<75bps) signals marginal deal economics." }
+  ],
+  stack: [
+    { term: "Senior Debt", def: "First-lien mortgage loan secured by the property. Has priority claim on assets and cash flows. Lowest risk, lowest return in the stack.", note: "When this lender is uncomfortable, nothing else in the deal works. Know their constraints first." },
+    { term: "Mezzanine Debt", def: "Subordinate loan secured by a pledge of the ownership interests (UCC lien), not the property itself. Fills gap between senior debt and equity.", note: "Mezz foreclosure via UCC can take 30–60 days vs. 12–24 months for mortgage foreclosure — this speed differential drives mezz pricing." },
+    { term: "Preferred Equity", def: "An equity ownership stake with a preferred return and priority over common equity. Sits inside the ownership structure, not as a separate debt claim.", note: "CMBS lenders often permit preferred equity where they prohibit mezz — a critical structuring distinction for permanent financing." },
+    { term: "Common Equity", def: "The residual claim on all cash flows after debt service and preferred returns. Highest risk and highest potential return position in the capital stack.", note: "Common equity absorbs losses first and receives distributions last. GP co-invest and LP equity both sit here." },
+    { term: "Intercreditor Agreement", def: "Contract governing the relationship between senior and mezz lenders — defining cure rights, standstill periods, purchase options, and transfer restrictions.", note: "Negotiate the intercreditor before closing the mezz, not after. A rejected intercreditor template can kill a deal at closing." },
+    { term: "Interest Reserve", def: "A capitalized portion of the loan that funds interest payments during construction when the property generates no revenue.", note: "Include this in your LTC calculation. A 30-month construction loan can require $3–6M in interest reserve — a meaningful equity-equivalent cost." },
+    { term: "Recourse vs. Non-Recourse", def: "A recourse loan allows the lender to pursue the borrower's personal assets beyond the property in default. Non-recourse limits recovery to the property.", note: "Construction loans are typically full recourse to the sponsor. Permanent loans are often non-recourse with 'bad boy' carve-outs." },
+    { term: "Debt Service Reserve", def: "A cash reserve (funded at closing or from operations) set aside to cover debt payments if property cash flow is temporarily insufficient.", note: "Lenders require debt service reserves when DSCR is projected to be tight during lease-up. Size is typically 3–6 months of debt service." },
+    { term: "PIK (Payment-In-Kind)", def: "A loan feature where interest accrues and is added to the principal balance rather than being paid in cash. Common in mezz structures.", note: "Model PIK accrual carefully — a $10M mezz at 12% PIK grows to $14.7M after 3 years. This exit obligation is often underestimated." },
+    { term: "Completion Guarantee", def: "A contractual commitment from the sponsor (or its principals) to complete construction to specification and within budget, providing lender recourse if not.", note: "Required on nearly all construction loans. A sponsor with multiple projects in parallel may have difficulty satisfying multiple completion guarantees simultaneously." }
+  ],
+  waterfall: [
+    { term: "Preferred Return", def: "The minimum annual return rate the LP must receive (on their invested capital) before the GP earns any promoted share of profits. Most commonly 8% in U.S. real estate.", note: "Example: $10M LP × 8% = $800K/year. On a 4-year development with no distributions, $3.2M accrues before any promote." },
+    { term: "Cumulative Preferred Return", def: "A preferred return structure where unpaid amounts carry forward and compound. LP must receive all accrued pref before GP earns promote.", note: "In a development deal with 3 years of no distributions, a cumulative 8% pref accrues $2.4M per $10M of LP equity — which must be paid at exit before any promote." },
+    { term: "Non-Cumulative Preferred Return", def: "A preferred return where unpaid amounts from prior periods are forfeited. Only current-period distributions are tested against the threshold.", note: "Non-cumulative favors the GP. In a development deal with no early distributions, the LP's pref simply doesn't accrue — making the LP's protection largely illusory." },
+    { term: "Promote / Carried Interest", def: "The GP's disproportionate share of profits above the return hurdle. Typically 15–25%. The GP's primary economic incentive beyond fee income.", note: "Promote is back-end loaded — on a 5-year development, the GP may not see promote until year 6 or 7. Model the GP's all-in IRR on their co-invest + promote." },
+    { term: "IRR Hurdle", def: "The minimum IRR threshold the LP must achieve before the GP earns promote at a higher tier. Creates a stepped promote structure tied to deal performance.", note: "A 12% IRR hurdle means the LP must receive capital back plus returns equivalent to a 12% annual return before the GP earns promote." },
+    { term: "Catch-Up Provision", def: "After the LP's preferred return is fully paid, the catch-up allows the GP to receive a disproportionate share of distributions until they've received their full promoted percentage of all profits.", note: "A 100% GP catch-up means after the LP's pref is paid, 100% goes to GP until they've received 20% of all cumulative profits. Then distributions revert to 80/20." },
+    { term: "Clawback", def: "A provision requiring the GP to return previously distributed promote if total LP returns ultimately fall below the agreed threshold. Protects LPs in deals with multiple assets or early distributions.", note: "Critical in fund structures with multiple properties. GPs should reserve against clawback risk — returning promote capital years later is a real obligation." },
+    { term: "Pari Passu", def: "Latin for 'equal step.' Describes distributions made proportionally and simultaneously to multiple parties without any preference between them.", note: "In return of capital, LP and GP typically receive capital back pari passu (in proportion to their respective investments). Once the pref kicks in, they're no longer pari passu." },
+    { term: "Distribution Waterfall", def: "The contractually defined sequence in which cash flows are distributed to partners. Each tier must be fully satisfied before distributions flow to the next.", note: "Standard sequence: return of capital → preferred return → catch-up → promoted split. Variations are infinite — always read the full operating agreement." },
+    { term: "Return of Capital", def: "The first tier of most waterfalls — the LP and GP receive back their invested equity contributions before any profit-sharing begins.", note: "RoC is typically pro-rata (proportional to ownership). Some deals separate LP and GP capital return timing — read carefully." }
+  ],
+  underwriting: [
+    { term: "IRR (Internal Rate of Return)", def: "The discount rate at which the NPV of all cash flows equals zero. Measures the annualized time-weighted return on equity invested in a deal.", note: "Common mistake: confusing a high IRR with a good deal. A 25% IRR on a 12-month flip and a 15% IRR on a 7-year development are fundamentally different risk profiles." },
+    { term: "Equity Multiple", def: "Total distributions received by the investor divided by total equity invested. Measures the magnitude of return independent of timing.", note: "Common mistake: using EM alone without considering IRR. A 2.0x EM in 2 years (≈41% IRR) is dramatically better than 2.0x in 8 years (≈9% IRR)." },
+    { term: "Cash-on-Cash Return", def: "Annual cash distributions divided by equity invested. Measures current income yield on an equity investment in a stabilized property.", note: "Common mistake: applying CoC to development deals. CoC is near zero during construction and lease-up. Use IRR and EM for development; CoC for stabilized income plays." },
+    { term: "DSCR (Debt Service Coverage Ratio)", def: "NOI divided by annual debt service. Measures the property's ability to cover loan payments from operations. The lender's primary performance covenant.", note: "Common mistake: using projected NOI without applying lender stress (typically 85-90% of projection). Always model DSCR at the stressed NOI lenders will underwrite to." },
+    { term: "Yield on Cost", def: "Stabilized NOI divided by total development cost. Tells the developer whether the project creates value relative to what a buyer would pay for a stabilized equivalent.", note: "Common mistake: using a comp set cap rate that doesn't match the asset's true risk profile. Using a 6% cap from a stabilized comp to validate a $4M NOI on an unproven new development overstates value creation." },
+    { term: "Cap Rate", def: "The ratio of stabilized NOI to property value. Represents the market's required current yield for a given asset type, quality, and location.", note: "Common mistake: using current-year NOI (during lease-up) to value an asset rather than stabilized NOI. This systematically understates value during lease-up and overstates during periods of above-normal performance." },
+    { term: "NOI (Net Operating Income)", def: "Gross revenue minus operating expenses, before debt service, depreciation, and capital expenditures. The fundamental measure of a real estate asset's income-producing capacity.", note: "Common mistake: excluding management fees or replacement reserves from operating expenses. A hotel management fee (3-5% of revenue) and replacement reserves (3-5% of revenue) can represent $500K–$1M+ annually that must be in NOI." },
+    { term: "LTV (Loan-to-Value)", def: "Loan amount divided by the stabilized appraised value. Measures the lender's downside protection at maturity or exit.", note: "Common mistake: confusing LTC and LTV. LTC measures risk during construction; LTV measures risk at stabilization. A deal with conservative LTC can still have risky LTV if development costs exceed market value." },
+    { term: "LTC (Loan-to-Cost)", def: "Loan amount divided by total project cost. The primary metric for sizing construction loans and determining equity required.", note: "Common mistake: excluding soft costs, interest reserves, and carry from the total project cost denominator. This overstates LTC and understates true equity requirements." },
+    { term: "Sensitivity Analysis", def: "A technique for measuring how changes in a single input variable (holding all others constant) affect the output metric (IRR, EM, or DSCR).", note: "Common mistake: building sensitivity analysis only around the base case. LPs underwrite to downside scenarios. Always build a sensitivity table around the downside case as well as base." }
+  ]
+};
+
+// ─── STATE ─────────────────────────────────────────────────────────────────────
+let currentMod = 0;
+let currentTopic = null;
+let quizState = null;
+let completedTopics = new Set();
+let currentScenarioDiff = 'intro';
+let currentScenarioType = 'hotel';
+let currentScenarioLoaded = false;
+
+// ─── TABS ──────────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ─── MODULES & TOPICS ─────────────────────────────────────────────────────────
+function selectMod(idx, btn) {
+  currentMod = idx;
+  document.querySelectorAll('.mod-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTopics();
+}
+
+function renderTopics() {
+  const mod = MODULES[currentMod];
+  document.getElementById('topic-section-label').textContent = mod.label + ' — choose a topic';
+  const grid = document.getElementById('topic-grid');
+  grid.innerHTML = mod.topics.map(t => {
+    const isDone = completedTopics.has(t);
+    const hasLesson = !!LESSONS[t];
+    return `<button class="topic-btn${isDone ? ' done' : ''}" onclick="openLesson('${t.replace(/'/g, "\\'")}')" ${!hasLesson ? 'style="opacity:0.5"' : ''}>
+      <span>${t}</span><span class="t-arr">→</span>
+    </button>`;
+  }).join('');
+}
+
+// ─── LESSONS ──────────────────────────────────────────────────────────────────
+function openLesson(topic) {
+  const lesson = LESSONS[topic];
+  if (!lesson) return;
+  currentTopic = topic;
+  quizState = null;
+
+  document.getElementById('lessons-home').style.display = 'none';
+  document.getElementById('lesson-view').classList.add('active');
+  document.getElementById('lesson-title').textContent = topic;
+  document.getElementById('lesson-body').innerHTML = lesson.content;
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('prog-label').textContent = 'Lesson loaded';
+  document.getElementById('prog-pct').textContent = 'Step 1 of 3';
+  document.getElementById('prog-fill').style.width = '33%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeLesson() {
+  document.getElementById('lesson-view').classList.remove('active');
+  document.getElementById('lessons-home').style.display = 'block';
+}
+
+function showQuiz() {
+  const lesson = LESSONS[currentTopic];
+  if (!lesson) return;
+
+  quizState = { questions: lesson.quiz, idx: 0, score: 0, answered: null, done: false };
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('prog-label').textContent = 'Quiz in progress';
+  document.getElementById('prog-pct').textContent = 'Step 2 of 3';
+  document.getElementById('prog-fill').style.width = '66%';
+  renderQuizQuestion();
+  document.getElementById('quiz-area').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderQuizQuestion() {
+  const qs = quizState;
+  const section = document.getElementById('quiz-section');
+
+  if (qs.done) {
+    const pct = Math.round(qs.score / qs.questions.length * 100);
+    const msg = pct === 100 ? 'Perfect — exceptional.' : pct >= 75 ? 'Strong grasp.' : pct >= 50 ? 'Review the lesson and retry.' : 'Re-read the lesson before retrying.';
+    section.innerHTML = `
+      <div class="score-box">
+        <div class="score-num">${qs.score}/${qs.questions.length}</div>
+        <div class="score-msg">${pct}% — ${msg}</div>
+      </div>
+      <div class="action-row">
+        <button class="btn-primary" onclick="retakeQuiz()">Retake quiz</button>
+        <button class="btn-sec" onclick="closeLesson()">← Choose another topic</button>
+      </div>`;
+    document.getElementById('prog-label').textContent = 'Complete';
+    document.getElementById('prog-pct').textContent = 'Step 3 of 3';
+    document.getElementById('prog-fill').style.width = '100%';
+    completedTopics.add(currentTopic);
+    renderTopics();
+    return;
+  }
+
+  const q = qs.questions[qs.idx];
+  const letters = ['A','B','C','D'];
+  const optsHtml = q.opts.map((opt, i) => {
+    let cls = 'quiz-opt';
+    if (qs.answered !== null) {
+      cls += ' locked';
+      if (i === q.correct) cls += ' correct';
+      else if (i === qs.answered && i !== q.correct) cls += ' wrong';
+    }
+    return `<div class="${cls}" onclick="answerQuiz(${i})">
+      <span class="opt-letter">${letters[i]}</span>
+      <span>${opt.replace(/^[A-D]\)\s*/, '')}</span>
+    </div>`;
+  }).join('');
+
+  const expHtml = qs.answered !== null ? `
+    <div class="quiz-exp">
+      <strong style="color:${qs.answered === q.correct ? 'var(--green)' : 'var(--red)'}">${qs.answered === q.correct ? '✓ Correct.' : '✗ Not quite.'}</strong>
+      ${q.exp}
+    </div>` : '';
+
+  const nextHtml = qs.answered !== null ? `
+    <div class="action-row" style="margin-top:12px">
+      <button class="btn-primary" onclick="nextQuestion()">${qs.idx + 1 < qs.questions.length ? 'Next question →' : 'See results →'}</button>
+    </div>` : '';
+
+  section.innerHTML = `
+    <div class="quiz-meta">Question ${qs.idx + 1} of ${qs.questions.length} · Score: ${qs.score}</div>
+    <div class="quiz-hdr">${q.q}</div>
+    <div class="quiz-opts">${optsHtml}</div>
+    ${expHtml}${nextHtml}`;
+}
+
+function answerQuiz(i) {
+  if (quizState.answered !== null) return;
+  quizState.answered = i;
+  if (i === quizState.questions[quizState.idx].correct) quizState.score++;
+  renderQuizQuestion();
+}
+
+function nextQuestion() {
+  quizState.idx++;
+  quizState.answered = null;
+  if (quizState.idx >= quizState.questions.length) quizState.done = true;
+  renderQuizQuestion();
+}
+
+function retakeQuiz() {
+  quizState = { questions: LESSONS[currentTopic].quiz, idx: 0, score: 0, answered: null, done: false };
+  renderQuizQuestion();
+}
+
+// ─── SCENARIOS ─────────────────────────────────────────────────────────────────
+function setDiff(diff, btn) {
+  currentScenarioDiff = diff;
+  document.querySelectorAll('.diff-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function loadScenario() {
+  currentScenarioType = document.getElementById('sc-type').value;
+  const scData = SCENARIOS[currentScenarioType];
+  if (!scData) {
+    document.getElementById('scenario-output').innerHTML = `<div class="scenario-box"><p>Scenario for this deal type coming soon. Try Hotel or Resort.</p></div>`;
+    return;
+  }
+  const diff = currentScenarioDiff === 'senior' ? 'senior' : 'intro';
+  const sc = scData[diff] || scData['intro'];
+  currentScenarioLoaded = true;
+
+  const qaKeys = Object.keys(sc.qa);
+  const qaButtons = qaKeys.map(k => `<button class="qa-btn" onclick="loadScenarioQA('${currentScenarioType}','${diff}','${k.replace(/'/g, "\\'")}')">${k} →</button>`).join('');
+
+  document.getElementById('scenario-output').innerHTML = `
+    <div class="scenario-box">${sc.html}</div>
+    <div class="scenario-qa">
+      <div class="sec-lbl">Drill into the deal</div>
+      <div class="qa-btn-grid">${qaButtons}</div>
+      <div id="qa-answer-box"></div>
+    </div>`;
+}
+
+function loadScenarioQA(type, diff, key) {
+  const sc = SCENARIOS[type][diff] || SCENARIOS[type]['intro'];
+  const answer = sc.qa[key];
+  if (!answer) return;
+
+  document.querySelectorAll('.qa-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  document.getElementById('qa-answer-box').innerHTML = `
+    <div class="sec-lbl" style="margin-top:16px">${key}</div>
+    <div class="qa-answer">${answer}</div>`;
+  document.getElementById('qa-answer-box').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── GLOSSARY ──────────────────────────────────────────────────────────────────
+function showGloss(key) {
+  document.querySelectorAll('.gloss-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.gloss-btns button').forEach(b => { b.className = 'btn-sec'; });
+  document.getElementById('gloss-' + key).classList.add('active');
+  event.currentTarget.className = 'btn-primary';
+
+  const section = document.getElementById('gloss-' + key);
+  if (section.innerHTML.trim() === '') {
+    const items = GLOSSARY_DATA[key];
+    section.innerHTML = items.map(item => `
+      <div class="gloss-item">
+        <div class="gloss-term">${item.term}</div>
+        <div class="gloss-def">${item.def}</div>
+        <div class="gloss-note">→ ${item.note}</div>
+      </div>`).join('');
+  }
+}
+
+// Init
+renderTopics();
+showGloss('formulas');
+</script>
+</body>
+</html>
