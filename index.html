@@ -993,13 +993,13 @@ const SCENARIOS = {
             <p>Work through each waterfall tier:</p>
             <table class="c-table" id="blank-table">
               <tr><th>Tier</th><th>Amount</th><th>To whom</th></tr>
-              <tr><td>Proceeds after debt repayment</td><td>$112M − $42.2M = <span class="c-blank">?</span></td><td>Available for equity</td></tr>
-              <tr><td>Return of LP capital</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
-              <tr><td>Return of GP capital</td><td><span class="c-blank">?</span></td><td>GP</td></tr>
-              <tr><td>Accrued LP pref ($22M × 8% × 5yr)</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
-              <tr><td>Remaining above-pref profits</td><td><span class="c-blank">?</span></td><td>Split 80/20</td></tr>
-              <tr><td>LP promote share (80%)</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
-              <tr><td>GP promote (20%)</td><td><span class="c-blank">?</span></td><td>GP</td></tr>
+              <tr><td>Proceeds after debt repayment</td><td>$112M − $42.2M = <input class="c-input" type="text" placeholder="$?M"></td><td>Available for equity</td></tr>
+              <tr><td>Return of LP capital</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>LP</td></tr>
+              <tr><td>Return of GP capital</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>GP</td></tr>
+              <tr><td>Accrued LP pref ($22M × 8% × 5yr)</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>LP</td></tr>
+              <tr><td>Remaining above-pref profits</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>Split 80/20</td></tr>
+              <tr><td>LP promote share (80%)</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>LP</td></tr>
+              <tr><td>GP promote (20%)</td><td><input class="c-input" type="text" placeholder="$?M"></td><td>GP</td></tr>
             </table>
             <button class="btn-sec" onclick="checkBlanks('blank-table', [{label:'After debt repayment',val:'$69.8M'},{label:'Return of LP capital',val:'$22.0M'},{label:'Return of GP capital',val:'$3.8M'},{label:'Remaining after capital return',val:'$44.0M'},{label:'Accrued LP pref',val:'$8.8M'},{label:'Above-pref profits',val:'$35.2M'},{label:'LP promote share (80%)',val:'$28.16M'},{label:'GP promote (20%)',val:'$7.04M'}])" style="margin-top:12px">Check my work</button>`,
           init: () => {}
@@ -1150,11 +1150,11 @@ const SCENARIOS = {
             <p>Complete the mezz payoff calculation at exit:</p>
             <table class="c-table" id="mezz-blanks">
               <tr><th>Item</th><th>Calculation</th><th>Answer</th></tr>
-              <tr><td>Annual PIK interest</td><td>$22.2M × 13.5%</td><td><span class="c-blank">?</span></td></tr>
-              <tr><td>Mezz balance at 36 months (simple)</td><td>$22.2M + (annual × 3)</td><td><span class="c-blank">?</span></td></tr>
-              <tr><td>Extra equity consumed vs. original mezz</td><td>Balance − $22.2M</td><td><span class="c-blank">?</span></td></tr>
-              <tr><td>Total debt at exit (senior + mezz)</td><td>$107M + balance</td><td><span class="c-blank">?</span></td></tr>
-              <tr><td>Equity proceeds (from $255M exit)</td><td>$255M − total debt</td><td><span class="c-blank">?</span></td></tr>
+              <tr><td>Annual PIK interest</td><td>$22.2M × 13.5%</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Mezz balance at 36 months (simple)</td><td>$22.2M + (annual × 3)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Extra equity consumed vs. original mezz</td><td>Balance − $22.2M</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total debt at exit (senior + mezz)</td><td>$107M + balance</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity proceeds (from $255M exit)</td><td>$255M − total debt</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
             </table>
             <button class="btn-sec" onclick="checkBlanks('mezz-blanks', [{label:'Annual PIK interest',val:'$3.0M'},{label:'Mezz balance at 36 months',val:'$31.2M'},{label:'Extra equity consumed',val:'$9.0M'},{label:'Total debt at exit',val:'$138.2M'},{label:'Equity proceeds',val:'$116.8M'}])" style="margin-top:12px">Check my work</button>`,
           init: () => {}
@@ -1609,13 +1609,27 @@ function revealAnswer(id) {
 }
 
 function checkBlanks(id, answers, nextLabel) {
-  const inputs = document.querySelectorAll('.c-input');
-  let html = '<div class="c-reveal show"><strong>Answers:</strong><br>';
-  answers.forEach((a, i) => { html += `<strong>${a.label}:</strong> ${a.val}<br>`; });
-  html += '</div>';
-  document.getElementById(id).innerHTML += html;
-  document.getElementById(id).innerHTML += `<div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">${nextLabel || 'Next challenge →'}</button></div>`;
-  inputs.forEach(inp => inp.disabled = true);
+  const table = document.getElementById(id);
+  const inputs = table.querySelectorAll('.c-input');
+  let correct = 0;
+
+  inputs.forEach((inp, i) => {
+    inp.disabled = true;
+    const ans = answers[i];
+    if (!ans) return;
+    // Extract numeric value from both user input and correct answer for loose comparison
+    const userNum = parseFloat(inp.value.replace(/[^0-9.-]/g, ''));
+    const correctNum = parseFloat(ans.val.replace(/[^0-9.-]/g, ''));
+    const isCorrect = !isNaN(userNum) && !isNaN(correctNum) && Math.abs(userNum - correctNum) / correctNum < 0.05;
+    inp.style.borderColor = isCorrect ? 'var(--green)' : 'var(--red)';
+    inp.style.background = isCorrect ? 'var(--green-bg)' : 'var(--red-bg)';
+    if (isCorrect) correct++;
+  });
+
+  let html = `<div class="c-reveal show" style="margin-top:14px"><strong>${correct}/${answers.length} correct.</strong> Full answers:<br><br>`;
+  answers.forEach(a => { html += `<strong>${a.label}:</strong> ${a.val}<br>`; });
+  html += `</div><div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">${nextLabel || 'Next challenge →'}</button></div>`;
+  table.closest('.challenge-body').insertAdjacentHTML('beforeend', html);
 }
 
 function pickDecision(chosen, options, revealId) {
