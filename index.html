@@ -133,7 +133,7 @@ select { font-family: ‘IBM Plex Sans’, sans-serif; font-size: 13px; color: v
 .diff-pills { display: flex; gap: 6px; }
 .diff-pill { padding: 8px 14px; border: 1px solid var(–border); background: var(–cream); font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(–muted); transition: all 0.13s; }
 .diff-pill.active { background: var(–deep); color: var(–paper); border-color: var(–deep); }
-.scenario-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.scenario-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; overflow-x: auto; }
 .scenario-box h2 { font-family: ‘Playfair Display’, serif; font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
 .scenario-box h2:first-child { margin-top: 0; }
 .scenario-box p { margin-bottom: 10px; }
@@ -173,7 +173,7 @@ select { font-family: ‘IBM Plex Sans’, sans-serif; font-size: 13px; color: v
 .challenge-body .c-table td { padding: 9px 10px; border-bottom: 1px solid var(–border); }
 .challenge-body .c-table tr:last-child td { border-bottom: none; }
 .c-blank { display: inline-block; min-width: 80px; border-bottom: 2px solid var(–gold-lt); padding: 0 6px; font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; color: var(–muted); font-style: italic; vertical-align: bottom; }
-.c-input { font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; padding: 6px 10px; border: 1px solid var(–border); background: var(–paper); color: var(–ink); width: 100px; }
+.c-input { font-family: ‘IBM Plex Mono’, monospace; font-size: 16px; padding: 8px 10px; border: 1px solid var(–border); background: var(–paper); color: var(–ink); width: 110px; }
 .c-input:focus { outline: none; border-color: var(–ink); }
 .c-reveal { display: none; background: var(–paper); border: 1px solid var(–border); padding: 16px 20px; margin-top: 14px; font-size: 13px; line-height: 1.7; }
 .c-reveal.show { display: block; animation: fadeUp 0.2s ease; }
@@ -218,6 +218,47 @@ input[type=range].c-range { flex: 1; min-width: 120px; }
 .topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
 .tabs { flex-direction: column; }
 .lesson-title { font-size: 20px; }
+
+/* Scenario path choice — stack vertically */
+.sc-path-choice { grid-template-columns: 1fr; }
+
+/* Challenge header — stack tag above title */
+.challenge-hdr { flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 18px; }
+
+/* Fill-in tables — hide thead, stack each row as a card */
+.challenge-body .c-table thead { display: none; }
+.challenge-body .c-table tr { display: block; background: var(–paper); border: 1px solid var(–border); border-radius: 8px; margin-bottom: 10px; padding: 12px 14px; }
+.challenge-body .c-table td { display: block; border: none; padding: 4px 0; font-size: 13px; }
+.challenge-body .c-table td:last-child { padding-top: 8px; }
+
+/* Inputs — full width on mobile */
+.c-input { width: 100%; max-width: 100%; font-size: 16px; padding: 10px 12px; margin-top: 4px; }
+
+/* Spot-the-problem table — same stacked treatment */
+.challenge-body table.c-table td:before {
+content: attr(data-label);
+display: block;
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 2px;
+}
+
+/* Metric output grid — 2 columns on mobile */
+.c-output-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* Slider rows — stack label above */
+.c-slider-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+.c-slider-label { min-width: unset; }
+input[type=range].c-range { width: 100%; }
+
+/* Decision buttons — ensure readable */
+.c-decision-btn { font-size: 13px; padding: 12px 14px; }
+
+/* Step nav */
+.c-step-nav { padding: 12px 16px; }
 }
 </style>
 
