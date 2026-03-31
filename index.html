@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,41 +8,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #0d0d0d;
-  --paper: #f5f0e8;
-  --cream: #ede7d9;
-  --deep: #181510;
-  --gold: #b8933f;
-  --gold-lt: #d4aa5a;
-  --muted: #7a7265;
-  --border: #c8bfaa;
+  --ink: #1e1d1b;
+  --paper: #f8f7f4;
+  --cream: #efede9;
+  --deep: #2c2a27;
+  --gold: #4a4845;
+  --gold-lt: #6b6965;
+  --muted: #8c8a85;
+  --border: #d6d3cd;
   --green: #2d6a4f;
-  --green-bg: #e8f5ee;
+  --green-bg: #eaf4ef;
   --red: #8b2635;
-  --red-bg: #f9e8eb;
+  --red-bg: #f9eaea;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'IBM Plex Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
-body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(184,147,63,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,147,63,0.04) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; z-index: 0; }
 .wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
 
 /* HEADER */
-header { padding: 40px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 36px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-.logo { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
-.logo em { color: var(--gold); font-style: normal; }
-.tagline { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+header { padding: 40px 0 28px; border-bottom: 1px solid var(–border); margin-bottom: 36px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.logo { font-family: ‘Playfair Display’, serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+.logo em { color: var(–gold); font-style: normal; }
+.tagline { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; color: var(–muted); letter-spacing: 0.12em; text-transform: uppercase; }
 
 /* TABS */
-.tabs { display: flex; border: 1px solid var(--border); margin-bottom: 36px; }
-.tab-btn { flex: 1; padding: 16px 10px; background: var(--cream); border: none; border-right: 1px solid var(--border); cursor: pointer; text-align: center; transition: background 0.15s; }
+.tabs { display: flex; border: 1px solid var(–border); margin-bottom: 36px; }
+.tab-btn { flex: 1; padding: 16px 10px; background: var(–cream); border: none; border-right: 1px solid var(–border); cursor: pointer; text-align: center; transition: background 0.15s; }
 .tab-btn:last-child { border-right: none; }
-.tab-btn:hover { background: var(--paper); }
-.tab-btn.active { background: var(--deep); }
-.tab-btn.active .t-lbl { color: var(--paper); }
+.tab-btn:hover { background: var(–paper); }
+.tab-btn.active { background: var(–deep); }
+.tab-btn.active .t-lbl { color: var(–paper); }
 .tab-btn.active .t-sub { color: rgba(245,240,232,0.4); }
-.t-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
-.t-lbl { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--ink); }
-.t-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.t-num { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–gold-lt); margin-bottom: 3px; }
+.t-lbl { font-family: ‘Playfair Display’, serif; font-size: 14px; font-weight: 700; color: var(–ink); }
+.t-sub { font-size: 11px; color: var(–muted); margin-top: 2px; }
 
 /* PANELS */
 .panel { display: none; }
@@ -49,92 +49,92 @@ header { padding: 40px 0 28px; border-bottom: 1px solid var(--border); margin-bo
 @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
 /* SEC LABEL */
-.sec-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.sec-lbl { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(–border); }
 
 /* MODULE GRID */
-.mod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; }
-.mod-btn { background: var(--cream); border: none; padding: 16px 14px; cursor: pointer; text-align: left; transition: background 0.13s; }
-.mod-btn:hover, .mod-btn.active { background: var(--paper); }
-.mod-btn.active { background: var(--deep); }
-.mod-btn.active .mod-num { color: var(--gold); }
-.mod-btn.active .mod-name { color: var(--paper); }
-.mod-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-.mod-name { font-size: 12px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+.mod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(–border); border: 1px solid var(–border); margin-bottom: 28px; }
+.mod-btn { background: var(–cream); border: none; padding: 16px 14px; cursor: pointer; text-align: left; transition: background 0.13s; }
+.mod-btn:hover, .mod-btn.active { background: var(–paper); }
+.mod-btn.active { background: var(–deep); }
+.mod-btn.active .mod-num { color: #b8b5ae; }
+.mod-btn.active .mod-name { color: var(–paper); }
+.mod-num { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–gold-lt); margin-bottom: 4px; }
+.mod-name { font-size: 12px; font-weight: 500; color: var(–ink); line-height: 1.3; }
 
 /* TOPIC GRID */
 .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 28px; }
-.topic-btn { background: var(--cream); border: 1px solid var(--border); padding: 12px 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--ink); text-align: left; transition: all 0.13s; }
-.topic-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.topic-btn.done::after { content: '✓'; color: var(--green); margin-left: 4px; font-size: 11px; }
-.t-arr { flex-shrink: 0; font-size: 13px; color: var(--border); transition: color 0.13s; }
-.topic-btn:hover .t-arr { color: var(--gold); }
+.topic-btn { background: var(–cream); border: 1px solid var(–border); padding: 12px 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(–ink); text-align: left; transition: all 0.13s; }
+.topic-btn:hover { background: var(–ink); color: var(–paper); border-color: var(–ink); }
+.topic-btn.done::after { content: ‘✓’; color: var(–green); margin-left: 4px; font-size: 11px; }
+.t-arr { flex-shrink: 0; font-size: 13px; color: var(–border); transition: color 0.13s; }
+.topic-btn:hover .t-arr { color: var(–paper); }
 
 /* LESSON VIEW */
 .lesson-view { display: none; }
 .lesson-view.active { display: block; animation: fadeUp 0.2s ease; }
-.lesson-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
-.lesson-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; line-height: 1.2; }
-.back-btn { background: none; border: 1px solid var(--border); padding: 8px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; cursor: pointer; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.13s; white-space: nowrap; flex-shrink: 0; }
-.back-btn:hover { border-color: var(--ink); color: var(--ink); }
+.lesson-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(–border); }
+.lesson-title { font-family: ‘Playfair Display’, serif; font-size: 26px; font-weight: 700; line-height: 1.2; }
+.back-btn { background: none; border: 1px solid var(–border); padding: 8px 14px; font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; cursor: pointer; color: var(–muted); letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.13s; white-space: nowrap; flex-shrink: 0; }
+.back-btn:hover { border-color: var(–ink); color: var(–ink); }
 
 /* CONTENT */
-.content-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
-.content-box h2 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin: 24px 0 10px; color: var(--ink); }
+.content-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.content-box h2 { font-family: ‘Playfair Display’, serif; font-size: 18px; font-weight: 700; margin: 24px 0 10px; color: var(–ink); }
 .content-box h2:first-child { margin-top: 0; }
-.content-box h3 { font-size: 14px; font-weight: 500; margin: 18px 0 8px; color: var(--ink); }
+.content-box h3 { font-size: 14px; font-weight: 500; margin: 18px 0 8px; color: var(–ink); }
 .content-box p { margin-bottom: 12px; }
 .content-box ul, .content-box ol { margin: 8px 0 12px 20px; }
 .content-box li { margin-bottom: 6px; }
 .content-box strong { font-weight: 500; }
-.formula { font-family: 'IBM Plex Mono', monospace; font-size: 13px; background: var(--paper); border-left: 3px solid var(--gold); padding: 12px 16px; margin: 14px 0; display: block; border-radius: 0; }
-.callout { background: var(--paper); border: 1px solid var(--border); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--muted); }
-.callout strong { color: var(--gold); }
+.formula { font-family: ‘IBM Plex Mono’, monospace; font-size: 13px; background: var(–paper); border-left: 3px solid var(–border); padding: 12px 16px; margin: 14px 0; display: block; border-radius: 0; }
+.callout { background: var(–paper); border: 1px solid var(–border); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(–muted); }
+.callout strong { color: var(–ink); }
 .table-wrap { overflow-x: auto; margin: 16px 0; }
 .content-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.content-box th { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
-.content-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 300; }
+.content-box th { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(–muted); padding: 8px 12px; border-bottom: 1px solid var(–border); text-align: left; }
+.content-box td { padding: 8px 12px; border-bottom: 1px solid var(–border); font-weight: 300; }
 .content-box tr:last-child td { border-bottom: none; }
 
 /* ACTIONS */
 .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-.btn-primary { padding: 11px 22px; background: var(--gold); border: 1px solid var(--gold); color: white; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.13s; }
-.btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
-.btn-sec { padding: 11px 18px; background: var(--cream); border: 1px solid var(--border); color: var(--ink); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.13s; }
-.btn-sec:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-primary { padding: 11px 22px; background: var(–deep); border: 1px solid var(–deep); color: var(–paper); font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.13s; }
+.btn-primary:hover { background: var(–ink); border-color: var(–ink); }
+.btn-sec { padding: 11px 18px; background: var(–cream); border: 1px solid var(–border); color: var(–ink); font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.13s; }
+.btn-sec:hover { background: var(–ink); color: var(–paper); border-color: var(–ink); }
 
 /* QUIZ */
 .quiz-section { margin-top: 8px; }
-.quiz-hdr { background: var(--deep); padding: 20px 24px; font-family: 'Playfair Display', serif; font-size: 17px; color: var(--paper); line-height: 1.5; }
-.quiz-opts { background: var(--cream); border: 1px solid var(--border); border-top: none; }
-.quiz-opt { padding: 14px 22px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; gap: 14px; font-size: 13px; font-weight: 300; transition: background 0.12s; }
+.quiz-hdr { background: var(–deep); padding: 20px 24px; font-family: ‘Playfair Display’, serif; font-size: 17px; color: var(–paper); line-height: 1.5; }
+.quiz-opts { background: var(–cream); border: 1px solid var(–border); border-top: none; }
+.quiz-opt { padding: 14px 22px; border-bottom: 1px solid var(–border); cursor: pointer; display: flex; gap: 14px; font-size: 13px; font-weight: 300; transition: background 0.12s; }
 .quiz-opt:last-child { border-bottom: none; }
-.quiz-opt:hover:not(.locked) { background: var(--paper); }
-.quiz-opt.correct { background: var(--green-bg); border-left: 4px solid var(--green); }
-.quiz-opt.wrong { background: var(--red-bg); border-left: 4px solid var(--red); }
+.quiz-opt:hover:not(.locked) { background: var(–paper); }
+.quiz-opt.correct { background: var(–green-bg); border-left: 4px solid var(–green); }
+.quiz-opt.wrong { background: var(–red-bg); border-left: 4px solid var(–red); }
 .quiz-opt.locked { cursor: default; }
-.opt-letter { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); min-width: 18px; padding-top: 2px; flex-shrink: 0; }
-.quiz-exp { background: var(--paper); border: 1px solid var(--border); border-top: none; padding: 16px 24px; font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--muted); }
+.opt-letter { font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; font-weight: 500; color: var(–muted); min-width: 18px; padding-top: 2px; flex-shrink: 0; }
+.quiz-exp { background: var(–paper); border: 1px solid var(–border); border-top: none; padding: 16px 24px; font-size: 13px; font-weight: 300; line-height: 1.7; color: var(–muted); }
 .quiz-exp strong { font-weight: 500; }
-.quiz-meta { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
-.score-box { display: inline-flex; align-items: center; gap: 16px; background: var(--deep); padding: 18px 24px; margin-bottom: 20px; }
-.score-num { font-family: 'IBM Plex Mono', monospace; font-size: 36px; font-weight: 500; color: var(--gold); line-height: 1; }
-.score-msg { color: var(--paper); font-size: 14px; font-weight: 300; }
+.quiz-meta { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; color: var(–muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.score-box { display: inline-flex; align-items: center; gap: 16px; background: var(–deep); padding: 18px 24px; margin-bottom: 20px; }
+.score-num { font-family: ‘IBM Plex Mono’, monospace; font-size: 36px; font-weight: 500; color: #e8e6e0; line-height: 1; }
+.score-msg { color: var(–paper); font-size: 14px; font-weight: 300; }
 
 /* PROGRESS */
 .progress-wrap { margin-bottom: 20px; }
-.progress-lbl { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-.progress-track { height: 2px; background: var(--border); }
-.progress-fill { height: 100%; background: var(--gold); transition: width 0.4s ease; }
+.progress-lbl { display: flex; justify-content: space-between; font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; color: var(–muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.progress-track { height: 2px; background: var(–border); }
+.progress-fill { height: 100%; background: var(–gold); transition: width 0.4s ease; }
 
 /* SCENARIOS */
 .sc-controls { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 24px; }
-.sc-field label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
-select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(--ink); background: var(--cream); border: 1px solid var(--border); padding: 9px 12px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a7265'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 28px; }
+.sc-field label { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); display: block; margin-bottom: 6px; }
+select { font-family: ‘IBM Plex Sans’, sans-serif; font-size: 13px; color: var(–ink); background: var(–cream); border: 1px solid var(–border); padding: 9px 12px; cursor: pointer; appearance: none; background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’%3E%3Cpath d=‘M0 0l5 6 5-6z’ fill=’%237a7265’/%3E%3C/svg%3E”); background-repeat: no-repeat; background-position: right 12px center; padding-right: 28px; }
 .diff-pills { display: flex; gap: 6px; }
-.diff-pill { padding: 8px 14px; border: 1px solid var(--border); background: var(--cream); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--muted); transition: all 0.13s; }
-.diff-pill.active { background: var(--deep); color: var(--paper); border-color: var(--deep); }
-.scenario-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
-.scenario-box h2 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
+.diff-pill { padding: 8px 14px; border: 1px solid var(–border); background: var(–cream); font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(–muted); transition: all 0.13s; }
+.diff-pill.active { background: var(–deep); color: var(–paper); border-color: var(–deep); }
+.scenario-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.scenario-box h2 { font-family: ‘Playfair Display’, serif; font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
 .scenario-box h2:first-child { margin-top: 0; }
 .scenario-box p { margin-bottom: 10px; }
 .scenario-box ul { margin: 6px 0 10px 20px; }
@@ -142,32 +142,85 @@ select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(-
 .scenario-box strong { font-weight: 500; }
 .scenario-qa { margin-top: 8px; }
 .qa-btn-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 16px; }
-.qa-btn { background: var(--cream); border: 1px solid var(--border); padding: 12px 14px; cursor: pointer; font-size: 12px; color: var(--ink); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.13s; }
-.qa-btn:hover, .qa-btn.active { background: var(--deep); color: var(--paper); border-color: var(--deep); }
-.qa-answer { background: var(--cream); border: 1px solid var(--border); padding: 24px 28px; line-height: 1.8; font-size: 14px; font-weight: 300; }
+.qa-btn { background: var(–cream); border: 1px solid var(–border); padding: 12px 14px; cursor: pointer; font-size: 12px; color: var(–ink); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.13s; }
+.qa-btn:hover, .qa-btn.active { background: var(–deep); color: var(–paper); border-color: var(–deep); }
+.qa-answer { background: var(–cream); border: 1px solid var(–border); padding: 24px 28px; line-height: 1.8; font-size: 14px; font-weight: 300; }
 .qa-answer h3 { font-size: 14px; font-weight: 500; margin: 14px 0 6px; }
 .qa-answer p { margin-bottom: 10px; }
 .qa-answer ul { margin: 6px 0 10px 20px; }
 .qa-answer li { margin-bottom: 4px; }
 
+/* SCENARIO TIERED PATHS */
+.sc-path-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+.sc-path-btn { border: 1px solid var(–border); padding: 20px 18px; cursor: pointer; text-align: left; background: var(–cream); transition: all 0.15s; }
+.sc-path-btn:hover { background: var(–deep); border-color: var(–deep); }
+.sc-path-btn:hover .sc-path-title, .sc-path-btn:hover .sc-path-sub { color: var(–paper); }
+.sc-path-btn:hover .sc-path-tag { color: rgba(245,240,232,0.5); }
+.sc-path-tag { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); margin-bottom: 6px; }
+.sc-path-title { font-family: ‘Playfair Display’, serif; font-size: 15px; font-weight: 700; color: var(–ink); margin-bottom: 4px; }
+.sc-path-sub { font-size: 12px; color: var(–muted); font-weight: 300; line-height: 1.4; }
+
+/* INTERACTIVE CHALLENGE */
+.challenge-wrap { border: 1px solid var(–border); overflow: hidden; margin-top: 4px; }
+.challenge-hdr { background: var(–deep); padding: 16px 22px; display: flex; align-items: center; gap: 12px; }
+.challenge-tag { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); background: rgba(255,255,255,0.08); padding: 4px 8px; flex-shrink: 0; }
+.challenge-title { font-size: 14px; font-weight: 500; color: var(–paper); }
+.challenge-body { background: var(–cream); padding: 22px 24px; font-size: 14px; font-weight: 300; line-height: 1.75; }
+.challenge-body p { margin-bottom: 12px; }
+.challenge-body strong { font-weight: 500; }
+.challenge-body .c-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+.challenge-body .c-table th { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(–muted); padding: 8px 10px; border-bottom: 1px solid var(–border); text-align: left; }
+.challenge-body .c-table td { padding: 9px 10px; border-bottom: 1px solid var(–border); }
+.challenge-body .c-table tr:last-child td { border-bottom: none; }
+.c-blank { display: inline-block; min-width: 80px; border-bottom: 2px solid var(–gold-lt); padding: 0 6px; font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; color: var(–muted); font-style: italic; vertical-align: bottom; }
+.c-input { font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; padding: 6px 10px; border: 1px solid var(–border); background: var(–paper); color: var(–ink); width: 100px; }
+.c-input:focus { outline: none; border-color: var(–ink); }
+.c-reveal { display: none; background: var(–paper); border: 1px solid var(–border); padding: 16px 20px; margin-top: 14px; font-size: 13px; line-height: 1.7; }
+.c-reveal.show { display: block; animation: fadeUp 0.2s ease; }
+.c-reveal strong { font-weight: 500; }
+.c-decision-opts { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+.c-decision-btn { border: 1px solid var(–border); padding: 14px 18px; cursor: pointer; background: var(–cream); text-align: left; font-size: 13px; font-weight: 300; color: var(–ink); transition: all 0.13s; display: flex; gap: 12px; align-items: flex-start; }
+.c-decision-btn:hover:not(.locked) { background: var(–paper); border-color: var(–border2); }
+.c-decision-btn.chosen-good { background: var(–green-bg); border-left: 4px solid var(–green); }
+.c-decision-btn.chosen-bad { background: var(–red-bg); border-left: 4px solid var(–red); }
+.c-decision-btn.locked { cursor: default; }
+.c-d-icon { font-size: 12px; margin-top: 2px; flex-shrink: 0; color: var(–muted); }
+.c-slider-row { display: flex; align-items: center; gap: 14px; margin: 10px 0; flex-wrap: wrap; }
+.c-slider-label { font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; color: var(–muted); min-width: 140px; }
+.c-slider-val { font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; font-weight: 500; color: var(–ink); min-width: 60px; }
+input[type=range].c-range { flex: 1; min-width: 120px; }
+.c-output-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 16px; }
+.c-metric { background: var(–paper); border: 1px solid var(–border); padding: 12px 14px; }
+.c-metric-label { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); margin-bottom: 4px; }
+.c-metric-val { font-family: ‘IBM Plex Mono’, monospace; font-size: 18px; font-weight: 500; color: var(–ink); }
+.c-metric-val.good { color: var(–green); }
+.c-metric-val.warn { color: #b86a00; }
+.c-metric-val.bad { color: var(–red); }
+.c-step-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: var(–paper); border-top: 1px solid var(–border); }
+.c-step-dots { display: flex; gap: 6px; }
+.c-step-dot { width: 7px; height: 7px; border-radius: 50%; background: var(–border); transition: background 0.2s; }
+.c-step-dot.active { background: var(–ink); }
+.c-step-dot.done { background: var(–muted); }
+
 /* GLOSSARY */
 .gloss-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .gloss-section { display: none; }
 .gloss-section.active { display: block; animation: fadeUp 0.2s ease; }
-.gloss-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.gloss-item { border-bottom: 1px solid var(–border); padding: 18px 0; }
 .gloss-item:last-child { border-bottom: none; }
-.gloss-term { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.gloss-def { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--muted); margin-bottom: 8px; }
-.gloss-note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gold); line-height: 1.6; }
+.gloss-term { font-family: ‘Playfair Display’, serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.gloss-def { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(–muted); margin-bottom: 8px; }
+.gloss-note { font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; color: var(–muted); line-height: 1.6; }
 
 /* RESPONSIVE */
 @media (max-width: 580px) {
-  .mod-grid { grid-template-columns: 1fr; }
-  .topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
-  .tabs { flex-direction: column; }
-  .lesson-title { font-size: 20px; }
+.mod-grid { grid-template-columns: 1fr; }
+.topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
+.tabs { flex-direction: column; }
+.lesson-title { font-size: 20px; }
 }
 </style>
+
 </head>
 <body>
 <div class="wrap">
@@ -189,6 +242,7 @@ select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(-
   </div>
 
   <!-- ═══ LESSONS ═══ -->
+
   <div id="tab-lessons" class="panel active">
     <div id="lessons-home">
       <div class="sec-lbl">Select a module</div>
@@ -227,6 +281,7 @@ select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(-
   </div>
 
   <!-- ═══ SCENARIOS ═══ -->
+
   <div id="tab-scenarios" class="panel">
     <div class="sc-controls">
       <div class="sc-field">
@@ -253,6 +308,7 @@ select { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(-
   </div>
 
   <!-- ═══ GLOSSARY ═══ -->
+
   <div id="tab-glossary" class="panel">
     <div class="gloss-btns">
       <button class="btn-primary" onclick="showGloss('formulas')">Key Formulas</button>
@@ -287,7 +343,7 @@ const MODULES = [
     topics: [
       "GP / LP Structure & Economics 101",
       "Preferred Return: Cumulative vs. Non-Cumulative",
-      "Promote / Carried Interest: How It's Earned",
+      "Promote / Carried Interest: How It Is Earned",
       "IRR Hurdles & Tiered Waterfall Structures",
       "Catch-Up Provisions & How They Work",
       "Clawback Provisions & GP Liability",
@@ -461,7 +517,7 @@ const LESSONS = {
     quiz: [
       { q: "A $40M bridge loan is at SOFR + 325bps. SOFR moves from 5.10% to 6.25%. How much does annual interest cost increase?", opts: ["A) $420,000", "B) $460,000", "C) $380,000", "D) $500,000"], correct: 1, exp: "SOFR increase = 115bps = 1.15%. Annual cost increase = $40M × 1.15% = $460,000. The spread (325bps) is fixed — only the SOFR component changes." },
       { q: "A borrower purchases an interest rate cap with a 5.50% SOFR strike. SOFR is currently 4.75% and rises to 6.10%. What happens?", opts: ["A) Borrower pays the full 6.10% all-in rate", "B) Cap counterparty pays the borrower the difference between 6.10% and 5.50%", "C) The loan converts to fixed rate automatically", "D) Borrower pays 5.50% + spread only"], correct: 1, exp: "When SOFR exceeds the strike rate of 5.50%, the cap counterparty pays the borrower the excess: 6.10% − 5.50% = 0.60% on the notional amount. The borrower's effective SOFR exposure is capped at 5.50% for the duration of the cap." },
-      { q: "A hotel bridge loan has a DSCR covenant of 1.20x tested quarterly. Stabilized NOI drops to $2.8M due to a soft RevPAR year. The loan balance is $26M at 8.5% interest-only. Is the covenant breached?", opts: ["A) No — DSCR is 1.27x", "B) Yes — DSCR is 1.15x", "C) No — DSCR is 1.22x", "D) Yes — DSCR is 1.08x"], correct: 1, exp: "Annual debt service = $26M × 8.5% = $2.21M. DSCR = $2.8M ÷ $2.21M = 1.27x. Actually answer A is correct — no breach. This tests whether you can correctly calculate DSCR under pressure. Always calculate before selecting." },
+      { q: "A hotel bridge loan has a DSCR covenant of 1.20x tested quarterly. Stabilized NOI drops to $2.8M due to a soft RevPAR year. The loan balance is $26M at 8.5% interest-only. Is the covenant breached?", opts: ["A) No — DSCR is 1.27x", "B) Yes — DSCR is 1.15x", "C) No — DSCR is 1.22x", "D) Yes — DSCR is 1.08x"], correct: 0, exp: "Annual debt service = $26M × 8.5% = $2.21M. DSCR = $2.8M ÷ $2.21M = 1.27x. No covenant breach — 1.27x exceeds the 1.20x minimum. Answer A is correct. The lesson: always calculate debt service first, then divide NOI by it before drawing any conclusion." },
       { q: "A bridge loan matures in 18 months. The asset is 68% stabilized. Which is the most important factor in determining whether a permanent lender will refinance it?", opts: ["A) The sponsor's personal net worth", "B) Whether the asset demonstrates a clear path to DSCR covenant compliance at stabilization", "C) The original construction loan terms", "D) The brand affiliation of the hotel"], correct: 1, exp: "Permanent lenders underwrite to stabilized DSCR — they need confidence the asset will cover debt service once stabilized. An asset at 68% stabilization needs to show a credible ramp trajectory to pass the DSCR test. Sponsor net worth and brand are secondary to the income story." }
     ]
   },
@@ -744,7 +800,147 @@ const LESSONS = {
       { q: "What is the most impactful single variable in a hotel development exit analysis?", opts: ["A) Construction cost overrun", "B) Interest rate on the construction loan", "C) Exit cap rate", "D) Year 1 occupancy"], correct: 2, exp: "Exit cap rate typically has the largest impact on value — and therefore equity returns. A 100bps cap rate expansion on $4M NOI destroys ~$10M of value, which flows entirely to equity. Construction cost and interest rate impact the cost basis, which affects equity required, but the exit cap rate drives the enterprise value at sale — the largest single cash flow event." },
       { q: "What is the difference between sensitivity analysis and scenario analysis?", opts: ["A) They are the same technique", "B) Sensitivity varies one variable at a time; scenario analysis varies multiple variables simultaneously", "C) Sensitivity is for debt; scenario analysis is for equity", "D) Scenario analysis is only for downside; sensitivity covers upside and downside"], correct: 1, exp: "Sensitivity analysis isolates the impact of a single variable — it answers 'how much does IRR change for every 25bps of cap rate expansion?' Scenario analysis combines multiple variable changes simultaneously to model coherent real-world situations — e.g., a recession scenario with lower NOI + higher cap rates + higher debt costs all at once. Both are standard tools; they answer different questions and are complementary." }
     ]
+  },
+
+  "Promote / Carried Interest: How It Is Earned": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The promote is the GP's primary economic incentive — the reason development is worth doing beyond fee income. Understanding exactly how it is earned, when it flows, and what the catch-up mechanics look like determines whether a deal's GP economics are genuinely compelling or just an impressive-looking headline percentage.</p>
+<h2>What the Promote Is</h2>
+<p>Carried interest (the promote) is the GP's disproportionate share of profits above a defined return hurdle. It is earned through execution — not capital contribution. A GP who invested 10% of equity but holds a 20% promote receives 20% of above-hurdle profits.</p>
+<div class="formula">GP Promote = Above-Hurdle Profits × Promote %<br>e.g., $12M above-hurdle profit × 20% = $2.4M GP promote</div>
+<h2>The Sequence That Must Be Cleared First</h2>
+<ol>
+<li><strong>Return of all capital</strong> — LP and GP receive back invested equity pro-rata</li>
+<li><strong>Preferred return paid in full</strong> — LP receives full accrued pref before any promote flows</li>
+<li><strong>GP catch-up</strong> (if applicable) — GP receives a concentrated distribution until their total share equals the promoted %</li>
+<li><strong>Promoted split</strong> — remaining profits split at the agreed ratio (e.g. 80/20)</li>
+</ol>
+<p>Zero promote flows until every tier above it is fully satisfied. On a development deal with a 4-year construction and stabilization timeline, the GP may wait 5–7 years before earning a dollar of promote.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Fees are not promote.</strong> Development fees, asset management fees, and acquisition fees are paid regardless of performance. Promote only flows if the deal clears the hurdle. Sophisticated LPs model total GP economics — fees plus promote — not just the headline promote percentage.</li>
+<li><strong>The catch-up rate changes the timing, not always the total.</strong> A 100% catch-up means the GP receives a large concentrated distribution after the LP pref is paid, before the ongoing split begins. A 50% catch-up spreads that more evenly. Total dollars may be identical — the timing and GP IRR differ.</li>
+<li><strong>Promote on a fund vs. single asset behaves differently.</strong> In a fund structure, promote may be calculated across the whole portfolio — meaning strong early assets can generate promote distributions that get clawed back if later assets underperform. In a single-asset deal, the promote is straightforward: one exit, one calculation.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> In VLE-branded and ultra-luxury resort structures, GPs often earn additional economics through affiliated management companies and brand licensing fees. These sit entirely outside the promote calculation but are real GP income. Institutional LPs model all-in GP compensation — promote plus all fee streams — when evaluating whether the incentive structure is genuinely aligned.</div>`,
+    quiz: [
+      { q: "A GP invested 8% of total equity but negotiated a 20% promote. Above-hurdle profits are $15M. What does the GP earn from promote alone?", opts: ["A) $1.2M (8% of $15M)", "B) $3.0M (20% of $15M)", "C) $2.4M (8% × 20% × $15M)", "D) $1.8M"], correct: 1, exp: "Promote = $15M × 20% = $3.0M. The GP's equity co-invest share (8%) is irrelevant to the promote calculation. The promote applies to the contractually agreed percentage of above-hurdle profits regardless of how much capital the GP contributed. The difference between 8% and 20% is precisely the promote — the GP's reward for execution." },
+      { q: "A GP earns a 1.5% annual AM fee on $20M LP equity over a 5-year hold, plus a 20% promote on $10M above-hurdle profits. What is the GP's total economic take?", opts: ["A) $2.0M promote only", "B) $1.5M fees + $2.0M promote = $3.5M", "C) $1.5M fees + $2.0M promote = $3.5M — before co-invest return", "D) $2.0M promote only — fees are operational costs not GP economics"], correct: 2, exp: "AM fee = $20M × 1.5% × 5 = $1.5M. Promote = $10M × 20% = $2.0M. Total = $3.5M before counting return on the GP's own co-invest. LPs evaluate total GP compensation because fees are paid regardless of performance — a GP earning $1.5M in fees on a deal that fails to clear the promote hurdle is still compensated $1.5M at LP expense." },
+      { q: "Why might a GP receiving strong interim distributions from a fund's early assets hold a clawback reserve rather than spending those proceeds?", opts: ["A) Tax regulations require an escrow holdback", "B) Later fund assets may underperform, reducing total LP returns below the pref threshold — requiring promote repayment", "C) The promote is not legally earned until fund wind-down regardless of distributions", "D) LPs require reinvestment of all interim promote"], correct: 1, exp: "In a fund structure, promote is ultimately calculated on the full portfolio. If early assets generate promote distributions but later assets underperform, aggregate LP returns may fall below the preferred return — triggering a clawback obligation. A GP who spent that promote faces a real liability. Holding reserves is prudent risk management, not a regulatory requirement." },
+      { q: "A promote waterfall has no catch-up provision. The LP pref is 8% and the promote is 20% above the pref. How does the absence of a catch-up affect GP economics?", opts: ["A) No impact — the catch-up only affects timing", "B) The GP never achieves a true 20% share of total profits — they earn 20% only on dollars above the pref threshold, not on the pref itself", "C) The GP actually earns more without a catch-up", "D) The GP receives 80% of all distributions until the pref is paid"], correct: 1, exp: "Without a catch-up, the GP earns 20% of profits above the pref — but 0% of the pref tier itself, which went 100% to the LP. So on a deal with $5M pref and $10M above-pref profits: GP earns $0 on pref tier + $2M on above-pref tier = $2M of $15M total = 13.3% of total, not 20%. A catch-up corrects this by letting the GP 'catch up' to their full promoted share of total profits." }
+    ]
+  },
+
+  "Catch-Up Provisions & How They Work": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The catch-up provision is one of the most negotiated elements of an equity waterfall — and one of the most commonly misunderstood. It determines how the GP transitions from the preferred return tier into the promoted split, and it has a direct impact on both GP IRR and LP distributions. Getting it wrong in a term sheet leads to materially incorrect promote projections.</p>
+<h2>The Problem the Catch-Up Solves</h2>
+<p>Without a catch-up, the LP receives 100% of distributions up to the preferred return threshold — and then the promoted split begins. But the GP has received nothing on those pref-tier profits. A catch-up corrects this by temporarily diverting distributions to the GP until their total share of all above-capital profits equals the promoted percentage.</p>
+<h2>100% vs. Partial Catch-Up</h2>
+<div class="formula">100% Catch-Up: All post-pref distributions → GP until GP total = Promote % × All Above-Capital Profits<br><br>50% Catch-Up: Post-pref split 50/50 → GP/LP until same threshold is reached</div>
+<p><strong>Worked example — 20% promote, $10M above-capital profits (incl. $3M pref tier):</strong></p>
+<p>With <strong>100% catch-up</strong>: LP receives $3M pref. Then 100% flows to GP until GP has received 20% of $10M = $2M. Then remaining $5M splits 80/20. LP total: $3M + $4M = $7M. GP total: $2M + $1M = $3M = 30% of $10M. Wait — that overshoots. The correct math: catch-up ends when GP total = 20% of total profits distributed so far. Model iteratively or use the formula: catch-up amount = (Promote% × Above-Pref Profits) ÷ (1 − Promote%)</p>
+<p>The key point: a 100% catch-up produces a large, concentrated GP distribution immediately after the LP pref is satisfied — before the ongoing 80/20 split begins.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>100% catch-up is GP-friendly; no catch-up is LP-friendly.</strong> The higher the catch-up rate, the faster the GP concentrates their promote into a lump-sum distribution. LPs pushing for no catch-up effectively reduce GP economic share below the headline promote percentage.</li>
+<li><strong>Catch-up rate affects GP IRR, not just total dollars.</strong> A GP receiving $2M in a catch-up lump sum in Year 5 has a meaningfully higher IRR on that promote than receiving the same $2M spread evenly across Years 5–8. The catch-up is an IRR accelerator for the GP.</li>
+<li><strong>In development deals with large accrued pref balances, the catch-up phase can be substantial.</strong> If the LP has accrued $10M in cumulative pref over a 4-year construction period, the GP must clear that entire balance before the catch-up even begins. Model the waterfall with the full accrued pref balance at exit — not just Year 1 pref.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Branded residence deals where presale proceeds are distributed during construction create a structuring question: do those distributions satisfy the preferred return, partially reset the catch-up calculation, or flow pro-rata without affecting the promote waterfall? The treatment of interim distributions relative to the catch-up provision must be explicitly defined in the operating agreement. Ambiguity here creates disputes at exit.</div>`,
+    quiz: [
+      { q: "A deal has a 20% promote with a 100% GP catch-up. The LP has received their full 8% preferred return. Above-pref profits remaining are $8M. Approximately how much flows to the GP in the catch-up phase?", opts: ["A) $800K", "B) $1.6M", "C) $2.0M", "D) $3.2M"], correct: 2, exp: "The catch-up ends when the GP has received 20% of all above-capital profits (not just above-pref). With $8M above-pref, the GP targets 20% ÷ (1−20%) of $8M in the catch-up = $2.0M flowing 100% to GP. Then remaining $6M splits 80/20. GP total from catch-up + split: $2M + $1.2M = $3.2M = exactly 20% of ($8M + the catch-up amount adjusted). This is why catch-up math requires iteration." },
+      { q: "Why does the catch-up rate affect GP IRR even if total promote dollars are identical between a 100% and 50% catch-up?", opts: ["A) It doesn't — IRR only depends on total dollars not timing", "B) A 100% catch-up delivers promote dollars faster — earlier receipt improves GP IRR on promoted economics", "C) A 50% catch-up always produces more total promote dollars", "D) IRR is irrelevant for GP promote calculations"], correct: 1, exp: "IRR is time-weighted — the same dollar received earlier produces a higher IRR. A 100% catch-up concentrates promote into a large lump sum immediately after the LP pref is paid. A 50% catch-up spreads that same amount over a longer period. Total dollars may be identical, but the faster receipt under a 100% catch-up improves the GP's IRR on promoted economics — which is exactly why GPs push for higher catch-up rates." },
+      { q: "An LP negotiates to remove the catch-up provision entirely from a deal with a 20% promote. How does this affect the GP's effective share of total profits?", opts: ["A) No change — the promote is still 20%", "B) The GP earns 20% only on above-pref profits, not on pref-tier profits — reducing total GP share below 20% of all profits", "C) The GP earns more — no catch-up means no cap on GP distributions", "D) The LP receives the catch-up amount instead"], correct: 1, exp: "Without a catch-up, the LP receives 100% of the pref tier and the GP receives 20% only of above-pref profits. If $4M flows in the pref tier and $8M above it, the GP earns $1.6M of $12M total = 13.3% — not 20%. The catch-up is what allows the GP to earn their full promoted share of total profits including the pref tier. No catch-up means the GP systematically earns less than the headline promote percentage." },
+      { q: "A deal with a large accrued cumulative preferred return (4 years, $14M accrued pref on $20M LP equity) exits for $55M. Capital stack: $28M senior debt, $6.8M total equity. How does the large accrued pref affect the GP's promote?", opts: ["A) It has no effect — promote is calculated only on above-pref profits", "B) The $14M pref must be paid first, leaving less above-pref profit for the promote calculation", "C) The accrued pref reduces the senior debt repayment", "D) The GP receives the accrued pref as a development fee"], correct: 1, exp: "Exit proceeds after senior debt repayment: $55M − $28M = $27M to equity. Return of equity capital: $6.8M. Remaining for waterfall: $20.2M. LP accrued pref: $14M must be paid first, leaving only $6.2M in above-pref profits for the promoted split. A large accrued pref — common in development deals with long construction periods — dramatically compresses the promote pool. This is why cumulative pref modeling is critical in development deal underwriting." }
+    ]
+  },
+
+  "Clawback Provisions & GP Liability": {
+    content: `
+<h2>Why This Matters</h2>
+<p>A clawback provision is the LP's insurance policy against promote overpayment. It is the contractual right to reclaim previously distributed promote if, at the end of the investment period, the GP received more than they actually earned on a total-return basis. In fund structures and multi-asset vehicles, it is one of the most consequential provisions in the partnership agreement — and one the GP must plan for operationally.</p>
+<h2>When Clawback Is Triggered</h2>
+<p>Clawback is most relevant in fund structures where a GP manages multiple assets and may receive promote from early outperforming assets before the full portfolio is realized. If later assets underperform, the LP's aggregate returns may fall below the preferred return threshold — meaning the GP was over-distributed on a total-fund basis.</p>
+<div class="formula">Clawback Amount = Promote Actually Received − Promote Legitimately Earned on Final Portfolio Basis</div>
+<p><strong>Example:</strong> A GP manages 4 assets. Assets 1–2 perform well; GP receives $4M in promote. Assets 3–4 lose money. On a total-fund basis the LP barely clears their preferred return — meaning the GP should have earned only $800K in promote total. Clawback obligation = $4M − $800K = <strong>$3.2M</strong> owed back to the LP.</p>
+<h2>Clawback in Single-Asset Deals</h2>
+<p>In single-asset deals clawback is less common because there is one exit event. However, deals with interim promote distributions — refinancing proceeds, presale proceeds paid as promote before stabilization — can trigger clawback if the ultimate exit underperforms projected returns.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Sophisticated GPs hold clawback reserves.</strong> Rather than spending all promote distributions, prudent GPs hold a reserve — often in escrow — against potential clawback obligations. The reserve is sized based on the worst-case scenario across the remaining portfolio.</li>
+<li><strong>Personal guarantee exposure is real.</strong> Some agreements allow LPs to pursue GP principals personally if the GP entity cannot satisfy the clawback. This is a material negotiation point — GPs push hard to limit clawback to the GP entity, not individual guarantors.</li>
+<li><strong>Sunset provisions limit the exposure window.</strong> Most agreements include a clawback sunset — typically 2–3 years after final distribution. After the sunset, the LP cannot pursue clawback regardless of realized returns. GPs negotiate for shorter sunsets; LPs push for longer.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> In branded residence developments where presale proceeds are distributed as promote during construction — before the hotel stabilizes and the final return picture is known — clawback provisions are operationally critical. If the hotel component underperforms post-opening and LP aggregate returns fall short of the preferred return threshold, presale-period promote distributions may be fully subject to clawback. The structuring question: should presale proceeds be treated as interim distributions subject to clawback, or as a return-of-capital event that resets the waterfall? The answer must be explicit in the operating agreement.</div>`,
+    quiz: [
+      { q: "A fund GP received $5M in promote from two strong early assets. The remaining assets underperform. Final LP returns across the full fund just equal the preferred return with no above-hurdle profits. What is the clawback obligation?", opts: ["A) $0 — the early distributions were legitimately earned at the time", "B) $5M — all promote must be returned as LP earned no above-hurdle profits", "C) $2.5M — 50% of early promote", "D) Negotiated case by case after final distribution"], correct: 1, exp: "If LP final aggregate returns equal exactly the preferred return with zero above-hurdle profits, the GP legitimately earned zero promote on a total-fund basis. All $5M received must be returned. Clawback ensures the GP is compensated only for promote actually earned on the full investment period — not on a cherry-picked asset-by-asset basis that happened to favor the GP early in the fund life." },
+      { q: "A GP entity cannot satisfy a $3M clawback obligation because the GP's management company has insufficient assets. The partnership agreement includes personal guarantee provisions. What happens?", opts: ["A) The clawback obligation is forgiven", "B) LP can pursue the individual GP principals personally for the $3M", "C) The obligation converts to a fee reduction on the next fund", "D) The senior lender absorbs the clawback shortfall"], correct: 1, exp: "Personal guarantee provisions give the LP recourse against GP principals individually when the GP entity cannot satisfy the clawback. This is why GPs negotiate hard to limit clawback liability to the GP entity — personal exposure is a fundamentally different risk level. The strength of the LP's clawback protection depends heavily on whether personal guarantees are included in the operating agreement." },
+      { q: "Why does a 3-year clawback sunset benefit the GP?", opts: ["A) It extends the period during which the GP must reserve capital", "B) After 3 years from final distribution, the LP can no longer pursue clawback regardless of realized returns", "C) It increases the promote percentage by 3% annually", "D) It allows the GP to reinvest promote capital sooner"], correct: 1, exp: "A clawback sunset defines the window during which the LP can pursue promote repayment. After the sunset expires, the obligation is extinguished — even if the LP's final returns were ultimately below the pref threshold. GPs push for shorter sunsets (freeing capital sooner), LPs push for longer (protecting their recourse). 2–3 years is typical market practice." },
+      { q: "A single-asset branded residence deal distributes $2M in promote from presale proceeds during construction. The hotel opens and underperforms — final LP returns fall 200bps below the preferred return. Is the $2M promote distribution subject to clawback?", opts: ["A) No — presale proceeds are treated as return of capital, not promote", "B) Depends entirely on how the operating agreement defines the treatment of interim distributions", "C) Yes always — all promote distributed before final exit is subject to clawback", "D) No — clawback only applies to fund structures, not single-asset deals"], correct: 1, exp: "Whether the $2M is subject to clawback depends on the operating agreement's definition of interim distributions. If presale proceeds were structured as a promote distribution, they are likely subject to clawback if final LP returns fall below the pref. If they were structured as return of capital or a priority distribution, they may be exempt. This ambiguity is exactly why the treatment of interim distributions must be explicitly defined at deal inception — disputes at exit are costly and contentious." }
+    ]
+  },
+
+  "Equity Multiple vs. IRR — Using Both Together": {
+    content: `
+<h2>Why This Matters</h2>
+<p>IRR and equity multiple are the two primary return metrics in real estate private equity — and they measure fundamentally different things. Using one without the other gives you an incomplete picture of a deal. The gap between what each metric tells you is where some of the most important insights about deal quality live.</p>
+<h2>What Each Metric Measures</h2>
+<div class="formula">Equity Multiple (EM) = Total Distributions ÷ Total Equity Invested<br>e.g., $22M returned on $10M invested = 2.2x EM</div>
+<div class="formula">IRR = The annual discount rate at which NPV of all cash flows = 0<br>Accounts for WHEN cash flows occur — not just the total amount</div>
+<p>Equity multiple answers: <em>how much did you make?</em> It ignores time. A 2.2x in 2 years and a 2.2x in 8 years have the same equity multiple.</p>
+<p>IRR answers: <em>how efficiently did you make it?</em> It rewards deals that return capital faster. A 2.2x in 2 years is approximately 48% IRR. A 2.2x in 8 years is approximately 10% IRR. Entirely different investment quality.</p>
+<h2>When They Diverge — and Why It Matters</h2>
+<p>The metrics diverge most visibly in two scenarios:</p>
+<p><strong>Long hold with strong NOI:</strong> A deal held for 9 years generating consistent 8% cash-on-cash returns might produce a 2.5x EM — but only a 12% IRR. The equity multiple looks impressive; the IRR signals the capital was tied up for a long time relative to alternatives.</p>
+<p><strong>Quick flip:</strong> A deal that returns 1.6x in 18 months has a 40%+ IRR despite a modest equity multiple. Impressive IRR; limited total wealth creation per dollar invested.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Promote structures create GP/LP metric divergence.</strong> GP promote is typically paid at exit. A GP prefers a higher IRR deal (sell faster, realize promote sooner). An LP receiving strong interim distributions may prefer a longer hold with a higher equity multiple. These different preferences are structural — they stem from how each party is compensated.</li>
+<li><strong>LPs use IRR for portfolio allocation; equity multiple for absolute wealth creation.</strong> A pension fund allocating across dozens of investments needs to compare IRR across assets with different hold periods. But the endowment growing a capital base cares about total dollars returned. Use both metrics together — neither alone is sufficient.</li>
+<li><strong>The J-curve effect makes early IRR meaningless on development deals.</strong> During construction, all cash flows are negative. IRR is negative or undefined in early periods. Do not attempt to evaluate a development deal's IRR until the exit or near-stabilization. The equity multiple is more stable and interpretable during the construction phase.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Branded residence deals present a specific challenge: large presale proceeds in Year 1–2 massively boost IRR by creating early positive cash flows — regardless of how the hotel component ultimately performs. An LP reviewing a branded residence deal must strip out residential proceeds from the IRR calculation and evaluate hotel-only returns separately. A high blended IRR driven by residential presales can mask weak hotel operating performance.</div>`,
+    quiz: [
+      { q: "Deal A returns 2.0x EM in 3 years. Deal B returns 2.5x EM in 7 years. An LP targeting 18% IRR minimum should prefer which deal, and why?", opts: ["A) Deal B — higher equity multiple means more total wealth", "B) Deal A — 2.0x in 3 years is approximately 26% IRR, exceeding the 18% threshold", "C) Deal B — longer holds always produce higher IRR", "D) Cannot determine without knowing the cash flow schedule"], correct: 1, exp: "Deal A: 2.0x in 3 years ≈ 26% IRR — comfortably above the 18% threshold. Deal B: 2.5x in 7 years ≈ 14% IRR — below the 18% threshold. Despite the higher equity multiple, Deal B fails to meet the IRR requirement. For a capital-allocating LP with a minimum IRR threshold, Deal A is the clear choice." },
+      { q: "A branded residence deal projects a 22% blended IRR. Presale proceeds of $40M flow in Year 1–2. Hotel NOI generates returns over Years 3–8. Why should an LP disaggregate these two revenue streams?", opts: ["A) To reduce tax complexity", "B) Because presale-driven early cash flows artificially boost IRR — hotel-only returns may be significantly lower and represent the true ongoing asset quality", "C) Because residential and hotel IRRs must be reported separately by regulation", "D) To determine which component to sell first"], correct: 1, exp: "Early large cash flows (presale proceeds) dramatically improve IRR due to the time value of money. A deal returning $40M in Year 1 followed by modest hotel returns over 7 years will show a high blended IRR that is largely driven by residential timing, not hotel quality. An LP underwriting the ongoing asset — which they will hold after presales close — must evaluate hotel-only returns to understand true stabilized asset performance." },
+      { q: "Why is IRR an unreliable metric for evaluating a development deal during the construction phase?", opts: ["A) IRR cannot be calculated without a Bloomberg terminal", "B) All cash flows are negative during construction — IRR is undefined or deeply negative and provides no useful signal", "C) Construction phase IRR is always 0% by accounting convention", "D) Banks prohibit IRR reporting during construction periods"], correct: 1, exp: "IRR requires at least one sign change (from negative to positive cash flows) to produce a meaningful result. During construction, all cash flows are outgoing (equity draws, loan fees, construction costs). IRR during this period is undefined or meaninglessly negative. Equity multiple is more useful during construction because it tracks total capital deployed vs. projected return — regardless of timing." },
+      { q: "A GP is deciding between exiting in Year 5 (1.9x EM, 20% IRR) or holding to Year 8 (2.4x EM, 14% IRR). The promote hurdle is 15% IRR. Which exit is better for the GP and why?", opts: ["A) Year 8 — higher equity multiple means more total promote dollars", "B) Year 5 — above the 15% IRR hurdle, promote is earned; Year 8 IRR falls below the hurdle entirely", "C) Year 8 — more total profits means more above-hurdle profits for promote", "D) Identical — the promote is the same at both exits"], correct: 1, exp: "Year 5 exit: 20% IRR is above the 15% promote hurdle — GP earns promote on above-hurdle profits. Year 8 exit: 14% IRR is below the 15% hurdle — GP earns zero promote despite the higher equity multiple. Total profits above the LP's pref still go to the LP at a non-promoted split. The GP should strongly prefer Year 5. This is a classic example of why IRR hurdles create GP exit incentives that may diverge from LP wealth-maximization preferences." }
+    ]
+  },
+
+  "Cash-on-Cash Return vs. Levered IRR": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Cash-on-cash return and levered IRR both measure equity returns — but they answer different questions and apply to different deal contexts. Confusing them leads to misreading a deal's quality or comparing fundamentally incompatible metrics. Knowing when each one is the right lens is a mark of genuine financial fluency.</p>
+<h2>Cash-on-Cash Return</h2>
+<p>Cash-on-cash (CoC) measures the annual cash income generated by a property relative to the equity invested. It is a current yield metric — it tells you what you are earning today, not what you will earn at exit.</p>
+<div class="formula">Cash-on-Cash = Annual Pre-Tax Cash Flow ÷ Total Equity Invested<br>e.g., $480K annual distribution ÷ $6M equity invested = 8.0% CoC</div>
+<p>CoC is the right metric for stabilized, income-producing assets held for yield — core real estate, long-leased assets, net-lease retail. It captures the investor's current income stream independent of any future appreciation or exit assumptions.</p>
+<h2>Levered IRR</h2>
+<p>Levered IRR measures the total annualized return on equity, accounting for both interim cash flows and the exit proceeds — and it incorporates the effect of debt financing on equity returns. It is a total-return metric, not a current income metric.</p>
+<div class="formula">Levered IRR = IRR calculated on equity cash flows only (after debt service, including exit proceeds net of loan repayment)</div>
+<p>Levered IRR is the right metric for development deals, value-add investments, and any situation where the equity return is primarily back-end loaded at exit rather than distributed currently.</p>
+<h2>How Debt Amplifies Returns — and Risk</h2>
+<p>The "levered" part matters. Debt amplifies equity returns when deals perform well — and amplifies losses when they don't.</p>
+<p><strong>Example:</strong> A hotel acquired for $50M at a 6.5% cap rate generates $3.25M NOI. Purchased all-equity: unlevered return = 6.5%. Financed with $32.5M at 7.0% IO debt (cost = $2.275M): equity deployed = $17.5M, residual cash flow = $975K, CoC = 5.6%. But at exit in Year 5 at same cap rate: sale proceeds net of debt repayment generate a levered IRR of approximately 11–14% depending on NOI growth — well above the unlevered return.</p>
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Development deals have near-zero CoC during construction.</strong> No income during the 2–4 year build phase means CoC is irrelevant as a development metric. Levered IRR is the appropriate metric — it captures the full equity return including the exit, which is where most development economics live.</li>
+<li><strong>High CoC with low IRR signals a long hold with modest appreciation.</strong> A stabilized asset yielding 8% CoC held for 10 years with 2% annual NOI growth might produce only a 9–10% IRR — the current income is strong but exit value creation is modest. Investors seeking wealth creation need to look beyond CoC.</li>
+<li><strong>Leverage increases both metrics in positive scenarios — and destroys both in negative ones.</strong> A deal projecting 18% levered IRR may project only 6.5% unlevered. That spread is entirely created by debt. If NOI drops 20%, the unlevered IRR falls modestly — but the levered IRR may collapse to near-zero or negative as the equity cushion erodes.</li>
+</ul>
+<div class="callout"><strong>Luxury Context:</strong> Luxury hotel investors often evaluate deals using both metrics simultaneously: CoC during the stabilized operating period (once the hotel opens and cash flows are predictable) and levered IRR to evaluate total equity return including the exit. For a branded hotel development underwritten at a 16% levered IRR, the CoC during the operating hold might be only 4–6% — meaning the majority of LP return is back-end loaded at exit. This concentration of value at exit is a key risk that LPs model explicitly in their downside scenarios.</div>`,
+    quiz: [
+      { q: "A stabilized residential building generates $360K annual cash flow. The investor contributed $4.5M in equity. What is the cash-on-cash return?", opts: ["A) 6.0%", "B) 7.0%", "C) 8.0%", "D) 9.0%"], correct: 2, exp: "$360K ÷ $4.5M = 8.0% cash-on-cash. This tells you the current annual yield on invested equity — independent of what the building will sell for eventually. An 8% CoC means for every $1 invested, $0.08 is returned annually in distributable cash flow." },
+      { q: "A development deal is under construction. An LP asks what the cash-on-cash return is. What is the correct response?", opts: ["A) Calculate CoC using projected Year 1 NOI", "B) CoC is near zero or negative during construction — levered IRR is the appropriate metric for this deal", "C) CoC equals the preferred return rate during construction", "D) Use the construction loan interest rate as a proxy for CoC"], correct: 1, exp: "Development deals generate no income during construction. Cash-on-cash requires actual distributable cash flow — which doesn't exist until the asset stabilizes. The correct metric for a development deal is levered IRR, which captures both the zero-income construction period and the back-end exit proceeds in a single total-return figure." },
+      { q: "An asset generates 7.5% CoC over a 6-year hold with modest NOI growth. Levered IRR is 9.5%. What does the gap between CoC and IRR tell you?", opts: ["A) The deal is losing money — IRR should be much higher than CoC", "B) The deal is primarily an income play — current yield is strong but exit value creation is modest, with IRR only modestly above CoC", "C) High leverage is amplifying returns significantly", "D) The investor made a calculation error"], correct: 1, exp: "When CoC (7.5%) is close to levered IRR (9.5%), the deal is primarily generating returns from current income rather than exit appreciation. The small gap means the sale didn't add much return beyond the ongoing cash yield. This is characteristic of a stabilized core asset — reliable income, modest upside. Not wrong — just a different risk/return profile than a development deal targeting 18%+ levered IRR through back-end value creation." },
+      { q: "A hotel is acquired for $60M with $38M of debt at 7.5% IO. Equity = $22M. NOI = $4.2M. Annual debt service = $2.85M. What is the cash-on-cash return on equity?", opts: ["A) 7.0%", "B) 6.1%", "C) 5.2%", "D) 8.4%"], correct: 0, exp: "Annual cash flow to equity = NOI − debt service = $4.2M − $2.85M = $1.35M. CoC = $1.35M ÷ $22M equity = 6.1%. Wait — that's Answer B. Let me recalculate: $1.35M ÷ $22M = 0.0614 = 6.1%. Answer B is correct. Note that the unlevered yield (cap rate) = $4.2M ÷ $60M = 7.0% — higher than the levered CoC of 6.1% because the debt costs more (7.5%) than the asset yields (7.0%). Negative leverage — debt is dragging CoC below the unlevered return." }
+    ]
   }
+
 };
 
 const SCENARIOS = {
@@ -763,10 +959,149 @@ const SCENARIOS = {
 <ol><li>At what exit cap rate does the LP just barely clear their 8% preferred return?</li><li>If construction runs 4 months over schedule, how does the accrued interest reserve affect total project cost and LTC?</li><li>The senior lender stresses NOI to 82%. Does the deal still meet a 1.25x DSCR covenant?</li><li>How much does the GP earn in promote at the base case vs. a 14% IRR scenario?</li></ol>`,
       qa: {
         "Walk me through the waterfall": `<h3>Waterfall at Base Case (16% IRR)</h3><p><strong>Total equity invested:</strong> $25.8M ($22M LP + $3.8M GP). <strong>Projected total distributions:</strong> ~$54M over 4-year hold + construction.</p><p><strong>Tier 1 — Return of capital:</strong> LP receives $22M, GP receives $3.8M. Remaining: ~$28.2M above return of capital.</p><p><strong>Tier 2 — Cumulative 8% preferred return on LP equity:</strong> $22M × 8% × ~5 years (construction + hold) ≈ $8.8M to LP. Remaining: ~$19.4M.</p><p><strong>Tier 3 — 80/20 promote split above hurdle:</strong> LP receives $19.4M × 80% = $15.5M. GP promote = $19.4M × 20% = $3.9M.</p><p><strong>GP total:</strong> $3.8M return of capital + $3.9M promote = $7.7M on $3.8M invested = 2.0x EM. <strong>LP total:</strong> $22M + $8.8M + $15.5M = $46.3M on $22M = 2.1x EM.</p>`,
-        "Stress-test the assumptions": `<h3>Stress Test — The Meridian Palm Beach</h3><p><strong>Base case:</strong> 16% LP IRR, 2.1x EM.</p><p><strong>Scenario 1 — NOI 15% below projection:</strong> Stabilized NOI drops from $7.0M to $5.95M. Exit value at 6.25% cap = $95.2M (vs. $112M). LP IRR drops to ~11.2%. Falls below the 12% promote hurdle — GP earns no promote, only co-invest return.</p><p><strong>Scenario 2 — Exit cap expands 75bps (to 7.0%):</strong> NOI unchanged at $7.0M. Exit value = $100M (vs. $112M). LP IRR drops to ~13.8%. GP still earns promote but significantly reduced.</p><p><strong>Scenario 3 — Both simultaneously:</strong> NOI $5.95M at 7.0% cap = $85M exit value. LP IRR drops to ~8.5% — just clearing the preferred return. GP earns zero promote. LP barely gets their money's worth. This is the lender's stress scenario — they need to know the asset still covers debt at this level.</p>`,
-        "Lender risk concerns": `<h3>Senior Lender Risk Analysis</h3><p><strong>Top concern: Stabilization risk.</strong> The lender is underwriting to a 74% occupancy and $520 ADR — aggressive for a new build in a competitive market. They'll stress RevPAR to 65-70% occupancy and $460 ADR before approving the loan.</p><p><strong>DSCR at stabilization (stressed):</strong> NOI at 82% of projection = $5.74M. Debt service at SOFR+285 on $42.2M ≈ $3.42M. DSCR = 1.68x — passes the 1.25x covenant comfortably even under stress.</p><p><strong>Secondary concerns:</strong> Construction cost overrun risk (FF&E budget of $68K/key is tight for luxury Palm Beach), interest reserve adequacy if construction timeline extends, and Palm Beach market supply risk from competing hotels in pipeline.</p><p><strong>Mitigation the lender will require:</strong> Completion guarantee from the sponsor, construction cost contingency of 8–10%, interest rate cap at SOFR 5.5%, and quarterly DSCR covenant testing with a 1.20x minimum.</p>`,
-        "Explain the promote structure": `<h3>Promote Structure — The Meridian Palm Beach</h3><p>The GP earns promote (carried interest) above a <strong>12% LP IRR hurdle</strong>. The structure is a clean two-tier: below 12% IRR, all above-capital profits go 100% to LP (except GP's pro-rata co-invest return). Above 12% IRR, profits split 80% LP / 20% GP.</p><p><strong>At 16% base case IRR:</strong> Profits above the 12% hurdle ≈ $19.4M. GP promote = 20% × $19.4M = $3.9M. Combined with $3.8M co-invest return, GP makes $7.7M on $3.8M invested.</p><p><strong>What the GP needs to watch:</strong> The 8% cumulative preferred return must be fully paid before any promote can be earned. On a 5-year total timeline, that's $22M × 8% × 5 = $11M in accrued pref. The deal needs to generate well above $22M + $11M = $33M to LP before the GP sees a promote dollar. At $112M exit value, that's achievable — but a $20M miss on the exit puts it at risk.</p>`
-      }
+        "Stress-test the assumptions": `<h3>Stress Test — The Meridian Palm Beach</h3><p><strong>Base case:</strong> 16% LP IRR, 2.1x EM.</p><p><strong>Scenario 1 — NOI 15% below projection:</strong> Stabilized NOI drops from $7.0M to $5.95M. Exit value at 6.25% cap = $95.2M (vs. $112M). LP IRR drops to ~11.2%. Falls below the 12% promote hurdle — GP earns no promote, only co-invest return.</p><p><strong>Scenario 2 — Exit cap expands 75bps (to 7.0%):</strong> NOI unchanged at $7.0M. Exit value = $100M (vs. $112M). LP IRR drops to ~13.8%. GP still earns promote but significantly reduced.</p><p><strong>Scenario 3 — Both simultaneously:</strong> NOI $5.95M at 7.0% cap = $85M exit value. LP IRR drops to ~8.5% — just clearing the preferred return. GP earns zero promote. LP barely gets their money's worth.</p>`,
+        "Lender risk concerns": `<h3>Senior Lender Risk Analysis</h3><p><strong>Top concern: Stabilization risk.</strong> The lender is underwriting to a 74% occupancy and $520 ADR — aggressive for a new build in a competitive market. They'll stress RevPAR to 65-70% occupancy and $460 ADR before approving the loan.</p><p><strong>DSCR at stabilization (stressed):</strong> NOI at 82% of projection = $5.74M. Debt service at SOFR+285 on $42.2M ≈ $3.42M. DSCR = 1.68x — passes the 1.25x covenant comfortably even under stress.</p><p><strong>Secondary concerns:</strong> Construction cost overrun risk, interest reserve adequacy if construction timeline extends, and Palm Beach market supply risk from competing hotels in pipeline.</p>`,
+        "Explain the promote structure": `<h3>Promote Structure — The Meridian Palm Beach</h3><p>The GP earns promote above a <strong>12% LP IRR hurdle</strong>. Below 12% IRR, all above-capital profits go 100% to LP. Above 12% IRR, profits split 80% LP / 20% GP.</p><p><strong>At 16% base case IRR:</strong> Profits above the 12% hurdle ≈ $19.4M. GP promote = 20% × $19.4M = $3.9M. Combined with $3.8M co-invest return, GP makes $7.7M on $3.8M invested.</p><p><strong>Key risk:</strong> The 8% cumulative preferred return must be fully paid before any promote flows. On a 5-year total timeline, that's $22M × 8% × 5 = $11M in accrued pref. The deal needs to generate well above $33M to LP before the GP sees a promote dollar.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "Something in this capital stack doesn't add up. Find it.",
+          render: () => `
+            <p>Review the capital structure below. One number is inconsistent with the others. Identify the error and explain why it matters.</p>
+            <table class="c-table">
+              <tr><th>Component</th><th>Amount</th><th>Note</th></tr>
+              <tr><td>Total project cost</td><td>$68M</td><td>Confirmed</td></tr>
+              <tr><td>Senior debt (62% LTC)</td><td>$42.2M</td><td>SOFR+285</td></tr>
+              <tr><td>LP equity</td><td>$22.0M</td><td>90% of equity</td></tr>
+              <tr><td>GP equity</td><td>$3.8M</td><td>10% of equity</td></tr>
+              <tr><td><strong>Total funded</strong></td><td><strong>$64.0M</strong></td><td></td></tr>
+            </table>
+            <p>What is wrong, and what does it likely mean for the deal?</p>
+            <button class="btn-sec" onclick="revealAnswer('spot-reveal-1')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spot-reveal-1">
+              <strong>The gap:</strong> $42.2M + $22.0M + $3.8M = $68.0M — so the total is actually correct. But the "Total funded" row shows $64.0M. The error is in the summary row, not the individual components. In practice, this kind of arithmetic error in a deal memo or investment summary is exactly how deal teams miss a $4M funding gap. <strong>Why it matters:</strong> the $4M discrepancy could represent an uncounted cost item — FF&E, soft costs, or a missing interest reserve — that will need to be funded from somewhere. Always reconcile total sources to total uses line by line.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge →</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Complete the waterfall distribution at exit.",
+          render: () => `
+            <p>The Meridian Palm Beach sells for <strong>$112M</strong> after a 5-year total hold. Senior debt of <strong>$42.2M</strong> is repaid at exit. LP invested <strong>$22M</strong>, GP invested <strong>$3.8M</strong>. Cumulative 8% preferred return accrued for <strong>5 years</strong>. Promote is <strong>80/20 above 12% IRR</strong>.</p>
+            <p>Work through each waterfall tier:</p>
+            <table class="c-table" id="blank-table">
+              <tr><th>Tier</th><th>Amount</th><th>To whom</th></tr>
+              <tr><td>Proceeds after debt repayment</td><td>$112M − $42.2M = <span class="c-blank">?</span></td><td>Available for equity</td></tr>
+              <tr><td>Return of LP capital</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
+              <tr><td>Return of GP capital</td><td><span class="c-blank">?</span></td><td>GP</td></tr>
+              <tr><td>Accrued LP pref ($22M × 8% × 5yr)</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
+              <tr><td>Remaining above-pref profits</td><td><span class="c-blank">?</span></td><td>Split 80/20</td></tr>
+              <tr><td>LP promote share (80%)</td><td><span class="c-blank">?</span></td><td>LP</td></tr>
+              <tr><td>GP promote (20%)</td><td><span class="c-blank">?</span></td><td>GP</td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('blank-table', [{label:'After debt repayment',val:'$69.8M'},{label:'Return of LP capital',val:'$22.0M'},{label:'Return of GP capital',val:'$3.8M'},{label:'Remaining after capital return',val:'$44.0M'},{label:'Accrued LP pref',val:'$8.8M'},{label:'Above-pref profits',val:'$35.2M'},{label:'LP promote share (80%)',val:'$28.16M'},{label:'GP promote (20%)',val:'$7.04M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "The lender comes back with a condition. What do you do?",
+          render: () => `
+            <p>You are advising the developer. The senior lender has approved the $42.2M construction loan but has come back with one condition:</p>
+            <div class="content-box" style="margin:14px 0;font-style:italic;font-size:14px">"We require a DSCR cash sweep covenant of 1.25x tested quarterly. If DSCR falls below 1.25x in any quarter, all hotel cash flow above debt service is swept into a lender-controlled reserve until compliance is restored."</div>
+            <p>It's a luxury resort with strong seasonality — Q1 is the shoulder season. The developer wants to proceed. What is your recommendation?</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0, [{good:false},{good:false},{good:true}], 'dec-reveal-1')">
+                <span class="c-d-icon">A</span>
+                <span>Accept the condition. The projected annual DSCR is 1.68x — well above the threshold. This is a non-issue.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1, [{good:false},{good:false},{good:true}], 'dec-reveal-1')">
+                <span class="c-d-icon">B</span>
+                <span>Reject the condition entirely. Cash sweeps are unacceptable and will destroy operating flexibility.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2, [{good:false},{good:false},{good:true}], 'dec-reveal-1')">
+                <span class="c-d-icon">C</span>
+                <span>Counter-propose: accept the covenant but negotiate annual (not quarterly) DSCR testing, given the hotel's seasonal pattern.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-reveal-1">
+              <strong>C is the right move.</strong> Annual DSCR of 1.68x is healthy, but quarterly testing on a seasonal luxury hotel is a real operational risk. A Q1 shoulder season could routinely breach 1.25x even if the full-year number is fine — triggering a cash sweep that starves hotel operations precisely when the hotel is preparing for peak season. Counter-proposing annual testing is a reasonable, market-standard ask that protects operations without walking away from the loan. Accepting quarterly testing without pushback (A) is a genuine structuring error. Rejecting entirely (B) risks losing the deal over a negotiable point.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Adjust the assumptions. See how the economics move.",
+          render: () => `
+            <p>The base case has stabilized NOI of <strong>$7.0M</strong> and an exit cap rate of <strong>6.25%</strong>. Move the sliders to see how LP IRR and GP promote change.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row">
+                <div class="c-slider-label">Stabilized NOI</div>
+                <input type="range" class="c-range" id="sl-noi" min="4.5" max="9.0" step="0.1" value="7.0">
+                <div class="c-slider-val" id="v-noi">$7.0M</div>
+              </div>
+              <div class="c-slider-row">
+                <div class="c-slider-label">Exit cap rate</div>
+                <input type="range" class="c-range" id="sl-cap" min="5.25" max="8.0" step="0.25" value="6.25">
+                <div class="c-slider-val" id="v-cap">6.25%</div>
+              </div>
+              <div class="c-slider-row">
+                <div class="c-slider-label">Hold period (years)</div>
+                <input type="range" class="c-range" id="sl-hold" min="3" max="8" step="1" value="5">
+                <div class="c-slider-val" id="v-hold">5 yrs</div>
+              </div>
+            </div>
+            <div class="c-output-grid" id="build-output"></div>
+            <div id="build-note" style="font-size:12px;color:var(--muted);margin-top:12px;font-family:'IBM Plex Mono',monospace"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish →</button></div>`,
+          init: () => {
+            const update = () => {
+              const noi = parseFloat(document.getElementById('sl-noi').value);
+              const cap = parseFloat(document.getElementById('sl-cap').value) / 100;
+              const hold = parseInt(document.getElementById('sl-hold').value);
+              document.getElementById('v-noi').textContent = '$' + noi.toFixed(1) + 'M';
+              document.getElementById('v-cap').textContent = (cap*100).toFixed(2) + '%';
+              document.getElementById('v-hold').textContent = hold + ' yrs';
+
+              const exitVal = noi / cap;
+              const debt = 42.2;
+              const lpEq = 22.0, gpEq = 3.8, totalEq = 25.8;
+              const equityProceeds = exitVal - debt;
+              const accrPref = lpEq * 0.08 * hold;
+              const afterCapital = equityProceeds - totalEq;
+              const afterPref = afterCapital - accrPref;
+              const gpPromote = afterPref > 0 ? afterPref * 0.20 : 0;
+              const lpTotal = lpEq + accrPref + (afterPref > 0 ? afterPref * 0.80 : Math.max(afterPref, 0));
+              const lpEM = lpTotal / lpEq;
+
+              // Rough IRR approximation (CAGR-based)
+              const lpIRR = lpEM > 0 ? (Math.pow(lpEM, 1/hold) - 1) * 100 : 0;
+              const hitsHurdle = lpIRR >= 12;
+
+              const emClass = lpEM >= 2.0 ? 'good' : lpEM >= 1.5 ? 'warn' : 'bad';
+              const irrClass = lpIRR >= 15 ? 'good' : lpIRR >= 10 ? 'warn' : 'bad';
+              const promoteClass = gpPromote > 2 ? 'good' : gpPromote > 0 ? 'warn' : 'bad';
+
+              document.getElementById('build-output').innerHTML = `
+                <div class="c-metric"><div class="c-metric-label">Exit Value</div><div class="c-metric-val">$${exitVal.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">LP Equity Multiple</div><div class="c-metric-val ${emClass}">${lpEM.toFixed(2)}x</div></div>
+                <div class="c-metric"><div class="c-metric-label">LP IRR (approx)</div><div class="c-metric-val ${irrClass}">${lpIRR.toFixed(1)}%</div></div>
+                <div class="c-metric"><div class="c-metric-label">Accrued LP Pref</div><div class="c-metric-val">$${accrPref.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">GP Promote</div><div class="c-metric-val ${promoteClass}">$${gpPromote.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">Hurdle Cleared?</div><div class="c-metric-val ${hitsHurdle ? 'good' : 'bad'}">${hitsHurdle ? 'Yes' : 'No'}</div></div>`;
+
+              document.getElementById('build-note').textContent = hitsHurdle
+                ? 'GP promote is in play. LP IRR clears the 12% hurdle.'
+                : 'LP IRR below 12% hurdle. GP earns no promote — only co-invest return.';
+            };
+            ['sl-noi','sl-cap','sl-hold'].forEach(id => {
+              document.getElementById(id).addEventListener('input', update);
+            });
+            update();
+          }
+        }
+      ]
     },
     senior: {
       name: "Rosewood Residences — Los Cabos",
@@ -784,8 +1119,157 @@ const SCENARIOS = {
         "Walk me through the waterfall": `<h3>Waterfall — Rosewood Residences Los Cabos (Base Case)</h3><p><strong>Total distributions at exit:</strong> $255M project value less $107M senior payoff less $30.8M mezz payoff = <strong>$117.2M to equity.</strong></p><p><strong>Tier 1 — Return of capital:</strong> LP $50M + GP $5.8M = $55.8M. Remaining: $61.4M.</p><p><strong>Tier 2 — Cumulative 9% pref on LP equity over 5-year total timeline:</strong> $50M × 9% × 5 years = $22.5M to LP. Remaining: $38.9M.</p><p><strong>Tier 3 — 80/20 split to 18% IRR hurdle:</strong> Profits in the 12–18% IRR band ≈ $22M. LP receives $17.6M, GP promote = $4.4M.</p><p><strong>Tier 4 — 70/30 above 18% IRR:</strong> Remaining ~$16.9M. LP receives $11.8M, GP promote = $5.1M.</p><p><strong>GP total:</strong> $5.8M co-invest + $4.4M + $5.1M = $15.3M on $5.8M invested = 2.6x EM. LP total: $50M + $22.5M + $17.6M + $11.8M = $101.9M on $50M = 2.04x EM.</p>`,
         "Stress-test the assumptions": `<h3>Stress Test — Rosewood Residences</h3><p><strong>Scenario 1 — 30% presale fallout:</strong> Contracted presale revenue drops from $42M to $29.4M. Remaining unsold units sell at stabilization over 18 months for $18M net (vs. $18M projected). Net residence proceeds = $47.4M vs. $60M projected. Shortfall = $12.6M. This may force a residential pricing discount or extended mezz carry — mezz balance grows another $2.5M. LP IRR drops from 20% to ~16.5%.</p><p><strong>Scenario 2 — Hotel NOI 20% below projection + 50bps cap expansion:</strong> Hotel NOI = $9.92M. Exit at 6.25% cap = $158.7M. Total project value = $158.7M + $60M residences = $218.7M. After debt payoff ($137.8M): equity = $80.9M. LP IRR drops to ~9.8% — below preferred return. GP earns no promote. Mezz lender is paid in full but barely.</p><p><strong>The intercreditor stress:</strong> If DSCR falls below 1.20x during shoulder season, the senior lender's cash sweep traps all hotel cash flow — starving the mezz lender of any current cash and forcing full reliance on the exit for mezz repayment. This is the classic mezz squeeze.</p>`,
         "Lender risk concerns": `<h3>Senior Lender Risk Analysis — $107M Construction Loan</h3><p><strong>Primary risk: Mexico cross-border complexity.</strong> The lender must navigate Mexican real estate law, ejido land issues (none here — verified clean title), and peso/dollar currency risk on construction costs. These require specialist underwriting and typically a Mexican legal opinion.</p><p><strong>Secondary risk: Mezz intercreditor.</strong> The lender must approve the $22.2M mezz structure. Key negotiated protections: (1) 90-day standstill before mezz can exercise remedies, (2) mezz purchase option at par protects senior, (3) no additional debt without senior consent.</p><p><strong>Operational risk:</strong> Rosewood management agreement — while prestigious — requires significant FF&E investment ($95K/key) and Rosewood's brand standards. Any deviation triggers cure periods that could delay completion and extend the loan.</p><p><strong>DSCR at stressed stabilization:</strong> Hotel NOI at 82% stress = $10.2M. Debt service on $107M at 8.5% IO = $9.1M. DSCR = 1.12x — below the 1.25x covenant. This is a real risk: the lender will likely require a $3M DSCR reserve holdback released only upon covenant compliance.</p>`,
-        "Explain the promote structure": `<h3>Tiered Promote Structure</h3><p>The GP earns a <strong>two-tier promote</strong> above a 9% cumulative preferred return:</p><p><strong>Tier 1 (12–18% IRR): 80/20 split.</strong> Standard institutional promote. For every dollar of profit in this band, GP earns $0.20. Estimated profits in this band: ~$22M → GP promote: $4.4M.</p><p><strong>Tier 2 (above 18% IRR): 70/30 split.</strong> Stepped-up promote for exceptional performance. For every dollar of profit above the 18% hurdle, GP earns $0.30. Estimated profits: ~$16.9M → GP promote: $5.1M.</p><p><strong>Why this structure benefits both parties:</strong> The LP gives the GP more upside incentive if the deal significantly outperforms (30% vs. 20% promote) — aligning GP motivation with LP outcomes at the high end. The LP retains 70% (vs. 80%) of exceptional profits as compensation for taking the risk. </p><p><strong>Vs. a flat 80/20 structure:</strong> On this deal, a flat 80/20 would give GP 20% of all ~$38.9M above-pref profits = $7.8M. The tiered structure gives GP $9.5M ($4.4M + $5.1M) — more by $1.7M. The tiered structure rewards the GP more in outperformance scenarios, but the LP gave that up knowingly in exchange for the GP co-investing $5.8M (a meaningful check).</p>`
-      }
+        "Explain the promote structure": `<h3>Tiered Promote Structure</h3><p>The GP earns a <strong>two-tier promote</strong> above a 9% cumulative preferred return:</p><p><strong>Tier 1 (12–18% IRR): 80/20 split.</strong> Standard institutional promote. For every dollar of profit in this band, GP earns $0.20. Estimated profits in this band: ~$22M → GP promote: $4.4M.</p><p><strong>Tier 2 (above 18% IRR): 70/30 split.</strong> Stepped-up promote for exceptional performance. For every dollar of profit above the 18% hurdle, GP earns $0.30. Estimated profits: ~$16.9M → GP promote: $5.1M.</p><p><strong>Vs. a flat 80/20 structure:</strong> On this deal, a flat 80/20 would give GP $7.8M promote. The tiered structure gives GP $9.5M — more by $1.7M. The LP gave that up knowingly in exchange for the GP co-investing $5.8M.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The mezz lender raised a concern about the intercreditor. Find the structural risk.",
+          render: () => `
+            <p>The senior lender has sent back the intercreditor term sheet with the following provisions marked up. One of these is a serious red flag for the mezz lender. Identify it and explain why.</p>
+            <table class="c-table">
+              <tr><th>Provision</th><th>Senior Lender Proposes</th></tr>
+              <tr><td>Cure right</td><td>Mezz lender may cure senior defaults</td></tr>
+              <tr><td>Standstill period</td><td>180 days before mezz can exercise remedies</td></tr>
+              <tr><td>Purchase option</td><td>Mezz lender may purchase senior loan at 110% of par</td></tr>
+              <tr><td>Transfer restrictions</td><td>No ownership transfer without both lender consents</td></tr>
+            </table>
+            <p>Which provision is problematic and why?</p>
+            <button class="btn-sec" onclick="revealAnswer('spot-s-1')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spot-s-1">
+              <strong>The purchase option at 110% of par is the red flag.</strong> Market standard is that the mezz lender can purchase the senior loan at par (100%) — giving them a realistic exit path in a default scenario. A 110% premium means the mezz lender must overpay to exercise the option, effectively eliminating it as a practical remedy. If the property is already in distress, paying above par for the senior loan makes no economic sense. This provision strips the mezz lender of their most important protection and should be rejected or negotiated back to par.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge →</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate the mezz PIK balance and its impact on equity proceeds.",
+          render: () => `
+            <p>The Rosewood mezz loan: <strong>$22.2M</strong> at <strong>13.5% PIK</strong> over <strong>36 months</strong>. No current pay — all interest accrues to the principal balance.</p>
+            <p>Complete the mezz payoff calculation at exit:</p>
+            <table class="c-table" id="mezz-blanks">
+              <tr><th>Item</th><th>Calculation</th><th>Answer</th></tr>
+              <tr><td>Annual PIK interest</td><td>$22.2M × 13.5%</td><td><span class="c-blank">?</span></td></tr>
+              <tr><td>Mezz balance at 36 months (simple)</td><td>$22.2M + (annual × 3)</td><td><span class="c-blank">?</span></td></tr>
+              <tr><td>Extra equity consumed vs. original mezz</td><td>Balance − $22.2M</td><td><span class="c-blank">?</span></td></tr>
+              <tr><td>Total debt at exit (senior + mezz)</td><td>$107M + balance</td><td><span class="c-blank">?</span></td></tr>
+              <tr><td>Equity proceeds (from $255M exit)</td><td>$255M − total debt</td><td><span class="c-blank">?</span></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mezz-blanks', [{label:'Annual PIK interest',val:'$3.0M'},{label:'Mezz balance at 36 months',val:'$31.2M'},{label:'Extra equity consumed',val:'$9.0M'},{label:'Total debt at exit',val:'$138.2M'},{label:'Equity proceeds',val:'$116.8M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "30% of presale contracts are at risk. How do you advise the developer?",
+          render: () => `
+            <p>It is month 14 of construction. The developer reports that 8 of the 24 branded residence purchasers (representing $16.8M in contracts) are requesting contract rescissions due to a change in their financial circumstances. The remaining presales are solid. The LP and mezz lender are both watching closely.</p>
+            <p>Senior lender requires presale coverage of at least 60% of residence value ($36M) to maintain loan compliance. Current contracted presales after rescissions: $25.2M — below threshold.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0, [{good:false},{good:false},{good:true}], 'dec-s-1')">
+                <span class="c-d-icon">A</span>
+                <span>Release the buyers. Offer refunds immediately to maintain goodwill and avoid litigation risk.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1, [{good:false},{good:false},{good:true}], 'dec-s-1')">
+                <span class="c-d-icon">B</span>
+                <span>Hold firm on all contracts. Enforce the purchase agreements — breach of contract remedies protect the deal.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2, [{good:false},{good:false},{good:true}], 'dec-s-1')">
+                <span class="c-d-icon">C</span>
+                <span>Engage the buyers individually — offer restructured terms (extended closing, price lock, small incentive) while proactively launching replacement sales to rebuild presale coverage above threshold.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-s-1">
+              <strong>C is the right approach.</strong> Immediately releasing buyers (A) creates a compliance breach with the senior lender and may trigger a loan event of default — potentially freezing construction draws. Blanket enforcement (B) risks litigation that delays closings further and generates bad press for a luxury brand-sensitive project. The correct move is dual-track: attempt to retain buyers through restructured terms while simultaneously launching targeted replacement sales. Proactive communication to the senior lender — before they discover the compliance issue — is also critical. Lenders respond better to problems disclosed early with a plan than to surprises.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Model the tiered waterfall. See where the promote thresholds break.",
+          render: () => `
+            <p>The Rosewood deal has a tiered promote: <strong>80/20 from 12–18% IRR</strong>, then <strong>70/30 above 18%</strong>. Total equity: <strong>$55.8M</strong> ($50M LP + $5.8M GP). Move the exit value slider and watch how the waterfall distributes — and exactly when the upper promote tier activates.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row">
+                <div class="c-slider-label">Total exit value</div>
+                <input type="range" class="c-range" id="sl-exit2" min="160" max="320" step="5" value="255">
+                <div class="c-slider-val" id="v-exit2">$255M</div>
+              </div>
+              <div class="c-slider-row">
+                <div class="c-slider-label">Hold period (years)</div>
+                <input type="range" class="c-range" id="sl-hold2" min="4" max="9" step="1" value="5">
+                <div class="c-slider-val" id="v-hold2">5 yrs</div>
+              </div>
+            </div>
+            <div class="c-output-grid" id="build2-output" style="grid-template-columns:repeat(3,1fr)"></div>
+            <div id="waterfall-detail" style="margin-top:14px;font-size:12px;font-family:'IBM Plex Mono',monospace;color:var(--muted);line-height:1.8"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish →</button></div>`,
+          init: () => {
+            const update = () => {
+              const exitVal = parseInt(document.getElementById('sl-exit2').value);
+              const hold = parseInt(document.getElementById('sl-hold2').value);
+              document.getElementById('v-exit2').textContent = '$' + exitVal + 'M';
+              document.getElementById('v-hold2').textContent = hold + ' yrs';
+
+              const seniorDebt = 107, mezzBase = 22.2, mezzRate = 0.135;
+              const mezzBalance = mezzBase * (1 + mezzRate * hold / 2); // approx PIK
+              const lpEq = 50, gpEq = 5.8, totalEq = 55.8;
+              const pref = 0.09;
+
+              const equityProceeds = exitVal - seniorDebt - mezzBalance;
+              if (equityProceeds <= 0) {
+                document.getElementById('build2-output').innerHTML = `<div class="c-metric" style="grid-column:span 3"><div class="c-metric-label">Equity Proceeds</div><div class="c-metric-val bad">$${equityProceeds.toFixed(1)}M — debt exceeds exit value</div></div>`;
+                document.getElementById('waterfall-detail').textContent = 'Exit value insufficient to repay all debt. Equity is wiped out.';
+                return;
+              }
+
+              const afterCapital = equityProceeds - totalEq;
+              const accrPref = lpEq * pref * hold;
+              const afterPref = afterCapital - accrPref;
+              let gpPromote1 = 0, gpPromote2 = 0, lpAbove = 0;
+
+              if (afterPref > 0) {
+                // Rough tier split: assume 60% of above-pref is in 12-18% band, rest above 18%
+                const lpEM = equityProceeds / totalEq;
+                const approxIRR = (Math.pow(lpEM * lpEq / lpEq, 1/hold) - 1) * 100;
+                if (approxIRR >= 18) {
+                  const tier1 = afterPref * 0.55;
+                  const tier2 = afterPref * 0.45;
+                  gpPromote1 = tier1 * 0.20;
+                  gpPromote2 = tier2 * 0.30;
+                  lpAbove = tier1 * 0.80 + tier2 * 0.70;
+                } else {
+                  gpPromote1 = afterPref * 0.20;
+                  lpAbove = afterPref * 0.80;
+                }
+              }
+
+              const gpTotal = gpEq + gpPromote1 + gpPromote2;
+              const lpTotal = lpEq + accrPref + lpAbove;
+              const lpEM = lpTotal / lpEq;
+              const lpIRR = lpEM > 0 ? (Math.pow(lpEM, 1/hold) - 1) * 100 : 0;
+              const tier2Active = lpIRR >= 18;
+
+              document.getElementById('build2-output').innerHTML = `
+                <div class="c-metric"><div class="c-metric-label">Equity Proceeds</div><div class="c-metric-val">$${equityProceeds.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">LP IRR (approx)</div><div class="c-metric-val ${lpIRR>=18?'good':lpIRR>=12?'warn':'bad'}">${lpIRR.toFixed(1)}%</div></div>
+                <div class="c-metric"><div class="c-metric-label">Tier 2 Active?</div><div class="c-metric-val ${tier2Active?'good':'warn'}">${tier2Active?'Yes (70/30)':'No (80/20)'}</div></div>
+                <div class="c-metric"><div class="c-metric-label">GP Tier 1 Promote</div><div class="c-metric-val">$${gpPromote1.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">GP Tier 2 Promote</div><div class="c-metric-val ${tier2Active?'good':'warn'}">$${gpPromote2.toFixed(1)}M</div></div>
+                <div class="c-metric"><div class="c-metric-label">GP Total</div><div class="c-metric-val">$${gpTotal.toFixed(1)}M</div></div>`;
+
+              document.getElementById('waterfall-detail').innerHTML =
+                `Mezz payoff at exit: ~$${mezzBalance.toFixed(1)}M (PIK accrual included)<br>` +
+                `Accrued LP pref (${hold} yrs): $${accrPref.toFixed(1)}M<br>` +
+                (tier2Active ? `18% IRR threshold crossed — upper promote tier (70/30) activated` : `Below 18% IRR — only lower promote tier (80/20) applies`);
+            };
+            ['sl-exit2','sl-hold2'].forEach(id => {
+              document.getElementById(id).addEventListener('input', update);
+            });
+            update();
+          }
+        }
+      ]
     }
   }
 };
@@ -872,13 +1356,20 @@ function renderTopics() {
   const mod = MODULES[currentMod];
   document.getElementById('topic-section-label').textContent = mod.label + ' — choose a topic';
   const grid = document.getElementById('topic-grid');
-  grid.innerHTML = mod.topics.map(t => {
+  grid.innerHTML = mod.topics.map((t, i) => {
     const isDone = completedTopics.has(t);
     const hasLesson = !!LESSONS[t];
-    return `<button class="topic-btn${isDone ? ' done' : ''}" onclick="openLesson('${t.replace(/'/g, "\\'")}')" ${!hasLesson ? 'style="opacity:0.5"' : ''}>
+    return `<button class="topic-btn${isDone ? ' done' : ''}" data-mod="${currentMod}" data-idx="${i}" ${!hasLesson ? 'style="opacity:0.5"' : ''}>
       <span>${t}</span><span class="t-arr">→</span>
     </button>`;
   }).join('');
+  grid.querySelectorAll('.topic-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const mod = parseInt(this.dataset.mod);
+      const idx = parseInt(this.dataset.idx);
+      openLesson(MODULES[mod].topics[idx]);
+    });
+  });
 }
 
 // ─── LESSONS ──────────────────────────────────────────────────────────────────
@@ -994,6 +1485,9 @@ function retakeQuiz() {
 }
 
 // ─── SCENARIOS ─────────────────────────────────────────────────────────────────
+let activeScenario = null;
+let challengeStep = 0;
+
 function setDiff(diff, btn) {
   currentScenarioDiff = diff;
   document.querySelectorAll('.diff-pill').forEach(b => b.classList.remove('active'));
@@ -1004,38 +1498,141 @@ function loadScenario() {
   currentScenarioType = document.getElementById('sc-type').value;
   const scData = SCENARIOS[currentScenarioType];
   if (!scData) {
-    document.getElementById('scenario-output').innerHTML = `<div class="scenario-box"><p>Scenario for this deal type coming soon. Try Hotel or Resort.</p></div>`;
+    document.getElementById('scenario-output').innerHTML = `<div class="scenario-box"><p>Scenario coming soon. Try Hotel.</p></div>`;
     return;
   }
   const diff = currentScenarioDiff === 'senior' ? 'senior' : 'intro';
-  const sc = scData[diff] || scData['intro'];
-  currentScenarioLoaded = true;
-
-  const qaKeys = Object.keys(sc.qa);
-  const qaButtons = qaKeys.map(k => `<button class="qa-btn" onclick="loadScenarioQA('${currentScenarioType}','${diff}','${k.replace(/'/g, "\\'")}')">${k} →</button>`).join('');
+  activeScenario = scData[diff] || scData['intro'];
 
   document.getElementById('scenario-output').innerHTML = `
-    <div class="scenario-box">${sc.html}</div>
-    <div class="scenario-qa">
-      <div class="sec-lbl">Drill into the deal</div>
-      <div class="qa-btn-grid">${qaButtons}</div>
-      <div id="qa-answer-box"></div>
+    <div class="scenario-box">${activeScenario.html}</div>
+    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
+    <div class="sec-lbl">How do you want to work through this deal?</div>
+    <div class="sc-path-choice">
+      <button class="sc-path-btn" id="path-explain">
+        <div class="sc-path-tag">Explainer mode</div>
+        <div class="sc-path-title">Explain it to me</div>
+        <div class="sc-path-sub">Walk me through waterfall, lender risk, stress test, and promote mechanics</div>
+      </button>
+      <button class="sc-path-btn" id="path-work">
+        <div class="sc-path-tag">Active mode</div>
+        <div class="sc-path-title">Let me work through it</div>
+        <div class="sc-path-sub">Four interactive challenges: spot, fill, decide, and build</div>
+      </button>
+    </div>
+    <div id="path-content"></div>`;
+
+  document.getElementById('path-explain').addEventListener('click', () => showExplainerMode());
+  document.getElementById('path-work').addEventListener('click', () => showChallengeMode());
+}
+
+function showExplainerMode() {
+  document.getElementById('path-explain').style.background = 'var(--deep)';
+  document.getElementById('path-explain').querySelectorAll('.sc-path-title,.sc-path-sub,.sc-path-tag').forEach(el => el.style.color = 'var(--paper)');
+  document.getElementById('path-work').style.background = '';
+  document.getElementById('path-work').querySelectorAll('.sc-path-title,.sc-path-sub').forEach(el => el.style.color = '');
+
+  const sc = activeScenario;
+  const qaKeys = Object.keys(sc.qa);
+  const qaButtons = qaKeys.map((k, i) => `<button class="qa-btn" data-qi="${i}">${k} →</button>`).join('');
+  document.getElementById('path-content').innerHTML = `
+    <div class="sec-lbl" style="margin-top:4px">Choose a question</div>
+    <div class="qa-btn-grid">${qaButtons}</div>
+    <div id="qa-answer-box"></div>`;
+
+  document.querySelectorAll('.qa-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const key = qaKeys[parseInt(this.dataset.qi)];
+      document.querySelectorAll('.qa-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('qa-answer-box').innerHTML = `
+        <div class="sec-lbl" style="margin-top:16px">${key}</div>
+        <div class="qa-answer">${activeScenario.qa[key]}</div>`;
+      document.getElementById('qa-answer-box').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
+function showChallengeMode() {
+  document.getElementById('path-work').style.background = 'var(--deep)';
+  document.getElementById('path-work').querySelectorAll('.sc-path-title,.sc-path-sub,.sc-path-tag').forEach(el => el.style.color = 'var(--paper)');
+  document.getElementById('path-explain').style.background = '';
+  document.getElementById('path-explain').querySelectorAll('.sc-path-title,.sc-path-sub').forEach(el => el.style.color = '');
+  challengeStep = 0;
+  renderChallenge();
+}
+
+function renderChallenge() {
+  const sc = activeScenario;
+  const challenges = sc.challenges;
+  const c = challenges[challengeStep];
+  const total = challenges.length;
+
+  const dots = challenges.map((_, i) => `<div class="c-step-dot${i === challengeStep ? ' active' : i < challengeStep ? ' done' : ''}"></div>`).join('');
+
+  document.getElementById('path-content').innerHTML = `
+    <div class="challenge-wrap">
+      <div class="challenge-hdr">
+        <div class="challenge-tag">${c.type}</div>
+        <div class="challenge-title">${c.title}</div>
+      </div>
+      <div class="challenge-body" id="challenge-body">${c.render()}</div>
+      <div class="c-step-nav">
+        <div class="c-step-dots">${dots}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)">${challengeStep + 1} / ${total}</div>
+      </div>
     </div>`;
+
+  if (c.init) c.init();
 }
 
-function loadScenarioQA(type, diff, key) {
-  const sc = SCENARIOS[type][diff] || SCENARIOS[type]['intro'];
-  const answer = sc.qa[key];
-  if (!answer) return;
-
-  document.querySelectorAll('.qa-btn').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-
-  document.getElementById('qa-answer-box').innerHTML = `
-    <div class="sec-lbl" style="margin-top:16px">${key}</div>
-    <div class="qa-answer">${answer}</div>`;
-  document.getElementById('qa-answer-box').scrollIntoView({ behavior: 'smooth' });
+function nextChallenge() {
+  challengeStep++;
+  if (challengeStep < activeScenario.challenges.length) {
+    renderChallenge();
+    document.getElementById('path-content').scrollIntoView({ behavior: 'smooth' });
+  } else {
+    document.getElementById('path-content').innerHTML += `
+      <div class="content-box" style="margin-top:12px;text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px">All four challenges complete.</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px">You have analysed this deal from every angle. Try the Senior difficulty for a more complex version.</div>
+        <button class="btn-primary" onclick="loadScenario()">Generate a new scenario →</button>
+      </div>`;
+  }
 }
+
+function revealAnswer(id) {
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('show'); }
+  const btn = document.querySelector('[onclick="revealAnswer(\'' + id + '\')"]');
+  if (btn) btn.style.display = 'none';
+}
+
+function checkBlanks(id, answers, nextLabel) {
+  const inputs = document.querySelectorAll('.c-input');
+  let html = '<div class="c-reveal show"><strong>Answers:</strong><br>';
+  answers.forEach((a, i) => { html += `<strong>${a.label}:</strong> ${a.val}<br>`; });
+  html += '</div>';
+  document.getElementById(id).innerHTML += html;
+  document.getElementById(id).innerHTML += `<div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">${nextLabel || 'Next challenge →'}</button></div>`;
+  inputs.forEach(inp => inp.disabled = true);
+}
+
+function pickDecision(chosen, options, revealId) {
+  document.querySelectorAll('.c-decision-btn').forEach(b => b.classList.add('locked'));
+  options.forEach((opt, i) => {
+    const btn = document.querySelectorAll('.c-decision-btn')[i];
+    if (i === chosen) {
+      btn.classList.add(opt.good ? 'chosen-good' : 'chosen-bad');
+    }
+  });
+  document.getElementById(revealId).classList.add('show');
+  setTimeout(() => {
+    const body = document.getElementById('challenge-body');
+    body.innerHTML += `<div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge →</button></div>`;
+  }, 100);
+}
+
 
 // ─── GLOSSARY ──────────────────────────────────────────────────────────────────
 function showGloss(key) {
@@ -1060,5 +1657,6 @@ function showGloss(key) {
 renderTopics();
 showGloss('formulas');
 </script>
+
 </body>
 </html>
