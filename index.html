@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -36,25 +35,25 @@ body { font-family: 'Josefin Sans', sans-serif; background: var(--bg); color: va
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px 100px; }
 
 /* HEADER */
-header { padding: 44px 0 32px; border-bottom: 1px solid var(–border); margin-bottom: 40px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
-.logo { font-family: ‘Josefin Sans’, sans-serif; font-size: 20px; font-weight: 100; letter-spacing: 0.38em; text-transform: uppercase; color: var(–ink); }
-.logo em { color: var(–taupe); font-style: normal; }
-.tagline { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; color: var(–muted); letter-spacing: 0.14em; text-transform: uppercase; }
+header { padding: 44px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.logo { font-family: 'Josefin Sans', sans-serif; font-size: 20px; font-weight: 100; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink); }
+.logo em { color: var(--taupe); font-style: normal; }
+.tagline { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
 
 /* TABS */
-.tabs { display: flex; border: 1px solid var(–border); margin-bottom: 40px; }
-.tab-btn { flex: 1; padding: 18px 10px; background: var(–surface); border: none; border-right: 1px solid var(–border); cursor: pointer; text-align: center; transition: background 0.18s; }
+.tabs { display: flex; border: 1px solid var(--border); margin-bottom: 40px; }
+.tab-btn { flex: 1; padding: 18px 10px; background: var(--surface); border: none; border-right: 1px solid var(--border); cursor: pointer; text-align: center; transition: background 0.18s; }
 .tab-btn:last-child { border-right: none; }
-.tab-btn:hover { background: var(–surface2); }
-.tab-btn:active { background: var(–taupe); }
-.tab-btn:active .t-lbl, .tab-btn:active .t-num, .tab-btn:active .t-sub { color: var(–cream); }
-.tab-btn.active { background: var(–ink); }
-.tab-btn.active .t-lbl { color: var(–cream); }
-.tab-btn.active .t-num { color: var(–taupe-lt); }
+.tab-btn:hover { background: var(--surface2); }
+.tab-btn:active { background: var(--taupe); }
+.tab-btn:active .t-lbl, .tab-btn:active .t-num, .tab-btn:active .t-sub { color: var(--cream); }
+.tab-btn.active { background: var(--ink); }
+.tab-btn.active .t-lbl { color: var(--cream); }
+.tab-btn.active .t-num { color: var(--taupe-lt); }
 .tab-btn.active .t-sub { color: rgba(229,225,215,0.5); }
-.t-num { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(–taupe); margin-bottom: 4px; transition: color 0.18s; }
-.t-lbl { font-family: ‘Josefin Sans’, sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(–ink2); transition: color 0.18s; }
-.t-sub { font-size: 10px; color: var(–muted); margin-top: 3px; letter-spacing: 0.06em; transition: color 0.18s; }
+.t-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin-bottom: 4px; transition: color 0.18s; }
+.t-lbl { font-family: 'Josefin Sans', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink2); transition: color 0.18s; }
+.t-sub { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.06em; transition: color 0.18s; }
 
 /* PANELS */
 .panel { display: none; }
@@ -62,234 +61,233 @@ header { padding: 44px 0 32px; border-bottom: 1px solid var(–border); margin-b
 @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
 /* SEC LABEL */
-.sec-lbl { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(–muted); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(–border); }
+.sec-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
 
 /* MODULE GRID */
-.mod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(–border); border: 1px solid var(–border); margin-bottom: 32px; }
-.mod-btn { background: var(–surface); border: none; padding: 18px 16px; cursor: pointer; text-align: left; transition: background 0.15s; }
-.mod-btn:hover { background: var(–bg); }
-.mod-btn:active { background: var(–taupe); }
-.mod-btn:active .mod-name { color: var(–cream); }
-.mod-btn.active { background: var(–choc); }
+.mod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 32px; }
+.mod-btn { background: var(--surface); border: none; padding: 18px 16px; cursor: pointer; text-align: left; transition: background 0.15s; }
+.mod-btn:hover { background: var(--bg); }
+.mod-btn:active { background: var(--taupe); }
+.mod-btn:active .mod-name { color: var(--cream); }
+.mod-btn.active { background: var(--choc); }
 .mod-btn.active .mod-num { color: rgba(229,225,215,0.5); }
-.mod-btn.active .mod-name { color: var(–cream); }
-.mod-num { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(–taupe); margin-bottom: 5px; }
-.mod-name { font-family: ‘Josefin Sans’, sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; color: var(–ink2); line-height: 1.4; }
+.mod-btn.active .mod-name { color: var(--cream); }
+.mod-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin-bottom: 5px; }
+.mod-name { font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); line-height: 1.4; }
 
 /* TOPIC GRID */
 .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-bottom: 32px; }
-.topic-btn { background: var(–surface); border: 1px solid var(–border); padding: 14px 16px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: ‘Josefin Sans’, sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.04em; color: var(–ink2); text-align: left; transition: all 0.15s; }
-.topic-btn:hover { background: var(–taupe); color: var(–cream); border-color: var(–taupe); }
-.topic-btn:active { background: var(–choc); color: var(–cream); border-color: var(–choc); transform: scale(0.99); }
-.topic-btn:hover .t-arr { color: var(–cream); }
-.topic-btn.done { border-left: 3px solid var(–taupe); }
-.topic-btn.done::after { content: ‘✓’; color: var(–taupe); margin-left: 4px; font-size: 11px; }
-.t-arr { flex-shrink: 0; font-size: 14px; color: var(–border2); transition: color 0.15s; }
+.topic-btn { background: var(--surface); border: 1px solid var(--border); padding: 14px 16px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: 'Josefin Sans', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.04em; color: var(--ink2); text-align: left; transition: all 0.15s; }
+.topic-btn:hover { background: var(--taupe); color: var(--cream); border-color: var(--taupe); }
+.topic-btn:active { background: var(--choc); color: var(--cream); border-color: var(--choc); transform: scale(0.99); }
+.topic-btn:hover .t-arr { color: var(--cream); }
+.topic-btn.done { border-left: 3px solid var(--taupe); }
+.topic-btn.done::after { content: '✓'; color: var(--taupe); margin-left: 4px; font-size: 11px; }
+.t-arr { flex-shrink: 0; font-size: 14px; color: var(--border2); transition: color 0.15s; }
 
 /* LESSON VIEW */
 .lesson-view { display: none; }
 .lesson-view.active { display: block; animation: fadeUp 0.25s ease; }
-.lesson-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(–border); }
-.lesson-title { font-family: ‘Cormorant Garamond’, serif; font-size: 28px; font-weight: 300; line-height: 1.25; color: var(–ink); letter-spacing: 0.01em; }
-.back-btn { background: none; border: 1px solid var(–border); padding: 9px 16px; font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; cursor: pointer; color: var(–muted); letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
-.back-btn:hover { border-color: var(–taupe); color: var(–taupe); }
-.back-btn:active { background: var(–taupe); color: var(–cream); border-color: var(–taupe); }
+.lesson-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.lesson-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1.25; color: var(--ink); letter-spacing: 0.01em; }
+.back-btn { background: none; border: 1px solid var(--border); padding: 9px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; cursor: pointer; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+.back-btn:hover { border-color: var(--taupe); color: var(--taupe); }
+.back-btn:active { background: var(--taupe); color: var(--cream); border-color: var(--taupe); }
 
 /* CONTENT */
-.content-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.85; font-size: 14px; font-weight: 300; color: var(–ink2); }
-.content-box h2 { font-family: ‘Cormorant Garamond’, serif; font-size: 20px; font-weight: 400; margin: 26px 0 10px; color: var(–ink); letter-spacing: 0.02em; }
+.content-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.85; font-size: 14px; font-weight: 300; color: var(--ink2); }
+.content-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin: 26px 0 10px; color: var(--ink); letter-spacing: 0.02em; }
 .content-box h2:first-child { margin-top: 0; }
-.content-box h3 { font-family: ‘Josefin Sans’, sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; margin: 20px 0 8px; color: var(–taupe); }
+.content-box h3 { font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; margin: 20px 0 8px; color: var(--taupe); }
 .content-box p { margin-bottom: 14px; }
 .content-box ul, .content-box ol { margin: 8px 0 14px 20px; }
 .content-box li { margin-bottom: 7px; }
-.content-box strong { font-weight: 400; color: var(–ink); }
-.formula { font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; background: var(–surface); border-left: 3px solid var(–taupe); padding: 14px 18px; margin: 16px 0; display: block; color: var(–ink); line-height: 1.7; }
-.callout { background: var(–surface); border: 1px solid var(–border); border-left: 3px solid var(–choc); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(–muted); }
-.callout strong { color: var(–choc); font-weight: 400; }
+.content-box strong { font-weight: 400; color: var(--ink); }
+.formula { font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: var(--surface); border-left: 3px solid var(--taupe); padding: 14px 18px; margin: 16px 0; display: block; color: var(--ink); line-height: 1.7; }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--choc); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--muted); }
+.callout strong { color: var(--choc); font-weight: 400; }
 .table-wrap { overflow-x: auto; margin: 16px 0; }
 .content-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.content-box th { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); padding: 9px 12px; border-bottom: 1px solid var(–border); text-align: left; }
-.content-box td { padding: 9px 12px; border-bottom: 1px solid var(–border); color: var(–ink2); }
+.content-box th { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+.content-box td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--ink2); }
 .content-box tr:last-child td { border-bottom: none; }
 
 /* ACTIONS */
 .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-.btn-primary { padding: 12px 24px; background: var(–taupe); border: 1px solid var(–taupe); color: var(–cream); font-family: ‘Josefin Sans’, sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; font-weight: 400; }
-.btn-primary:hover { background: var(–choc); border-color: var(–choc); }
-.btn-primary:active { background: var(–brick); border-color: var(–brick); transform: scale(0.98); }
-.btn-sec { padding: 12px 20px; background: transparent; border: 1px solid var(–border); color: var(–ink2); font-family: ‘Josefin Sans’, sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; font-weight: 300; }
-.btn-sec:hover { border-color: var(–taupe); color: var(–taupe); }
-.btn-sec:active { background: var(–taupe); color: var(–cream); border-color: var(–taupe); transform: scale(0.98); }
+.btn-primary { padding: 12px 24px; background: var(--taupe); border: 1px solid var(--taupe); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; font-weight: 400; }
+.btn-primary:hover { background: var(--choc); border-color: var(--choc); }
+.btn-primary:active { background: var(--brick); border-color: var(--brick); transform: scale(0.98); }
+.btn-sec { padding: 12px 20px; background: transparent; border: 1px solid var(--border); color: var(--ink2); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; font-weight: 300; }
+.btn-sec:hover { border-color: var(--taupe); color: var(--taupe); }
+.btn-sec:active { background: var(--taupe); color: var(--cream); border-color: var(--taupe); transform: scale(0.98); }
 
 /* QUIZ */
 .quiz-section { margin-top: 8px; }
-.quiz-hdr { background: var(–ink); padding: 22px 26px; font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 300; color: var(–cream); line-height: 1.55; font-style: italic; }
-.quiz-opts { background: var(–cream); border: 1px solid var(–border); border-top: none; }
-.quiz-opt { padding: 14px 22px; border-bottom: 1px solid var(–border); cursor: pointer; display: flex; gap: 14px; font-size: 13px; font-weight: 300; transition: background 0.13s; color: var(–ink2); }
+.quiz-hdr { background: var(--ink); padding: 22px 26px; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--cream); line-height: 1.55; font-style: italic; }
+.quiz-opts { background: var(--cream); border: 1px solid var(--border); border-top: none; }
+.quiz-opt { padding: 14px 22px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; gap: 14px; font-size: 13px; font-weight: 300; transition: background 0.13s; color: var(--ink2); }
 .quiz-opt:last-child { border-bottom: none; }
-.quiz-opt:hover:not(.locked) { background: var(–surface); }
-.quiz-opt:active:not(.locked) { background: var(–surface2); }
-.quiz-opt.correct { background: var(–green-bg); border-left: 3px solid var(–green); color: var(–ink); }
-.quiz-opt.wrong { background: var(–red-bg); border-left: 3px solid var(–red); color: var(–ink2); }
+.quiz-opt:hover:not(.locked) { background: var(--surface); }
+.quiz-opt:active:not(.locked) { background: var(--surface2); }
+.quiz-opt.correct { background: var(--green-bg); border-left: 3px solid var(--green); color: var(--ink); }
+.quiz-opt.wrong { background: var(--red-bg); border-left: 3px solid var(--red); color: var(--ink2); }
 .quiz-opt.locked { cursor: default; }
-.opt-letter { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; font-weight: 400; color: var(–taupe); min-width: 18px; padding-top: 2px; flex-shrink: 0; letter-spacing: 0.06em; }
-.quiz-exp { background: var(–bg); border: 1px solid var(–border); border-top: none; padding: 16px 24px; font-size: 13px; font-weight: 300; line-height: 1.75; color: var(–muted); }
-.quiz-exp strong { font-weight: 400; color: var(–ink2); }
-.quiz-meta { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; color: var(–muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
-.score-box { display: inline-flex; align-items: center; gap: 20px; background: var(–ink); padding: 20px 28px; margin-bottom: 20px; }
-.score-num { font-family: ‘Cormorant Garamond’, serif; font-size: 44px; font-weight: 300; color: var(–taupe-lt); line-height: 1; }
-.score-msg { color: var(–cream); font-size: 14px; font-weight: 300; letter-spacing: 0.04em; }
+.opt-letter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; color: var(--taupe); min-width: 18px; padding-top: 2px; flex-shrink: 0; letter-spacing: 0.06em; }
+.quiz-exp { background: var(--bg); border: 1px solid var(--border); border-top: none; padding: 16px 24px; font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--muted); }
+.quiz-exp strong { font-weight: 400; color: var(--ink2); }
+.quiz-meta { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.score-box { display: inline-flex; align-items: center; gap: 20px; background: var(--ink); padding: 20px 28px; margin-bottom: 20px; }
+.score-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: var(--taupe-lt); line-height: 1; }
+.score-msg { color: var(--cream); font-size: 14px; font-weight: 300; letter-spacing: 0.04em; }
 
 /* PROGRESS */
 .progress-wrap { margin-bottom: 22px; }
-.progress-lbl { display: flex; justify-content: space-between; font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; color: var(–muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-.progress-track { height: 1px; background: var(–border); }
-.progress-fill { height: 100%; background: var(–taupe); transition: width 0.5s ease; }
+.progress-lbl { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.progress-track { height: 1px; background: var(--border); }
+.progress-fill { height: 100%; background: var(--taupe); transition: width 0.5s ease; }
 
 /* SCENARIOS */
 .sc-controls { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 24px; }
-.sc-field label { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(–muted); display: block; margin-bottom: 7px; }
-select { font-family: ‘Josefin Sans’, sans-serif; font-size: 13px; font-weight: 300; color: var(–ink); background: var(–cream); border: 1px solid var(–border); padding: 10px 12px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’%3E%3Cpath d=‘M0 0l5 6 5-6z’ fill=’%237a7060’/%3E%3C/svg%3E”); background-repeat: no-repeat; background-position: right 12px center; padding-right: 28px; }
-select:focus { outline: 1px solid var(–taupe); }
+.sc-field label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 7px; }
+select { font-family: 'Josefin Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--ink); background: var(--cream); border: 1px solid var(--border); padding: 10px 12px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a7060'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 28px; }
+select:focus { outline: 1px solid var(--taupe); }
 .diff-pills { display: flex; gap: 6px; }
-.diff-pill { padding: 9px 16px; border: 1px solid var(–border); background: var(–surface); font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(–muted); transition: all 0.15s; }
-.diff-pill:hover { border-color: var(–taupe); color: var(–taupe); }
-.diff-pill:active { background: var(–taupe); color: var(–cream); border-color: var(–taupe); }
-.diff-pill.active { background: var(–choc); color: var(–cream); border-color: var(–choc); }
-.scenario-box { background: var(–cream); border: 1px solid var(–border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.85; font-size: 14px; font-weight: 300; overflow-x: auto; color: var(–ink2); }
-.scenario-box h2 { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 400; margin: 22px 0 8px; color: var(–ink); }
+.diff-pill { padding: 9px 16px; border: 1px solid var(--border); background: var(--surface); font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+.diff-pill:hover { border-color: var(--taupe); color: var(--taupe); }
+.diff-pill:active { background: var(--taupe); color: var(--cream); border-color: var(--taupe); }
+.diff-pill.active { background: var(--choc); color: var(--cream); border-color: var(--choc); }
+.scenario-box { background: var(--cream); border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; line-height: 1.85; font-size: 14px; font-weight: 300; overflow-x: auto; color: var(--ink2); }
+.scenario-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin: 22px 0 8px; color: var(--ink); }
 .scenario-box h2:first-child { margin-top: 0; }
 .scenario-box p { margin-bottom: 10px; }
 .scenario-box ul { margin: 6px 0 10px 20px; }
 .scenario-box li { margin-bottom: 5px; }
-.scenario-box strong { font-weight: 400; color: var(–ink); }
+.scenario-box strong { font-weight: 400; color: var(--ink); }
 .scenario-qa { margin-top: 8px; }
 .qa-btn-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-bottom: 16px; }
-.qa-btn { background: var(–surface); border: 1px solid var(–border); padding: 13px 16px; cursor: pointer; font-family: ‘Josefin Sans’, sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: var(–ink2); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.15s; }
-.qa-btn:hover { background: var(–surface2); border-color: var(–taupe); color: var(–taupe); }
-.qa-btn:active { background: var(–taupe); color: var(–cream); border-color: var(–taupe); }
-.qa-btn.active { background: var(–choc); color: var(–cream); border-color: var(–choc); }
-.qa-answer { background: var(–cream); border: 1px solid var(–border); padding: 24px 28px; line-height: 1.85; font-size: 14px; font-weight: 300; color: var(–ink2); }
-.qa-answer h3 { font-family: ‘Josefin Sans’, sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(–taupe); margin: 16px 0 7px; }
+.qa-btn { background: var(--surface); border: 1px solid var(--border); padding: 13px 16px; cursor: pointer; font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: var(--ink2); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.15s; }
+.qa-btn:hover { background: var(--surface2); border-color: var(--taupe); color: var(--taupe); }
+.qa-btn:active { background: var(--taupe); color: var(--cream); border-color: var(--taupe); }
+.qa-btn.active { background: var(--choc); color: var(--cream); border-color: var(--choc); }
+.qa-answer { background: var(--cream); border: 1px solid var(--border); padding: 24px 28px; line-height: 1.85; font-size: 14px; font-weight: 300; color: var(--ink2); }
+.qa-answer h3 { font-family: 'Josefin Sans', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin: 16px 0 7px; }
 .qa-answer p { margin-bottom: 10px; }
 .qa-answer ul { margin: 6px 0 10px 20px; }
 .qa-answer li { margin-bottom: 5px; }
 
 /* SCENARIO TIERED PATHS */
 .sc-path-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.sc-path-btn { border: 1px solid var(–border); padding: 22px 20px; cursor: pointer; text-align: left; background: var(–surface); transition: all 0.18s; }
-.sc-path-btn:hover { background: var(–surface2); border-color: var(–taupe); }
-.sc-path-btn:active { background: var(–taupe); border-color: var(–taupe); }
-.sc-path-btn:hover .sc-path-title { color: var(–ink); }
-.sc-path-btn:hover .sc-path-tag { color: var(–taupe); }
-.sc-path-tag { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(–muted); margin-bottom: 8px; }
-.sc-path-title { font-family: ‘Cormorant Garamond’, serif; font-size: 16px; font-weight: 400; color: var(–ink2); margin-bottom: 5px; }
-.sc-path-sub { font-size: 12px; color: var(–muted); font-weight: 300; line-height: 1.5; letter-spacing: 0.02em; }
+.sc-path-btn { border: 1px solid var(--border); padding: 22px 20px; cursor: pointer; text-align: left; background: var(--surface); transition: all 0.18s; }
+.sc-path-btn:hover { background: var(--surface2); border-color: var(--taupe); }
+.sc-path-btn:active { background: var(--taupe); border-color: var(--taupe); }
+.sc-path-btn:hover .sc-path-title { color: var(--ink); }
+.sc-path-btn:hover .sc-path-tag { color: var(--taupe); }
+.sc-path-tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.sc-path-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: var(--ink2); margin-bottom: 5px; }
+.sc-path-sub { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.5; letter-spacing: 0.02em; }
 
 /* INTERACTIVE CHALLENGE */
-.challenge-wrap { border: 1px solid var(–border); overflow: hidden; margin-top: 4px; }
-.challenge-hdr { background: var(–surface2); padding: 16px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(–border); }
-.challenge-tag { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(–taupe); background: rgba(149,134,101,0.15); padding: 4px 10px; flex-shrink: 0; }
-.challenge-title { font-family: ‘Josefin Sans’, sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.08em; color: var(–ink2); }
-.challenge-body { background: var(–cream); padding: 22px 24px; font-size: 14px; font-weight: 300; line-height: 1.8; color: var(–ink2); }
+.challenge-wrap { border: 1px solid var(--border); overflow: hidden; margin-top: 4px; }
+.challenge-hdr { background: var(--surface2); padding: 16px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+.challenge-tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); background: rgba(149,134,101,0.15); padding: 4px 10px; flex-shrink: 0; }
+.challenge-title { font-family: 'Josefin Sans', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.08em; color: var(--ink2); }
+.challenge-body { background: var(--cream); padding: 22px 24px; font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--ink2); }
 .challenge-body p { margin-bottom: 12px; }
-.challenge-body strong { font-weight: 400; color: var(–ink); }
+.challenge-body strong { font-weight: 400; color: var(--ink); }
 .challenge-body .c-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
-.challenge-body .c-table th { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); padding: 9px 10px; border-bottom: 1px solid var(–border); text-align: left; }
-.challenge-body .c-table td { padding: 10px 10px; border-bottom: 1px solid var(–border); color: var(–ink2); }
+.challenge-body .c-table th { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+.challenge-body .c-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); color: var(--ink2); }
 .challenge-body .c-table tr:last-child td { border-bottom: none; }
-.c-blank { display: inline-block; min-width: 80px; border-bottom: 1px solid var(–taupe); padding: 0 6px; font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; color: var(–muted); font-style: italic; vertical-align: bottom; }
-.c-input { font-family: ‘IBM Plex Mono’, monospace; font-size: 16px; padding: 8px 10px; border: 1px solid var(–border); background: var(–bg); color: var(–ink); width: 110px; transition: border-color 0.15s; }
-.c-input:focus { outline: none; border-color: var(–taupe); }
-.c-reveal { display: none; background: var(–bg); border: 1px solid var(–border); padding: 16px 20px; margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(–ink2); }
+.c-blank { display: inline-block; min-width: 80px; border-bottom: 1px solid var(--taupe); padding: 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); font-style: italic; vertical-align: bottom; }
+.c-input { font-family: 'IBM Plex Mono', monospace; font-size: 16px; padding: 8px 10px; border: 1px solid var(--border); background: var(--bg); color: var(--ink); width: 110px; transition: border-color 0.15s; }
+.c-input:focus { outline: none; border-color: var(--taupe); }
+.c-reveal { display: none; background: var(--bg); border: 1px solid var(--border); padding: 16px 20px; margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(--ink2); }
 .c-reveal.show { display: block; animation: fadeUp 0.2s ease; }
-.c-reveal strong { font-weight: 400; color: var(–ink); }
+.c-reveal strong { font-weight: 400; color: var(--ink); }
 .c-decision-opts { display: flex; flex-direction: column; gap: 7px; margin: 16px 0; }
-.c-decision-btn { border: 1px solid var(–border); padding: 14px 18px; cursor: pointer; background: var(–surface); text-align: left; font-size: 13px; font-weight: 300; color: var(–ink2); transition: all 0.15s; display: flex; gap: 12px; align-items: flex-start; }
-.c-decision-btn:hover:not(.locked) { background: var(–surface2); border-color: var(–taupe); }
-.c-decision-btn:active:not(.locked) { background: var(–taupe); color: var(–cream); }
-.c-decision-btn.chosen-good { background: var(–green-bg); border-left: 3px solid var(–green); color: var(–ink); }
-.c-decision-btn.chosen-bad { background: var(–red-bg); border-left: 3px solid var(–red); color: var(–ink2); }
+.c-decision-btn { border: 1px solid var(--border); padding: 14px 18px; cursor: pointer; background: var(--surface); text-align: left; font-size: 13px; font-weight: 300; color: var(--ink2); transition: all 0.15s; display: flex; gap: 12px; align-items: flex-start; }
+.c-decision-btn:hover:not(.locked) { background: var(--surface2); border-color: var(--taupe); }
+.c-decision-btn:active:not(.locked) { background: var(--taupe); color: var(--cream); }
+.c-decision-btn.chosen-good { background: var(--green-bg); border-left: 3px solid var(--green); color: var(--ink); }
+.c-decision-btn.chosen-bad { background: var(--red-bg); border-left: 3px solid var(--red); color: var(--ink2); }
 .c-decision-btn.locked { cursor: default; }
-.c-d-icon { font-size: 11px; margin-top: 2px; flex-shrink: 0; color: var(–taupe); font-family: ‘IBM Plex Mono’, monospace; }
+.c-d-icon { font-size: 11px; margin-top: 2px; flex-shrink: 0; color: var(--taupe); font-family: 'IBM Plex Mono', monospace; }
 .c-slider-row { display: flex; align-items: center; gap: 14px; margin: 10px 0; flex-wrap: wrap; }
-.c-slider-label { font-family: ‘IBM Plex Mono’, monospace; font-size: 10px; color: var(–muted); min-width: 140px; letter-spacing: 0.06em; }
-.c-slider-val { font-family: ‘IBM Plex Mono’, monospace; font-size: 12px; font-weight: 400; color: var(–taupe); min-width: 60px; }
-input[type=range].c-range { flex: 1; min-width: 120px; accent-color: var(–taupe); }
+.c-slider-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); min-width: 140px; letter-spacing: 0.06em; }
+.c-slider-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 400; color: var(--taupe); min-width: 60px; }
+input[type=range].c-range { flex: 1; min-width: 120px; accent-color: var(--taupe); }
 .c-output-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 16px; }
-.c-metric { background: var(–bg); border: 1px solid var(–border); padding: 14px 14px; }
-.c-metric-label { font-family: ‘IBM Plex Mono’, monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); margin-bottom: 6px; }
-.c-metric-val { font-family: ‘Cormorant Garamond’, serif; font-size: 22px; font-weight: 400; color: var(–ink); }
-.c-metric-val.good { color: var(–green); }
-.c-metric-val.warn { color: var(–taupe); }
-.c-metric-val.bad { color: var(–brick); }
-.c-step-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: var(–bg); border-top: 1px solid var(–border); }
+.c-metric { background: var(--bg); border: 1px solid var(--border); padding: 14px 14px; }
+.c-metric-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.c-metric-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); }
+.c-metric-val.good { color: var(--green); }
+.c-metric-val.warn { color: var(--taupe); }
+.c-metric-val.bad { color: var(--brick); }
+.c-step-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: var(--bg); border-top: 1px solid var(--border); }
 .c-step-dots { display: flex; gap: 8px; }
-.c-step-dot { width: 6px; height: 6px; border-radius: 50%; background: var(–border2); transition: background 0.2s; }
-.c-step-dot.active { background: var(–taupe); }
-.c-step-dot.done { background: var(–choc); }
+.c-step-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border2); transition: background 0.2s; }
+.c-step-dot.active { background: var(--taupe); }
+.c-step-dot.done { background: var(--choc); }
 
 /* GLOSSARY */
 .gloss-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
 .gloss-section { display: none; }
 .gloss-section.active { display: block; animation: fadeUp 0.2s ease; }
-.gloss-item { border-bottom: 1px solid var(–border); padding: 20px 0; }
+.gloss-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
 .gloss-item:last-child { border-bottom: none; }
-.gloss-term { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 400; margin-bottom: 6px; color: var(–ink); }
-.gloss-def { font-size: 13px; font-weight: 300; line-height: 1.8; color: var(–muted); margin-bottom: 8px; }
-.gloss-note { font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; color: var(–taupe); line-height: 1.65; }
+.gloss-term { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin-bottom: 6px; color: var(--ink); }
+.gloss-def { font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--muted); margin-bottom: 8px; }
+.gloss-note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--taupe); line-height: 1.65; }
 
 /* RESPONSIVE */
 @media (max-width: 580px) {
-.mod-grid { grid-template-columns: 1fr; }
-.topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
-.tabs { flex-direction: column; }
-.lesson-title { font-size: 20px; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .topic-grid, .qa-btn-grid { grid-template-columns: 1fr; }
+  .tabs { flex-direction: column; }
+  .lesson-title { font-size: 20px; }
 
-/* Scenario path choice — stack vertically */
-.sc-path-choice { grid-template-columns: 1fr; }
+  /* Scenario path choice — stack vertically */
+  .sc-path-choice { grid-template-columns: 1fr; }
 
-/* Challenge header — stack tag above title */
-.challenge-hdr { flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 18px; }
+  /* Challenge header — stack tag above title */
+  .challenge-hdr { flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 18px; }
 
-/* Fill-in tables — hide thead, stack each row as a card */
-.challenge-body .c-table thead { display: none; }
-.challenge-body .c-table tr { display: block; background: var(–bg); border: 1px solid var(–border); border-radius: 6px; margin-bottom: 10px; padding: 12px 14px; }
-.challenge-body .c-table td { display: block; border: none; padding: 4px 0; font-size: 13px; }
-.challenge-body .c-table td:last-child { padding-top: 8px; }
+  /* Fill-in tables — hide thead, stack each row as a card */
+  .challenge-body .c-table thead { display: none; }
+  .challenge-body .c-table tr { display: block; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px; padding: 12px 14px; }
+  .challenge-body .c-table td { display: block; border: none; padding: 4px 0; font-size: 13px; }
+  .challenge-body .c-table td:last-child { padding-top: 8px; }
 
-/* Inputs — full width on mobile */
-.c-input { width: 100%; max-width: 100%; font-size: 16px; padding: 10px 12px; margin-top: 4px; }
+  /* Inputs — full width on mobile */
+  .c-input { width: 100%; max-width: 100%; font-size: 16px; padding: 10px 12px; margin-top: 4px; }
 
-/* Spot-the-problem table — same stacked treatment */
-.challenge-body table.c-table td:before {
-content: attr(data-label);
-display: block;
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 9px;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 2px;
-}
+  /* Spot-the-problem table — same stacked treatment */
+  .challenge-body table.c-table td:before {
+    content: attr(data-label);
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
 
-/* Metric output grid — 2 columns on mobile */
-.c-output-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Metric output grid — 2 columns on mobile */
+  .c-output-grid { grid-template-columns: repeat(2, 1fr); }
 
-/* Slider rows — stack label above */
-.c-slider-row { flex-direction: column; align-items: flex-start; gap: 6px; }
-.c-slider-label { min-width: unset; }
-input[type=range].c-range { width: 100%; }
+  /* Slider rows — stack label above */
+  .c-slider-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .c-slider-label { min-width: unset; }
+  input[type=range].c-range { width: 100%; }
 
-/* Decision buttons — ensure readable */
-.c-decision-btn { font-size: 13px; padding: 12px 14px; }
+  /* Decision buttons — ensure readable */
+  .c-decision-btn { font-size: 13px; padding: 12px 14px; }
 
-/* Step nav */
-.c-step-nav { padding: 12px 16px; }
+  /* Step nav */
+  .c-step-nav { padding: 12px 16px; }
 }
 </style>
-
 </head>
 <body>
 <div class="wrap">
@@ -311,7 +309,6 @@ input[type=range].c-range { width: 100%; }
   </div>
 
   <!-- ═══ LESSONS ═══ -->
-
   <div id="tab-lessons" class="panel active">
     <div id="lessons-home">
       <div class="sec-lbl">Select a module</div>
@@ -350,25 +347,25 @@ input[type=range].c-range { width: 100%; }
   </div>
 
   <!-- ═══ SCENARIOS ═══ -->
-
   <div id="tab-scenarios" class="panel">
     <div class="sc-controls">
       <div class="sc-field">
         <label>Deal type</label>
         <select id="sc-type">
-          <option value="hotel">Hotel / Branded Residence</option>
+          <option value="hotel">Hotel Development</option>
           <option value="resort">Resort Development</option>
-          <option value="mixed">Mixed-Use Development</option>
+          <option value="mixed">Mixed-Use (Hotel + Residential + Retail)</option>
+          <option value="lifestyle">Mixed-Use Lifestyle (F&B + Spa + Hotel)</option>
+          <option value="branded_res">Branded Residence (Standalone)</option>
           <option value="multifamily">Multifamily Acquisition</option>
-          <option value="office">Office Repositioning</option>
         </select>
       </div>
       <div class="sc-field">
         <label>Difficulty</label>
         <div class="diff-pills">
           <button class="diff-pill active" onclick="setDiff('intro',this)">Intro</button>
-          <button class="diff-pill" onclick="setDiff('mid',this)">Mid</button>
-          <button class="diff-pill" onclick="setDiff('senior',this)">Senior</button>
+          <button class="diff-pill" onclick="setDiff('mid',this)">Senior</button>
+          <button class="diff-pill" onclick="setDiff('senior',this)">Structuring</button>
         </div>
       </div>
       <button class="btn-primary" onclick="loadScenario()">Generate scenario →</button>
@@ -377,7 +374,6 @@ input[type=range].c-range { width: 100%; }
   </div>
 
   <!-- ═══ GLOSSARY ═══ -->
-
   <div id="tab-glossary" class="panel">
     <div class="gloss-btns">
       <button class="btn-primary" onclick="showGloss('formulas')">Key Formulas</button>
@@ -1340,7 +1336,641 @@ const SCENARIOS = {
         }
       ]
     }
+,
+
+  structuring: {
+    name: "The Ardmore — Nashville",
+    html: `<h2>Hotel Structuring Scenario</h2>
+<p><strong>The Ardmore Nashville</strong> — Nashville, TN. 188-key luxury lifestyle hotel. $112M total cost. Historic tax credit equity ($14M), PIK mezzanine ($18M at 12%), senior construction loan ($57M), and a tiered LP waterfall (80/20 to 14% IRR, 70/30 above).</p>
+<h2>Key Structuring Questions</h2>
+<ol><li>HTC master lease — how does it interact with senior lender title requirements?</li><li>PIK mezz grows $18M to ~$25.3M at maturity — model the exit waterfall at different cap rates.</li><li>F&B lease ($480K/yr) — include in DSCR at face value or with a haircut?</li><li>At what NOI and cap rate does GP promote disappear entirely?</li></ol>`,
+    qa: {
+      "Historic tax credit structure": `<h3>HTC Mechanics</h3><p>Federal HTCs = 20% of qualified rehab expenditures. On $70M qualifying = $14M credits. HTC investor provides $14M via a master lease structure, creating a title encumbrance requiring senior lender subordination agreement — adds 4-8 weeks to closing.</p>`,
+      "Mezz PIK accrual at exit": `<h3>PIK Waterfall Impact</h3><p>$18M at 12% PIK: Yr1 $20.16M, Yr2 $22.58M, Yr3 $25.29M. At $148M exit: senior $57M + mezz $25.3M = $82.3M. Equity proceeds = $65.7M. After capital ($23M) + LP pref ($8.28M): above-pref = $34.42M. GP promote (20%) = $6.88M. If exit drops to $130M: equity barely covers pref — GP earns zero.</p>`,
+      "F&B lease in DSCR": `<h3>Lease Income Credit</h3><p>$480K base rent credited at 90-95% for creditworthy tenants, 50-75% for startups. Full credit adds 0.20x to DSCR on this deal — the difference between a $57M and $52M loan approval.</p>`,
+      "Promote break-even": `<h3>GP Promote Sensitivity</h3><p>14% IRR hurdle. LP needs ~1.95x on $18.4M = $35.9M total. After pref ($8.28M): above-pref needed = $9.22M. Total equity at exit = $38.2M. Add debt ($82.3M) = minimum exit $120.5M. At 6.5% cap: NOI required = $7.83M.</p>`
+    },
+    challenges: [
+      {
+        type: "Spot the Problem",
+        title: "The HTC investor markup creates a structural problem. Find it.",
+        render: () => `
+          <p>Review the HTC investor markup to the master lease term sheet:</p>
+          <table class="c-table">
+            <tr><th>Term</th><th>Proposed</th><th>HTC Markup</th></tr>
+            <tr><td>Lease term</td><td>5 years</td><td>5 years &#10003;</td></tr>
+            <tr><td>Subordination to senior</td><td>Full subordination</td><td>Foreclosure only</td></tr>
+            <tr><td>Recapture indemnity</td><td>Developer indemnifies</td><td>Developer indemnifies &#10003;</td></tr>
+            <tr><td>Exit buy-out</td><td>$1 after year 5</td><td>Fair market value after year 5</td></tr>
+          </table>
+          <button class="btn-sec" onclick="revealAnswer('spt-str-a')" style="margin-top:8px">Show answer</button>
+          <div class="c-reveal" id="spt-str-a">
+            <strong>Fair market value exit buy-out.</strong> $1 is standard — clean exit from HTC structure at year 5. Fair market value means HTC investor demands payment based on appreciated property value ($8-15M) not modeled in the waterfall. Reject and negotiate back to $1.
+            <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+          </div>`,
+        init: () => {}
+      },
+      {
+        type: "Fill in the Blanks",
+        title: "Model the PIK accrual and exit waterfall.",
+        render: () => `
+          <p>Mezz: <strong>$18M at 12% PIK, 36 months</strong>. Exit: <strong>$148M</strong>. Senior: <strong>$57M</strong>. Total equity: <strong>$23M</strong>. LP: <strong>$18.4M, 9% pref, 5yr hold</strong>.</p>
+          <table class="c-table" id="pik-blanks">
+            <tr><th>Item</th><th>Answer</th></tr>
+            <tr><td>Mezz balance at 36 months (12% PIK)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            <tr><td>Equity proceeds after all debt</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            <tr><td>Accrued LP pref (9% x $18.4M x 5yr)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            <tr><td>Above-pref profits</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            <tr><td>GP promote at 20%</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+          </table>
+          <button class="btn-sec" onclick="checkBlanks('pik-blanks',[{label:'Mezz',val:'$25.3M'},{label:'Equity',val:'$65.7M'},{label:'Pref',val:'$8.28M'},{label:'Above-pref',val:'$34.42M'},{label:'Promote',val:'$6.88M'}])" style="margin-top:12px">Check my work</button>`,
+        init: () => {}
+      },
+      {
+        type: "Decision Point",
+        title: "Lender excludes F&B lease from DSCR. DSCR drops to 1.18x. How do you respond?",
+        render: () => `
+          <p>Without F&B lease credit, DSCR = 1.18x — below 1.25x minimum. Lender offers $52M instead of $57M.</p>
+          <div class="c-decision-opts">
+            <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true}],'dec-str-a')">
+              <span class="c-d-icon">A</span><span>Accept $52M. Raise the $5M gap from LP equity at a diluted promote.</span>
+            </div>
+            <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true}],'dec-str-a')">
+              <span class="c-d-icon">B</span><span>Push back hard or walk to another lender.</span>
+            </div>
+            <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true}],'dec-str-a')">
+              <span class="c-d-icon">C</span><span>Counter: offer a 2-year personal guarantee on the F&B lease, or a $960K cash reserve, in exchange for crediting 75% of lease income in DSCR at the original $57M.</span>
+            </div>
+          </div>
+          <div class="c-reveal" id="dec-str-a">
+            <strong>C.</strong> A $960K reserve is far cheaper than raising $5M in equity and directly addresses the lender concern. Walking (B) is premature over a negotiable point. Accepting the gap immediately (A) exhausts no alternatives.
+          </div>`,
+        init: () => {}
+      },
+      {
+        type: "Build the Deal",
+        title: "Find the promote break-even. Where does the GP earn nothing?",
+        render: () => `
+          <p>GP earns promote above <strong>14% LP IRR hurdle</strong>. LP: <strong>$18.4M</strong>. Total debt at exit: <strong>$82.3M</strong>. 5yr hold.</p>
+          <div style="margin:16px 0">
+            <div class="c-slider-row"><div class="c-slider-label">Stabilized NOI</div><input type="range" class="c-range" id="sl-noi-str" min="6.0" max="12.0" step="0.1" value="9.0"><div class="c-slider-val" id="v-noi-str">$9.0M</div></div>
+            <div class="c-slider-row"><div class="c-slider-label">Exit cap rate</div><input type="range" class="c-range" id="sl-cap-str" min="5.5" max="8.5" step="0.25" value="6.5"><div class="c-slider-val" id="v-cap-str">6.50%</div></div>
+          </div>
+          <div class="c-output-grid" id="build-str-output" style="grid-template-columns:repeat(3,1fr)"></div>
+          <div id="build-str-note" style="font-size:12px;color:var(--muted);margin-top:10px"></div>
+          <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+        init: () => {
+          const updStr = () => {
+            const noi = parseFloat(document.getElementById('sl-noi-str').value);
+            const cap = parseFloat(document.getElementById('sl-cap-str').value)/100;
+            document.getElementById('v-noi-str').textContent = '$'+noi.toFixed(1)+'M';
+            document.getElementById('v-cap-str').textContent = (cap*100).toFixed(2)+'%';
+            const ex=noi/cap, d=82.3, teq=23, lp=18.4, h=5;
+            const ep=ex-d, ac=ep-teq, pref=lp*0.09*h, ap=ac-pref;
+            const gp=ap>0?ap*0.20:0;
+            const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+            const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+            const gc=irr>=14?'good':irr>=9?'warn':'bad';
+            document.getElementById('build-str-output').innerHTML=
+              '<div class="c-metric"><div class="c-metric-label">Exit Value</div><div class="c-metric-val">$'+ex.toFixed(1)+'M</div></div>'+
+              '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+gc+'">'+irr.toFixed(1)+'%</div></div>'+
+              '<div class="c-metric"><div class="c-metric-label">GP Promote</div><div class="c-metric-val '+(gp>2?'good':gp>0?'warn':'bad')+'">${'+gp.toFixed(1)+'M</div></div>';
+            document.getElementById('build-str-note').textContent = irr>=14?'GP earns $'+gp.toFixed(1)+'M promote.':'LP below 14% hurdle — GP earns zero.';
+          };
+          ['sl-noi-str','sl-cap-str'].forEach(id=>document.getElementById(id).addEventListener('input',updStr)); updStr();
+        }
+      }
+    ]
   }
+}
+
+
+,
+
+  resort: {
+    intro: {
+      name: "Solano Beach Club — Tulum",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Solano Beach Club</strong> — Tulum, Mexico. 94-key eco-luxury resort targeting the ultra-luxury experiential traveler. Beachfront site with overwater bungalows and a full wellness spa. Offshore financing at 9.5% fixed.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total cost: <strong>$52M</strong> ($553K/key)</li><li>Senior: 55% LTC = <strong>$28.6M</strong> at 9.5% fixed (offshore lender)</li><li>LP equity: <strong>$20.6M</strong> (88%) | GP equity: <strong>$2.8M</strong></li><li>Stabilized NOI: <strong>$5.4M</strong> (38% margin) | Exit cap 7.0% → Value: <strong>$77.1M</strong></li><li>LP IRR target: 14-16% | Hold: 5 years</li></ul>`,
+      qa: {
+        "Why is the cap rate higher than a US hotel?": `<h3>Offshore Cap Rate Premium</h3><p>Institutional buyers apply 100-150bps country risk premium for: currency risk, political uncertainty, ejido land title concerns, infrastructure reliability, and reduced liquidity. Fewer qualified buyers for a $77M Tulum resort than a comparable US asset — which means lower price competition at exit.</p>`,
+        "Walk me through the waterfall": `<h3>Waterfall at Base Case</h3><p>Exit $77.1M minus $28.6M senior = $48.5M equity. Return capital $23.4M — remaining $25.1M. LP pref (8% x $20.6M x 5yr) = $8.24M. Above-pref $16.86M: LP 80% = $13.49M, GP 20% = $3.37M. LP total = $42.33M on $20.6M = 2.05x EM.</p>`,
+        "What makes this riskier than a US deal?": `<h3>Offshore Resort Risks</h3><p>(1) Infrastructure unreliability drives generator and water treatment costs. (2) Hurricane insurance significantly more expensive. (3) Tulum is highly seasonal. (4) Limited local staff sourcing. (5) Ejido land title risk despite foreign ownership structures.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The 38% NOI margin is 4 points below a comparable US resort. Find the drivers.",
+          render: () => `
+            <table class="c-table">
+              <tr><th>Line Item</th><th>Solano (Tulum)</th><th>US Comparable</th></tr>
+              <tr><td>Labor</td><td>28%</td><td>29%</td></tr>
+              <tr><td>F&B costs</td><td>8%</td><td>8%</td></tr>
+              <tr><td>Insurance & property tax</td><td>7%</td><td>5%</td></tr>
+              <tr><td>Maintenance & utilities</td><td>9%</td><td>7%</td></tr>
+              <tr><td>Management fee</td><td>5%</td><td>5%</td></tr>
+              <tr><td>Other</td><td>5%</td><td>4%</td></tr>
+              <tr><td><strong>NOI margin</strong></td><td><strong>38%</strong></td><td><strong>42%</strong></td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-rsi-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-rsi-a">
+              <strong>Insurance (+2%) and maintenance/utilities (+2%) account for the full 4-point gap.</strong> Infrastructure unreliability drives generator costs. Hurricane insurance in the Yucatan is materially more expensive than US markets. Stress both by 1-2% before presenting to lenders — a 36% margin vs 38% changes exit value by approximately $4M at a 7% cap.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate the exit waterfall at base case.",
+          render: () => `
+            <p>Exit: <strong>$77.1M</strong>. Senior: <strong>$28.6M</strong>. Total equity: <strong>$23.4M</strong>. LP: <strong>$20.6M, 8% pref, 5yr, 80/20 promote</strong>.</p>
+            <table class="c-table" id="rsi-blanks">
+              <tr><th>Tier</th><th>Amount</th></tr>
+              <tr><td>Equity proceeds after debt</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Return of all capital</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Accrued LP pref</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Above-pref profits</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>GP promote (20%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('rsi-blanks',[{label:'Equity proceeds',val:'$48.5M'},{label:'Return capital',val:'$23.4M'},{label:'LP pref',val:'$8.24M'},{label:'Above-pref',val:'$16.86M'},{label:'GP promote',val:'$3.37M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "A US LP is nervous about Mexico. How do you address it?",
+          render: () => `
+            <p>LP ($15M of the equity) wants either a reduced hurdle (13% to 11% IRR) or a GP guarantee on return of capital, citing Mexico country risk.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:false}],'dec-rsi-a')">
+                <span class="c-d-icon">A</span><span>Accept the reduced hurdle — 11% instead of 13%.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:false}],'dec-rsi-a')">
+                <span class="c-d-icon">B</span><span>Reject both. Provide a detailed country risk memo, evidence of title security, and introduce the offshore legal and insurance team — address with information, not structural concessions.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:false}],'dec-rsi-a')">
+                <span class="c-d-icon">C</span><span>Offer a personal GP guarantee on return of capital.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-rsi-a">
+              <strong>B.</strong> If the concern is informational, address it with information. A reduced hurdle permanently gives away promote economics without solving the underlying concern. A personal guarantee (C) is open-ended exposure the GP should never issue. Structural concessions signal the GP believes the concern is valid.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Stress the offshore cap rate. See how it hits harder than a US deal.",
+          render: () => `
+            <p>Base NOI: <strong>$5.4M</strong>. Senior: <strong>$28.6M</strong>. LP: <strong>$20.6M</strong>. 5yr hold. Offshore caps can move aggressively.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row"><div class="c-slider-label">Stabilized NOI</div><input type="range" class="c-range" id="sl-rsi-noi" min="3.5" max="7.5" step="0.1" value="5.4"><div class="c-slider-val" id="v-rsi-noi">$5.4M</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">Exit cap rate</div><input type="range" class="c-range" id="sl-rsi-cap" min="6.0" max="10.0" step="0.25" value="7.0"><div class="c-slider-val" id="v-rsi-cap">7.00%</div></div>
+            </div>
+            <div class="c-output-grid" id="rsi-build-output"></div>
+            <div id="rsi-build-note" style="font-size:12px;color:var(--muted);margin-top:10px"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+          init: () => {
+            const updRsi = () => {
+              const noi=parseFloat(document.getElementById('sl-rsi-noi').value);
+              const cap=parseFloat(document.getElementById('sl-rsi-cap').value)/100;
+              document.getElementById('v-rsi-noi').textContent='$'+noi.toFixed(1)+'M';
+              document.getElementById('v-rsi-cap').textContent=(cap*100).toFixed(2)+'%';
+              const ex=noi/cap, d=28.6, teq=23.4, lp=20.6, h=5;
+              const ep=ex-d, ac=ep-teq, pref=lp*0.08*h, ap=ac-pref;
+              const gp=ap>0?ap*0.20:0;
+              const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+              const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+              document.getElementById('rsi-build-output').innerHTML=
+                '<div class="c-metric"><div class="c-metric-label">Exit Value</div><div class="c-metric-val">$'+ex.toFixed(1)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+(irr>=13?'good':irr>=8?'warn':'bad')+'">'+irr.toFixed(1)+'%</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">GP Promote</div><div class="c-metric-val '+(gp>2?'good':gp>0?'warn':'bad')+'">${'+gp.toFixed(1)+'M</div></div>';
+              document.getElementById('rsi-build-note').textContent=ep<0?'Exit insufficient to repay debt.':irr>=13?'LP clears 13% hurdle.':'LP below hurdle — no promote.';
+            };
+            ['sl-rsi-noi','sl-rsi-cap'].forEach(id=>document.getElementById(id).addEventListener('input',updRsi)); updRsi();
+          }
+        }
+      ]
+    },
+    senior: { name:"Cerro Blanco — Costa Rica", html:`<h2>Senior Resort Scenario</h2><p><strong>Cerro Blanco</strong> — Nosara, Costa Rica. 58-key VLE-affiliated wellness resort with 22 branded villas. Dual revenue stream: hotel NOI capitalised at exit + presale proceeds. Mezz with a cash sweep provision that conflicts with presale structure. Full challenges coming in next update.</p>`, qa:{"Presale mechanics":"<p>Villa presales serve as both capital source and lender covenant — 60% presale coverage required for construction draws. If contracts rescind below threshold, lender has grounds for default.</p>"}, challenges:[] },
+    structuring: { name:"Punta Sal — Panama", html:`<h2>Structuring Resort Scenario</h2><p><strong>Punta Sal</strong> — Bocas del Toro, Panama. 42-key ultra-luxury overwater resort with 34-unit fractional residence club. Aman brand discussions ongoing (not contracted). Brand representation risk, pref equity with profit participation, fractional ownership governance. Full challenges coming in next update.</p>`, qa:{}, challenges:[] }
+  },
+
+  mixed: {
+    intro: {
+      name: "The Embarcadero — San Diego",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Embarcadero</strong> — Little Italy, San Diego. 14-story mixed-use: 120 luxury condos, 68-key boutique hotel, 8,400 SF retail.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total cost: <strong>$148M</strong></li><li>Senior: 60% LTC = <strong>$88.8M</strong></li><li>LP: <strong>$50.5M</strong> | GP: <strong>$8.7M</strong></li><li>Residential presales: 78 of 120 units ($87.3M)</li><li>Residential gross: $162M | Hotel NOI $2.8M at 6.5% cap = $43.1M | Retail $6.9M | Blended value: ~$203M</li></ul>`,
+      qa: {
+        "How are the three components valued?": `<h3>Component Valuation Methods</h3><p>Residential condos: comparable sale basis — not income capitalisation. Hotel: NOI divided by cap rate. Retail: income capitalised at a higher cap rate. Cannot be blended without understanding each methodology — a common error is applying a cap rate to condo revenue.</p>`,
+        "Lender primary risk concern": `<h3>Lender Risk</h3><p>The hotel — it has no presale mechanism. Lenders size the loan primarily against residential presales and stress hotel projections heavily. Strong presales protect the loan even if the hotel underperforms.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The developer's returns summary has a methodological error.",
+          render: () => `
+            <table class="c-table">
+              <tr><th>Component</th><th>Developer Approach</th></tr>
+              <tr><td>Residential condos</td><td>Gross proceeds included in IRR</td></tr>
+              <tr><td>Hotel</td><td>Capitalised at 6.5% on stabilised NOI</td></tr>
+              <tr><td>Retail</td><td>Capitalised at 7%</td></tr>
+              <tr><td>Residential commissions</td><td>Not deducted — recovered in pricing</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-mxi-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mxi-a">
+              <strong>Residential commissions not deducted.</strong> 5.5% of $162M gross = $8.91M overstating proceeds. This reduces LP IRR by 1.5-2 percentage points. Always use net proceeds — never gross. Applying gross residential proceeds is one of the most common mixed-use underwriting errors.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate net blended project value after commissions.",
+          render: () => `
+            <p>Gross residential: <strong>$162M</strong> (5.5% commission). Hotel NOI <strong>$2.8M / 6.5%</strong>. Retail <strong>$480K / 7%</strong>. Senior: <strong>$88.8M</strong>.</p>
+            <table class="c-table" id="mxi-blanks">
+              <tr><th>Item</th><th>Amount</th></tr>
+              <tr><td>Net residential (after 5.5%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Hotel exit value</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Retail exit value</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total proceeds</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Net equity after senior</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mxi-blanks',[{label:'Net residential',val:'$153.1M'},{label:'Hotel',val:'$43.1M'},{label:'Retail',val:'$6.9M'},{label:'Total',val:'$203.1M'},{label:'Net equity',val:'$114.3M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "Hotel underperforms Year 1. Residential 95% sold. Sell the hotel early or hold?",
+          render: () => `
+            <p>Hotel at 58% occupancy vs 71% projected. NOI $1.9M vs $2.8M. At current NOI and 7% cap (market shifted 50bps): hotel worth $27.1M vs $43.1M underwritten. Senior repaid from residential. LP asks: sell now or hold?</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:false}],'dec-mxi-a')">
+                <span class="c-d-icon">A</span><span>Sell at $27.1M now.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:false}],'dec-mxi-a')">
+                <span class="c-d-icon">B</span><span>Hold 18-24 months. Present LP with a revised stabilization model showing NOI trajectory toward $2.8M before making the decision.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:false}],'dec-mxi-a')">
+                <span class="c-d-icon">C</span><span>Refinance the hotel at current value and distribute proceeds to LP.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mxi-a">
+              <strong>B — with honest LP communication.</strong> Year 1-2 underperformance is normal for a new hotel. Selling permanently crystallises a $16M shortfall. The quantitative hold/sell analysis belongs to the LP — present it transparently. Refinancing (C) at current rates is premature without stabilized income.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Adjust residential sellout pace and hotel cap rate. See blended IRR.",
+          render: () => `
+            <p>LP: <strong>$50.5M</strong>. Senior: <strong>$88.8M</strong>. Total equity: <strong>$59.2M</strong>. 5yr hold.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row"><div class="c-slider-label">Residential sellout %</div><input type="range" class="c-range" id="sl-mxi-res" min="60" max="100" step="5" value="95"><div class="c-slider-val" id="v-mxi-res">95%</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">Hotel exit cap rate</div><input type="range" class="c-range" id="sl-mxi-cap" min="5.5" max="8.5" step="0.25" value="6.5"><div class="c-slider-val" id="v-mxi-cap">6.50%</div></div>
+            </div>
+            <div class="c-output-grid" id="mxi-build-output"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+          init: () => {
+            const updMxi = () => {
+              const rp=parseFloat(document.getElementById('sl-mxi-res').value)/100;
+              const cap=parseFloat(document.getElementById('sl-mxi-cap').value)/100;
+              document.getElementById('v-mxi-res').textContent=Math.round(rp*100)+'%';
+              document.getElementById('v-mxi-cap').textContent=(cap*100).toFixed(2)+'%';
+              const rn=162*0.945*rp, hv=2.8/cap, tot=rn+hv+6.9;
+              const d=88.8, teq=59.2, lp=50.5, h=5;
+              const ep=tot-d, ac=ep-teq, pref=lp*0.08*h, ap=ac-pref;
+              const gp=ap>0?ap*0.20:0;
+              const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+              const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+              document.getElementById('mxi-build-output').innerHTML=
+                '<div class="c-metric"><div class="c-metric-label">Total Proceeds</div><div class="c-metric-val">$'+tot.toFixed(1)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+(irr>=14?'good':irr>=9?'warn':'bad')+'">'+irr.toFixed(1)+'%</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">GP Promote</div><div class="c-metric-val '+(gp>4?'good':gp>0?'warn':'bad')+'">${'+gp.toFixed(1)+'M</div></div>';
+            };
+            ['sl-mxi-res','sl-mxi-cap'].forEach(id=>document.getElementById(id).addEventListener('input',updMxi)); updMxi();
+          }
+        }
+      ]
+    },
+    senior: { name:"The Meridian Quarter — Austin", html:`<h2>Senior Mixed-Use</h2><p>Coming soon — phased mixed-use (apartments + hotel + retail) across two phases with inter-phase capital dependency and a DSCR problem at Phase 2 financing.</p>`, qa:{}, challenges:[] },
+    structuring: { name:"The Colón District — Miami", html:`<h2>Structuring Mixed-Use</h2><p>Coming soon — EB-5 financing, 240 international condo buyers, ABSD-equivalent stamp duty dynamics, and CMBS permanent financing challenge across four components.</p>`, qa:{}, challenges:[] }
+  },
+
+  multifamily: {
+    intro: {
+      name: "The Linden — Denver",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Linden</strong> — Cherry Creek North, Denver. 186-unit Class A luxury apartment acquisition with value-add renovation targeting 12-15% rent uplift over 3 years.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Purchase: <strong>$72M</strong> ($387K/unit) | In-place NOI: <strong>$3.85M</strong> (5.35% going-in cap)</li><li>Capex: <strong>$4.2M</strong> | Stabilized NOI target: <strong>$5.1M</strong></li><li>Senior: 65% LTV = <strong>$46.8M</strong> at 6.75% fixed, 30yr am</li><li>LP: <strong>$25.6M</strong> | GP: <strong>$3.8M</strong> | Hold: 5yr | Exit at 5.0% cap = <strong>$102M</strong></li></ul>`,
+      qa: {
+        "What is value-add?": `<h3>Value-Add Strategy</h3><p>Acquire below potential, invest capital, exit at higher value. Returns come from: (1) cap rate arbitrage — buying at 5.35%, exiting at 5.0%, (2) NOI growth from rent uplift, (3) leverage amplification. The Linden targets $1.25M NOI growth — at 5% exit cap, that's $25M additional asset value on $4.2M invested.</p>`,
+        "What drives DSCR on this deal?": `<h3>DSCR on an Acquisition</h3><p>Unlike construction loans (IO), this is fully amortizing. Debt service on $46.8M at 6.75%/30yr = approximately $3.65M. Going-in DSCR = $3.85M / $3.65M = 1.05x — very thin during renovation. Post-stabilization DSCR on $5.1M = 1.40x. Lenders test DSCR at stabilization, not during the value-add period.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The rent roll model overstates NOI improvement. Find the error.",
+          render: () => `
+            <table class="c-table">
+              <tr><th>Assumption</th><th>Model</th></tr>
+              <tr><td>Units renovated</td><td>186 units at $22.6K each</td></tr>
+              <tr><td>Rent uplift per unit</td><td>$210/month</td></tr>
+              <tr><td>Annual NOI uplift</td><td>186 x $210 x 12 = $469K/yr</td></tr>
+              <tr><td>Vacancy during renovation</td><td>Not modeled — turned on lease renewal</td></tr>
+              <tr><td>Renovation timeline</td><td>3 weeks offline per unit</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-mfi-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mfi-a">
+              <strong>Renovation vacancy not modeled.</strong> 62 units/year offline for 3 weeks = lost base rent approximately $83.7K/yr (62 x $1,800 x 0.75mo) plus lost uplift opportunity. Total unmodeled loss: approximately $160K/yr — reducing actual NOI improvement by 34% vs the model projection.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate going-in cap rate, exit value, and equity proceeds.",
+          render: () => `
+            <p>Purchase: <strong>$72M</strong>. In-place NOI: <strong>$3.85M</strong>. Stabilized NOI: <strong>$5.1M</strong>. Exit cap: <strong>5.0%</strong>. Senior at exit: <strong>$43.5M</strong>. Total equity: <strong>$29.4M</strong>.</p>
+            <table class="c-table" id="mfi-blanks">
+              <tr><th>Item</th><th>Answer</th></tr>
+              <tr><td>Going-in cap rate ($3.85M / $72M)</td><td><input class="c-input" type="text" placeholder="?%"></td></tr>
+              <tr><td>Exit value ($5.1M / 5.0%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity proceeds (exit minus $43.5M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity multiple (proceeds / $29.4M)</td><td><input class="c-input" type="text" placeholder="?x"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mfi-blanks',[{label:'Going-in cap',val:'5.35%'},{label:'Exit value',val:'$102M'},{label:'Equity proceeds',val:'$58.5M'},{label:'EM',val:'1.99x'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "Rates rise. Exit cap is 5.75% not 5.0%. LP IRR drops to 10.8%. Hold or sell?",
+          render: () => `
+            <p>Year 5. NOI stabilized at $5.1M. Cap rates moved to 5.75% — exit value $88.7M (vs $102M underwritten). LP IRR approximately 10.8% — below 12% hurdle. GP earns no promote.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:false}],'dec-mfi-a')">
+                <span class="c-d-icon">A</span><span>Sell at $88.7M now.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:false}],'dec-mfi-a')">
+                <span class="c-d-icon">B</span><span>Hold 2 more years. 2.5% annual NOI growth plus potential cap rate normalization may restore the 12% hurdle — present LP with the hold/sell sensitivity before deciding.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:false}],'dec-mfi-a')">
+                <span class="c-d-icon">C</span><span>Refinance at current value and hold as an income play.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mfi-a">
+              <strong>B — with full LP transparency.</strong> 2.5% NOI growth over 2 years brings NOI to $5.36M. At 5.25% normalized cap: exit $102M, LP IRR recovers above 12%. This is a quantitative decision — present the analysis to LP. Refinancing at current rates (C) likely creates DSCR problems.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Model NOI growth and cap rate compression. See how value-add creates equity value.",
+          render: () => `
+            <p>Senior at exit: <strong>$43.5M</strong>. LP: <strong>$25.6M</strong>. Total equity: <strong>$29.4M</strong>. 5yr hold.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row"><div class="c-slider-label">Stabilized NOI</div><input type="range" class="c-range" id="sl-mfi-noi" min="3.8" max="6.5" step="0.1" value="5.1"><div class="c-slider-val" id="v-mfi-noi">$5.1M</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">Exit cap rate</div><input type="range" class="c-range" id="sl-mfi-cap" min="4.25" max="6.5" step="0.25" value="5.0"><div class="c-slider-val" id="v-mfi-cap">5.00%</div></div>
+            </div>
+            <div class="c-output-grid" id="mfi-build-output"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+          init: () => {
+            const updMfi = () => {
+              const noi=parseFloat(document.getElementById('sl-mfi-noi').value);
+              const cap=parseFloat(document.getElementById('sl-mfi-cap').value)/100;
+              document.getElementById('v-mfi-noi').textContent='$'+noi.toFixed(1)+'M';
+              document.getElementById('v-mfi-cap').textContent=(cap*100).toFixed(2)+'%';
+              const ex=noi/cap, d=43.5, teq=29.4, lp=25.6, h=5;
+              const ep=ex-d, ac=ep-teq, pref=lp*0.08*h, ap=ac-pref;
+              const gp=ap>0?ap*0.20:0;
+              const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+              const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+              document.getElementById('mfi-build-output').innerHTML=
+                '<div class="c-metric"><div class="c-metric-label">Exit Value</div><div class="c-metric-val">$'+ex.toFixed(1)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+(irr>=14?'good':irr>=9?'warn':'bad')+'">'+irr.toFixed(1)+'%</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">GP Promote</div><div class="c-metric-val '+(gp>2?'good':gp>0?'warn':'bad')+'">${'+gp.toFixed(1)+'M</div></div>';
+            };
+            ['sl-mfi-noi','sl-mfi-cap'].forEach(id=>document.getElementById(id).addEventListener('input',updMfi)); updMfi();
+          }
+        }
+      ]
+    },
+    senior: { name:"One Halsted — Chicago", html:`<h2>Senior Multifamily</h2><p>Coming soon — 312-unit institutional apartment tower with three exit options: institutional sale, Fannie Mae/Freddie Mac agency refinancing, or REIT contribution at NAV.</p>`, qa:{}, challenges:[] },
+    structuring: { name:"Meridian Portfolio — Southeast US", html:`<h2>Structuring Multifamily</h2><p>Coming soon — 3-asset portfolio acquisition (Atlanta, Charlotte, Nashville) with a distressed asset creating clawback risk from prior fund distributions.</p>`, qa:{}, challenges:[] }
+  },
+
+  branded_res: {
+    intro: {
+      name: "Bellmont Residences — Aspen",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Bellmont Residences</strong> — Aspen, CO. 28 standalone Four Seasons–affiliated luxury residences. No hotel component. Buyers access FS hotel amenities under a services agreement.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total cost: <strong>$185M</strong> ($6.6M/unit avg) | Brand fee: 4% of gross sales</li><li>Senior: 55% LTC = <strong>$101.75M</strong> | LP: <strong>$62.1M</strong> | GP: <strong>$21.15M</strong></li><li>Presales: 18 of 28 units contracted | Hold: 3.5 years</li><li>Full sellout gross: $185M. Net after 7.5% deductions: $171.12M</li></ul>`,
+      qa: {
+        "How is a standalone branded residence valued?": `<h3>Valuation Method</h3><p>Comparable sale basis — not income capitalisation. Developer return is entirely the sales margin: net proceeds minus total development cost. Four Seasons brand adds 25-40% over non-branded comparable product.</p>`,
+        "What is the brand fee?": `<h3>Brand Fee Economics</h3><p>4% of gross sale price = $7.4M on $185M gross. Justified because the brand premium adds 30-40% to pricing — potentially $40-50M in additional value. $7.4M to generate $40M+ in incremental proceeds is a strong return on affiliation cost.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The brand fee timing in the waterfall is modeled incorrectly.",
+          render: () => `
+            <table class="c-table">
+              <tr><th>Item</th><th>Developer Approach</th></tr>
+              <tr><td>Brand fee amount (4% of $185M)</td><td>$7.4M — correct</td></tr>
+              <tr><td>Commissions (3%)</td><td>$5.55M — correct</td></tr>
+              <tr><td>Total deductions (7.5%)</td><td>$13.88M — correct</td></tr>
+              <tr><td>Brand fee timing</td><td>Modeled as lump sum at project completion</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-bri-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-bri-a">
+              <strong>Brand fee timing is wrong.</strong> The fee is paid at each individual unit closing as proceeds come in — not as a lump sum at project completion. Modeling it as end-loaded overstates early cash flows and inflates IRR. The total dollar amount is correct but the timing misrepresentation is a material modeling error.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate net proceeds and waterfall at full sellout.",
+          render: () => `
+            <p>Gross: <strong>$185M</strong>. Deductions: 7.5%. Senior: <strong>$101.75M</strong>. LP: <strong>$62.1M, 8% pref, 3.5yr hold</strong>.</p>
+            <table class="c-table" id="bri-blanks">
+              <tr><th>Item</th><th>Amount</th></tr>
+              <tr><td>Total deductions (7.5% x $185M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Net proceeds after deductions</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity proceeds after senior</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP accrued pref (8% x $62.1M x 3.5yr)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('bri-blanks',[{label:'Deductions',val:'$13.88M'},{label:'Net proceeds',val:'$171.12M'},{label:'Equity proceeds',val:'$69.37M'},{label:'LP pref',val:'$17.39M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "10 units remain unsold at completion. Lender wants repayment. Gap = $9.05M.",
+          render: () => `
+            <p>18 units closed generating $92.7M net. Senior = $101.75M. Gap = $9.05M. 10 unsold units worth approximately $68M gross.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true}],'dec-bri-a')">
+                <span class="c-d-icon">A</span><span>Discount remaining units aggressively to sell quickly and repay the loan.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true}],'dec-bri-a')">
+                <span class="c-d-icon">B</span><span>Request a loan extension collateralized by unsold units while continuing sales at full pricing.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true}],'dec-bri-a')">
+                <span class="c-d-icon">C</span><span>Inject GP equity ($9.05M) to repay the shortfall, sell remaining units at full price, recover injection from subsequent closing proceeds.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-bri-a">
+              <strong>B typically — C as fallback.</strong> Discounting luxury branded residences can breach the brand's minimum price provisions and permanently damage market pricing. Loan extension is the standard approach. If lender refuses, GP equity injection (C) preserves full pricing and the brand relationship without creating long-term damage.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Faster absorption = higher IRR at the same unit price.",
+          render: () => `
+            <p>Total equity: <strong>$83.25M</strong>. Senior: <strong>$101.75M</strong>. LP: <strong>$62.1M</strong>. Construction: 22 months fixed.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row"><div class="c-slider-label">Avg unit price ($M)</div><input type="range" class="c-range" id="sl-bri-price" min="5.0" max="9.0" step="0.1" value="6.6"><div class="c-slider-val" id="v-bri-price">$6.6M</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">Sellout period (months)</div><input type="range" class="c-range" id="sl-bri-time" min="6" max="36" step="3" value="18"><div class="c-slider-val" id="v-bri-time">18 mo</div></div>
+            </div>
+            <div class="c-output-grid" id="bri-build-output"></div>
+            <div id="bri-build-note" style="font-size:12px;color:var(--muted);margin-top:10px"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+          init: () => {
+            const updBri = () => {
+              const price=parseFloat(document.getElementById('sl-bri-price').value);
+              const mo=parseFloat(document.getElementById('sl-bri-time').value);
+              document.getElementById('v-bri-price').textContent='$'+price.toFixed(1)+'M';
+              document.getElementById('v-bri-time').textContent=mo+' mo';
+              const gross=28*price, net=gross*0.925, ep=net-101.75;
+              const teq=83.25, lp=62.1, h=(22+mo)/12;
+              const ac=ep-teq, pref=lp*0.08*h, ap=ac-pref;
+              const gp=ap>0?ap*0.20:0;
+              const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+              const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+              document.getElementById('bri-build-output').innerHTML=
+                '<div class="c-metric"><div class="c-metric-label">Gross Sales</div><div class="c-metric-val">$'+gross.toFixed(1)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">Hold (yrs)</div><div class="c-metric-val">'+h.toFixed(1)+'</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+(irr>=14?'good':irr>=9?'warn':'bad')+'">'+irr.toFixed(1)+'%</div></div>';
+              document.getElementById('bri-build-note').textContent=mo<=12?'Fast absorption — strong IRR.':mo>=30?'Slow sellout hurts IRR significantly.':'Moderate absorption pace.';
+            };
+            ['sl-bri-price','sl-bri-time'].forEach(id=>document.getElementById(id).addEventListener('input',updBri)); updBri();
+          }
+        }
+      ]
+    },
+    senior: { name:"The Oberoi Collection — Dubai", html:`<h2>Senior Branded Residence</h2><p>Coming soon — 62 ultra-luxury residences in Dubai with an Oberoi affiliation, 60% ABSD buyer stamp duty impact, and a brand premium analysis showing how Oberoi's track record in India cannot be extrapolated to Dubai pricing.</p>`, qa:{}, challenges:[] },
+    structuring: { name:"The Mandarin Collection — Singapore", html:`<h2>Structuring Branded Residence</h2><p>Coming soon — hybrid sale + retain structure with 15 units in a Mandarin Oriental rental pool, SGD/USD FX hedging decision, and German CFC tax structuring for a European family office co-GP.</p>`, qa:{}, challenges:[] }
+  },
+
+  lifestyle: {
+    intro: {
+      name: "Casilda Club — Oaxaca",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Casilda Club</strong> — Oaxaca, Mexico. 52-key lifestyle hotel with a leased destination restaurant (Michelin-recognized chef), mezcal bar, 6-treatment spa, and rooftop pool lounge.</p>
+<h2>Deal Parameters</h2>
+<ul><li>Total cost: <strong>$28M</strong> ($538K/key)</li><li>Senior: 55% LTC = <strong>$15.4M</strong> at 10.5% fixed</li><li>LP: <strong>$10.9M</strong> | GP: <strong>$1.7M</strong></li><li>Restaurant lease: $180K base rent + 6% of F&B revenue above $1.2M breakpoint</li><li>Stabilized NOI: <strong>$2.78M</strong> | Exit cap 8.0% → Value: <strong>$34.8M</strong> | LP IRR target: 13-15%</li></ul>`,
+      qa: {
+        "How does the F&B lease work?": `<h3>Restaurant Lease Economics</h3><p>$180K base rent + 6% of gross F&B revenue above $1.2M natural breakpoint. If the restaurant generates $2.8M: percentage rent = ($2.8M minus $1.2M) x 6% = $96K. Total F&B income = $276K. The hotel takes no food cost, labour, or kitchen management risk — aligned incentives with a guaranteed income floor.</p>`,
+        "Why 8% cap rate in Oaxaca?": `<h3>Secondary Market Premium</h3><p>Oaxaca is culturally rich but a secondary market with limited institutional buyer pool. Cap rates run 150-250bps above Cabo, Tulum, and Mexico City for: lower liquidity, infrastructure risk, and demand volatility. Same NOI worth $34.8M in Oaxaca vs $42.8M in Tulum at 6.5% cap.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The NOI calculation blends spa and hotel revenue incorrectly.",
+          render: () => `
+            <table class="c-table">
+              <tr><th>Revenue Stream</th><th>Developer Treatment</th></tr>
+              <tr><td>Rooms + Other ($5.31M)</td><td>42% hotel margin applied</td></tr>
+              <tr><td>Spa — direct-operated ($680K)</td><td>42% margin applied (blended in)</td></tr>
+              <tr><td>F&B lease income ($276K)</td><td>100% — no margin applied</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-lsi-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-lsi-a">
+              <strong>Spa revenue blended into hotel NOI margin.</strong> Spa has its own direct costs — therapists, products, linens, equipment maintenance — that don't match the hotel cost structure. Each revenue stream should be modeled at its own margin. Spa typically runs 35-50% NOI margin. Small dollar difference here, but the methodology error signals weak underwriting discipline.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Build NOI with correct margin treatment per revenue stream.",
+          render: () => `
+            <table class="c-table" id="lsi-blanks">
+              <tr><th>Stream</th><th>Revenue</th><th>NOI</th></tr>
+              <tr><td>Rooms + Other at 42%</td><td>$5.31M</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Spa at 40%</td><td>$680K</td><td><input class="c-input" type="text" placeholder="$?K"></td></tr>
+              <tr><td>F&B lease at 100%</td><td>$276K</td><td><input class="c-input" type="text" placeholder="$?K"></td></tr>
+              <tr><td><strong>Total NOI</strong></td><td></td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('lsi-blanks',[{label:'Rooms NOI',val:'$2.23M'},{label:'Spa NOI',val:'$272K'},{label:'F&B lease',val:'$276K'},{label:'Total NOI',val:'$2.78M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "The chef wants more space, lower rent, and F&B exclusivity. How do you respond?",
+          render: () => `
+            <p>The restaurant operator requests: (1) 20% more kitchen space ($180K in construction changes), (2) base rent reduced from $180K to $120K, (3) 5-year F&B exclusivity across all hotel outlets.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true}],'dec-lsi-a')">
+                <span class="c-d-icon">A</span><span>Accept all three — a Michelin-recognized chef will drive ADR and occupancy.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true}],'dec-lsi-a')">
+                <span class="c-d-icon">B</span><span>Reject all — the lease is signed and these terms are unreasonable.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true}],'dec-lsi-a')">
+                <span class="c-d-icon">C</span><span>Negotiate each separately: kitchen expansion at 50/50 shared cost, rent restructured to maintain total hotel economics (lower base with lower percentage breakpoint), F&B exclusivity rejected outright.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-lsi-a">
+              <strong>C.</strong> Accepting everything (A) gives away $60K/yr rent and $180K construction with no operational exit if the relationship deteriorates. Blanket rejection (B) may lose a high-value operator. F&B exclusivity is a structural risk no well-advised hotelier accepts — it eliminates flexibility permanently and should be rejected regardless of the chef's profile.
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "See how F&B lease and spa drive total NOI — and how cap rate hits exit value.",
+          render: () => `
+            <p>Base room NOI: <strong>$2.23M</strong>. Senior: <strong>$15.4M</strong>. LP: <strong>$10.9M</strong>. Total equity: <strong>$12.6M</strong>. 5yr hold.</p>
+            <div style="margin:16px 0">
+              <div class="c-slider-row"><div class="c-slider-label">Spa NOI ($K)</div><input type="range" class="c-range" id="sl-lsi-spa" min="50" max="400" step="10" value="272"><div class="c-slider-val" id="v-lsi-spa">$272K</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">F&B lease total ($K)</div><input type="range" class="c-range" id="sl-lsi-fb" min="80" max="500" step="10" value="276"><div class="c-slider-val" id="v-lsi-fb">$276K</div></div>
+              <div class="c-slider-row"><div class="c-slider-label">Exit cap rate</div><input type="range" class="c-range" id="sl-lsi-cap" min="6.5" max="10.5" step="0.25" value="8.0"><div class="c-slider-val" id="v-lsi-cap">8.00%</div></div>
+            </div>
+            <div class="c-output-grid" id="lsi-build-output"></div>
+            <div class="action-row" style="margin-top:16px"><button class="btn-primary" onclick="nextChallenge()">Finish</button></div>`,
+          init: () => {
+            const updLsi = () => {
+              const spa=parseFloat(document.getElementById('sl-lsi-spa').value)/1000;
+              const fb=parseFloat(document.getElementById('sl-lsi-fb').value)/1000;
+              const cap=parseFloat(document.getElementById('sl-lsi-cap').value)/100;
+              document.getElementById('v-lsi-spa').textContent='$'+Math.round(spa*1000)+'K';
+              document.getElementById('v-lsi-fb').textContent='$'+Math.round(fb*1000)+'K';
+              document.getElementById('v-lsi-cap').textContent=(cap*100).toFixed(2)+'%';
+              const noi=2.23+spa+fb, ex=noi/cap, d=15.4, teq=12.6, lp=10.9, h=5;
+              const ep=ex-d, ac=ep-teq, pref=lp*0.08*h, ap=ac-pref;
+              const gp=ap>0?ap*0.20:0;
+              const lpt=lp+Math.min(pref,Math.max(0,ac))+(ap>0?ap*0.80:0);
+              const em=lpt/lp, irr=em>0?(Math.pow(em,1/h)-1)*100:0;
+              document.getElementById('lsi-build-output').innerHTML=
+                '<div class="c-metric"><div class="c-metric-label">Total NOI</div><div class="c-metric-val">$'+noi.toFixed(2)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">Exit Value</div><div class="c-metric-val">$'+ex.toFixed(1)+'M</div></div>'+
+                '<div class="c-metric"><div class="c-metric-label">LP IRR</div><div class="c-metric-val '+(irr>=13?'good':irr>=8?'warn':'bad')+'">'+irr.toFixed(1)+'%</div></div>';
+            };
+            ['sl-lsi-spa','sl-lsi-fb','sl-lsi-cap'].forEach(id=>document.getElementById(id).addEventListener('input',updLsi)); updLsi();
+          }
+        }
+      ]
+    },
+    senior: { name:"Solis House — Cartagena", html:`<h2>Senior Lifestyle</h2><p>Coming soon — 78-key lifestyle hotel with owned F&B, a WeWork-affiliate co-working lease, and a DSCR stress test revealing which revenue stream creates the most lender concern when non-traditional income is heavily discounted.</p>`, qa:{}, challenges:[] },
+    structuring: { name:"The Bergamot — Los Angeles", html:`<h2>Structuring Lifestyle</h2><p>Coming soon — 96-key Santa Monica lifestyle hotel with a James Beard chef profit-share (not a lease), a 700-member wellness club, and a California public accommodation law conflict in the membership admissions model.</p>`, qa:{}, challenges:[] }
+  }
+
 };
 
 const GLOSSARY_DATA = {
@@ -1570,8 +2200,8 @@ function loadScenario() {
     document.getElementById('scenario-output').innerHTML = `<div class="scenario-box"><p>Scenario coming soon. Try Hotel.</p></div>`;
     return;
   }
-  const diff = currentScenarioDiff === 'senior' ? 'senior' : 'intro';
-  activeScenario = scData[diff] || scData['intro'];
+  const diff = currentScenarioDiff === 'senior' ? 'senior' : currentScenarioDiff === 'mid' ? 'mid' : 'intro';
+  activeScenario = scData[diff] || scData['mid'] || scData['intro'];
 
   document.getElementById('scenario-output').innerHTML = `
     <div class="scenario-box">${activeScenario.html}</div>
@@ -1740,6 +2370,5 @@ function showGloss(key) {
 renderTopics();
 showGloss('formulas');
 </script>
-
 </body>
 </html>
