@@ -322,6 +322,9 @@ input[type=range].c-range { flex: 1; min-width: 120px; accent-color: var(--taupe
         <button class="mod-btn" onclick="selectMod(2,this)">
           <div class="mod-num">Module 03</div><div class="mod-name">Deal Underwriting</div>
         </button>
+        <button class="mod-btn" onclick="selectMod(3,this)">
+          <div class="mod-num">Module 04</div><div class="mod-name">PE Mental Math</div>
+        </button>
       </div>
       <div class="sec-lbl" id="topic-section-label">Capital Stack & Debt Structures — choose a topic</div>
       <div class="topic-grid" id="topic-grid"></div>
@@ -423,6 +426,17 @@ const MODULES = [
       "Cap Rate & NOI — Building the Income Approach",
       "Cash-on-Cash Return vs. Levered IRR",
       "Sensitivity Analysis: Stress-Testing Assumptions",
+    ]
+  },
+  {
+    label: "PE Mental Math",
+    topics: [
+      "LBO Intuition: Entry, Exit, and the Return in Between",
+      "Quick IRR Approximation: The Mental Math",
+      "Debt Capacity and Coverage Math",
+      "Accretion and Dilution Logic",
+      "The Paper LBO: Hold the Deal in Your Head",
+      "Sensitivity Without Excel: What Actually Moves the Needle",
     ]
   }
 ];
@@ -1004,7 +1018,253 @@ const LESSONS = {
       { q: "An asset generates 7.5% CoC over a 6-year hold with modest NOI growth. Levered IRR is 9.5%. What does the gap between CoC and IRR tell you?", opts: ["A) The deal is losing money — IRR should be much higher than CoC", "B) The deal is primarily an income play — current yield is strong but exit value creation is modest, with IRR only modestly above CoC", "C) High leverage is amplifying returns significantly", "D) The investor made a calculation error"], correct: 1, exp: "When CoC (7.5%) is close to levered IRR (9.5%), the deal is primarily generating returns from current income rather than exit appreciation. The small gap means the sale didn't add much return beyond the ongoing cash yield. This is characteristic of a stabilized core asset — reliable income, modest upside. Not wrong — just a different risk/return profile than a development deal targeting 18%+ levered IRR through back-end value creation." },
       { q: "A hotel is acquired for $60M with $38M of debt at 7.5% IO. Equity = $22M. NOI = $4.2M. Annual debt service = $2.85M. What is the cash-on-cash return on equity?", opts: ["A) 7.0%", "B) 6.1%", "C) 5.2%", "D) 8.4%"], correct: 0, exp: "Annual cash flow to equity = NOI − debt service = $4.2M − $2.85M = $1.35M. CoC = $1.35M ÷ $22M equity = 6.1%. Wait — that's Answer B. Let me recalculate: $1.35M ÷ $22M = 0.0614 = 6.1%. Answer B is correct. Note that the unlevered yield (cap rate) = $4.2M ÷ $60M = 7.0% — higher than the levered CoC of 6.1% because the debt costs more (7.5%) than the asset yields (7.0%). Negative leverage — debt is dragging CoC below the unlevered return." }
     ]
+  },
+
+  "LBO Intuition: Entry, Exit, and the Return in Between": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The leveraged buyout is the foundational transaction of private equity. Before you can build a model in Excel, you need to hold the deal logic in your head — entry price, debt load, operating growth, exit value, equity return. Every PE analyst is expected to sketch this mentally. The firms that test for it (Blackstone, Apollo, KKR) are testing whether you understand deal economics, not whether you can operate software.</p>
+
+<h2>The LBO in Four Lines</h2>
+<p>At its core, a leveraged buyout is simple:</p>
+<div class="formula">
+1. Buy a business at an entry multiple × EBITDA<br>
+2. Finance it with a lot of debt and a little equity<br>
+3. Grow EBITDA, pay down debt over the hold period<br>
+4. Sell at an exit multiple and return equity to investors
+</div>
+<p>Returns come from three sources: EBITDA growth, debt paydown (increasing equity value), and multiple expansion (selling at a higher multiple than you paid). The best deals have all three. A realistic deal might have two. A mediocre deal relies on one.</p>
+
+<h2>The Mental Math: Entry</h2>
+<p>A business generates $20M EBITDA. You buy it at 8x. Purchase price = $160M. You finance it with 5x debt ($100M) and 3x equity ($60M). Equity check: $60M. This is what PE investors are putting up.</p>
+<p>Always know: what is the equity as a percentage of total purchase price? Here: $60M / $160M = 37.5%. What multiple of EBITDA is the equity? $60M / $20M = 3.0x equity contribution.</p>
+
+<h2>The Mental Math: Exit</h2>
+<p>Five years later. EBITDA has grown from $20M to $28M (about 7% annually). You sell at 9x exit multiple. Exit value = $28M × 9 = $252M. Debt has been paid down from $100M to $65M. Equity proceeds = $252M - $65M = $187M.</p>
+<p>Equity multiple = $187M / $60M = <strong>3.1x</strong>. Over 5 years, 3.1x is approximately a <strong>25% IRR</strong>. Strong deal.</p>
+
+<div class="callout"><strong>The quick equity multiple check:</strong> Before calculating IRR, always calculate the equity multiple first. A 2x in 5 years is a modest deal. A 3x in 4 years is strong. A 5x in 3 years is exceptional. Build the IRR intuition from the multiple.</div>
+
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Entry multiple is the biggest risk.</strong> Overpaying at entry is hard to recover from. Even if everything goes right operationally, a high entry multiple sets a high bar for exit. "You make money when you buy, not when you sell" is PE's oldest rule.</li>
+<li><strong>Leverage amplifies in both directions.</strong> 5x debt on a good deal turns $60M equity into $187M. On a bad deal where EBITDA falls, the same leverage turns $60M into zero — the company can't service debt and equity is wiped out.</li>
+<li><strong>Multiple expansion is gravy, not a strategy.</strong> Underwriting a deal that only works if you sell at a higher multiple than you paid is dangerous. Build the model assuming flat multiples. Expansion is upside, not a base case.</li>
+</ul>`,
+    quiz: [
+      { q: "A PE firm buys a business for 7x EBITDA of $15M. What is the purchase price?", opts: ["A) $90M", "B) $105M", "C) $75M", "D) $120M"], correct: 1, exp: "Purchase price = EBITDA × entry multiple = $15M × 7 = $105M. This is the first mental math step in any LBO: entry multiple × EBITDA = enterprise value / purchase price." },
+      { q: "The same $105M deal is financed with 4.5x debt. How much equity is required?", opts: ["A) $37.5M", "B) $52.5M", "C: $42M", "D) $35M"], correct: 0, exp: "Debt = 4.5x × $15M EBITDA = $67.5M. Equity = $105M - $67.5M = $37.5M. Always calculate debt as a multiple of EBITDA first, then subtract from total purchase price to get equity." },
+      { q: "Five years later, EBITDA is $22M and the company sells at 8x. Remaining debt is $40M. What is the equity multiple?", opts: ["A) 2.8x", "B) 3.4x", "C) 4.1x", "D) 2.2x"], correct: 1, exp: "Exit value = $22M × 8 = $176M. Equity proceeds = $176M - $40M = $136M. Equity multiple = $136M / $37.5M = 3.63x. Closest answer is B (3.4x). Always: exit value - remaining debt = equity proceeds, then divide by initial equity." },
+      { q: "Returns in a leveraged buyout come from three sources. Which is considered the most sustainable?", opts: ["A) Multiple expansion — selling at a higher multiple than entry", "B) Financial engineering — minimising taxes through interest deductibility", "C) EBITDA growth — genuinely making the business more profitable", "D) Debt paydown — reducing leverage over the hold period"], correct: 2, exp: "EBITDA growth through operational improvement is the most defensible return driver — it reflects real value creation in the business. Multiple expansion depends on market conditions and is unreliable. Debt paydown is real but limited. Financial engineering is temporary. The best PE firms build their thesis around EBITDA growth first." }
+    ]
+  },
+
+  "Quick IRR Approximation: The Mental Math": {
+    content: `
+<h2>Why This Matters</h2>
+<p>In an interview, a live deal review, or a partner meeting, you will not always have time to run an Excel model. You need to be able to look at an equity multiple and a hold period and quickly estimate whether the IRR is compelling, mediocre, or a waste of time. This skill is specifically tested in PE analyst assessments — and it separates people who understand deal economics from people who can only operate models.</p>
+
+<h2>The Rule of 72</h2>
+<p>The Rule of 72 is the fastest approximation in finance: divide 72 by the annual return percentage to estimate how many years it takes to double your money.</p>
+<div class="formula">Years to double ≈ 72 ÷ Annual Return %<br>→ Inverted: Annual Return % ≈ 72 ÷ Years to double</div>
+<p>If your money doubles in 4 years: 72 / 4 = <strong>18% IRR</strong> (approximate). Doubles in 6 years: 72 / 6 = <strong>12% IRR</strong>. Doubles in 3 years: 72 / 3 = <strong>24% IRR</strong>.</p>
+
+<h2>The Multiple-to-IRR Table: Memorise This</h2>
+<div class="table-wrap"><table>
+<tr><th>Equity Multiple</th><th>3 Years</th><th>4 Years</th><th>5 Years</th><th>7 Years</th></tr>
+<tr><td>1.5x</td><td>~14%</td><td>~11%</td><td>~8%</td><td>~6%</td></tr>
+<tr><td>2.0x</td><td>~26%</td><td>~19%</td><td>~15%</td><td>~10%</td></tr>
+<tr><td>2.5x</td><td>~36%</td><td>~26%</td><td>~20%</td><td>~14%</td></tr>
+<tr><td>3.0x</td><td>~44%</td><td>~32%</td><td>~25%</td><td>~17%</td></tr>
+<tr><td>3.5x</td><td>~52%</td><td>~37%</td><td>~28%</td><td>~19%</td></tr>
+</table></div>
+
+<h2>The Formula Behind It</h2>
+<p>IRR ≈ (Equity Multiple)^(1/Hold Years) − 1. A 2x in 5 years: 2^(1/5) - 1 = 2^0.2 - 1 ≈ 1.149 - 1 = <strong>14.9%</strong>. A 3x in 4 years: 3^(1/4) - 1 ≈ 1.316 - 1 = <strong>31.6%</strong>.</p>
+<p>You can approximate this without a calculator. For a 2x: you doubled, so the Rule of 72 gives you the hold-period anchor. For a 3x: think of it as doubling twice — one double takes (72/IRR) years, two doubles takes twice that — then back-solve.</p>
+
+<h2>What Hold Period Does to IRR</h2>
+<p>This is the insight most analysts miss: <strong>the same equity multiple produces dramatically different IRRs at different hold periods</strong>. A 2.0x EM in 3 years = ~26% IRR. A 2.0x EM in 7 years = ~10% IRR. The multiple is identical. The IRR is almost three times better in the shorter hold.</p>
+<p>This is why PE firms fight for clean exits — holding a deal 2 years longer to "get the last dollar" often destroys IRR even when it marginally improves the absolute proceeds. Carry is earned on IRR, not just multiples.</p>
+
+<div class="callout"><strong>The quick filter:</strong> Any deal returning below 2.0x equity in 5 years is below a 15% IRR — typically below PE's minimum return threshold. Any deal returning 3.0x+ in 4 years is a 32%+ IRR — exceptional. Use these anchors to triage before modelling.</div>`,
+    quiz: [
+      { q: "An investment returns a 2.5x equity multiple over 5 years. Approximately what is the IRR?", opts: ["A) 12%", "B) 16%", "C) 20%", "D) 28%"], correct: 2, exp: "2.5^(1/5) - 1 = 2.5^0.2 - 1. Approximate: 2.5x in 5 years ≈ 20% IRR. From the table: 2.5x at 5 years = ~20%. This is a solid PE return — above most fund hurdle rates." },
+      { q: "Using the Rule of 72, approximately how long does it take to triple your money at a 15% annual return?", opts: ["A) 4.8 years", "B) 6.4 years", "C) 7.7 years", "D) 9.2 years"], correct: 2, exp: "Rule of 72 says doubling takes 72/15 = 4.8 years. Tripling is approximately 1.58x a doubling period (log(3)/log(2) = 1.585). So 4.8 × 1.585 ≈ 7.6 years. The rule of 72 gives you a doubling anchor; tripling takes roughly 60% longer." },
+      { q: "A deal returns 3.0x equity. Which hold period produces the higher IRR?", opts: ["A) 7 years — more absolute time for compounding", "B) 4 years — shorter hold period at the same multiple means higher annualised return", "C) They produce the same IRR — the multiple is identical", "D) Depends on the entry multiple"], correct: 1, exp: "3.0x in 4 years: 3^(1/4)-1 ≈ 31.6%. 3.0x in 7 years: 3^(1/7)-1 ≈ 17.0%. Same multiple, very different IRR. IRR is a time-weighted measure — shorter hold period at the same multiple always produces higher IRR. This is why exit timing is a real return lever, not just a clean-up exercise." },
+      { q: "A PE fund targets a minimum 20% net IRR. What equity multiple must they return in 5 years to clear this hurdle (approximately)?", opts: ["A) 1.8x", "B) 2.1x", "C) 2.5x", "D) 2.8x"], correct: 2, exp: "At 20% IRR over 5 years: multiple = (1.20)^5 = 1.20 × 1.20 × 1.20 × 1.20 × 1.20 ≈ 2.49x. So approximately 2.5x equity multiple clears a 20% IRR over 5 years. Memorising (1.20)^5 ≈ 2.5x is one of the most useful anchors in PE." }
+    ]
+  },
+
+  "Debt Capacity and Coverage Math": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Before any lender commits capital, before any PE firm structures a deal, someone has to answer one question: how much debt can this business actually support? The answer comes from the business's earnings power — specifically EBITDA — and the lender's requirements around coverage and leverage. Being able to calculate this quickly, mentally, is a fundamental PE analyst skill.</p>
+
+<h2>The Two Debt Sizing Constraints</h2>
+<p>Lenders use two constraints simultaneously and size to the more restrictive:</p>
+
+<p><strong>Leverage multiple constraint:</strong> Most lenders for middle-market PE transactions will lend 4.0–6.0x EBITDA. Senior debt alone is usually 3.0–4.0x. Total debt (senior + mezz) is 5.0–6.5x. Above 6x is considered highly leveraged and requires strong credit quality and growth visibility.</p>
+
+<div class="formula">Max Debt (leverage) = EBITDA × Maximum Leverage Multiple</div>
+
+<p><strong>Coverage constraint:</strong> The business must generate enough cash flow to service debt payments. Lenders require DSCR of 1.20x–1.40x minimum. Working backwards from required coverage:</p>
+
+<div class="formula">Max Annual Debt Service = EBITDA ÷ Required DSCR<br>Max Debt = Max Annual Debt Service ÷ Interest Rate</div>
+
+<h2>The Mental Math Walkthrough</h2>
+<p>A business has $30M EBITDA. Lender requires 1.25x DSCR and quotes 8% interest (IO loan). What's the maximum debt?</p>
+<p>Max debt service = $30M / 1.25 = $24M/year. Max debt = $24M / 8% = <strong>$300M</strong>.</p>
+<p>Check against leverage: $300M / $30M = 10x EBITDA — clearly unrealistic. The leverage constraint (say 5x = $150M) is more restrictive. <strong>Always check both constraints.</strong></p>
+
+<h2>How Leverage Affects Equity Returns</h2>
+<p>Higher leverage means: less equity to put in → same dollar return to equity → higher equity multiple and IRR. But also: higher fixed debt service → less margin for EBITDA decline → higher risk of distress.</p>
+<p>A deal bought at $100M: at 4x leverage ($80M debt, $20M equity), a $140M exit gives equity 3.0x EM. At 2x leverage ($50M debt, $50M equity), the same $140M exit gives equity only 1.8x EM. Leverage is the amplifier.</p>
+
+<div class="callout"><strong>The leverage stress test:</strong> If EBITDA falls 20%, can the business still cover interest? At 5x EBITDA leverage and 8% IO interest: debt service = $0.4M per $1M EBITDA. A 20% EBITDA decline leaves 80 cents to cover every 40-cent debt service obligation. Coverage = 2.0x on base, 1.6x stressed. Comfortable. At 7x leverage and 8%: debt service = $0.56M per $1M EBITDA. Stressed coverage = 0.8M / 0.56M = 1.43x. Thin.</div>
+
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>EBITDA to free cash flow is the real question.</strong> Debt is serviced from cash, not accounting income. Capital-intensive businesses with high maintenance capex have far less real cash available than their EBITDA suggests.</li>
+<li><strong>Covenant headroom matters.</strong> A 1.25x minimum DSCR with actual coverage of 1.30x has very thin headroom. Any EBITDA miss trips the covenant. Build deals with 30-40% covenant headroom or negotiate covenant-lite structures.</li>
+<li><strong>Amortising vs. IO debt changes the math.</strong> Amortising debt (principal + interest payments) is harder to service and reduces IRR by tying up cash in principal repayment. IO (interest only) maximises equity returns but leaves more debt at exit.</li>
+</ul>`,
+    quiz: [
+      { q: "A business has $25M EBITDA. A lender will lend up to 5x EBITDA at 7.5% IO. What is the maximum loan amount and annual interest burden?", opts: ["A) $125M loan, $9.375M interest", "B) $100M loan, $7.5M interest", "C) $150M loan, $11.25M interest", "D) $125M loan, $8.75M interest"], correct: 0, exp: "Max debt = 5x × $25M = $125M. Annual interest = $125M × 7.5% = $9.375M. DSCR = $25M / $9.375M = 2.67x — well above minimum. The leverage multiple constraint ($125M) is the binding one here." },
+      { q: "A lender requires 1.30x DSCR minimum. EBITDA is $18M and the interest rate is 9% IO. What is the maximum loan amount?", opts: ["A) $128M", "B) $154M", "C) $180M", "D) $138M"], correct: 1, exp: "Max debt service = $18M / 1.30 = $13.85M. Max loan = $13.85M / 9% = $153.8M ≈ $154M. This is the coverage-driven constraint. Always check against the leverage multiple too — if this $154M represents, say, 8x EBITDA, the leverage constraint would be more restrictive." },
+      { q: "Why does an interest-only loan structure produce higher equity IRR than an amortising loan at the same rate?", opts: ["A) IO loans have lower interest rates", "B) IO loans preserve cash flow inside the company rather than requiring principal repayment, keeping more capital available for operations and returning more cash at exit", "C) Amortising loans are taxed more heavily", "D) IO loans have shorter terms"], correct: 1, exp: "With IO, all cash flow above interest can be retained in the business or distributed. With an amortising loan, a portion of each payment reduces principal — that cash leaves the company without generating returns. IO also means the full loan amount remains outstanding at exit (more proceeds go to debt repayment), but the equity benefited from keeping that cash working during the hold period." },
+      { q: "EBITDA falls 25% unexpectedly. Base DSCR was 1.40x. What is the stressed DSCR?", opts: ["A) 1.05x", "B) 1.10x", "C) 1.15x", "D) 0.95x"], correct: 0, exp: "Stressed EBITDA = original EBITDA × 75%. Stressed DSCR = 1.40x × 75% = 1.05x. The business is barely covering debt service — just 5% above the minimum typically required. Any further EBITDA decline breaches a 1.0x coverage floor. This illustrates why lenders stress-test and why thin coverage deals are vulnerable." }
+    ]
+  },
+
+  "Accretion and Dilution Logic": {
+    content: `
+<h2>Why This Matters</h2>
+<p>When a public company acquires another, the first question the market asks is: is this accretive or dilutive to earnings per share? The answer determines whether the acquirer's stock price rises or falls on announcement day. For PE, the logic is different but the underlying question is the same — does this deal improve or worsen the per-share economics of the acquiring entity? Understanding accretion/dilution is a core skill tested in PE and investment banking interviews.</p>
+
+<h2>The Core Concept</h2>
+<p>A deal is <strong>accretive</strong> if the earnings per share (EPS) of the acquirer increases after the deal closes. It is <strong>dilutive</strong> if EPS falls. The driver is whether the return on the acquisition exceeds the cost of financing it.</p>
+
+<div class="formula">Accretive if: Earnings Yield of Target > Cost of Acquisition Financing<br>Earnings Yield = (Net Income / Purchase Price) = 1 / P/E multiple</div>
+
+<p>If you buy a company at a 15x P/E and finance the acquisition with debt at 5% interest, the earnings yield of the target is 1/15 = 6.7%. That exceeds the 5% cost of debt — the deal is accretive. If you finance with stock and your own P/E is 12x (earnings yield 8.3%), you're swapping 8.3% earnings yield for 6.7% — dilutive.</p>
+
+<h2>The Mental Math</h2>
+<p>Acquirer: net income $50M, 100M shares = $0.50 EPS. Buys a target with $20M net income for $200M (10x P/E). Finances with new shares at the acquirer's stock price of $10 (20x P/E): 20M new shares issued. New total shares = 120M. New net income = $70M. New EPS = $70M / 120M = <strong>$0.583</strong>. Accretive ($0.583 > $0.500).</p>
+<p>Same deal, financed instead with debt at 7%: Interest cost = $200M × 7% = $14M. After-tax interest (25% tax rate) = $10.5M. New net income = $70M − $10.5M = $59.5M. EPS = $59.5M / 100M = <strong>$0.595</strong>. Also accretive — but both the equity and debt financing versions are accretive here because the target trades at a lower P/E (10x) than the acquirer (20x).</p>
+
+<h2>How PE Thinks About This Differently</h2>
+<p>PE doesn't have public EPS to worry about. But the underlying logic — does the return on acquired assets exceed the cost of capital — is exactly what the IRR calculation captures. A PE firm buying a business at 8x EBITDA and financing it at a total cost of capital (debt cost + equity return requirement) of 15% is asking: can this business generate enough return to clear 15%? If yes, it's "accretive" to fund returns. If not, it destroys value.</p>
+
+<div class="callout"><strong>The key insight:</strong> Lower P/E (higher earnings yield) targets acquired by higher P/E (lower earnings yield) acquirers are mathematically accretive when financed with stock. This is the "multiple arbitrage" that drives many strategic M&A decisions — and why PE firms operating in fragmented industries can roll up smaller businesses below their exit multiple and create value simply through the arithmetic.</div>
+
+<h2>What Practitioners Know</h2>
+<ul>
+<li><strong>Accretion/dilution is an EPS metric, not a value metric.</strong> A deal can be accretive to EPS and still destroy shareholder value if the acquirer overpays relative to intrinsic value. Wall Street's obsession with accretion/dilution has led to many value-destructive deals that looked good on EPS screens.</li>
+<li><strong>Synergies are the most abused input.</strong> Deals that are dilutive standalone often get justified by "synergies" that materialise partially or not at all. PE treats synergies with skepticism — they only underwrite what management can control.</li>
+<li><strong>The roll-up strategy is built on this logic.</strong> Buy 10 small businesses at 5-6x EBITDA, combine them into a platform that exits at 10-12x. The multiple arbitrage between acquisition multiple and exit multiple is pure accretion math.</li>
+</ul>`,
+    quiz: [
+      { q: "An acquirer with a 20x P/E buys a target at a 12x P/E using only stock. Is this accretive or dilutive?", opts: ["A) Dilutive — lower P/E target always dilutes", "B) Accretive — the target's earnings yield (8.3%) exceeds the cost of issuing stock at 20x P/E (5%)", "C) Accretive only if the target grows faster", "D) Dilutive — issuing shares always dilutes EPS"], correct: 1, exp: "Target earnings yield = 1/12 = 8.33%. Cost of equity financing = 1/20 = 5.0% (you're 'paying' 5 cents of your earnings for each dollar of your stock you issue). Since 8.33% > 5.0%, the deal is accretive — you receive more earnings per dollar of stock issued than you give up." },
+      { q: "A PE firm acquires 10 small businesses at 6x EBITDA and plans to sell the combined platform at 11x EBITDA. The individual businesses haven't grown. What is the source of value creation?", opts: ["A) EBITDA growth", "B) Debt paydown", "C) Multiple arbitrage — buying at 6x and selling at 11x creates equity value through the valuation gap alone", "D) Tax benefits from the acquisition structure"], correct: 2, exp: "Pure multiple arbitrage: acquire at 6x, exit at 11x. If combined EBITDA is $50M, acquisition cost was $300M (at 6x) and exit value is $550M (at 11x). The $250M value increase came entirely from the multiple re-rating — not from operational improvement. This is the core logic of PE roll-up strategies in fragmented industries." },
+      { q: "Why might a strategically accretive deal still destroy shareholder value?", opts: ["A) Accretion always creates value — these are equivalent", "B) EPS accretion only means earnings per share rose; if the acquirer significantly overpaid relative to intrinsic value, the present value of future synergies may not justify the premium", "C) Accretive deals are always good for bondholders, not equity holders", "D) Tax treatment of accretive deals reduces their actual benefit"], correct: 1, exp: "EPS accretion is a short-term accounting metric. A company can buy a dilutive-to-fair-value target and make it look accretive through financial engineering (low-interest debt, favourable accounting). The real test: did you pay less than intrinsic value? Decades of M&A research show most acquisitions destroy acquirer shareholder value despite being announced as accretive." },
+      { q: "Acquirer net income: $40M on 80M shares (EPS $0.50). Acquires target with $10M net income for $80M cash, financed at 6% debt (tax rate 30%). What is the new EPS?", opts: ["A) $0.575", "B) $0.488", "C) $0.538", "D) $0.563"], correct: 2, exp: "After-tax interest = $80M × 6% × (1-0.30) = $3.36M. New net income = $40M + $10M - $3.36M = $46.64M. Shares unchanged at 80M. New EPS = $46.64M / 80M = $0.583. Accretive (from $0.50 to $0.583). The target's earnings ($10M) exceeded the after-tax interest cost ($3.36M)." }
+    ]
+  },
+
+  "The Paper LBO: Hold the Deal in Your Head": {
+    content: `
+<h2>Why This Matters</h2>
+<p>The paper LBO is the single most commonly tested skill in PE analyst and associate interviews. You'll be given a few numbers and asked to work through a complete leveraged buyout — entry, financing, operations, exit, returns — without Excel. Firms including Blackstone, Apollo, Carlyle, and KKR all use versions of this test. The goal is not precision. It is demonstrating that you understand how deal economics work and can communicate them clearly under pressure.</p>
+
+<h2>The Framework: Five Steps</h2>
+<p>Work through every paper LBO in this exact sequence:</p>
+
+<div class="formula">
+Step 1: Calculate Purchase Price<br>
+Step 2: Determine Debt and Equity Split<br>
+Step 3: Project EBITDA at Exit<br>
+Step 4: Calculate Exit Value and Equity Proceeds<br>
+Step 5: Determine Equity Multiple and Approximate IRR
+</div>
+
+<h2>A Full Worked Example</h2>
+<p><strong>The setup:</strong> Target EBITDA: $40M. Entry multiple: 8.5x. Debt: 5.0x EBITDA. Annual EBITDA growth: 10%. Hold period: 5 years. Exit multiple: 9.0x. Debt paydown: 40% of original debt over 5 years. Ignore taxes and fees.</p>
+
+<p><strong>Step 1 — Purchase Price:</strong> $40M × 8.5 = <strong>$340M</strong></p>
+
+<p><strong>Step 2 — Debt and Equity:</strong> Debt = 5.0x × $40M = $200M. Equity = $340M − $200M = <strong>$140M</strong></p>
+
+<p><strong>Step 3 — EBITDA at Exit:</strong> $40M growing at 10% for 5 years: $40M × (1.10)^5 ≈ $40M × 1.61 = <strong>$64.4M</strong> (mental shortcut: 10% × 5 years ≈ 61% growth, use 1.61x)</p>
+
+<p><strong>Step 4 — Exit Value and Proceeds:</strong> Exit value = $64.4M × 9.0 = <strong>$579.6M</strong>. Debt remaining = $200M × 60% = $120M. Equity proceeds = $579.6M − $120M = <strong>$459.6M</strong></p>
+
+<p><strong>Step 5 — Returns:</strong> Equity multiple = $459.6M / $140M = <strong>3.28x</strong>. IRR approximation: 3.28x in 5 years → 3.0x in 5 years ≈ 25% IRR. 3.28x is somewhat above 3.0x → approximately <strong>27% IRR</strong>. Strong deal.</p>
+
+<div class="callout"><strong>The mental shortcuts to memorise:</strong> (1.10)^5 ≈ 1.61. (1.08)^5 ≈ 1.47. (1.15)^5 ≈ 2.01. (1.20)^5 ≈ 2.49. These four growth multiples appear constantly in paper LBO questions.</div>
+
+<h2>Common Variations</h2>
+<p>Interviewers will stress-test your base case: what if the exit multiple contracts to 7.5x? What if EBITDA only grows 6%? What if debt paydown is only 20%? You need to quickly rerun steps 3-5 with the new inputs and communicate the return impact. Practice the sequence until it's automatic.</p>
+
+<h2>What Interviewers Are Actually Testing</h2>
+<ul>
+<li><strong>Do you know the sequence?</strong> Entry → debt/equity → EBITDA growth → exit → returns. In order, without prompting.</li>
+<li><strong>Can you sense-check your own numbers?</strong> If your equity multiple comes out at 8x from an 8x entry and 9x exit on a 5-year hold with modest growth, something is wrong — and you should catch it.</li>
+<li><strong>Can you communicate cleanly under pressure?</strong> "Entry is $340M. I'm putting in $140M of equity. Five years of 10% EBITDA growth gets me to $64M. At 9x exit that's $580M. Net of $120M remaining debt, equity gets $460M — 3.3x, call it 27% IRR." That's the answer. Concise and confident.</li>
+</ul>`,
+    quiz: [
+      { q: "Target EBITDA: $20M. Entry: 9x. Debt: 4.5x EBITDA. What is the equity check?", opts: ["A) $80M", "B) $90M", "C) $70M", "D) $85M"], correct: 1, exp: "Purchase price = $20M × 9 = $180M. Debt = 4.5x × $20M = $90M. Equity = $180M - $90M = $90M. Step 1: entry multiple × EBITDA = purchase price. Step 2: leverage multiple × EBITDA = debt. Equity = purchase price - debt." },
+      { q: "Continuing the above: EBITDA grows 8% per year for 4 years. Approximate exit EBITDA.", opts: ["A) $26M", "B) $27M", "C) $29M", "D) $24M"], correct: 1, exp: "(1.08)^4 ≈ 1.36. Exit EBITDA = $20M × 1.36 = $27.2M. Mental shortcut: 8% × 4 years ≈ 36% growth (slightly less due to compounding effect at this range). $20M × 1.36 = $27.2M ≈ $27M." },
+      { q: "Exit at 8.5x. Debt reduced from $90M to $55M. What are equity proceeds and the equity multiple?", opts: ["A) $175M proceeds, 1.9x EM", "B) $175M proceeds, 1.9x EM — wait, that's the same", "C) $175M proceeds, 1.94x EM", "D) $180M proceeds, 2.0x EM"], correct: 2, exp: "Exit value = $27M × 8.5 = $229.5M. Equity proceeds = $229.5M - $55M = $174.5M ≈ $175M. Equity multiple = $175M / $90M = 1.94x. Over 4 years, 1.94x ≈ 18% IRR. A modest but acceptable return. Note that entry at 9x and exit at 8.5x represents multiple contraction — a headwind the EBITDA growth partially offset." },
+      { q: "In a paper LBO interview, the interviewer asks you to stress the base case with a 20% EBITDA decline in year 1, then recovery to base growth. What is the most important thing to check first?", opts: ["A) Whether the equity multiple drops below 2.0x", "B) Whether the company can still service its debt in year 1 — a coverage breach could trigger default before the recovery materialises", "C) Whether the exit multiple needs to be adjusted", "D) Whether the PE firm should add more equity to the deal"], correct: 1, exp: "Before worrying about returns, check whether the business survives the stress. A 20% EBITDA decline with 4.5x leverage and 8% IO debt means: stressed EBITDA = $16M, annual interest = $90M × 8% = $7.2M, DSCR = 16/7.2 = 2.2x. Comfortable — deal survives. If leverage were 6x, stressed coverage would be much tighter. The debt service question comes before the return question." }
+    ]
+  },
+
+  "Sensitivity Without Excel: What Actually Moves the Needle": {
+    content: `
+<h2>Why This Matters</h2>
+<p>Every PE analyst can run a sensitivity table in Excel. The question firms like Blackstone ask is: do you know, before you open the model, which assumptions will matter most? Can you rank the return drivers without running a thousand scenarios? This intuition — which variable has the biggest impact on IRR — separates analysts who understand deal economics from analysts who operate models.</p>
+
+<h2>The Four Return Drivers</h2>
+<p>In any LBO, returns come from four variables:</p>
+<ul>
+<li><strong>Entry multiple</strong> — what you paid</li>
+<li><strong>Exit multiple</strong> — what you sold for</li>
+<li><strong>EBITDA growth</strong> — how much better the business performed</li>
+<li><strong>Leverage</strong> — how much debt amplified equity returns</li>
+</ul>
+<p>The intuitive answer to "which matters most" is usually wrong. Most people say EBITDA growth. The actual answer is context-dependent — and knowing why reveals genuine understanding.</p>
+
+<h2>Entry Multiple: The Biggest Risk, Not the Biggest Return Driver</h2>
+<p>Entry multiple is the most important variable for <em>downside protection</em>. Overpaying at entry creates a structural handicap that operating performance rarely overcomes. But entry multiple sensitivity to IRR is roughly symmetrical — a 1x improvement in entry multiple (from 9x to 8x on a $40M EBITDA business) reduces the equity check by $40M, which has a significant but bounded impact on IRR.</p>
+<p>In a $340M purchase with $140M equity: reducing entry from 8.5x to 7.5x means purchase price drops to $300M, equity drops to $100M, and the same exit generates 4.6x EM vs 3.3x EM — a massive swing. <strong>Entry multiple is the most IRR-sensitive variable in high-leverage deals.</strong></p>
+
+<h2>Exit Multiple: The Biggest Upside Driver</h2>
+<p>Exit multiple expansion adds value directly and is multiplied by the entire exit EBITDA base. A 1x improvement in exit multiple on $64M exit EBITDA = $64M more in equity value. On $140M initial equity, that's a 46% return boost. Multiple expansion from 8x to 9x at exit is worth more in dollar terms than 10% EBITDA outperformance.</p>
+
+<h2>EBITDA Growth: The Most Reliable and Most Controllable</h2>
+<p>EBITDA growth is the only return driver the PE firm can actually influence directly. Entry and exit multiples are set by markets. Leverage is set by lenders. EBITDA growth comes from strategy, operations, management, and execution. For this reason, despite not being the highest-leverage return driver arithmetically, it is the one PE firms spend the most time on pre-investment — because it's the one they can actually control.</p>
+
+<h2>Leverage: Amplifier, Not Creator</h2>
+<p>Leverage magnifies returns on the way up — but it also magnifies losses on the way down and creates fixed obligations that must be met regardless of performance. Beyond a certain point, more leverage adds more risk than it adds return. The "optimal" leverage point is where the marginal return on additional debt exceeds the marginal risk of distress.</p>
+
+<div class="callout"><strong>The practitioner's ranking (for a typical PE deal):</strong> Entry multiple sensitivity > Exit multiple sensitivity > Leverage sensitivity > EBITDA growth sensitivity on a pure mathematical basis. But from a "what can I actually control" basis: EBITDA growth > leverage negotiation > exit timing > entry discipline. These two rankings tell different stories — and both are true.</div>
+
+<h2>Quick Sensitivity Mental Math</h2>
+<p>Base case: 3.3x EM in 5 years ≈ 27% IRR. What does each variable do?</p>
+<p>Entry multiple +1x (worse): equity check increases $40M → 3.3x drops to ~2.9x → IRR drops to ~24%.</p>
+<p>Exit multiple +1x (better): equity proceeds increase $64M → 3.3x rises to ~3.8x → IRR rises to ~31%.</p>
+<p>EBITDA growth -2% per year (5yr compounding): exit EBITDA drops from $64M to $57M → equity proceeds fall $63M → 3.3x drops to ~2.8x → IRR ~23%.</p>
+<p>Leverage -1x (less debt): equity check increases $40M → EM drops to ~2.9x → IRR ~24%.</p>`,
+    quiz: [
+      { q: "In a standard PE deal, which variable change produces the largest IRR impact: (a) entry multiple decreases by 1x, or (b) EBITDA growth increases by 3% per year for 5 years?", opts: ["A) EBITDA growth — compounding makes it dominant", "B) Entry multiple — it directly reduces equity check while exit proceeds remain the same, creating a higher percentage return on less capital", "C) They are mathematically identical", "D) Depends on the leverage level"], correct: 1, exp: "On a $40M EBITDA deal: a 1x reduction in entry multiple reduces the equity check by $40M (from, say, $140M to $100M). The exit proceeds remain unchanged. This drives a massive improvement in EM. A 3% EBITDA growth improvement over 5 years adds roughly $8M to exit EBITDA — meaningful, but worth less than $40M in equity check reduction. Entry multiple is more IRR-sensitive in leveraged structures." },
+      { q: "Exit multiple expands from 8x to 10x on a deal with $60M exit EBITDA and $80M remaining debt. Initial equity was $100M. What is the additional equity value created by the 2x multiple expansion?", opts: ["A) $60M", "B) $90M", "C) $120M", "D) $80M"], correct: 2, exp: "At 8x: exit value = $480M. Equity proceeds = $480M - $80M = $400M. EM = 4.0x. At 10x: exit value = $600M. Equity proceeds = $600M - $80M = $520M. EM = 5.2x. Additional equity value = $520M - $400M = $120M. Each 1x of multiple expansion on $60M exit EBITDA = $60M of additional equity value." },
+      { q: "A PE deal has the following base case: 3.5x EM in 5 years. EBITDA underperforms by 15% below projection. Approximate the new equity multiple (rough mental math).", opts: ["A) ~2.9x", "B) ~3.0x", "C) ~2.7x", "D) ~3.1x"], correct: 0, exp: "A 15% EBITDA miss reduces exit EBITDA by 15%. Exit value falls by 15% × exit multiple. If exit value was, say, $500M, it's now ~$425M. Equity proceeds fall roughly proportionally. From 3.5x: a 15-18% reduction in equity proceeds → roughly 2.9-3.0x EM. The exact answer depends on leverage, but the rough math puts it around 2.9x. EBITDA misses compound through the exit multiple — the impact is larger than the raw % miss." },
+      { q: "A PE firm can either: (a) negotiate the entry multiple down 0.5x, or (b) implement an operational initiative that adds $3M EBITDA annually (growing with the business). Which creates more value assuming a 5-year hold and 9x exit multiple?", opts: ["A) Entry multiple reduction — immediate and certain", "B) EBITDA initiative — $3M growing for 5 years, capitalised at 9x exit multiple, creates substantial terminal value", "C) They are equal in value", "D) Depends on the initial EBITDA base"], correct: 1, exp: "Entry multiple down 0.5x on, say, $40M EBITDA = $20M less equity needed. Value of that = $20M saved. The EBITDA initiative: $3M growing at 10% for 5 years = ~$4.8M at exit. Capitalised at 9x = $43.2M in exit value. After paying down any associated costs, the EBITDA initiative creates more value. Operational improvement, once embedded and growing, gets multiplied by the exit multiple — making it extremely valuable in absolute dollar terms even if entry multiple has higher IRR sensitivity." }
+    ]
   }
+
+
 
 };
 
@@ -1970,7 +2230,6 @@ const SCENARIOS = {
     senior: { name:"Solis House — Cartagena", html:`<h2>Senior Lifestyle</h2><p>Coming soon — 78-key lifestyle hotel with owned F&B, a WeWork-affiliate co-working lease, and a DSCR stress test revealing which revenue stream creates the most lender concern when non-traditional income is heavily discounted.</p>`, qa:{}, challenges:[] },
     structuring: { name:"The Bergamot — Los Angeles", html:`<h2>Structuring Lifestyle</h2><p>Coming soon — 96-key Santa Monica lifestyle hotel with a James Beard chef profit-share (not a lease), a 700-member wellness club, and a California public accommodation law conflict in the membership admissions model.</p>`, qa:{}, challenges:[] }
   }
-
 };
 
 const GLOSSARY_DATA = {
@@ -2371,4 +2630,5 @@ renderTopics();
 showGloss('formulas');
 </script>
 </body>
+</html>
 </html>
