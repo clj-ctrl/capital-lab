@@ -1812,10 +1812,312 @@ const SCENARIOS = {
         }
       ]
     },
-    senior: { name:"Cerro Blanco — Costa Rica", html:`<h2>Senior Resort Scenario</h2><p><strong>Cerro Blanco</strong> — Nosara, Costa Rica. 58-key VLE-affiliated wellness resort with 22 branded villas. Dual revenue stream: hotel NOI capitalised at exit + presale proceeds. Mezz with a cash sweep provision that conflicts with presale structure. Full challenges coming in next update.</p>`, qa:{"Presale mechanics":"<p>Villa presales serve as both capital source and lender covenant — 60% presale coverage required for construction draws. If contracts rescind below threshold, lender has grounds for default.</p>"}, challenges:[] },
-    structuring: { name:"Punta Sal — Panama", html:`<h2>Structuring Resort Scenario</h2><p><strong>Punta Sal</strong> — Bocas del Toro, Panama. 42-key ultra-luxury overwater resort with 34-unit fractional residence club. Aman brand discussions ongoing (not contracted). Brand representation risk, pref equity with profit participation, fractional ownership governance. Full challenges coming in next update.</p>`, qa:{}, challenges:[] }
+    senior: {
+      name: "Cerro Blanco — Costa Rica",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Cerro Blanco</strong> — Nosara, Costa Rica. 58-key Virgin Limited Edition–affiliated wellness resort with 22 branded villas on 34 acres of certified rainforest. New construction on freehold titled land. Developer: Tico-Canadian JV, first VLE project in Central America.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total project cost: <strong>$82M</strong> | Senior: 55% LTC = <strong>$45.1M</strong> at SOFR+340 (all-in ~9.0%), 30-month term</li>
+  <li>Mezzanine: <strong>$9.8M</strong> at 14.5% PIK, 30-month term — balance at maturity: <strong>$13.6M</strong></li>
+  <li>LP equity: <strong>$22.0M</strong> | GP equity: <strong>$5.1M</strong> | Dev fee: $3.2M (50% at close, 50% at opening)</li>
+  <li>Villa presales: <strong>$16.8M</strong> contracted (60% of $28M total) — 60% coverage required for draws 3 and 4</li>
+</ul>
+<h2>Capital Stack</h2>
+<ul>
+  <li><strong>Senior $45.1M</strong> | SOFR+340 | Cash sweep if DSCR &lt; 1.20x | Presale proceeds escrowed, released at draw milestones</li>
+  <li><strong>Mezz $9.8M</strong> | 14.5% PIK | 90-day standstill | Purchase option at par+accrued</li>
+  <li><strong>LP Equity $22M</strong> | 9% cumulative pref | 80/20 above 13% IRR</li>
+</ul>
+<h2>Financial Projections</h2>
+<ul>
+  <li>Stabilized ADR: $1,100 | Occupancy: 71% | RevPAR: $781 | Hotel NOI: <strong>$6.8M</strong> (38% margin)</li>
+  <li>Villa proceeds at completion: <strong>$28M</strong> net (22 villas x $1.27M avg)</li>
+  <li>Hotel exit cap: 6.75% to Hotel value: <strong>$100.7M</strong> | Total project value: <strong>$128.7M</strong></li>
+  <li>LP IRR target: 18-21% | EM: 2.2-2.5x | Hold: 5 years post-opening</li>
+</ul>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>The mezz PIK accrual grows to $13.6M at maturity. At what exit value does mezz foreclose rather than accept repayment?</li>
+  <li>If 25% of presale contracts rescind, does the project fall below the 60% draw threshold?</li>
+  <li>VLE has not yet signed the final management agreement. How should the LP be responding?</li>
+  <li>Costa Rica colon appreciation has increased labor costs 12% above budget. How does this flow through NOI?</li>
+</ol>`,
+      qa: {
+        "Presale mechanics and draw triggers": `<h3>Presale Draw Triggers</h3><p>Presale deposits (40% of contract price) are escrowed with a Costa Rican notary. The lender releases construction draws 3 and 4 only when verified 60% presale coverage is confirmed. $16.8M contracted = 60% of $28M. One rescission drops coverage to 55.4%. If draw 3 is blocked, construction pauses and interest accrues on the full senior balance at SOFR+340.</p>`,
+        "VLE management risk": `<h3>VLE Management Agreement Risk</h3><p>VLE has signed a letter of intent but not the final 25-year management agreement. Senior lender requires a consent-to-encumbrance and subordination/non-disturbance agreement (SNDA) before funding. Without it, lender cannot foreclose without triggering a management agreement breach. VLE will extract concessions during final negotiation, knowing the developer needs them to close.</p>`,
+        "Waterfall at base case": `<h3>Waterfall — Cerro Blanco (Base Case)</h3><p><strong>Total exit $128.7M.</strong> Senior $45.1M + mezz $13.6M = $58.7M debt. Equity proceeds: $70.0M. Return of capital: LP $22M + GP $5.1M = $27.1M. Remaining $42.9M. LP cumul pref (9% x $22M x 5yr) = $9.9M. Remaining $33.0M. Above 13% IRR split 80/20: LP $26.4M, GP $6.6M. GP total: $5.1M + $6.6M = $11.7M on $5.1M = 2.3x EM.</p>`,
+        "Country risk in underwriting": `<h3>Country Risk Layers</h3><p>(1) CRC/USD volatility — labor is colon-denominated, revenue USD. 12% CRC appreciation = 4-6% labor cost increase as % of revenue. (2) Insurance premium — remote rainforest site = 25-40% above comparable US resort. (3) Exit buyer pool — fewer institutional buyers for a $100M Costa Rica asset implies 6.75% cap vs. 5.75% in Mexico or the US.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The presale waterfall has a sequencing conflict. Find it.",
+          render: () => `
+            <p>Review the presale mechanics as structured. One element creates a hidden funding risk if any contract rescinds.</p>
+            <table class="c-table">
+              <tr><th>Event</th><th>Presale Proceeds</th><th>Direction</th></tr>
+              <tr><td>Unit contract signed</td><td>10% deposit</td><td>Released to developer operating account</td></tr>
+              <tr><td>Draw milestone 3</td><td>40% coverage required</td><td>Senior lender confirms 60% threshold</td></tr>
+              <tr><td>Construction complete</td><td>Remaining 50% due at closing</td><td>Senior lender sweeps to debt paydown</td></tr>
+              <tr><td>Exit waterfall</td><td>Equity after full debt repayment</td><td>Mezz takes par + accrued before equity</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-rss-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-rss-a">
+              <strong>The 10% deposit release to the developer operating account.</strong> If a contract rescinds, the developer may have already spent those funds. The lender's 60% coverage threshold counts contracted amounts, not escrowed amounts — so the test can appear satisfied by contracts that have partially defunded deposits. One large rescission can simultaneously breach the coverage covenant AND leave the developer without cash to cure it.<br><br>
+              <strong>Fix:</strong> All deposits remain escrowed through construction completion. Release only after lender confirms coverage still passes.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Model the mezz PIK accrual and its impact on the waterfall.",
+          render: () => `
+            <p>Mezz: <strong>$9.8M at 14.5% PIK, 30 months</strong>. Total exit: <strong>$128.7M</strong>. Senior payoff: <strong>$45.1M</strong>. LP: <strong>$22M, 9% pref, 5yr hold</strong>.</p>
+            <table class="c-table" id="rss-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Mezz balance at 30 months (14.5% PIK compounded)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total debt at exit (senior + mezz)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity proceeds after all debt</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Return of LP + GP capital ($27.1M) — remaining above-capital</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP cumulative pref (9% x $22M x 5yr)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>GP promote at 20% of above-pref profits</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('rss-blanks',[{label:'Mezz balance',val:'$13.6M'},{label:'Total debt',val:'$58.7M'},{label:'Equity',val:'$70.0M'},{label:'Above-capital',val:'$42.9M'},{label:'LP pref',val:'$9.9M'},{label:'GP promote',val:'$6.6M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "VLE has stalled on the management agreement. Construction draw 2 is due in 30 days.",
+          render: () => `
+            <p>Senior lender will not fund draw 2 ($11.3M) without VLE's executed management agreement and SNDA. VLE has gone quiet. Every 30 days of delay costs ~$118K in PIK accrual on top of halted construction.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true},{good:false}],'dec-rss-a')">
+                <span class="c-d-icon">A</span><span>Accept the pause. Wait out VLE while construction stops and PIK accrues.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true},{good:false}],'dec-rss-a')">
+                <span class="c-d-icon">B</span><span>Threaten to switch to a competitor brand — Six Senses or Aman.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true},{good:false}],'dec-rss-a')">
+                <span class="c-d-icon">C</span><span>Arrange an LP bridge loan ($11.3M at 10%) to fund draw 2 for 60 days. Simultaneously engage VLE's commercial team directly with a hard deadline.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:false},{good:true},{good:false}],'dec-rss-a')">
+                <span class="c-d-icon">D</span><span>Find out what VLE's fee concern actually is and solve it directly — even at $200K/yr more in management fees.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-rss-a">
+              <p><strong>C is the best primary action.</strong> Keeps construction moving, gives VLE a real 60-day deadline, shifts negotiation back to commercial level. The 10% bridge cost over 60 days is ~$188K — a rounding error vs. a construction pause and PIK drag.</p>
+              <p><strong>D should have happened first.</strong> At $200K/yr more over 25 years = $5M in fees vs. a $23M exit value difference with/without VLE. The math clearly says pay the fee. But D alone does not solve the draw timing problem.</p>
+              <p><strong>B is a bluff</strong> unless you genuinely have a credible alternative. VLE knows the site. Don't escalate without a backup.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Labor costs are 12% over budget due to colon appreciation. LP is asking for a capital call. Do you issue it?",
+          render: () => `
+            <p>CRC appreciation has increased total labor costs by <strong>$680K</strong> vs. underwriting — spread across construction and stabilization. Two options:</p>
+            <ul>
+              <li><strong>Option A:</strong> Issue a $1.5M capital call. LP proportional share = $1.35M at 90%.</li>
+              <li><strong>Option B:</strong> Draw down the $1.2M contingency reserve already in the budget. Accept tighter margins and defer any remaining gap to operating cash flow.</li>
+            </ul>
+            <button class="btn-sec" onclick="revealAnswer('mtc-rss-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-rss-a">
+              <strong>Do not issue the capital call. Use the contingency reserve.</strong><br><br>
+              That is exactly what a contingency fund is for. Labor overruns from currency moves are a textbook contingency scenario. Issue a capital call only if the reserve is depleted AND the overrun is affecting the construction draw schedule.<br><br>
+              Issuing a capital call for a manageable variance signals poor budget discipline and creates LP friction disproportionate to the dollar. If Year 1-2 operating cash flow cannot absorb the remaining gap, a modest development fee increase is a cleaner instrument than an equity call.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Complete</button></div>
+            </div>`,
+          init: () => {}
+        }
+      ]
+    },
+    structuring: {
+      name: "Punta Sal — Panama",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Punta Sal</strong> — Bocas del Toro, Panama. 42-key ultra-luxury overwater resort with 34-unit fractional residence club on a private island. Aman brand discussions at LOI stage — not contracted. Developer: Panama-focused boutique developer, first fractional product.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total project cost: <strong>$94M</strong> | Senior: 52% LTC = <strong>$48.9M</strong> at SOFR+380 (~9.5%), 36-month term</li>
+  <li>Preferred equity: <strong>$18.5M</strong> | 14% cumul pref | 1.5x liquidation preference ($27.75M) | 20% profit participation above 18% GP IRR</li>
+  <li>LP equity: <strong>$20.0M</strong> | 10% cumul pref | 80/20 above 15% IRR | GP equity: <strong>$6.6M</strong></li>
+  <li>Fractional sales target: <strong>$38.4M</strong> (34 units x 8 shares x $141K avg/share) — Aman LOI: non-binding, 30% brand premium modeled</li>
+</ul>
+<h2>Capital Stack</h2>
+<ul>
+  <li><strong>Senior $48.9M</strong> | SOFR+380 | NOI coverage covenant 1.15x min | Fractional proceeds sweep to debt</li>
+  <li><strong>Pref equity $18.5M</strong> | 14% cumul | 1.5x liq preference = $27.75M before LP/GP | 20% profits above 18% GP IRR</li>
+  <li><strong>LP equity $20M</strong> | 10% cumul pref | 80/20 above 15% IRR</li>
+</ul>
+<h2>Brand Scenarios</h2>
+<table class="c-table">
+  <tr><th>Metric</th><th>With Aman</th><th>No Brand</th></tr>
+  <tr><td>Hotel NOI</td><td>$8.1M</td><td>$6.9M</td></tr>
+  <tr><td>Exit cap rate</td><td>5.25%</td><td>6.5%</td></tr>
+  <tr><td>Hotel value</td><td>$154.3M</td><td>$106.2M</td></tr>
+  <tr><td>Fractional proceeds</td><td>$38.4M</td><td>$26.9M</td></tr>
+  <tr><td>Total exit</td><td>$192.7M</td><td>$133.1M</td></tr>
+  <tr><td>LP IRR (est.)</td><td>20-23%</td><td>~15%</td></tr>
+</table>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>The pref equity 1.5x liquidation preference was not disclosed to the senior lender. Is this a covenant breach?</li>
+  <li>If Aman withdraws at month 14, at what exit value does pref recover fully and LP receives zero?</li>
+  <li>How does the 20% profit participation above 18% GP IRR interact with LP's 80/20 promote?</li>
+  <li>The fractional governance structure has no HOA documents filed. What happens at opening?</li>
+</ol>`,
+      qa: {
+        "Pref equity liq preference vs. senior": `<h3>Undisclosed Liquidation Preference</h3><p>Senior lender underwrote assuming two layers: senior debt and equity. The 1.5x liq preference on $18.5M = $27.75M is functionally a second debt claim. Most senior lenders would prohibit this or require it disclosed in LTV analysis. If discovered, grounds for technical default. Cure: full disclosure, intercreditor renegotiation, potential senior loan reduction.</p>`,
+        "No-brand scenario survival": `<h3>No-Brand Waterfall</h3><p>Exit $133.1M. Senior $48.9M + pref liq $27.75M = $76.65M. Equity: $56.45M. Return LP+GP capital $26.6M. Remaining $29.85M. LP pref (10% x $20M x 6yr extended hold) = $12M. Remaining $17.85M. LP 80% = $14.28M. LP total ~$46.3M on $20M over 6yr = ~15% IRR. Above 10% pref threshold but a significant miss vs. 20-23% underwriting.</p>`,
+        "Aman withdrawal at month 14": `<h3>Month 14 Withdrawal Response</h3><p>At 38% construction complete, Aman withdrawal triggers: (1) fractional pricing review — likely 20-30% haircut without brand; (2) senior lender covenant review — exit value assumptions change materially; (3) pref equity put option may activate. Developer must immediately approach Six Senses, Banyan Tree, or Habitas as alternatives. A qualified replacement brand signed within 90 days prevents the put trigger.</p>`,
+        "Fractional ownership governance": `<h3>Panama Fractional Law</h3><p>Panama's Ley 45 (horizontal property regime) requires filing a reglamento de copropiedad before any fractional sales close. Without it, sales contracts are technically invalid. Developer must engage a Panama notary and fractional management company (Exclusive Resorts, SierraMar) to draft governance docs no later than month 6 of construction.</p>`,
+        "Waterfall at base case (Aman)": `<h3>Waterfall — Punta Sal with Aman</h3><p>Exit $192.7M. Senior $48.9M. Pref liq preference $27.75M. Equity: $116.05M. Return LP+GP capital $26.6M. Remaining $89.45M. LP pref $10M. Remaining $79.45M. Above 15% hurdle 80/20: LP $63.56M, GP $15.89M. GP IRR ~27% — pref profit participation (20% above 18% GP IRR) extracts ~$2.1M. GP net promote: ~$13.8M.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The pref equity term sheet has three provisions that conflict with the senior loan. Find them.",
+          render: () => `
+            <p>Review the pref equity term sheet alongside the senior loan agreement. There are at least three direct conflicts.</p>
+            <table class="c-table">
+              <tr><th>Term</th><th>Pref Term Sheet</th><th>Senior Loan Agreement</th></tr>
+              <tr><td>Liquidation preference</td><td>1.5x = $27.75M</td><td>Not disclosed to senior lender</td></tr>
+              <tr><td>Cash distributions</td><td>Current pay, quarterly</td><td>No equity distributions until DSCR &ge; 1.35x</td></tr>
+              <tr><td>Put option</td><td>Pref can put back to developer if brand LOI lapses</td><td>Not in intercreditor agreement</td></tr>
+              <tr><td>Refinancing consent</td><td>Pref approves any refinancing</td><td>Senior lender has sole consent right</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-psl-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-psl-a">
+              <strong>Three fatal conflicts:</strong><br><br>
+              <strong>1. Undisclosed liquidation preference.</strong> Senior lender's LTV assumed only senior debt above equity. The $27.75M liq preference is functionally subordinated debt they never underwrote. Covenant breach if discovered.<br><br>
+              <strong>2. Current pay distributions vs. DSCR covenant.</strong> Pref receives quarterly cash while senior blocks all equity distributions below 1.35x DSCR. Direct covenant breach at any DSCR between 1.15x and 1.35x.<br><br>
+              <strong>3. Refinancing consent conflict.</strong> Pref has veto on refinancing; senior has sole consent right. These provisions directly conflict — any future refinancing is structurally impossible without resolving both.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Model the no-brand scenario. Does LP clear their preferred return?",
+          render: () => `
+            <p>Aman withdraws. Fractional proceeds drop 30% to $26.9M. Hotel NOI falls to $6.9M. Exit cap: 6.5%. Hold extends to 6 years.</p>
+            <table class="c-table" id="psl-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Hotel exit value ($6.9M at 6.5% cap)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total exit (hotel + fractional)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity after senior ($48.9M) + pref liq ($27.75M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP cumul pref (10% x $20M x 6yr)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP total distributions</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP IRR (approx, 6yr hold)</td><td><input class="c-input" type="text" placeholder="~?%"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('psl-blanks',[{label:'Hotel value',val:'$106.2M'},{label:'Total exit',val:'$133.1M'},{label:'Equity after debt+pref',val:'$56.45M'},{label:'LP pref',val:'$12M'},{label:'LP total',val:'~$46.3M'},{label:'LP IRR',val:'~15%'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "Aman withdraws at month 14. Pref equity's put option may trigger. You have 60 days.",
+          render: () => `
+            <p>Aman sends a withdrawal letter at month 14 — no signed agreement exists. Construction is 38% complete. Pref equity's put option requires developer to repurchase at <strong>$24.1M</strong> (par + accrued). Developer does not have $24.1M.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:true},{good:true},{good:false},{good:false}],'dec-psl-a')">
+                <span class="c-d-icon">A</span><span>Immediately approach Six Senses, Banyan Tree, and Habitas. Secure a replacement brand within 90 days before the put triggers.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:true},{good:true},{good:false},{good:false}],'dec-psl-a')">
+                <span class="c-d-icon">B</span><span>Negotiate with pref equity to extend the put trigger window by 90 days — offer a 1% increase in their preferred return (~$185K) to buy time.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:true},{good:true},{good:false},{good:false}],'dec-psl-a')">
+                <span class="c-d-icon">C</span><span>Invoke force majeure to suspend the project until brand replacement is secured.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:true},{good:true},{good:false},{good:false}],'dec-psl-a')">
+                <span class="c-d-icon">D</span><span>Accept the no-brand scenario. Re-price fractionals at $26.9M and proceed with revised LP projections.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-psl-a">
+              <p><strong>A + B together are the right play.</strong> A begins brand replacement before the put triggers — you need a qualified replacement signed within 90 days. B buys time at low cost ($185K vs. a $24.1M put obligation). Run both simultaneously.</p>
+              <p><strong>C is wrong.</strong> Force majeure applies to external events, not a counterparty's business decision. Invoking it here constitutes a developer default.</p>
+              <p><strong>D is a viable last resort</strong> if no brand is secured. LP IRR drops to ~15%, which clears the 10% pref but significantly misses underwriting.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Pref equity wants 25% participation above 15% GP IRR instead of 20% above 18%. Accept?",
+          render: () => `
+            <p>At month 6, the Panamanian family office requests an amendment: lower the profit participation trigger from 18% to 15% GP IRR, raise participation from 20% to 25%. In exchange: they extend the put option window from 60 to 120 days.</p>
+            <table class="c-table">
+              <tr><th>Term</th><th>Original</th><th>Proposed</th></tr>
+              <tr><td>Participation trigger</td><td>18% GP IRR</td><td>15% GP IRR</td></tr>
+              <tr><td>Participation rate</td><td>20%</td><td>25%</td></tr>
+              <tr><td>Put option window</td><td>60 days</td><td>120 days</td></tr>
+              <tr><td>Cost to GP at base case</td><td>~$2.1M</td><td>~$3.8M</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('mtc-psl-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-psl-a">
+              <strong>Don't accept as presented. Counter at 22% above 16% IRR.</strong><br><br>
+              The additional cost to GP is $1.7M. The put extension is worth ~$200K in reduced execution risk. Net cost: ~$1.5M. At month 6, the Aman LOI is still fresh — you probably don't need the extended put window badly enough to pay $1.5M for it.<br><br>
+              Splitting the difference (22% participation above 16%) costs GP ~$500K incremental vs. original terms. Use the put extension as your closing concession — offer it last, not first. The family office values it more than they're letting on.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "The deal is brand-binary. See exactly how much each lever moves.",
+          render: () => `
+            <p>Adjust the three drivers. Watch how brand premium, cap rate, and fractional pricing combine to determine total exit and LP IRR.</p>
+            <div class="c-sliders">
+              <label>Brand premium on fractional pricing: <strong id="sl-psl-brand-val">30%</strong></label>
+              <input type="range" min="0" max="35" step="5" value="30" id="sl-psl-brand" oninput="updateBtdPsl()">
+              <label>Hotel exit cap rate: <strong id="sl-psl-cap-val">5.25%</strong></label>
+              <input type="range" min="500" max="750" step="25" value="525" id="sl-psl-cap" oninput="updateBtdPsl()">
+              <label>Fractional price per share: <strong id="sl-psl-frac-val">$141K</strong></label>
+              <input type="range" min="90" max="175" step="5" value="141" id="sl-psl-frac" oninput="updateBtdPsl()">
+            </div>
+            <table class="c-table">
+              <tr><th>Metric</th><th>Value</th></tr>
+              <tr><td>Hotel value (NOI / cap rate)</td><td id="psl-hotel-val">$154.3M</td></tr>
+              <tr><td>Fractional proceeds (34u x 8sh x price)</td><td id="psl-frac-proc">$38.4M</td></tr>
+              <tr><td>Total exit value</td><td id="psl-total-val">$192.7M</td></tr>
+              <tr><td>Equity after senior + pref liq preference</td><td id="psl-equity-val">$116.1M</td></tr>
+              <tr><td>LP IRR (approx, 5yr hold)</td><td id="psl-irr-val">~21%</td></tr>
+              <tr><td>Pref profit participation triggers?</td><td id="psl-pref-trig">Yes (GP IRR ~27%)</td></tr>
+            </table>`,
+          init: () => {
+            window.updateBtdPsl = function() {
+              const brand = parseInt(document.getElementById('sl-psl-brand').value);
+              const capRaw = parseInt(document.getElementById('sl-psl-cap').value);
+              const fracPrice = parseInt(document.getElementById('sl-psl-frac').value);
+              const cap = capRaw / 10000;
+              const hotelNOI = brand >= 20 ? 8.1 : 6.9;
+              const hotelVal = Math.round(hotelNOI / cap * 10) / 10;
+              const fracVal = Math.round(34 * 8 * fracPrice / 1000 * 10) / 10;
+              const totalExit = Math.round((hotelVal + fracVal) * 10) / 10;
+              const equityAfterDebt = Math.round((totalExit - 48.9 - 27.75) * 10) / 10;
+              const lpCapPref = 20 + 6.6 + 20 * 0.10 * 5;
+              const abovePref = Math.max(0, equityAfterDebt - lpCapPref);
+              const lpTotal = Math.min(equityAfterDebt, 20 + 20 * 0.10 * 5) + abovePref * 0.80;
+              const gpTotal = Math.max(0, equityAfterDebt - lpTotal);
+              const lpEM = lpTotal / 20;
+              const lpIRR = Math.round((Math.pow(Math.max(lpEM, 0.01), 0.2) - 1) * 100);
+              const gpIRR = gpTotal > 6.6 ? Math.round((Math.pow(gpTotal / 6.6, 0.2) - 1) * 100) : 0;
+              document.getElementById('sl-psl-brand-val').textContent = brand + '%';
+              document.getElementById('sl-psl-cap-val').textContent = (capRaw / 100).toFixed(2) + '%';
+              document.getElementById('sl-psl-frac-val').textContent = '$' + fracPrice + 'K';
+              document.getElementById('psl-hotel-val').textContent = '$' + hotelVal + 'M';
+              document.getElementById('psl-frac-proc').textContent = '$' + fracVal + 'M';
+              document.getElementById('psl-total-val').textContent = '$' + totalExit + 'M';
+              document.getElementById('psl-equity-val').textContent = equityAfterDebt > 0 ? '$' + equityAfterDebt + 'M' : 'Negative';
+              document.getElementById('psl-irr-val').textContent = lpIRR > 0 ? '~' + lpIRR + '%' : 'Below pref';
+              document.getElementById('psl-pref-trig').textContent = gpIRR > 18 ? 'Yes (GP IRR ~' + gpIRR + '%)' : 'No (GP IRR ' + gpIRR + '%)';
+            };
+          }
+        }
+      ]
+    }
   },
-
   mixed: {
     intro: {
       name: "The Embarcadero — San Diego",
@@ -1916,10 +2218,303 @@ const SCENARIOS = {
         }
       ]
     },
-    senior: { name:"The Meridian Quarter — Austin", html:`<h2>Senior Mixed-Use</h2><p>Coming soon — phased mixed-use (apartments + hotel + retail) across two phases with inter-phase capital dependency and a DSCR problem at Phase 2 financing.</p>`, qa:{}, challenges:[] },
-    structuring: { name:"The Colón District — Miami", html:`<h2>Structuring Mixed-Use</h2><p>Coming soon — EB-5 financing, 240 international condo buyers, ABSD-equivalent stamp duty dynamics, and CMBS permanent financing challenge across four components.</p>`, qa:{}, challenges:[] }
+    senior: {
+      name: "The Meridian Quarter — Austin",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Meridian Quarter</strong> — Austin, TX. Phased mixed-use development: Phase 1 = 280 multifamily units + 18,500 SF retail. Phase 2 = 190-key lifestyle hotel. Phase 2 construction financing is conditional on Phase 1 achieving stabilized DSCR &ge; 1.20x.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Phase 1 cost: <strong>$185M</strong> | Senior: <strong>$114.7M</strong> at SOFR+210 (~7.3% stressed at 6.0%), IO through stabilization</li>
+  <li>Phase 1 equity: LP <strong>$55M</strong> | GP <strong>$15.3M</strong></li>
+  <li>Phase 2 cost: <strong>$127M</strong> | Financing conditional on Phase 1 DSCR trigger</li>
+  <li>Phase 2 equity: LP <strong>$35M</strong> additional | GP additional</li>
+</ul>
+<h2>Phase 1 NOI Build</h2>
+<table class="c-table">
+  <tr><th>Line Item</th><th>Amount</th><th>Note</th></tr>
+  <tr><td>MF effective gross revenue (280u x $3,200 x 12 x 93%)</td><td>$10.07M</td><td></td></tr>
+  <tr><td>Less: operating expenses (32% ratio)</td><td>($3.22M)</td><td>Includes mgmt fee</td></tr>
+  <tr><td>MF NOI</td><td>$6.85M</td><td></td></tr>
+  <tr><td>Retail base rent (18,500 SF x $77/SF)</td><td>$1.425M</td><td></td></tr>
+  <tr><td>Less: management fee (3% of MF EGR)</td><td>($0.302M)</td><td>Separately listed</td></tr>
+  <tr><td><strong>Total stated NOI</strong></td><td><strong>$7.97M</strong></td><td></td></tr>
+  <tr><td>Debt service (stressed 6.0% IO on $114.7M)</td><td>$6.85M</td><td></td></tr>
+  <tr><td><strong>DSCR</strong></td><td><strong>1.163x</strong></td><td>Below 1.20x — Phase 2 blocked</td></tr>
+</table>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>Where is the management fee double-deduction, and how much does it affect DSCR?</li>
+  <li>If the 1,800 SF retail tenant walks, what is the maximum senior loan that still triggers Phase 2?</li>
+  <li>The DSCR trigger uses "stabilized DSCR" but does not define the stabilization date. Why does this matter?</li>
+  <li>LP wants to exit after Phase 1 sale instead of rolling into Phase 2. Is that economically viable?</li>
+</ol>`,
+      qa: {
+        "The management fee double-deduction": `<h3>Where the Error Lives</h3><p>The 32% opex ratio applied to $10.07M MF EGR ($3.22M) already includes management fee — this is standard in multifamily underwriting where management is embedded in the opex stack. The separate "management fee: $302K" line below the NOI calculation is a duplicate of the same cost. Corrected NOI: $7.97M + $0.302M = <strong>$8.27M</strong>. Corrected DSCR: $8.27M / $6.85M = <strong>1.208x</strong> — Phase 2 trigger clears.</p>`,
+        "Retail tenant walk scenario": `<h3>Retail Vacancy Impact</h3><p>If the 1,800 SF tenant walks (9.7% of retail GLA), retail NOI drops by $138K. Revised total NOI: $8.27M - $0.138M = $8.13M. DSCR: $8.13M / $6.85M = 1.187x — fails 1.20x. Maximum DS at 1.20x: $8.13M / 1.20 = $6.775M. Maximum loan at 6.0% IO: $6.775M / 0.06 = $112.9M. Gap vs. current senior ($114.7M): $1.8M — must be covered by additional equity or NOI improvement.</p>`,
+        "Stabilization date language": `<h3>Defining Stabilized DSCR</h3><p>Without a defined stabilization date, the lender can demand the DSCR test at any trailing period of their choosing — potentially during lease-up when occupancy is below steady state. Developer should request: "Stabilized DSCR shall mean the trailing 3-month annualized DSCR measured no earlier than month 18 following Phase 1 certificate of occupancy, provided occupancy has been &ge; 90% for at least 60 consecutive days."</p>`,
+        "LP exit after Phase 1": `<h3>Phase 1 Standalone Economics</h3><p>Phase 1 exit at $143.6M ($121.6M MF at 4.85% cap + $22M retail at 6.5% cap). Senior repayment $114.7M. Equity proceeds: $28.9M. LP invested $55M — this is a $26.1M shortfall on LP capital alone, before pref. Phase 1 is intentionally under-equitied; it is the enabling condition for Phase 2 hotel upside. LP exit after Phase 1 crystallizes a loss. The combined-phase waterfall is the only structure in which LP achieves target returns.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "Phase 1 DSCR is failing the trigger — but there is an error in the NOI model. Find it.",
+          render: () => `
+            <p>Review the Phase 1 NOI model below. The DSCR tests at 1.163x and blocks Phase 2 financing. There is one error that, when corrected, pushes DSCR above the 1.20x trigger.</p>
+            <table class="c-table">
+              <tr><th>Line Item</th><th>Amount</th><th>Source</th></tr>
+              <tr><td>MF effective gross revenue</td><td>$10.07M</td><td>280u x $3,200 x 12 x 93%</td></tr>
+              <tr><td>Less: operating expenses (32%)</td><td>($3.22M)</td><td>Includes mgmt, maintenance, insurance</td></tr>
+              <tr><td>MF NOI</td><td>$6.85M</td><td></td></tr>
+              <tr><td>Retail base rent</td><td>$1.425M</td><td>18,500 SF x $77/SF</td></tr>
+              <tr><td>Less: management fee</td><td>($0.302M)</td><td>3% of MF EGR</td></tr>
+              <tr><td><strong>Total NOI</strong></td><td><strong>$7.97M</strong></td><td></td></tr>
+              <tr><td>Debt service (stressed 6.0%)</td><td>$6.85M</td><td></td></tr>
+              <tr><td>DSCR</td><td>1.163x</td><td>Below 1.20x minimum</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-mxs-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mxs-a">
+              <strong>Management fee double-deduction.</strong> The 32% operating expense ratio already includes management fee — it is embedded in the opex stack as standard MF underwriting practice. The separate "management fee: $302K" line below is a duplicate deduction of the same cost.<br><br>
+              <strong>Corrected NOI:</strong> $7.97M + $0.302M = $8.27M. <strong>Corrected DSCR:</strong> $8.27M / $6.85M = <strong>1.208x</strong> — Phase 2 trigger clears.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "A retail tenant walks. Size the maximum Phase 1 loan that still clears the Phase 2 trigger.",
+          render: () => `
+            <p>The 1,800 SF retail tenant (9.7% of GLA) declines to renew. Corrected NOI was $8.27M. Retail rent: $77/SF. Debt service factor at 6.0% IO: divide by 0.06.</p>
+            <table class="c-table" id="mxs-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Retail NOI lost (1,800 SF x $77)</td><td><input class="c-input" type="text" placeholder="$?K"></td></tr>
+              <tr><td>Revised total NOI</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Maximum debt service at 1.20x DSCR</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Maximum loan at 6.0% IO</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Gap vs. current senior ($114.7M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mxs-blanks',[{label:'NOI lost',val:'$138.6K'},{label:'Revised NOI',val:'$8.13M'},{label:'Max DS',val:'$6.775M'},{label:'Max loan',val:'$112.9M'},{label:'Gap',val:'$1.8M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "At Phase 1 stabilization, DSCR tests at 1.18x. Phase 2 construction loan closes in 90 days. How do you solve the 2bps shortfall?",
+          render: () => `
+            <p>Phase 1 is fully stabilized — 93% MF occupancy, 87% retail. DSCR calculates to 1.18x, 2bps short of the 1.20x trigger. Phase 2 construction loan is negotiated and ready to close. The Phase 1 lender controls the trigger definition.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:true},{good:false}],'dec-mxs-a')">
+                <span class="c-d-icon">A</span><span>Request a 6-month DSCR testing extension from Phase 1 lender, arguing the shortfall is immaterial.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:true},{good:false}],'dec-mxs-a')">
+                <span class="c-d-icon">B</span><span>Sign a new retail tenant term sheet within 30 days. Even a creditworthy LOI may satisfy the lender's credit committee and tip DSCR to 1.20x.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:true},{good:false}],'dec-mxs-a')">
+                <span class="c-d-icon">C</span><span>Inject $3M equity to buy down the Phase 1 senior loan. Reduces DS by $180K, tipping DSCR to 1.235x. Clean and fast — no negotiation required.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:true},{good:true},{good:false}],'dec-mxs-a')">
+                <span class="c-d-icon">D</span><span>Request a one-time waiver from Phase 1 lender in exchange for extending the Phase 1 loan by 6 months at the same rate.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mxs-a">
+              <p><strong>B and C are the right moves — ideally run in parallel.</strong></p>
+              <p><strong>B</strong> gets to root cause. A signed LOI with a creditworthy tenant may allow the lender to credit partial income in DSCR, tipping to 1.20x. Best long-term fix.</p>
+              <p><strong>C</strong> is clean, fast, and requires no counterparty negotiation. $3M unlocks a $127M Phase 2 investment — the math is obvious.</p>
+              <p><strong>A is weak</strong> — "immaterial" is not a legal argument against a black-letter covenant. Lender has no incentive to grant this without something in exchange.</p>
+              <p><strong>D is worth trying in parallel</strong> — some lenders grant one-time waivers on immaterial shortfalls with meaningful quid pro quo, but do not count on it.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "LP wants to exit after Phase 1 closes. They're asking for $55M back plus 8% cumulative pref. Do you agree?",
+          render: () => `
+            <p>Phase 1 has stabilized. An institutional buyer has offered $143.6M for the MF + retail component. LP invested $55M in Phase 1 and is requesting a full exit: $55M capital + 8% cumulative pref accrued over 4 years ($17.6M) = <strong>$72.6M total</strong>.</p>
+            <p>Phase 1 equity proceeds: $143.6M exit &minus; $114.7M senior repayment = <strong>$28.9M</strong>.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-mxs-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-mxs-a">
+              <strong>No — and this needs to have been explained before LP invested.</strong><br><br>
+              Phase 1 generates $28.9M in equity proceeds. LP's ask is $72.6M. There is a $43.7M gap. Phase 1 is intentionally under-equitied because it is the enabling condition for Phase 2 — the combined return across both phases is where LP achieves target IRR.<br><br>
+              If LP is threatening exit now, the GP has a structural problem: either the LP was mis-sold on Phase 1 standalone returns, or the LP agreement does not clearly bind them through Phase 2. The fix for future deals: a combined-phase waterfall agreement at inception with explicit lockup provisions through Phase 2 stabilization.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Complete</button></div>
+            </div>`,
+          init: () => {}
+        }
+      ]
+    },
+    structuring: {
+      name: "The Col\u00f3n District — Miami",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Col&oacute;n District</strong> — Miami, FL. 38-story mixed-use tower: 240 international condo units + 120-key boutique hotel + 45,000 SF Class A office + 22,000 SF ground-floor retail. Total development cost: <strong>$680M</strong>. Developer: Miami-based luxury developer, fourth major tower.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Condo: 240 units | Avg price $1.95M | Gross revenue $468M | 60% foreign buyers (144 units) — FIRPTA: 15% withholding on foreign buyer proceeds</li>
+  <li>Hotel: 120 keys | $95M construction cost | CMBS permanent loan target $58M (6.1% fixed, 10yr) — requires 12 consecutive months &ge; 90% occupancy before funding</li>
+  <li>Office: 45,000 SF | 65% pre-leased | $62/SF | NOI $2.79M | Retail: 22,000 SF | 80% pre-leased | $95/SF | NOI $2.09M</li>
+  <li>EB-5: <strong>$95M</strong> | 500 investors x $500K | Regional Center structure | Released per USCIS I-526 approval cadence — <em>not</em> on construction draw schedule</li>
+</ul>
+<h2>Capital Stack</h2>
+<ul>
+  <li><strong>Senior construction loan: $285M</strong> | SOFR+280 | 42-month term | IO through construction</li>
+  <li><strong>EB-5: $95M</strong> | 0.5% interest | Subordinated | Flows ~$12.5M/month after 6-month USCIS lag</li>
+  <li><strong>Condo deposits: $140.4M</strong> (30% deposits on all units) | Developer equity: $159.6M</li>
+</ul>
+<h2>Key Risks</h2>
+<ul>
+  <li><strong>EB-5 timing:</strong> USCIS approval takes 6+ months. Zero EB-5 capital in months 0-6. Senior lender underwrote EB-5 as a Day 1 source — this is wrong.</li>
+  <li><strong>FIRPTA:</strong> $42M withheld at foreign buyer closings creates a temporary cash gap. Developer modeled this as zero cost.</li>
+  <li><strong>CMBS timing:</strong> Hotel loan won't fund until month 50+. It is in the capital plan but unavailable during construction.</li>
+  <li><strong>Brazilian buyers:</strong> 22 buyers (9.2% of foreign cohort) — BRL has weakened 18% vs. USD since contracts signed.</li>
+</ul>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>Where in the EB-5 draw schedule is the senior loan over-drawn vs. the capital plan?</li>
+  <li>FIRPTA creates a $42M temporary gap at condo closings. How is this actually structured?</li>
+  <li>At month 8, USCIS announces a 90-day delay affecting $30M of pending EB-5. What happens to the draw schedule?</li>
+  <li>22 Brazilian buyers request contract price modifications. Do you modify?</li>
+</ol>`,
+      qa: {
+        "EB-5 timing mechanics": `<h3>EB-5 Draw Timing</h3><p>I-526 petitions take 18-24 months for USCIS approval. In a Regional Center structure, funds cannot be drawn until each investor's petition is approved. 500 investors filing simultaneously = staggered approvals. First approvals arrive ~6 months after filing. At 25 approvals/month x $500K = $12.5M/month flowing from month 7. Developer error: modeled EB-5 as ratable from Day 1. Actual: $0 in months 0-6, then catch-up over months 7-25.</p>`,
+        "FIRPTA withholding mechanics": `<h3>FIRPTA — What It Actually Does</h3><p>FIRPTA requires 15% withholding on gross proceeds when a foreign buyer closes on US real estate. On 144 units x avg $1.95M = $280.8M foreign buyer gross x 15% = $42.1M withheld. This goes to the IRS at closing, not to the developer. Buyers file for refund (90-180 days). Developer's error: modeling net foreign proceeds as gross minus 15% (implying developer keeps the 15%). FIRPTA is a buyer tax, not a developer cost — but it reduces the buyer's available funds and creates a cash timing issue if the developer advanced any FIRPTA credit to buyers.</p>`,
+        "Brazilian buyer modifications": `<h3>BRL Devaluation Response</h3><p>BRL down 18% vs. USD means a Brazilian buyer faces a 22% effective price increase in local currency terms. Options: honor the contract (enforceable under Florida law), offer a 6-month closing extension (buys buyer time to arrange USD financing), or offer a 3% discount for immediate no-contingency close with a 30-day wire. Never offer a blanket discount matching the FX move — you're setting a precedent for all 22 buyers and signaling that contract prices are negotiable. Contain modifications to individual buyers, not announced as a policy.</p>`,
+        "CMBS timing gap": `<h3>CMBS Hotel Loan Timing</h3><p>CMBS permanent loan of $58M requires 12 consecutive months of 90%+ occupancy. Hotel opens at roughly the same time as condo closings. CMBS won't fund until month 50+. During the 18-month gap between hotel opening and CMBS funding, the hotel generates NOI but contributes nothing to construction loan repayment. Net condo proceeds of ~$400M retire the $285M senior construction loan — meaning developer equity return is deferred until CMBS funds and hotel is sold or refinanced.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The EB-5 draw schedule contains a critical timing assumption error. Find it.",
+          render: () => `
+            <p>Review the developer's capital plan showing how EB-5 funds are scheduled alongside construction draws.</p>
+            <table class="c-table">
+              <tr><th>Period</th><th>Construction Draw</th><th>EB-5 Funded</th><th>Senior Draw</th><th>Running Senior Balance</th></tr>
+              <tr><td>Months 0-3</td><td>$45M</td><td>$23.75M</td><td>$21.25M</td><td>$21.25M</td></tr>
+              <tr><td>Months 4-6</td><td>$55M</td><td>$23.75M</td><td>$31.25M</td><td>$52.5M</td></tr>
+              <tr><td>Months 7-12</td><td>$95M</td><td>$23.75M</td><td>$71.25M</td><td>$123.75M</td></tr>
+              <tr><td>Months 13-24</td><td>$180M</td><td>$23.75M</td><td>$156.25M</td><td>$280M</td></tr>
+            </table>
+            <p><em>Stated assumption: EB-5 funded rateably over 24 months = $95M &divide; 24 = $3.96M/month ($23.75M/quarter).</em></p>
+            <button class="btn-sec" onclick="revealAnswer('spt-mxstr-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mxstr-a">
+              <strong>EB-5 cannot be drawn until USCIS approves individual I-526 petitions.</strong> With a 6-month processing lag, zero EB-5 capital is available in months 0-6. The developer has modeled $47.5M of EB-5 in months 0-6 that simply will not exist.<br><br>
+              Actual senior balance at month 12: ~$170M vs. the modeled $123.75M. By month 24, the senior balance could approach the $285M maximum before EB-5 catches up. Developer needs either a $47.5M EB-5 bridge facility or must restructure the draw schedule to reflect the actual approval cadence.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Model the FIRPTA withholding at condo closings.",
+          render: () => `
+            <p>240 total condo units. 60% foreign buyers (144 units). Average price: $1.95M. FIRPTA withholding rate: 15% of foreign buyer gross proceeds. Commission: 6% of all proceeds.</p>
+            <table class="c-table" id="mxstr-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Foreign buyer gross proceeds (144 x $1.95M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>FIRPTA withholding (15% of foreign gross)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Domestic buyer gross proceeds (96 x $1.95M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total gross proceeds (foreign + domestic)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Less commissions (6% of total gross)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Net proceeds to developer (FIRPTA is a pass-through, not a cost)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mxstr-blanks',[{label:'Foreign gross',val:'$280.8M'},{label:'FIRPTA',val:'$42.1M'},{label:'Domestic gross',val:'$187.2M'},{label:'Total gross',val:'$468M'},{label:'Commissions',val:'$28.1M'},{label:'Net to developer',val:'$439.9M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "12% of EB-5 investors face a 90-day USCIS delay at month 8. Construction draw 4 ($22M) is due in 45 days.",
+          render: () => `
+            <p>USCIS announces a processing delay affecting 60 investors ($30M). Their capital is frozen for 90+ days. Construction draw 4 is $22M due in 45 days. You have $8.5M already drawn from this tranche. Remaining unfunded: $21.5M.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true},{good:false}],'dec-mxstr-a')">
+                <span class="c-d-icon">A</span><span>Draw down remaining senior loan capacity to cover draw 4. You will be at $238M of $285M — tight but technically possible.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true},{good:false}],'dec-mxstr-a')">
+                <span class="c-d-icon">B</span><span>Request a 45-day construction schedule compression from the GC — shift work to accelerate billings covered by the next EB-5 tranche.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true},{good:false}],'dec-mxstr-a')">
+                <span class="c-d-icon">C</span><span>Arrange a $22M EB-5 bridge loan at 8-10% for 90 days from a specialty lender. Cost: ~$440K.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:false},{good:true},{good:false}],'dec-mxstr-a')">
+                <span class="c-d-icon">D</span><span>Request voluntary early release of escrowed EB-5 funds pending USCIS approval to keep the draw schedule intact.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mxstr-a">
+              <p><strong>C is the right answer.</strong> EB-5 bridge lenders exist precisely for USCIS processing delays. $440K on a $680M project is immaterial — and it preserves your senior loan headroom for future draws if further delays occur.</p>
+              <p><strong>A is viable short-term</strong> but burns through senior headroom. If EB-5 delays compound, you breach the $285M maximum before project completion.</p>
+              <p><strong>B is wrong.</strong> GCs invoice on actual work completion, not your financing needs. You cannot compress billing timing.</p>
+              <p><strong>D is illegal.</strong> Escrowed EB-5 funds cannot be released before I-526 approval under SEC and USCIS rules. Doing this creates criminal securities law exposure.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "22 Brazilian buyers request contract price modifications due to BRL devaluation. Your sales director says offer 8%. Do you?",
+          render: () => `
+            <p>BRL has weakened 18% vs. USD since contracts were signed. 22 buyers have engaged lawyers requesting amendments. Combined contract value: $42.9M. An 8% blanket discount = <strong>$3.43M</strong> in gross revenue reduction. Your legal team confirms contracts are enforceable under Florida law.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-mxstr-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-mxstr-a">
+              <strong>Do not offer a blanket 8% discount.</strong><br><br>
+              The contracts are enforceable. A publicly announced 8% modification triggers requests from all remaining foreign buyers — the $3.43M cost becomes a much larger precedent problem.<br><br>
+              Instead: (1) Offer a 6-month closing extension at no cost — buys buyers time to arrange USD financing. (2) For buyers who genuinely cannot perform: offer a 3% discount for an immediate no-contingency close with a 30-day wire. (3) Handle each buyer individually, never as a stated policy.<br><br>
+              The sales director's instinct to preserve relationships is correct — but a blanket discount is the wrong instrument. Extensions and individual case-by-case resolutions protect both the relationship and the price integrity.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Move the three biggest variables. See how condo pricing, foreign buyer mix, and hotel cap rate drive total project value.",
+          render: () => `
+            <p>Adjust the sliders. The FIRPTA line shows the cash management gap at closing — not a developer cost, but a real liquidity event.</p>
+            <div class="c-sliders">
+              <label>Condo avg price: <strong id="sl-mxstr-condo-val">$1.95M</strong></label>
+              <input type="range" min="160" max="230" step="5" value="195" id="sl-mxstr-condo" oninput="updateBtdMxstr()">
+              <label>Foreign buyer %: <strong id="sl-mxstr-foreign-val">60%</strong></label>
+              <input type="range" min="40" max="70" step="5" value="60" id="sl-mxstr-foreign" oninput="updateBtdMxstr()">
+              <label>Hotel exit cap rate: <strong id="sl-mxstr-hotel-val">5.50%</strong></label>
+              <input type="range" min="475" max="650" step="25" value="550" id="sl-mxstr-hotel" oninput="updateBtdMxstr()">
+            </div>
+            <table class="c-table">
+              <tr><th>Metric</th><th>Value</th></tr>
+              <tr><td>Gross condo revenue</td><td id="mxstr-gross">$468.0M</td></tr>
+              <tr><td>FIRPTA withholding (foreign buyers x 15%)</td><td id="mxstr-firpta">$42.1M</td></tr>
+              <tr><td>Net condo proceeds (after commissions)</td><td id="mxstr-net">$439.9M</td></tr>
+              <tr><td>Hotel exit value (NOI $4.2M)</td><td id="mxstr-hotel">$76.4M</td></tr>
+              <tr><td>Income property total (hotel + office $41.7M + retail $29.2M)</td><td id="mxstr-income">$147.3M</td></tr>
+              <tr><td>Total project value</td><td id="mxstr-total">$587.2M</td></tr>
+              <tr><td>Developer profit vs. $680M cost</td><td id="mxstr-profit">($92.8M)</td></tr>
+            </table>
+            <p style="font-size:0.85em;color:#666;margin-top:8px"><em>Note: developer profit turns positive once condo proceeds + permanent financing repays construction debt. The income properties are retained at cap value, not sold at cost.</em></p>`,
+          init: () => {
+            window.updateBtdMxstr = function() {
+              const condoM = parseInt(document.getElementById('sl-mxstr-condo').value) / 100;
+              const foreignPct = parseInt(document.getElementById('sl-mxstr-foreign').value) / 100;
+              const capRaw = parseInt(document.getElementById('sl-mxstr-hotel').value);
+              const cap = capRaw / 10000;
+              const gross = Math.round(240 * condoM * 10) / 10;
+              const foreignUnits = Math.round(240 * foreignPct);
+              const foreignGross = Math.round(foreignUnits * condoM * 10) / 10;
+              const firpta = Math.round(foreignGross * 0.15 * 10) / 10;
+              const netCondo = Math.round((gross - gross * 0.06) * 10) / 10;
+              const hotelVal = Math.round(4.2 / cap * 10) / 10;
+              const incomeTotal = Math.round((hotelVal + 41.7 + 29.2) * 10) / 10;
+              const total = Math.round((netCondo + incomeTotal) * 10) / 10;
+              const profit = Math.round((total - 680) * 10) / 10;
+              document.getElementById('sl-mxstr-condo-val').textContent = '$' + condoM.toFixed(2) + 'M';
+              document.getElementById('sl-mxstr-foreign-val').textContent = (foreignPct * 100) + '%';
+              document.getElementById('sl-mxstr-hotel-val').textContent = (capRaw / 100).toFixed(2) + '%';
+              document.getElementById('mxstr-gross').textContent = '$' + gross + 'M';
+              document.getElementById('mxstr-firpta').textContent = '$' + firpta + 'M';
+              document.getElementById('mxstr-net').textContent = '$' + netCondo + 'M';
+              document.getElementById('mxstr-hotel').textContent = '$' + hotelVal + 'M';
+              document.getElementById('mxstr-income').textContent = '$' + incomeTotal + 'M';
+              document.getElementById('mxstr-total').textContent = '$' + total + 'M';
+              document.getElementById('mxstr-profit').textContent = profit >= 0 ? '$' + profit + 'M' : '($' + Math.abs(profit) + 'M)';
+            };
+          }
+        }
+      ]
+    }
   },
-
   multifamily: {
     intro: {
       name: "The Linden — Denver",
@@ -2019,10 +2614,296 @@ const SCENARIOS = {
         }
       ]
     },
-    senior: { name:"One Halsted — Chicago", html:`<h2>Senior Multifamily</h2><p>Coming soon — 312-unit institutional apartment tower with three exit options: institutional sale, Fannie Mae/Freddie Mac agency refinancing, or REIT contribution at NAV.</p>`, qa:{}, challenges:[] },
-    structuring: { name:"Meridian Portfolio — Southeast US", html:`<h2>Structuring Multifamily</h2><p>Coming soon — 3-asset portfolio acquisition (Atlanta, Charlotte, Nashville) with a distressed asset creating clawback risk from prior fund distributions.</p>`, qa:{}, challenges:[] }
+    senior: {
+      name: "One Halsted — Chicago",
+      html: `<h2>Deal Overview</h2>
+<p><strong>One Halsted</strong> — Chicago, IL. 312-unit institutional apartment tower, 34 stories, West Loop submarket. New construction on a ground-lease site (75-year ground lease, $1.2M/yr). Developer: Chicago-based institutional developer, $1.8B prior multifamily closings.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total project cost: <strong>$142M</strong> ($455K/unit) | Senior construction: <strong>$92.3M</strong> at SOFR+225 (~6.6%), 30-month IO</li>
+  <li>LP equity: <strong>$40.5M</strong> | 8% cumul pref | 80/20 above 14% IRR | Fund life: Year 7 hard deadline</li>
+  <li>GP equity: <strong>$9.2M</strong> | Plus 2.5% dev fee + 1.25% AM fee | Ground lease: $1.2M/yr treated as operating expense</li>
+  <li>Stabilized NOI before ground lease: <strong>$8.6M</strong> | Net NOI after ground lease: <strong>$7.4M</strong></li>
+</ul>
+<h2>Three Exit Scenarios</h2>
+<table class="c-table">
+  <tr><th>Path</th><th>Proceeds</th><th>Notes</th></tr>
+  <tr><td>Institutional sale</td><td>$172M</td><td>5.0% cap on exit NOI — cleanest, highest value</td></tr>
+  <tr><td>Agency refi (Fannie Mae)</td><td>$129M (modeled) / $101.5M (correct)</td><td>Error: ground lease excluded from DSCR</td></tr>
+  <tr><td>REIT contribution</td><td>$155M NAV</td><td>2-year OP unit lockup — conflicts with Year 7 fund deadline</td></tr>
+</table>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>The agency refi proceeds are overstated by $27.5M. Where is the error?</li>
+  <li>Agency refi returns only ~$9M of equity vs. $49.7M invested. What does this mean for LP?</li>
+  <li>REIT OP unit lockup expires at Year 7 — exactly at LP fund deadline. What can go wrong?</li>
+  <li>Chicago rent stabilization ordinance passes. Exit is 18 months away. Hold or sell immediately?</li>
+</ol>`,
+      qa: {
+        "Agency refinancing mechanics": `<h3>Fannie Mae DSCR and Ground Lease</h3><p>Fannie Mae underwrites multifamily loans on net operating income after all operating expenses — including ground lease payments. Ground lease at $1.2M/yr must reduce NOI before DSCR is calculated. Developer's model used pre-ground-lease NOI of $8.6M. Correct NOI: $7.4M. Max IO DS at 1.25x DSCR: $7.4M / 1.25 = $5.92M. At 5.75% IO: max loan = $101.5M — not $129M. The $27.5M gap is a real shortfall in the capital plan.</p>`,
+        "Three exit path comparison": `<h3>Exit Path Analysis</h3><p><strong>Institutional sale ($172M):</strong> Cleanest, highest value, requires 6-9 month marketing process. <strong>Agency refi ($101.5M correct):</strong> Returns only $9.2M of equity above construction loan repayment — leaves $32.2M of LP equity in the deal in a 10-year loan. LP fund deadline makes this path unworkable. <strong>REIT OP units ($155M):</strong> $17M below institutional sale but closes in 90 days. 2-year lockup expiring at Year 7 is dangerously tight — any execution delay blows the fund deadline.</p>`,
+        "REIT OP units and fund life": `<h3>REIT Contribution and Fund Deadline</h3><p>LP fund has a hard Year 7 deadline. REIT OP units have a 2-year lockup. If hotel opens Year 3 and REIT contribution happens Year 5, lockup expires Year 7 — exactly at the fund deadline. Any delay in REIT execution (common in REIT transactions) extends the lockup past Year 7. LP counsel will not approve. Options: negotiate an 18-month lockup instead (tight but workable), or structure a deferred-payment REIT contribution where LP receives cash at Year 7 and GP retains the OP units.</p>`,
+        "Rent stabilization impact": `<h3>Chicago Rent Stabilization Analysis</h3><p>If annual increases are capped at CPI+1% (~3.5%) vs. 4% underwritten, Year 5 NOI = $8.1M vs. $8.9M projected. Exit value at 5.0% cap: $162M vs. $178M — a $16M reduction. LP IRR drops from ~16% to ~13.5%. Still above pref but below promote hurdle — GP earns reduced promote. The key question: does the 60-90 day institutional buyer confusion window allow a pre-revaluation sale?</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The agency refinancing proceeds are overstated by $27.5M. Find the error.",
+          render: () => `
+            <p>The developer's agency refi model shows $129M in proceeds. Review the inputs below and identify what is wrong.</p>
+            <table class="c-table">
+              <tr><th>Input</th><th>Developer Model</th><th>Correct Input</th></tr>
+              <tr><td>Stabilized NOI</td><td>$8.6M</td><td>?</td></tr>
+              <tr><td>Ground lease treatment</td><td>Not included in NOI</td><td>?</td></tr>
+              <tr><td>NOI used for DSCR calc</td><td>$8.6M</td><td>?</td></tr>
+              <tr><td>DSCR minimum (Fannie IO)</td><td>1.25x</td><td>1.25x</td></tr>
+              <tr><td>Fannie IO rate</td><td>5.75%</td><td>5.75%</td></tr>
+              <tr><td>Maximum loan</td><td>$129M</td><td>?</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-mfs-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mfs-a">
+              <strong>Ground lease excluded from NOI.</strong> Fannie Mae treats ground lease payments as an operating expense. The $1.2M/yr ground lease must reduce NOI before the DSCR test.<br><br>
+              Correct NOI: $8.6M &minus; $1.2M = <strong>$7.4M</strong>. Max IO DS at 1.25x: $7.4M / 1.25 = $5.92M. At 5.75%: max loan = <strong>$101.5M</strong>.<br><br>
+              The developer's model used pre-ground-lease NOI of $8.6M: $8.6M / 1.25 = $6.88M &rarr; $6.88M / 5.75% = $119.7M (closer to their $129M with LTV adjustments). The gap is <strong>$27.5M</strong> of proceeds the capital plan is counting on that won't exist.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Size the correct agency refi and calculate how much LP equity remains trapped.",
+          render: () => `
+            <p>Net NOI after ground lease: $7.4M. Fannie IO rate: 5.75%. DSCR minimum: 1.25x. Construction loan: $92.3M. LP invested: $40.5M (90% of $45M equity).</p>
+            <table class="c-table" id="mfs-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Max IO debt service at 1.25x DSCR ($7.4M / 1.25)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Max loan at 5.75% IO</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity returned from refi (max loan minus $92.3M construction)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP share of equity returned (90%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>LP equity still in deal after refi</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mfs-blanks',[{label:'Max DS',val:'$5.92M'},{label:'Max loan',val:'$101.5M'},{label:'Equity returned',val:'$9.2M'},{label:'LP share',val:'$8.3M'},{label:'LP equity trapped',val:'$32.2M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "REIT offers $155M NAV with a 2-year lockup. Contribution closes Year 5. LP fund deadline is Year 7. What do you do?",
+          render: () => `
+            <p>REIT contribution at $155M closes in 90 days (Year 5). OP unit lockup: 2 years — expires Year 7, exactly at LP fund deadline. Institutional sale at $172M would take 6-9 months. Any delay in REIT execution pushes lockup past Year 7.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:true},{good:false}],'dec-mfs-a')">
+                <span class="c-d-icon">A</span><span>Accept REIT terms as presented. The lockup expires exactly at Year 7 — it works on paper.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:true},{good:false}],'dec-mfs-a')">
+                <span class="c-d-icon">B</span><span>Counter the REIT on lockup: accept the $155M valuation but request 18 months instead of 24.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:true},{good:false}],'dec-mfs-a')">
+                <span class="c-d-icon">C</span><span>Run the institutional sale process at $172M in parallel. Use the REIT as a floor, take whichever closes first.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:true},{good:true},{good:false}],'dec-mfs-a')">
+                <span class="c-d-icon">D</span><span>Ask LP to extend their fund deadline by 6 months to create buffer for the REIT lockup.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mfs-a">
+              <p><strong>B + C together are the right play.</strong></p>
+              <p><strong>B:</strong> The lockup is a liquidity management tool for the REIT — shortening from 24 to 18 months is a small ask for them and a large benefit for you. Counter it. Most REITs will split the difference.</p>
+              <p><strong>C:</strong> Running both processes creates competitive tension. $172M institutional sale is the better price. REIT is a fast-close floor, not a ceiling.</p>
+              <p><strong>A is the highest-risk option.</strong> Any execution delay in REIT transactions (common) blows the Year 7 deadline. Do not count on "exactly on paper" timelines holding.</p>
+              <p><strong>D is worth discussing but cannot be counted on.</strong> Hard fund deadlines are legal obligations to LP's own investors — GPs cannot negotiate away LP's fiduciary duties.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Chicago rent stabilization ordinance passes. Exit is 18 months away. Hold or sell immediately?",
+          render: () => `
+            <p>Chicago City Council passes a rent stabilization ordinance: annual increases capped at CPI+1% (~3.5%/yr). Underwriting assumed 4%/yr growth. One Halsted is currently Year 3.5, running 8% below current market rent. Institutional buyers are still processing the law's implications — you have a <strong>60-90 day window</strong> before the market re-prices the asset.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-mfs-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-mfs-a">
+              <strong>Initiate a sale process now.</strong><br><br>
+              The 60-90 day institutional buyer confusion window is the most valuable asset you have. Every month you hold post-ordinance, buyers recalibrate NOI growth assumptions downward. Year 5 NOI under stabilization: $8.1M vs. $8.9M projected. Exit value impact at 5.0% cap: $162M vs. $178M — a $16M swing that reduces LP IRR from ~16% to ~13.5%.<br><br>
+              Initiating a sale process now costs nothing. If pricing hasn't moved yet, you lose nothing. If it has moved, you've protected $16M+ of value. The only reason to hold: if you believe the ordinance will be struck down in court — possible, but uncertain. If that's the thesis, be ready to sell quickly if the legal challenge fails.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Complete</button></div>
+            </div>`,
+          init: () => {}
+        }
+      ]
+    },
+    structuring: {
+      name: "Meridian Portfolio — Southeast US",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Meridian Portfolio</strong> — Southeast US. Acquisition of three stabilized multifamily assets: Atlanta (220 units), Charlotte (185 units), Nashville (240 units). Combined 645 units. Acquisition price: <strong>$187M</strong> blended. Life company permanent financing. Critical complication: clawback risk from a prior fund's ownership of Nashville.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Portfolio price: <strong>$187M</strong> | Atlanta $58M | Charlotte $51M | Nashville $78M | Blended cap 5.8% | NOI $10.85M</li>
+  <li>Life company loan: <strong>$117.8M</strong> at 6.35% fixed, 10-year term, 30yr amortizing | No partial release provisions</li>
+  <li>LP equity: <strong>$57.3M</strong> | GP equity: <strong>$11.9M</strong></li>
+</ul>
+<h2>Loan Structure — Key Constraints</h2>
+<table class="c-table">
+  <tr><th>Feature</th><th>This Loan</th><th>Market Standard</th></tr>
+  <tr><td>Release provisions</td><td>None</td><td>115% release price per asset</td></tr>
+  <tr><td>Cross-default</td><td>All three assets</td><td>Individual asset only</td></tr>
+  <tr><td>Prepayment</td><td>Yield maintenance, 10yr</td><td>Open after 7yr or step-down</td></tr>
+  <tr><td>Defeasance</td><td>Not available</td><td>Available after year 2</td></tr>
+</table>
+<h2>Clawback Risk</h2>
+<p>Fund III (prior GP fund) owned Nashville — exited 18 months ago at a gain, distributing <strong>$8.4M</strong> to LP investors. GP is now re-acquiring Nashville at $78M ($10M above Fund III's exit price of $68M). Fund III LPs have engaged counsel alleging self-dealing and information advantage.</p>
+<h2>Charlotte Underperformance</h2>
+<p>Year 2 NOI: <strong>$2.1M</strong> vs. <strong>$2.8M</strong> underwritten (25% miss). Implied value at 6.25% cap: $33.6M vs. $51M purchase price — <strong>$17.4M unrealized loss</strong>.</p>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>No release provisions mean you cannot sell any individual asset. What should have been negotiated at origination?</li>
+  <li>What is the yield maintenance cost at Year 5 exit, and how does it affect net proceeds?</li>
+  <li>Fund III LPs have filed a $8.4M clawback demand. How do you respond?</li>
+  <li>Charlotte NOI is 25% below underwriting at Year 2. Sell now or hold to Year 5?</li>
+</ol>`,
+      qa: {
+        "Life company loan and release provisions": `<h3>Release Provision Gap</h3><p>Most life company portfolio loans have no partial release provisions — they treat the portfolio as a single collateral pool. No individual asset can be sold without repaying the full loan. Standard fix: negotiate 115-120% release price per asset at origination. At 115%: Nashville release price = $78M allocated loan x 1.15 = ~$57.6M. This should have been a non-negotiable term. Combined with yield maintenance and no defeasance, this loan is locked for 10 years unless all three assets exit simultaneously.</p>`,
+        "Yield maintenance calculation": `<h3>Yield Maintenance at Year 5</h3><p>Life company loan $117.8M, 6.35% coupon. Estimated Treasury rate ~4.5%. Remaining term at Year 5: 5 years. Simplified YM: spread (6.35% - 4.5% = 1.85%) x remaining balance (~$112M) x remaining years (5) = ~$10.36M. Exact calculation uses present value of each remaining coupon discounted at Treasury rate. This is why life company loans should never be assumed prepayable at par — the YM is a real cost that must be in every exit model.</p>`,
+        "Fund III clawback risk": `<h3>Clawback Exposure Analysis</h3><p>Clawback applies if Fund III distributions were earned through self-dealing or breach of fiduciary duty. Key exposure factors: (1) Was there a right-of-first-offer for Fund III LPs if Nashville was re-acquired? Check the LPA. (2) GP's information advantage from the management period may constitute a fiduciary breach. (3) The $10M price increase from Fund III exit to Fund IV acquisition raises appearance issues even if arm's length. Defensible position: Nashville was sold to an unaffiliated seller, bought back 18 months later in a competitive process.</p>`,
+        "Charlotte hold vs. sell analysis": `<h3>Charlotte Options</h3><p>Selling Charlotte now triggers the full $117.8M loan repayment (no release provisions) plus yield maintenance of ~$18M at Year 2. You'd crystallize a $17.4M unrealized loss AND pay $18M in prepayment penalty — $35.4M of combined damage. Hold instead: intensify operations, bring in a new property manager, push rents. Recover 50% of the NOI miss ($350K/yr) and add $5.6M in value at exit. Hold to Year 7 when yield maintenance steps down or disappears. Nashville and Atlanta likely carry the portfolio economics at exit.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The portfolio loan has a structural feature that makes it impossible to sell any individual asset. Find it.",
+          render: () => `
+            <p>Review the loan terms below against market standard. Identify the feature that traps all three assets together.</p>
+            <table class="c-table">
+              <tr><th>Loan Feature</th><th>Meridian Portfolio Loan</th><th>Market Standard</th></tr>
+              <tr><td>Release provisions</td><td>None</td><td>115% release price per asset</td></tr>
+              <tr><td>Cross-default</td><td>All three assets</td><td>Individual asset only</td></tr>
+              <tr><td>Prepayment</td><td>Yield maintenance, 10yr</td><td>Open after 7yr or step-down</td></tr>
+              <tr><td>Defeasance</td><td>Not available</td><td>Available after year 2</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-mfstr-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-mfstr-a">
+              <strong>No release provisions.</strong> Without them, no individual asset can be sold without triggering full loan repayment across all three properties. If Charlotte underperforms and you want to cut losses by selling it, you cannot — without unwinding the entire $117.8M loan and paying yield maintenance.<br><br>
+              This should have been negotiated at origination. Standard life company portfolio loans allow individual asset release at 115-120% of that asset's allocated loan amount. Combined with yield maintenance and no defeasance, this loan is effectively locked for 10 years unless all three assets sell simultaneously. This is a structuring failure, not a market condition.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Model a Year 5 portfolio exit including yield maintenance.",
+          render: () => `
+            <p>Loan balance at Year 5 (30yr amortizing, minimal paydown): ~$112M. Treasury rate: 4.5%. Coupon: 6.35%. Portfolio exit at acquisition cap (5.8%) on NOI $10.85M.</p>
+            <table class="c-table" id="mfstr-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Portfolio exit value ($10.85M at 5.8% cap)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Interest rate spread (6.35% &minus; 4.5%)</td><td><input class="c-input" type="text" placeholder="?%"></td></tr>
+              <tr><td>Simplified YM (spread x $112M x 5yr remaining)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Net equity proceeds (exit minus $112M loan minus YM)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>5yr cumulative cash flow (NOI $10.85M minus DS $7.49M/yr x 5)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total LP distributions (equity proceeds + cash flow x LP 83%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('mfstr-blanks',[{label:'Exit value',val:'$187M'},{label:'Spread',val:'1.85%'},{label:'YM',val:'~$10.4M'},{label:'Equity proceeds',val:'~$64.6M'},{label:'5yr cash flow',val:'~$16.8M'},{label:'LP distributions',val:'~$67.5M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "Fund III LPs have filed a clawback demand for $8.4M. How do you respond?",
+          render: () => `
+            <p>Fund III LPs allege GP's re-acquisition of Nashville — at a $10M premium 18 months after exit — constitutes a breach of fiduciary duty. The Fund III LPA has a standard clawback provision but does not explicitly address re-acquisition of sold assets. GP counsel estimates a 40% chance of adverse ruling.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:false},{good:true}],'dec-mfstr-a')">
+                <span class="c-d-icon">A</span><span>Defend fully. The transaction was arm's length — sold to an unaffiliated seller, bought back 18 months later in a competitive process.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:false},{good:true}],'dec-mfstr-a')">
+                <span class="c-d-icon">B</span><span>Settle immediately at $4.2M (50% of claimed amount).</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:false},{good:true}],'dec-mfstr-a')">
+                <span class="c-d-icon">C</span><span>Propose mediation. Offer Fund III LPs co-investment rights in Nashville at current terms — converting the clawback dispute into a forward alignment opportunity.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:false},{good:false},{good:true}],'dec-mfstr-a')">
+                <span class="c-d-icon">D</span><span>Conduct discovery. If Fund III LPA has no re-acquisition restriction and the sale was at market value, present this in mediation and offer a $1.5M nuisance settlement.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-mfstr-a">
+              <p><strong>D is the most defensible structured approach.</strong> Limits downside to $1.5M, preserves GP's reputation for not capitulating without evidence, resolves in 6-9 months. Full discovery first — if the LPA has no re-acquisition restriction and the arm's-length sale is documented, you have a strong position.</p>
+              <p><strong>C is creative</strong> and potentially best long-term — converts adversarial clawback into a co-investment opportunity. Worth proposing in parallel with D if the Fund III LPs are also potential Fund IV investors (relationship value).</p>
+              <p><strong>A (full defense)</strong> is legally viable but ignores the information advantage issue and risks 18-24 months of litigation at $800K+ in fees plus relationship damage.</p>
+              <p><strong>B (50% immediate settlement)</strong> signals weakness before any discovery and is the worst negotiating outcome.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Charlotte NOI is 25% below underwriting at Year 2. Sell now or hold to Year 5?",
+          render: () => `
+            <p>Charlotte NOI: <strong>$2.1M</strong> vs. <strong>$2.8M</strong> underwritten. Implied value at 6.25% cap: <strong>$33.6M</strong> vs. $51M purchase price — $17.4M unrealized loss. But: no release provisions means selling Charlotte requires unwinding the entire $117.8M portfolio loan, plus yield maintenance of ~$18M at Year 2 (8 years remaining on coupon).</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-mfstr-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-mfstr-a">
+              <strong>Hold. The math on selling now is punishing.</strong><br><br>
+              Triggering $18M in yield maintenance to sell a $33.6M asset that cost $51M crystallizes a $17.4M loss AND incurs an $18M prepayment penalty — $35.4M of combined damage. You cannot afford this.<br><br>
+              Instead: (1) Bring in a new property management company. Intensify lease-up, push rents, cut controllable costs. Recovering 50% of the NOI miss ($350K/yr) adds $5.6M at exit. (2) Hold to Year 7 when the loan enters its open period and yield maintenance declines materially. (3) At portfolio exit, Nashville's likely appreciation and Atlanta's stability will carry Charlotte's shortfall in the blended return. The portfolio structure is both the trap and the solution.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "Three assets, one loan. Move each NOI and watch the portfolio hold together — or not.",
+          render: () => `
+            <p>Adjust individual asset NOIs and the blended exit cap. See how Nashville and Atlanta carry Charlotte — and where the yield maintenance cost hits the return.</p>
+            <div class="c-sliders">
+              <label>Atlanta NOI: <strong id="sl-mfstr-atl-val">$3.3M</strong></label>
+              <input type="range" min="280" max="420" step="10" value="330" id="sl-mfstr-atl" oninput="updateBtdMfstr()">
+              <label>Charlotte NOI: <strong id="sl-mfstr-clt-val">$2.1M</strong></label>
+              <input type="range" min="160" max="320" step="10" value="210" id="sl-mfstr-clt" oninput="updateBtdMfstr()">
+              <label>Nashville NOI: <strong id="sl-mfstr-nsh-val">$4.35M</strong></label>
+              <input type="range" min="300" max="550" step="10" value="435" id="sl-mfstr-nsh" oninput="updateBtdMfstr()">
+              <label>Blended exit cap rate: <strong id="sl-mfstr-cap-val">5.80%</strong></label>
+              <input type="range" min="475" max="675" step="25" value="580" id="sl-mfstr-cap" oninput="updateBtdMfstr()">
+            </div>
+            <table class="c-table">
+              <tr><th>Metric</th><th>Value</th></tr>
+              <tr><td>Total portfolio NOI</td><td id="mfstr-noi">$10.85M</td></tr>
+              <tr><td>Portfolio exit value</td><td id="mfstr-exit">$187.1M</td></tr>
+              <tr><td>Yield maintenance (fixed Year 5 cost)</td><td id="mfstr-ym">~$10.4M</td></tr>
+              <tr><td>Net equity after loan + YM</td><td id="mfstr-equity">~$64.6M</td></tr>
+              <tr><td>5yr cumulative cash flow</td><td id="mfstr-cf">~$16.8M</td></tr>
+              <tr><td>LP total return (equity + CF x 83% share)</td><td id="mfstr-lp">~$67.5M</td></tr>
+              <tr><td>LP IRR (approx, 5yr hold, $57.3M invested)</td><td id="mfstr-irr">~8%</td></tr>
+            </table>`,
+          init: () => {
+            window.updateBtdMfstr = function() {
+              const atl = parseInt(document.getElementById('sl-mfstr-atl').value) / 100;
+              const clt = parseInt(document.getElementById('sl-mfstr-clt').value) / 100;
+              const nsh = parseInt(document.getElementById('sl-mfstr-nsh').value) / 100;
+              const capRaw = parseInt(document.getElementById('sl-mfstr-cap').value);
+              const cap = capRaw / 10000;
+              const totalNOI = Math.round((atl + clt + nsh) * 100) / 100;
+              const exitVal = Math.round(totalNOI / cap * 10) / 10;
+              const loanBal = 112;
+              const ym = 10.4;
+              const equity = Math.round((exitVal - loanBal - ym) * 10) / 10;
+              const ds = 7.49;
+              const cf = Math.round((totalNOI - ds) * 5 * 10) / 10;
+              const lpShare = Math.round((equity + cf) * 0.83 * 10) / 10;
+              const lpEM = lpShare / 57.3;
+              const lpIRR = Math.round((Math.pow(Math.max(lpEM, 0.01), 0.2) - 1) * 100);
+              document.getElementById('sl-mfstr-atl-val').textContent = '$' + atl.toFixed(2) + 'M';
+              document.getElementById('sl-mfstr-clt-val').textContent = '$' + clt.toFixed(2) + 'M';
+              document.getElementById('sl-mfstr-nsh-val').textContent = '$' + nsh.toFixed(2) + 'M';
+              document.getElementById('sl-mfstr-cap-val').textContent = (capRaw / 100).toFixed(2) + '%';
+              document.getElementById('mfstr-noi').textContent = '$' + totalNOI + 'M';
+              document.getElementById('mfstr-exit').textContent = '$' + exitVal + 'M';
+              document.getElementById('mfstr-ym').textContent = '~$10.4M';
+              document.getElementById('mfstr-equity').textContent = equity > 0 ? '~$' + equity + 'M' : 'Negative';
+              document.getElementById('mfstr-cf').textContent = cf > 0 ? '~$' + cf + 'M' : 'Negative';
+              document.getElementById('mfstr-lp').textContent = lpShare > 0 ? '~$' + lpShare + 'M' : 'Loss';
+              document.getElementById('mfstr-irr').textContent = lpIRR > 0 ? '~' + lpIRR + '%' : 'Below pref';
+            };
+          }
+        }
+      ]
+    }
   },
-
   branded_res: {
     intro: {
       name: "Bellmont Residences — Aspen",
@@ -2124,10 +3005,302 @@ const SCENARIOS = {
         }
       ]
     },
-    senior: { name:"The Oberoi Collection — Dubai", html:`<h2>Senior Branded Residence</h2><p>Coming soon — 62 ultra-luxury residences in Dubai with an Oberoi affiliation, 60% ABSD buyer stamp duty impact, and a brand premium analysis showing how Oberoi's track record in India cannot be extrapolated to Dubai pricing.</p>`, qa:{}, challenges:[] },
-    structuring: { name:"The Mandarin Collection — Singapore", html:`<h2>Structuring Branded Residence</h2><p>Coming soon — hybrid sale + retain structure with 15 units in a Mandarin Oriental rental pool, SGD/USD FX hedging decision, and German CFC tax structuring for a European family office co-GP.</p>`, qa:{}, challenges:[] }
+    senior: {
+      name: "The Oberoi Collection — Dubai",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Oberoi Collection</strong> — Dubai Hills Estate, UAE. 62 ultra-luxury branded residences. First Oberoi-branded residential product in the Middle East. Average unit price: $4.6M. Gross revenue: <strong>$285.2M</strong>. Developer: Dubai-based developer, four prior luxury tower completions.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total development cost: <strong>$198M</strong> ($3.19M/unit)</li>
+  <li>Senior construction finance: 58% LTC = <strong>$114.8M</strong> | EIBOR+320 (~9.0%), 36-month term</li>
+  <li>LP equity: <strong>$62.1M</strong> | GP equity: <strong>$21.1M</strong> | Total equity: <strong>$83.2M</strong></li>
+  <li>DLD registration fee: 4% per transaction | Developer absorbs for 70% of units = <strong>$7.97M</strong> cost (in budget)</li>
+  <li>Presales: 45 of 62 units pre-sold (73%) | 20% deposits = $41.5M in escrow</li>
+  <li>Oberoi brand fee: 2.5% of gross sales = <strong>$7.13M</strong> one-time licensing fee</li>
+</ul>
+<h2>Brand Premium Problem</h2>
+<table class="c-table">
+  <tr><th>Comp Used</th><th>Location</th><th>Premium vs. Unbranded</th><th>Brand Recognition</th></tr>
+  <tr><td>Oberoi Realty Mumbai</td><td>Mumbai, India</td><td>+18%</td><td>30yr India track record</td></tr>
+  <tr><td>Oberoi Udaipur</td><td>Rajasthan, India</td><td>+22%</td><td>Iconic heritage property</td></tr>
+  <tr><td>Four Seasons DIFC</td><td>Dubai, UAE</td><td>+12%</td><td>Global brand, strong Gulf presence</td></tr>
+  <tr><td>Baccarat Residences</td><td>Dubai, UAE</td><td>+14%</td><td>First Gulf launch</td></tr>
+</table>
+<p>Developer modeled 18% brand premium ($4.6M avg). Agent-executed pricing: $4.1M avg — only 5% above unbranded. Revenue gap: <strong>$31M on full sellout</strong>.</p>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>Why are Indian Oberoi comps invalid for Gulf pricing?</li>
+  <li>What is the developer profit impact if pricing settles at $4.1M?</li>
+  <li>Four penthouses ($8.5M each) are unsold at month 18. How do you move them?</li>
+  <li>Oberoi wants to increase the brand fee from 2.5% to 3.125%. Negotiate.</li>
+</ol>`,
+      qa: {
+        "Brand premium methodology error": `<h3>Why Indian Comps Don't Apply</h3><p>Oberoi commands a premium in India because of 30+ years of brand recognition with Indian HNW buyers. In the Gulf, Oberoi has no established residential presence. The two relevant comps are Gulf-only: Four Seasons DIFC (+12%) and Baccarat Residences (+14%) — and Baccarat is also a Gulf brand debut, meaning Oberoi should be at or below Baccarat's 14%, not above it. Correcting to Gulf comps: brand premium 8-12% max, avg price $4.2-4.3M, revenue shortfall $14-31M vs. modeled.</p>`,
+        "Revenue sensitivity at $4.1M": `<h3>Profit Impact at Corrected Pricing</h3><p>Gross sales: 62 x $4.1M = $254.2M. Less commissions (4%): $10.17M. Less DLD (70% x 62 x 4% x $4.1M): $7.11M. Less Oberoi fee (2.5%): $6.36M. Net proceeds: $230.56M. Cost: $198M. Developer profit: $32.56M — roughly half the modeled $60.69M. LP IRR at corrected proceeds over 3.5yr: ~12-14% — below the 15% hurdle. GP earns zero promote.</p>`,
+        "Unsold penthouse strategy": `<h3>Moving Four Penthouses at Month 18</h3><p>Options: (1) Off-market private placement to a single family office at 5-7% discount ($31.5-32.3M for all four) — clean, fast, no public price signal. (2) Christie's or Sotheby's luxury real estate auction — creates scarcity and bidding pressure, 90-day timeline. Never publicly discount — it reprices all comps in the building and signals weakness to remaining buyers with unclosed contracts.</p>`,
+        "Oberoi brand fee negotiation": `<h3>Fee Increase Response</h3><p>Current fee 2.5% = $7.13M. Proposed 3.125% = $8.91M — incremental $1.78M. Without Oberoi, revenue reverts to unbranded comps ($14-31M revenue impact). The asymmetry is clear. Counter: (1) Accept 3.0% (saves $360K). (2) Make the increment performance-contingent — 2.5% base, additional 0.5% only if avg closed pricing exceeds $4.3M. (3) Agree to the fee increase in exchange for Oberoi committing to a 6-month Gulf marketing blitz. Align incentives.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The brand premium methodology contains a critical comp error. Find it.",
+          render: () => `
+            <p>The developer used four comps to justify an 18% brand premium. Review the comp table and identify why the methodology is flawed.</p>
+            <table class="c-table">
+              <tr><th>Comp</th><th>Location</th><th>Premium</th><th>Brand Recognition in Gulf</th></tr>
+              <tr><td>Oberoi Realty Mumbai</td><td>Mumbai, India</td><td>+18%</td><td>None</td></tr>
+              <tr><td>Oberoi Udaipur</td><td>Rajasthan, India</td><td>+22%</td><td>None</td></tr>
+              <tr><td>Four Seasons DIFC Dubai</td><td>Dubai, UAE</td><td>+12%</td><td>Strong — global brand</td></tr>
+              <tr><td>Baccarat Residences Dubai</td><td>Dubai, UAE</td><td>+14%</td><td>Moderate — first Gulf launch</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-brs-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-brs-a">
+              <strong>Indian comps are being used to justify Gulf pricing.</strong> Oberoi commands an 18-22% premium in India because of 30+ years of brand recognition with Indian HNW buyers. Gulf HNW buyers (GCC nationals, South Asian expats, European second-home buyers) have zero established Oberoi residential reference.<br><br>
+              The only valid comps are the two Gulf transactions: Four Seasons DIFC at +12% and Baccarat at +14%. Since Baccarat is also a Gulf brand debut, Oberoi should be priced at or below Baccarat — not 4 points above it. Corrected brand premium: 8-12% max. Corrected avg price: $4.2-4.3M. Revenue shortfall vs. model: $14-31M.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Recalculate developer profit under corrected agent pricing of $4.1M avg.",
+          render: () => `
+            <p>62 units at $4.1M avg. DLD absorbed by developer on 70% of units at 4%. Oberoi brand fee: 2.5% of gross. Commission: 4% of gross.</p>
+            <table class="c-table" id="brs-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Gross sales (62 x $4.1M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Less commissions (4%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Less DLD absorbed (70% x 62 x 4% x $4.1M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Less Oberoi brand fee (2.5% of gross)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Net proceeds to developer</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Developer profit (net minus $198M cost)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('brs-blanks',[{label:'Gross',val:'$254.2M'},{label:'Commissions',val:'$10.17M'},{label:'DLD',val:'$7.11M'},{label:'Brand fee',val:'$6.36M'},{label:'Net proceeds',val:'$230.56M'},{label:'Developer profit',val:'$32.56M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "Four penthouses at $8.5M each are unsold at month 18. LP wants resolution in 60 days.",
+          render: () => `
+            <p>Four penthouses, $34M total unsold inventory. Construction complete. Carrying cost on allocated loan at EIBOR+320: ~$255K/month. 18 more months held = $4.6M in interest carry. Oberoi's team wants to hold at full price for the right buyer.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:true},{good:false}],'dec-brs-a')">
+                <span class="c-d-icon">A</span><span>Hold at asking price. Luxury penthouses take 18-36 months. Brief LP on rationale and patience.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:true},{good:false}],'dec-brs-a')">
+                <span class="c-d-icon">B</span><span>Private off-market package: all four penthouses to a single family office buyer at $31.5M (7.4% discount). Clean, fast, no public price signal.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:true},{good:false}],'dec-brs-a')">
+                <span class="c-d-icon">C</span><span>List through Christie's International Real Estate for a competitive 90-day bidding process.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:true},{good:true},{good:false}],'dec-brs-a')">
+                <span class="c-d-icon">D</span><span>Publicly discount to $7.5M/penthouse and announce limited-time availability to create urgency.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-brs-a">
+              <p><strong>B and C are both correct — the choice depends on LP's IRR urgency.</strong></p>
+              <p><strong>B</strong> is right if LP needs resolution now. $2.5M discount vs. $4.6M carry cost over 18 months — the trade-off is obvious. A single family office buyer removes the comp risk entirely.</p>
+              <p><strong>C</strong> is right if you have conviction that $34M is achievable and LP can wait 90 days. Auction format creates scarcity — appropriate for trophy luxury product.</p>
+              <p><strong>A</strong> is a defensible hold strategy but requires LP buy-in at $255K/month burn rate. Needs to be a shared decision, not a unilateral GP call.</p>
+              <p><strong>D is wrong.</strong> Public discount reprices all comps in the building and may trigger modification requests from remaining unclosed contract holders.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Oberoi wants to increase their brand fee from 2.5% to 3.125% of gross sales. You're at month 6 of construction. Negotiate.",
+          render: () => `
+            <p>Oberoi's regional director sends an amendment request: brand licensing fee from 2.5% to 3.125% of gross sales, citing Gulf market launch costs. At corrected gross of $254.2M, this is an incremental <strong>$1.59M</strong>. Without Oberoi, agent pricing reverts to unbranded comps — estimated <strong>$14-31M</strong> revenue impact. The brand agreement has a "reasonable cost adjustment" clause for the first Gulf market.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-brs-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-brs-a">
+              <strong>Negotiate to 3.0%, not 3.125%.</strong><br><br>
+              The asymmetry is clear: $1.59M fee increase vs. $14M+ revenue impact without the brand. Protecting Oberoi is worth the cost. But pay 3.0%, not 3.125% — counter and test whether they'll split the difference (they usually will). $360K saved.<br><br>
+              Better structure: make the increment performance-linked. Base 2.5%, additional 0.5% triggered only if average closed pricing exceeds $4.3M. This aligns Oberoi's fee with actual brand performance — they earn more if they deliver more.<br><br>
+              In exchange for any increase, request Oberoi provide 3 additional Gulf launch sales events (DIFC, Abu Dhabi) within 12 months. Turn the fee conversation into a marketing commitment conversation.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Complete</button></div>
+            </div>`,
+          init: () => {}
+        }
+      ]
+    },
+    structuring: {
+      name: "The Mandarin Collection — Singapore",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Mandarin Collection</strong> — Orchard Road corridor, Singapore. 45 Mandarin Oriental branded residences: 30 units sold to end buyers, 15 units retained in MO rental pool. SGD-denominated asset. USD LP equity. German family office as co-GP with potential CFC tax exposure.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>45 units | 30 sold (avg SGD 5.8M = USD 4.33M) | 15 retained in MO rental pool</li>
+  <li>Gross sold proceeds: SGD 174M / USD 130M | Retained units: SGD 87M asset value</li>
+  <li>Development cost: SGD 220M / USD 164M</li>
+  <li>LP equity: USD $28M | Co-GP (German family office): USD $8M | GP equity: USD $6M</li>
+  <li>Senior construction: SGD 132M / USD 98.5M | SORA+240 (~5.8%), 36-month term</li>
+  <li>MO rental pool income: SGD 2.9M/yr estimated | Guaranteed alternative: SGD 2.8M/yr fixed</li>
+</ul>
+<h2>FX Hedge — The Error</h2>
+<p>Developer is hedging <strong>USD $60M</strong> — representing total USD proceeds from sold units. The error: the hedge should be on <em>net SGD exposure</em> (SGD proceeds minus SGD costs minus SGD debt repayment) converted to USD — not gross sold unit proceeds.</p>
+<table class="c-table">
+  <tr><th>Item</th><th>Developer Hedge</th><th>Correct Approach</th></tr>
+  <tr><td>Hedge notional</td><td>USD $60M</td><td>Net USD exposure only</td></tr>
+  <tr><td>Gross SGD sold proceeds</td><td>SGD 174M = USD 130M</td><td>Includes debt repayment — wrong base</td></tr>
+  <tr><td>Construction loan repayment</td><td>Not subtracted</td><td>SGD 132M repaid in SGD</td></tr>
+  <tr><td>Net SGD equity to convert</td><td>USD 130M (wrong)</td><td>~USD 16-22M</td></tr>
+  <tr><td>Annual hedge cost at 1.8%</td><td>$1.08M/yr</td><td>~$0.29M/yr correct</td></tr>
+</table>
+<h2>CFC Tax Risk</h2>
+<p>German family office co-GP holds 19% interest in Singapore SPV. Under German AStG §8, passive income in a low-tax foreign jurisdiction (&lt;25% corporate tax — Singapore at 17%) may trigger CFC treatment. Germany-Singapore treaty Article 6 (real estate carve-out) may provide exemption — but requires formal German tax opinion before close.</p>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>What is the correct FX hedge notional, and how much is the developer over-hedging?</li>
+  <li>How does the German CFC rule apply, and what are the restructuring options?</li>
+  <li>MO offers SGD 2.8M guaranteed vs. variable SGD 2.9M. Which do you take?</li>
+  <li>If SGD depreciates 10%, what is the LP IRR impact?</li>
+</ol>`,
+      qa: {
+        "FX hedge correct sizing": `<h3>Why the Hedge Is Over-Sized</h3><p>Developer hedges gross SGD proceeds converted to USD (SGD 174M x 1.34 = $130M). The correct hedge covers only net USD exposure: total SGD revenue minus SGD costs minus SGD debt repayment. Construction loan of SGD 132M is repaid in SGD — it never becomes USD. Only the net equity proceeds (~SGD 21-30M) need hedging. The $60M hedge notional is 2.7-3.8x the actual exposure. Over-hedging cost: ~$750K over the hedge period. Additionally, over-hedging creates a mark-to-market derivative liability if SGD moves favorably.</p>`,
+        "German CFC analysis": `<h3>CFC Structuring Solution</h3><p>Under AStG §8, a German resident holding interest in a foreign entity with passive income below 25% tax threshold may trigger CFC rules — treating income as currently taxable in Germany at 30%+. Singapore at 17% is below the threshold. The Germany-Singapore treaty Article 6 provides a real estate carve-out for rental income — but equity returns (promote) may still be caught. Solution: structure the co-GP's Singapore entity as a transparent limited partnership (GmbH &amp; Co. KG equivalent). CFC rules do not apply to transparent entities under German law. Timeline: 3-4 weeks to restructure — tight but workable before month 4 equity funding.</p>`,
+        "Guaranteed vs. variable rental": `<h3>MO Guaranteed vs. Variable Return</h3><p>Guaranteed: SGD 2.8M/yr fixed for 5 years. Variable: est. SGD 2.9M/yr at 72% occupancy, $750/night. Difference: SGD 100K/yr = USD 74K/yr = USD 370K over 5yr. The guaranteed return eliminates occupancy risk, MO performance risk, and rental pool accounting disputes. Singapore luxury hospitality is cyclical — 72% sustained occupancy on Orchard Road is optimistic. Take the guaranteed return. The $370K potential upside is not worth the operating complexity for 15 units.</p>`,
+        "SGD depreciation impact on LP IRR": `<h3>FX Sensitivity</h3><p>LP invested USD $28M. Net SGD equity proceeds at exit: ~SGD 42M. At base rate 1.34 SGD/USD: USD $56.3M = 2.01x EM over 5yr = ~15% IRR. If SGD depreciates 10% (rate moves from 1.34 to 1.21 SGD/USD): USD $50.8M = 1.81x EM = ~12.5% IRR. 10% SGD depreciation costs LP approximately 2.5% IRR. This is the risk the hedge should be protecting against — but only on the net equity exposure (~SGD 21-30M), not gross proceeds.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The FX hedge notional is wrong. Find the over-hedge.",
+          render: () => `
+            <p>Review the FX hedge structure. The developer is hedging more USD exposure than actually exists. Identify the error.</p>
+            <table class="c-table">
+              <tr><th>Item</th><th>Developer Approach</th><th>Correct Approach</th></tr>
+              <tr><td>Hedge notional</td><td>USD $60M</td><td>Net USD exposure only</td></tr>
+              <tr><td>Gross SGD sold proceeds</td><td>SGD 174M = USD 130M</td><td>Gross (includes debt repayment in SGD)</td></tr>
+              <tr><td>Construction loan repayment</td><td>Not subtracted</td><td>SGD 132M — repaid in SGD, never converts to USD</td></tr>
+              <tr><td>SGD dev costs remaining</td><td>Not subtracted</td><td>~SGD 35M</td></tr>
+              <tr><td>Net SGD to USD conversion needed</td><td>USD 130M (wrong)</td><td>~USD 16-22M</td></tr>
+              <tr><td>Annual hedge cost (1.8%)</td><td>$1.08M/yr</td><td>~$0.29M/yr if correctly sized</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-brstr-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-brstr-a">
+              <strong>Developer is hedging gross sold unit proceeds, not net USD exposure.</strong><br><br>
+              The SGD 132M construction loan is repaid in SGD — it never needs to be converted to USD. Only the net equity proceeds (~SGD 21-30M) need hedging. The $60M hedge notional is 2.7-3.8x too large.<br><br>
+              Over-hedging cost: ~$750K over the hedge period vs. ~$200K if correctly sized. Additionally, over-hedging creates a mark-to-market derivative loss if SGD appreciates — the developer has locked in a conversion rate on currency that doesn't need converting.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate LP IRR under three FX scenarios.",
+          render: () => `
+            <p>LP invested USD $28M. Net SGD equity proceeds at exit: SGD 42M. 5-year hold. Calculate USD proceeds and approximate IRR under each scenario.</p>
+            <table class="c-table" id="brstr-blanks">
+              <tr><th>Scenario</th><th>SGD/USD Rate</th><th>USD Proceeds</th><th>LP IRR (approx)</th></tr>
+              <tr><td>Base case (flat)</td><td>1.34</td><td><input class="c-input" type="text" placeholder="$?M"></td><td><input class="c-input" type="text" placeholder="~?%"></td></tr>
+              <tr><td>SGD appreciates 8%</td><td>1.45</td><td><input class="c-input" type="text" placeholder="$?M"></td><td><input class="c-input" type="text" placeholder="~?%"></td></tr>
+              <tr><td>SGD depreciates 10%</td><td>1.21</td><td><input class="c-input" type="text" placeholder="$?M"></td><td><input class="c-input" type="text" placeholder="~?%"></td></tr>
+            </table>
+            <p style="font-size:0.85em;color:#888">IRR hint: EM = USD proceeds / $28M. IRR &asymp; EM^(1/5) &minus; 1.</p>
+            <button class="btn-sec" onclick="checkBlanks('brstr-blanks',[{label:'Base USD',val:'$56.3M'},{label:'Base IRR',val:'~15%'},{label:'Appre USD',val:'$60.9M'},{label:'Appre IRR',val:'~17%'},{label:'Depre USD',val:'$50.8M'},{label:'Depre IRR',val:'~13%'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "German co-GP's CFC exposure is unresolved at month 3. Equity funding starts month 4.",
+          render: () => `
+            <p>German tax counsel's preliminary opinion: the Singapore SPV structure likely triggers AStG §8 CFC rules for the family office — treating SGD rental income as currently taxable in Germany at 30%+. A formal Finanzbehoerde ruling takes 6-9 months. Equity funding starts month 4. All equity must be committed before construction begins.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:false},{good:false}],'dec-brstr-a')">
+                <span class="c-d-icon">A</span><span>Proceed with the existing structure and apply for the Finanzbehoerde ruling in parallel. Risk retroactive German tax exposure from Day 1.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:false},{good:false}],'dec-brstr-a')">
+                <span class="c-d-icon">B</span><span>Restructure the Singapore SPV as a transparent limited partnership (GmbH &amp; Co. KG structure). CFC rules don't apply to transparent entities. Timeline: 3-4 weeks.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:false},{good:false}],'dec-brstr-a')">
+                <span class="c-d-icon">C</span><span>Route the German family office contribution through a Singapore-incorporated holding company. No German tax nexus if the holding entity is Singapore-resident.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:true},{good:false},{good:false}],'dec-brstr-a')">
+                <span class="c-d-icon">D</span><span>Replace the German family office with a UAE or Singapore-based family office co-GP.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-brstr-a">
+              <p><strong>B is the right answer.</strong> Restructuring to a transparent limited partnership (GmbH &amp; Co. KG or equivalent) takes 3-4 weeks — tight but within the month 4 funding deadline. CFC rules explicitly do not apply to transparent partnership entities under German tax law. Clean, fast, minimal cost.</p>
+              <p><strong>C also works</strong> but adds complexity. A Singapore-resident holding company creates potential Singapore withholding tax on dividends back up to the German entity — may solve the CFC issue while creating a new one. Needs its own tax opinion.</p>
+              <p><strong>A is high risk</strong> — retroactive CFC tax exposure is a financial and reputational issue a family office will not accept. Do not proceed into equity funding with an unresolved CFC opinion.</p>
+              <p><strong>D is a last resort</strong> — loses the co-GP relationship without exhausting restructuring options first.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "MO offers SGD 2.8M guaranteed annual return on 15 retained units. Variable estimate is SGD 2.9M. Take the guaranteed?",
+          render: () => `
+            <p>Mandarin Oriental offers two structures for the 15 retained units:</p>
+            <table class="c-table">
+              <tr><th>Option</th><th>Annual Return</th><th>5-Year Total</th><th>Risk</th></tr>
+              <tr><td>Guaranteed fixed</td><td>SGD 2.8M</td><td>SGD 14M</td><td>None — contractual</td></tr>
+              <tr><td>Variable rental pool</td><td>SGD 2.9M (est.)</td><td>SGD 14.5M (est.)</td><td>Occupancy, MO performance, pool accounting</td></tr>
+            </table>
+            <p>Difference: SGD 100K/yr = USD ~$74K/yr = USD ~$370K over 5yr. At a 4.0% exit cap, this affects retained unit exit value by: SGD 100K / 4% = SGD 2.5M.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-brstr-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-brstr-a">
+              <strong>Take the guaranteed return.</strong><br><br>
+              The SGD 100K/yr difference over 5 years = SGD 500K = USD $370K — not worth the operational complexity, occupancy risk, or rental pool accounting disputes at exit. The guaranteed return also creates a clean, auditable income stream that supports the retained unit valuation more defensibly for a future buyer.<br><br>
+              Singapore luxury hospitality is cyclical. Sustained 72% occupancy on Orchard Road over 5 years is an optimistic assumption — one renovation quarter or a regional downturn affects the variable pool meaningfully. Take certainty. The SGD 2.5M in exit value difference is theoretical; the SGD 500K in certain income is real.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "SGD/USD rate, rental yield, and unit price all move the return. See how much each one matters.",
+          render: () => `
+            <p>Adjust the three levers below. The FX rate and unit price have roughly equal IRR impact — see for yourself.</p>
+            <div class="c-sliders">
+              <label>SGD/USD rate at exit: <strong id="sl-brstr-sgdusd-val">1.34</strong></label>
+              <input type="range" min="120" max="150" step="2" value="134" id="sl-brstr-sgdusd" oninput="updateBtdBrstr()">
+              <label>Retained unit exit cap rate: <strong id="sl-brstr-rental-val">4.00%</strong></label>
+              <input type="range" min="300" max="550" step="25" value="400" id="sl-brstr-rental" oninput="updateBtdBrstr()">
+              <label>Sold unit avg price (SGD M): <strong id="sl-brstr-price-val">SGD 5.8M</strong></label>
+              <input type="range" min="500" max="700" step="10" value="580" id="sl-brstr-price" oninput="updateBtdBrstr()">
+            </div>
+            <table class="c-table">
+              <tr><th>Metric</th><th>Value</th></tr>
+              <tr><td>Gross sold proceeds (30 units)</td><td id="brstr-gross">SGD 174M</td></tr>
+              <tr><td>Retained unit exit value (SGD 2.8M / cap rate)</td><td id="brstr-retained">SGD 70M</td></tr>
+              <tr><td>Total SGD asset value</td><td id="brstr-total-sgd">SGD 244M</td></tr>
+              <tr><td>Net equity proceeds (SGD 42M approx)</td><td id="brstr-net-sgd">SGD 42M</td></tr>
+              <tr><td>USD proceeds at exit rate</td><td id="brstr-usd">USD $56.3M</td></tr>
+              <tr><td>LP IRR (approx, 5yr, $28M invested)</td><td id="brstr-irr">~15%</td></tr>
+            </table>`,
+          init: () => {
+            window.updateBtdBrstr = function() {
+              const rateRaw = parseInt(document.getElementById('sl-brstr-sgdusd').value);
+              const rate = rateRaw / 100;
+              const capRaw = parseInt(document.getElementById('sl-brstr-rental').value);
+              const cap = capRaw / 10000;
+              const priceRaw = parseInt(document.getElementById('sl-brstr-price').value);
+              const price = priceRaw / 100;
+              const grossSold = Math.round(30 * price * 10) / 10;
+              const retainedVal = Math.round(2.8 / cap * 10) / 10;
+              const totalSGD = Math.round((grossSold + retainedVal) * 10) / 10;
+              const netSGD = 42;
+              const usdProceeds = Math.round(netSGD * rate * 10) / 10;
+              const lpEM = usdProceeds / 28;
+              const lpIRR = Math.round((Math.pow(Math.max(lpEM, 0.01), 0.2) - 1) * 100);
+              document.getElementById('sl-brstr-sgdusd-val').textContent = rate.toFixed(2);
+              document.getElementById('sl-brstr-rental-val').textContent = (capRaw / 100).toFixed(2) + '%';
+              document.getElementById('sl-brstr-price-val').textContent = 'SGD ' + price.toFixed(1) + 'M';
+              document.getElementById('brstr-gross').textContent = 'SGD ' + grossSold + 'M';
+              document.getElementById('brstr-retained').textContent = 'SGD ' + retainedVal + 'M';
+              document.getElementById('brstr-total-sgd').textContent = 'SGD ' + totalSGD + 'M';
+              document.getElementById('brstr-net-sgd').textContent = 'SGD ' + netSGD + 'M (approx net equity)';
+              document.getElementById('brstr-usd').textContent = 'USD $' + usdProceeds + 'M';
+              document.getElementById('brstr-irr').textContent = lpIRR > 0 ? '~' + lpIRR + '%' : 'Below pref';
+            };
+          }
+        }
+      ]
+    }
   },
-
   lifestyle: {
     intro: {
       name: "Casilda Club — Oaxaca",
@@ -2227,11 +3400,305 @@ const SCENARIOS = {
         }
       ]
     },
-    senior: { name:"Solis House — Cartagena", html:`<h2>Senior Lifestyle</h2><p>Coming soon — 78-key lifestyle hotel with owned F&B, a WeWork-affiliate co-working lease, and a DSCR stress test revealing which revenue stream creates the most lender concern when non-traditional income is heavily discounted.</p>`, qa:{}, challenges:[] },
-    structuring: { name:"The Bergamot — Los Angeles", html:`<h2>Structuring Lifestyle</h2><p>Coming soon — 96-key Santa Monica lifestyle hotel with a James Beard chef profit-share (not a lease), a 700-member wellness club, and a California public accommodation law conflict in the membership admissions model.</p>`, qa:{}, challenges:[] }
+    senior: {
+      name: "Solis House — Cartagena",
+      html: `<h2>Deal Overview</h2>
+<p><strong>Solis House</strong> — Getseman&iacute; neighborhood, Cartagena, Colombia. 78-key lifestyle hotel with owned F&amp;B (El Bajo restaurant + rooftop bar), a 2,800 SF WeWork-affiliate co-working lease, and a wellness spa. Developer: Colombian-American boutique developer, first standalone hotel.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total project cost: <strong>$28M</strong> | Senior loan target: <strong>$19.3M</strong> at 9.25% fixed, 15yr term (Miami private lender)</li>
+  <li>LP equity: <strong>$7.1M</strong> | GP equity: <strong>$1.6M</strong> | Total equity: <strong>$8.7M</strong></li>
+</ul>
+<h2>Revenue and NOI</h2>
+<table class="c-table">
+  <tr><th>Stream</th><th>Revenue</th><th>% of Total</th></tr>
+  <tr><td>Rooms</td><td>$3.80M</td><td>65%</td></tr>
+  <tr><td>F&amp;B (owned)</td><td>$1.20M</td><td>21%</td></tr>
+  <tr><td>Co-working lease</td><td>$0.48M</td><td>8%</td></tr>
+  <tr><td>Wellness spa</td><td>$0.34M</td><td>6%</td></tr>
+  <tr><td><strong>Total</strong></td><td><strong>$5.82M</strong></td><td></td></tr>
+</table>
+<p>Developer NOI: <strong>$1.87M</strong> (32% margin). Opex ratio 68% includes management fee at 3% of gross revenue.</p>
+<h2>Lender DSCR Methodology</h2>
+<table class="c-table">
+  <tr><th>Revenue Stream</th><th>Lender Credit</th><th>Lender-Adjusted Revenue</th></tr>
+  <tr><td>Rooms ($3.80M)</td><td>100%</td><td>$3.80M</td></tr>
+  <tr><td>F&amp;B ($1.20M)</td><td>75%</td><td>$0.90M</td></tr>
+  <tr><td>Co-working ($0.48M)</td><td>50%</td><td>$0.24M</td></tr>
+  <tr><td>Spa ($0.34M)</td><td>50%</td><td>$0.17M</td></tr>
+  <tr><td><strong>Lender-adjusted total</strong></td><td></td><td><strong>$5.11M</strong></td></tr>
+</table>
+<p>Lender DSCR worksheet as submitted: $5.11M adjusted revenue &minus; $3.96M opex &minus; $0.291M mgmt fee = <strong>$0.859M NOI</strong>. Debt service on $19.3M at 9.25%/15yr: $1.976M. DSCR: <strong>0.43x</strong> — far below 1.25x minimum.</p>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>Where is the management fee appearing twice in the lender worksheet?</li>
+  <li>After correcting the error, what is the maximum senior loan at each credit methodology?</li>
+  <li>WeWork affiliate announces restructuring at month 14. What do you do with the co-working lease?</li>
+  <li>Lender offers $12M at 9.5% — $7.3M short of the $19.3M target. How do you fill the gap?</li>
+</ol>`,
+      qa: {
+        "Management fee double-deduction": `<h3>Where the Error Lives</h3><p>Developer's 68% opex ratio applied to $5.82M gross revenue ($3.96M) already includes the 3% management fee — it is embedded as a line item inside the opex stack (3% x $5.82M = $175K). When the developer submitted the lender DSCR worksheet, they separately listed "management fee: $291K" as an additional deduction below the opex subtotal. This duplicates the cost. Corrected lender NOI: $5.11M &minus; $3.96M = $1.15M. Corrected DSCR: $1.15M / $1.976M = 0.58x. Still fails 1.25x — but the lender was seeing 0.43x because of the duplication.</p>`,
+        "Maximum supportable loan": `<h3>Max Loan at Each Credit Approach</h3><p>After fixing double-deduction, lender NOI = $1.15M. At 1.25x DSCR: max DS = $0.92M. At 9.25%/15yr (factor 0.1024): max loan = $8.98M. The non-rooms revenue haircut is the structural issue — not the spreadsheet error. SBA 504 alternative: at 6.5%/20yr, full NOI $1.87M at 1.25x = $1.496M DS &rarr; max loan = $16.8M. SBA 504 credit methodology (no haircuts) dramatically changes the viable loan size.</p>`,
+        "WeWork restructuring response": `<h3>Co-working Lease Options</h3><p>Chapter 11 options: (1) lease may be assumed and assigned to a new operator — best outcome, no revenue loss; (2) debtor rejects the lease — you become an unsecured creditor at 10-30 cents on the dollar; (3) negotiate directly with the bankruptcy trustee. Best action: immediately approach Industrious or Regus for a replacement lease before WeWork's lease is formally rejected. A new operator at the same rent maintains NOI with no disruption. If no replacement: convert 2,800 SF to hotel uses or additional F&amp;B. Co-working at 8% of revenue is recoverable either way.</p>`,
+        "Filling the $7.3M gap": `<h3>Capital Stack to Fill the Gap</h3><p>Lender's $12M at 9.5% vs. developer's $19.3M target — gap: $7.3M. Options: (1) LP equity top-up: $3.5M additional at same 8% pref terms — total LP becomes $10.6M. LP incentive: preserves upside. (2) Seller/subordinated note: $2M from prior owner at 8% for 3 years — low-friction instrument. (3) SBA 504 alternative: at 6.5%/20yr, SBA supports $16.8M — replaces the Miami lender entirely, adds only $2.5M from LP top-up. SBA path is slower (90-120 day approval) but dramatically improves deal economics by cutting the rate from 9.5% to 6.5%.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "The lender DSCR worksheet shows a $291K cost that appears twice. Find it.",
+          render: () => `
+            <p>Review the lender DSCR worksheet as submitted. One cost item is deducted twice, depressing the calculated NOI by $291K and making DSCR appear worse than it actually is.</p>
+            <table class="c-table">
+              <tr><th>Line Item</th><th>Amount</th><th>Source</th></tr>
+              <tr><td>Lender-adjusted gross revenue</td><td>$5.11M</td><td>After haircuts (100/75/50/50)</td></tr>
+              <tr><td>Total operating expenses</td><td>($3.96M)</td><td>68% of $5.82M gross — from developer model</td></tr>
+              <tr><td>Management fee (3% of gross revenue)</td><td>($0.291M)</td><td>Separately listed</td></tr>
+              <tr><td><strong>Lender-adjusted NOI</strong></td><td><strong>$0.859M</strong></td><td></td></tr>
+              <tr><td>Annual debt service ($19.3M at 9.25%/15yr)</td><td>$1.976M</td><td></td></tr>
+              <tr><td>DSCR</td><td><strong>0.43x</strong></td><td>Far below 1.25x minimum</td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-lss-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-lss-a">
+              <strong>Management fee double-deduction.</strong> The total operating expenses of $3.96M (68% of $5.82M gross revenue) already include the 3% management fee embedded in the opex stack. The separate "management fee: $291K" line is a duplicate of the same cost.<br><br>
+              Remove the duplicate: corrected lender NOI = $5.11M &minus; $3.96M = <strong>$1.15M</strong>. Corrected DSCR = $1.15M / $1.976M = <strong>0.58x</strong>. Still fails 1.25x — but the lender was seeing 0.43x because of the error. The maximum supportable loan at 0.58x-equivalent lender NOI is ~$9M, not $19.3M. The non-rooms revenue haircut methodology is the real structural issue.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Calculate the maximum senior loan at each credit methodology.",
+          render: () => `
+            <p>Same hotel, three different lender approaches. See how methodology determines loan size more than interest rate does.</p>
+            <table class="c-table" id="lss-blanks">
+              <tr><th>Lender Type</th><th>Revenue Credit</th><th>Adjusted NOI</th><th>Max DS at 1.25x</th><th>Max Loan</th></tr>
+              <tr><td>Miami private (9.25%/15yr)</td><td>100/75/50/50</td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td></tr>
+              <tr><td>Community bank (9.0%/15yr)</td><td>100/90/75/75</td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td></tr>
+              <tr><td>SBA 504 (6.5%/20yr)</td><td>100% all revenue</td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td><td><input class="c-input" type="text" placeholder="$?M" style="width:60px"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('lss-blanks',[{label:'Miami NOI',val:'$1.15M'},{label:'Miami DS',val:'$0.92M'},{label:'Miami max',val:'$8.98M'},{label:'Bank NOI',val:'$1.54M'},{label:'Bank DS',val:'$1.23M'},{label:'Bank max',val:'$12.1M'},{label:'SBA NOI',val:'$1.87M'},{label:'SBA DS',val:'$1.50M'},{label:'SBA max',val:'$16.8M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "WeWork affiliate announces Chapter 11 at month 14. The co-working lease ($480K/yr) is at risk.",
+          render: () => `
+            <p>The co-working lease has 4 years remaining ($1.92M total). WeWork affiliate has filed Chapter 11. The 2,800 SF space is in a prime location within the hotel — high-value for repositioning. You have three viable paths.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:false},{good:true},{good:true}],'dec-lss-a')">
+                <span class="c-d-icon">A</span><span>File a proof of claim as an unsecured creditor for $1.92M and wait for bankruptcy proceedings.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:false},{good:true},{good:true}],'dec-lss-a')">
+                <span class="c-d-icon">B</span><span>Negotiate with the bankruptcy trustee: terminate the lease in exchange for a $120K break fee. Take immediate control of the space.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:false},{good:true},{good:true}],'dec-lss-a')">
+                <span class="c-d-icon">C</span><span>Approach Industrious or Regus within 30 days with a new lease offer — before WeWork's lease is formally rejected. Maintain the co-working revenue stream with a replacement operator.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:false},{good:true},{good:true}],'dec-lss-a')">
+                <span class="c-d-icon">D</span><span>Convert the space to additional hotel rooms or an F&amp;B annex. Invest $300K in conversion to generate higher hotel NOI than the co-working rent.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-lss-a">
+              <p><strong>C is the best outcome if available.</strong> Replacing WeWork with Industrious or Regus before the lease is formally rejected maintains the revenue stream with no gap. Move within 30 days — speed is the entire advantage here.</p>
+              <p><strong>B is the right move if no replacement is found.</strong> A $120K break fee for immediate space control is better than $192-576K unsecured recovery over 12-18 months. Certainty and speed have real value.</p>
+              <p><strong>D is the best long-term outcome</strong> if co-working demand in Getsemani is thin — converting to hotel use at $300K capex to generate more than $480K/yr in additional rooms or F&amp;B NOI is viable on the numbers.</p>
+              <p><strong>A is the worst option.</strong> Unsecured creditors in WeWork-type bankruptcies recover 10-30 cents on the dollar, 12-18 months from now. $192-576K on a $1.92M claim is a poor outcome when you control the physical space.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "Lender offers $12M at 9.5% — you need $19.3M. Where does the $7.3M gap come from?",
+          render: () => `
+            <p>Miami private lender has issued a revised term sheet: maximum $12M at 9.5% fixed. Developer needs $19.3M total debt. Gap: <strong>$7.3M</strong>. Current equity: LP $7.1M + GP $1.6M = $8.7M. Total project cost: $28M.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-lss-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-lss-a">
+              <strong>Take the $12M at 9.5% and fill the gap with a layered stack.</strong><br><br>
+              Three sources for the $7.3M gap: (1) <strong>LP equity top-up: $3.5M</strong> additional at same 8% pref terms — total LP becomes $10.6M. LP preserves their upside; cost to GP is dilution only. (2) <strong>Seller subordinated note: $2M</strong> from the prior building owner at 8% for 3 years — low-friction, no new lender relationships required. (3) <strong>GP defers $1.8M</strong> of dev fee to project cash flow — aligns GP incentive with project completion.<br><br>
+              Better path: <strong>SBA 504</strong>. At 6.5%/20yr, SBA supports $16.8M — replaces the Miami private lender entirely. Add only $2.5M of LP equity top-up for the balance. SBA approval takes 90-120 days, so this only works if there is timeline flexibility. The rate difference (6.5% vs. 9.5%) saves $360K/yr in debt service — material on a $28M project.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Complete</button></div>
+            </div>`,
+          init: () => {}
+        }
+      ]
+    },
+    structuring: {
+      name: "The Bergamot — Los Angeles",
+      html: `<h2>Deal Overview</h2>
+<p><strong>The Bergamot</strong> — Santa Monica, CA. 96-key lifestyle hotel, converted from a 1970s creative office complex adjacent to Bergamot Station arts district. Three structural complications: (1) James Beard-nominated chef profit-share arrangement (not a lease), (2) 700-member wellness club ($8,500/yr), (3) preferred equity with profit participation above 18% GP IRR.</p>
+<h2>Deal Parameters</h2>
+<ul>
+  <li>Total project cost: <strong>$68M</strong> ($708K/key) | Senior: <strong>$42M</strong> at SOFR+260 (~7.6%), 25yr term</li>
+  <li>Pref equity: <strong>$12M</strong> | 12% cumul pref | 1.2x liq preference ($14.4M) | 20% profit participation above 18% GP IRR</li>
+  <li>LP equity: <strong>$10.5M</strong> | GP equity: <strong>$3.5M</strong></li>
+</ul>
+<h2>Revenue Components</h2>
+<table class="c-table">
+  <tr><th>Stream</th><th>Revenue</th><th>Developer Cap</th><th>Institutional Cap</th></tr>
+  <tr><td>Hotel rooms (96 keys, ADR $380, Occ 77%)</td><td>$10.27M</td><td>5.5%</td><td>6.5%</td></tr>
+  <tr><td>F&amp;B (chef 12% profit-share of $3.2M gross)</td><td>$3.20M</td><td>5.5%</td><td>7.0%</td></tr>
+  <tr><td>Wellness club (700 members x $8,500)</td><td>$5.95M</td><td>5.5%</td><td>8.5%</td></tr>
+</table>
+<h2>The Valuation Gap</h2>
+<p>Developer exit model: blended 5.5% cap on total NOI $6.7M = <strong>$121.8M</strong>. Institutional buyer component method: rooms at 6.5% + F&amp;B at 7.0% + wellness at 8.5% = <strong>$111.3M</strong>. Gap: <strong>$10.5M</strong> — driven almost entirely by the wellness club cap rate.</p>
+<h2>California Unruh Act Complication</h2>
+<p>A disability rights complaint has been filed with the California CRD: a prospective wellness club member claims the physical therapy studio is not ADA-compliant and that the admissions process informally excluded them. CRD investigations can result in civil penalties up to $25K per violation plus private right of action.</p>
+<h2>Key Structuring Questions</h2>
+<ol>
+  <li>Why do institutional buyers capitalize wellness NOI at 8.5% instead of 5.5%?</li>
+  <li>What is the correct exit value using component cap rates?</li>
+  <li>How do you resolve the CRD disability complaint?</li>
+  <li>The chef wants 18% profit-share at Year 3, up from 12%. Accept?</li>
+</ol>`,
+      qa: {
+        "Wellness club cap rate": `<h3>Why 8.5% Not 5.5%</h3><p>Hotel buyers apply hotel NOI cap rates (5.5-6.5%) to rooms and F&amp;B income. For membership-based businesses, they apply service business cap rates (8.0-9.0%) because: (1) membership revenue is cancellable, not a lease; (2) California-regulated under Unruh Act; (3) operational complexity outside core hotel competency. Developer's error on wellness NOI: $3.57M at 5.5% = $64.9M vs. correct 8.5% = $42M — a $22.9M component gap. This single cap rate error drives most of the $10.5M total valuation gap.</p>`,
+        "Component exit valuation": `<h3>Component Method vs. Blended</h3><p>Developer blended (5.5% on $6.7M NOI): $121.8M. Component method: rooms NOI ~$3.08M at 6.5% = $47.4M. F&amp;B NOI ~$1.54M at 7.0% = $22.0M. Wellness NOI ~$2.07M at 8.5% = $24.4M. Total: $93.8M — developer's blended model overstates exit by $28M. Every institutional buyer will use component cap rates; the blended model only works in a seller's own underwriting.</p>`,
+        "Unruh Act compliance": `<h3>CRD Complaint Response</h3><p>California Unruh Civil Rights Act (Civil Code §51) prohibits discrimination in business establishments. Required actions: (1) ADA compliance audit of all physical spaces — therapy studio, spa, fitness areas (Title III). (2) Rewrite admissions criteria to be purely objective — health clearance, waitlist by application date only, no social vetting. (3) Settle the CRD complaint within 60 days — ADA retrofits typically cost $150-250K, policy revision is low-cost. Do not litigate a membership discrimination complaint; the PR risk to a boutique hotel is disproportionate to any legal defense benefit.</p>`,
+        "Chef profit-share negotiation": `<h3>Negotiating the Chef Arrangement</h3><p>At 12% gross: $384K/yr on $3.2M F&amp;B. At 18% gross: $576K/yr — incremental $192K/yr, $960K over 5yr hold. At 7.0% F&amp;B cap rate, this reduces exit value by $192K / 7% = $2.74M. The chef has genuine leverage (Michelin recognition is tied to F&amp;B valuation). Counter at 14% base with a performance increase to 16% above $4M revenue threshold. Extend from 3-year to 5-year terms in exchange for the lower rate — provides both parties certainty. Never agree to 18% on gross — it is punishing for any F&amp;B operation running 40% cost of goods.</p>`
+      },
+      challenges: [
+        {
+          type: "Spot the Problem",
+          title: "Developer applied a hotel cap rate to wellness club income. Find the error and quantify the gap.",
+          render: () => `
+            <p>Review the exit valuation. Developer used a blended 5.5% cap rate across all revenue streams. Identify the error and calculate the correct exit value.</p>
+            <table class="c-table">
+              <tr><th>Component</th><th>NOI</th><th>Developer Cap</th><th>Developer Value</th><th>Correct Cap</th><th>Correct Value</th></tr>
+              <tr><td>Hotel rooms</td><td>$3.08M</td><td>5.5%</td><td>$56.0M</td><td>6.5%</td><td>$47.4M</td></tr>
+              <tr><td>F&amp;B (kept portion)</td><td>$1.54M</td><td>5.5%</td><td>$28.0M</td><td>7.0%</td><td>$22.0M</td></tr>
+              <tr><td>Wellness club</td><td>$2.07M</td><td>5.5%</td><td>$37.6M</td><td>8.5%</td><td>$24.4M</td></tr>
+              <tr><td><strong>Total</strong></td><td><strong>$6.69M</strong></td><td>5.5%</td><td><strong>$121.6M</strong></td><td>Component</td><td><strong>?</strong></td></tr>
+            </table>
+            <button class="btn-sec" onclick="revealAnswer('spt-lsstr-a')" style="margin-top:8px">Show answer</button>
+            <div class="c-reveal" id="spt-lsstr-a">
+              <strong>Developer applied a 5.5% hotel cap rate to wellness club income.</strong> Institutional buyers capitalize membership-based service businesses at 8.5% because: membership revenue is cancellable (not a lease), California-regulated under Unruh Act, and operationally complex relative to core hotel business.<br><br>
+              <strong>Correct total exit value:</strong> $47.4M + $22.0M + $24.4M = <strong>$93.8M</strong>.<br>
+              <strong>Developer model: $121.6M. Gap: $27.8M</strong> — more than 22% of total exit value. The wellness club's high NOI contribution looks attractive until it's capitalized at its correct rate.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Fill in the Blanks",
+          title: "Rebuild the exit value using component cap rates and work through the waterfall.",
+          render: () => `
+            <p>Use component cap rates to build the correct exit value, then work through the waterfall. Senior: $42M. Pref liq preference: $14.4M. LP: $10.5M invested.</p>
+            <table class="c-table" id="lsstr-blanks">
+              <tr><th>Item</th><th>Your answer</th></tr>
+              <tr><td>Hotel rooms value ($3.08M at 6.5%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>F&amp;B value ($1.54M at 7.0%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Wellness value ($2.07M at 8.5%)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Total component exit value</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Equity after senior + pref liq preference</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+              <tr><td>Valuation gap vs. developer model ($121.6M)</td><td><input class="c-input" type="text" placeholder="$?M"></td></tr>
+            </table>
+            <button class="btn-sec" onclick="checkBlanks('lsstr-blanks',[{label:'Rooms',val:'$47.4M'},{label:'F&B',val:'$22.0M'},{label:'Wellness',val:'$24.4M'},{label:'Total exit',val:'$93.8M'},{label:'Equity',val:'$37.4M'},{label:'Gap',val:'$27.8M'}])" style="margin-top:12px">Check my work</button>`,
+          init: () => {}
+        },
+        {
+          type: "Decision Point",
+          title: "A CRD disability complaint targets the wellness club admissions process. How do you respond?",
+          render: () => `
+            <p>California CRD has issued an investigation notice: a prospective member with a mobility disability alleges the physical therapy studio is not fully ADA-accessible and that their application was rejected without explanation. CRD investigations can result in civil penalties up to $25K per violation plus private right of action at $4K per incident.</p>
+            <div class="c-decision-opts">
+              <div class="c-decision-btn" onclick="pickDecision(0,[{good:false},{good:true},{good:false},{good:false}],'dec-lsstr-a')">
+                <span class="c-d-icon">A</span><span>Contest the complaint vigorously. The admissions process has no explicit exclusion language, and the studio has some accessible features.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(1,[{good:false},{good:true},{good:false},{good:false}],'dec-lsstr-a')">
+                <span class="c-d-icon">B</span><span>Commission an ADA audit immediately, remediate identified deficiencies (~$180K), rewrite admissions criteria to be objective, and offer the complainant a complimentary 1-year membership. Settle with CRD within 60 days.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(2,[{good:false},{good:true},{good:false},{good:false}],'dec-lsstr-a')">
+                <span class="c-d-icon">C</span><span>Transfer wellness club operations to a third-party operator to remove ADA liability from the hotel entity.</span>
+              </div>
+              <div class="c-decision-btn" onclick="pickDecision(3,[{good:false},{good:true},{good:false},{good:false}],'dec-lsstr-a')">
+                <span class="c-d-icon">D</span><span>Close the wellness club temporarily and reopen as a hotel-only amenity without membership, eliminating Unruh Act exposure entirely.</span>
+              </div>
+            </div>
+            <div class="c-reveal" id="dec-lsstr-a">
+              <p><strong>B is the right answer.</strong> Fast, cheap, and definitive. $180K in ADA retrofits + a $5-15K civil penalty (or zero with demonstrated remediation) + a complimentary membership is the lowest-cost path that resolves the issue. Good faith remediation within 60 days typically ends CRD investigations before they escalate to litigation.</p>
+              <p><strong>A is wrong.</strong> Contesting an ADA complaint where there is a real physical access deficiency is expensive (18-24 month process), slow, and generates PR risk that no boutique hotel wants. The physical deficiency must be corrected regardless of the legal outcome.</p>
+              <p><strong>C doesn't solve the problem.</strong> ADA Title III applies to the physical space — not the operator. Liability follows the property, not the management company.</p>
+              <p><strong>D destroys $2.07M of NOI and $24.4M of exit value</strong> for a problem that costs $180K to fix. Last resort only, and even then the membership model is workable if properly structured.</p>
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Make the Call",
+          title: "The James Beard chef is requesting 18% gross profit-share at Year 3, up from 12%. Accept?",
+          render: () => `
+            <p>Chef's current arrangement: 12% of F&amp;B gross ($3.4M at Year 3) = $408K/yr. Chef is requesting 18% = $612K. Incremental cost: $204K/yr. At 7.0% F&amp;B cap rate, this reduces exit value by <strong>$2.91M</strong>. Chef has two Michelin Bib Gourmand nominations. Their no-poach clause runs 12 months — but they can decline the renewal.</p>
+            <button class="btn-sec" onclick="revealAnswer('mtc-lsstr-a')" style="margin-top:8px">Show my thinking</button>
+            <div class="c-reveal" id="mtc-lsstr-a">
+              <strong>Counter at 14%, not 18%.</strong><br><br>
+              The chef has real leverage — Michelin recognition is directly tied to F&amp;B positioning and exit valuation. But 18% of gross revenue is punishing for any operation running 40% cost of goods. At 14%: $476K/yr = $68K incremental annually, $2.04M reduction in F&amp;B exit value vs. $2.91M at 18%. A meaningful difference.<br><br>
+              Counter structure: (1) 14% base, performance increase to 16% if annual F&amp;B gross exceeds $4.0M. The chef earns more by growing revenue — aligns incentive with the asset. (2) Extend from a 3-year to 5-year agreement in exchange for the lower base rate — provides chef certainty and hotel exit value certainty for the buyer. (3) Offer a right of first negotiation with any new owner on the hotel's sale — protects chef without costing money. Lock in the terms before Michelin recognition converts into competing offers.
+              <div class="action-row" style="margin-top:14px"><button class="btn-primary" onclick="nextChallenge()">Next challenge</button></div>
+            </div>`,
+          init: () => {}
+        },
+        {
+          type: "Build the Deal",
+          title: "The wellness club is the highest-NOI and highest-risk component. Move the sliders and see why.",
+          render: () => `
+            <p>Adjust wellness membership, fee, and cap rate. Toggle between developer's blended method and institutional component method to see the valuation gap in real time.</p>
+            <div class="c-sliders">
+              <label>Wellness members: <strong id="sl-lsstr-wellness-val">700</strong></label>
+              <input type="range" min="400" max="900" step="50" value="700" id="sl-lsstr-wellness" oninput="updateBtdLsstr()">
+              <label>Annual membership fee: <strong id="sl-lsstr-wfee-val">$8,500</strong></label>
+              <input type="range" min="6500" max="11000" step="500" value="8500" id="sl-lsstr-wfee" oninput="updateBtdLsstr()">
+              <label>Wellness exit cap rate: <strong id="sl-lsstr-wcap-val">8.5%</strong></label>
+              <input type="range" min="650" max="1000" step="50" value="850" id="sl-lsstr-wcap" oninput="updateBtdLsstr()">
+            </div>
+            <table class="c-table">
+              <tr><th>Metric</th><th>Value</th></tr>
+              <tr><td>Wellness revenue (members x fee)</td><td id="lsstr-wrev">$5.95M</td></tr>
+              <tr><td>Wellness NOI (60% margin)</td><td id="lsstr-wnoi">$3.57M — wait, using component NOI</td></tr>
+              <tr><td>Wellness exit value (component cap)</td><td id="lsstr-wval">$24.4M</td></tr>
+              <tr><td>Hotel + F&amp;B exit value (fixed: $47.4M + $22M)</td><td>$69.4M</td></tr>
+              <tr><td>Total component exit value</td><td id="lsstr-total">$93.8M</td></tr>
+              <tr><td>Developer blended model (5.5% on same NOI)</td><td id="lsstr-blended">$121.6M</td></tr>
+              <tr><td>Valuation gap</td><td id="lsstr-gap">$27.8M</td></tr>
+              <tr><td>Equity after senior ($42M) + pref liq ($14.4M)</td><td id="lsstr-equity">$37.4M</td></tr>
+              <tr><td>LP IRR (approx, 5yr hold, $10.5M invested)</td><td id="lsstr-irr">~29%</td></tr>
+            </table>`,
+          init: () => {
+            window.updateBtdLsstr = function() {
+              const members = parseInt(document.getElementById('sl-lsstr-wellness').value);
+              const fee = parseInt(document.getElementById('sl-lsstr-wfee').value);
+              const capRaw = parseInt(document.getElementById('sl-lsstr-wcap').value);
+              const cap = capRaw / 10000;
+              const wRev = Math.round(members * fee / 1000000 * 100) / 100;
+              const wNOI = Math.round(wRev * 0.60 * 100) / 100;
+              const wNOIComp = Math.round(wRev * 0.347 * 100) / 100;
+              const wVal = Math.round(wNOIComp / cap * 10) / 10;
+              const hotelFB = 69.4;
+              const totalComp = Math.round((wVal + hotelFB) * 10) / 10;
+              const totalNOI = Math.round((wNOIComp + 4.62) * 100) / 100;
+              const blended = Math.round(totalNOI / 0.055 * 10) / 10;
+              const gap = Math.round((blended - totalComp) * 10) / 10;
+              const equity = Math.round((totalComp - 42 - 14.4) * 10) / 10;
+              const lpTotal = Math.min(equity, 10.5 + 10.5 * 0.08 * 5) + Math.max(0, equity - 10.5 - 10.5 * 0.08 * 5) * 0.8;
+              const lpIRR = Math.round((Math.pow(Math.max(lpTotal / 10.5, 0.01), 0.2) - 1) * 100);
+              document.getElementById('sl-lsstr-wellness-val').textContent = members;
+              document.getElementById('sl-lsstr-wfee-val').textContent = '$' + fee.toLocaleString();
+              document.getElementById('sl-lsstr-wcap-val').textContent = (capRaw / 100).toFixed(1) + '%';
+              document.getElementById('lsstr-wrev').textContent = '$' + wRev + 'M';
+              document.getElementById('lsstr-wnoi').textContent = '$' + wNOIComp + 'M (component allocation)';
+              document.getElementById('lsstr-wval').textContent = '$' + wVal + 'M';
+              document.getElementById('lsstr-total').textContent = '$' + totalComp + 'M';
+              document.getElementById('lsstr-blended').textContent = '$' + blended + 'M';
+              document.getElementById('lsstr-gap').textContent = '$' + gap + 'M';
+              document.getElementById('lsstr-equity').textContent = equity > 0 ? '$' + equity + 'M' : 'Negative';
+              document.getElementById('lsstr-irr').textContent = lpIRR > 0 ? '~' + lpIRR + '%' : 'Below pref';
+            };
+          }
+        }
+      ]
+    }
   }
 };
-
 const GLOSSARY_DATA = {
   formulas: [
     { term: "Loan-to-Cost (LTC)", def: "Measures the loan amount as a percentage of total project cost. Primary sizing metric for construction lenders.", note: "LTC = Loan Amount ÷ Total Project Cost. Typical range: 55–65% for hospitality construction." },
@@ -2630,5 +4097,4 @@ renderTopics();
 showGloss('formulas');
 </script>
 </body>
-</html>
 </html>
